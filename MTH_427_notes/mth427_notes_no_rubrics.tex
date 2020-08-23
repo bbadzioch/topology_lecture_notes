@@ -42,7 +42,6 @@
 \usepackage{ifthen}
 \newboolean{ShowRubrics}
 \newcommand{\Rubrics}[1]{\ifthenelse{\boolean{ShowRubrics}}{{\footnotesize\color{red}{#1}}}}{}
-%\setboolean{ShowRubrics}{false}
 \setboolean{ShowRubrics}{false}
 
 
@@ -321,6 +320,7 @@
 \newtheorem{corollary}[theorem]{Corollary}
 
 \newtheorem{ULEMMA}[theorem]{Urysohn Lemma}
+\newtheorem{GULEMMA}[theorem]{Generalized Urysohn Lemma}
 \newtheorem{OPASTINGL}[theorem]{Open Pasting Lemma}
 \newtheorem{CPASTINGL}[theorem]{Closed Pasting Lemma}
 \newtheorem{TIETZE1}[theorem]{Tietze Extension Theorem (v.1)}
@@ -529,7 +529,7 @@ Introduction to Topology I \\
 {\Large Bernard Badzioch}
 
 \vskip 85mm
-{\large 2018.11.20}
+{\large 2020.07.10}
 \end{center}
 
 {\small This work is licensed under CC BY-NC-SA 4.0. To view a copy of this license, visit 
@@ -594,21 +594,25 @@ in detail it will be worth go over the basics notions related to sets and functi
 a quick review of this material. We will also fix here some notation and terminology. 
 
 %---BBLANK
-\textbf{Sets.} In general sets will be denoted by capital letters:  $A, B, C, \dots$ We will also use the following notation 
+\textbf{Sets.}
+%---EBLANK \
+ In general sets will be denoted by capital letters:  $A, B, C, \dots$ 
+We will also use the following notation 
 for sets that will be of a particularly interest: 
+%---BBLANK # \vskip 50mm Frequently  used sets:
 \begin{itemize}
 \item[] $\varnothing = $ the empty set (i.e. the set that contains no elements) 
 \item[] $\N = \{0, 1, 2, \dots\}$ the set of natural numbers 
-\item[] $\Z^{+} = \{1, 2, 3, \dots \}$ the set of positive integers 
 \item[] $\Z = \{\dots, -2, -1, 0, 1, 2, \dots \}$ the set of integers 
+\item[] $\Z^{+} = \{1, 2, 3, \dots \}$ the set of positive integers 
 \item[] $\Q = $ the set of rational numbers 
 \item[] $\R = $ the set of real numbers
 \end{itemize}
 %---EBLANK
 
 %---BBLANK # \vskip 10mm
-We will write  $a\in B$ to denote that  $a$ is an element of the set $B$ and
-$a\not\in B$ to indicate that  $a$ is not an element of $B$. 
+We will write  $x\in A$ to denote that  $x$ is an element of the set $A$ and
+$y\not\in A$ to indicate that  $y$ is not an element of $A$. 
 %---EBLANK # \newpage
 For example, 
 $5\in \Z$,  $\tfrac{1}{3} \not\in \Z$.
@@ -640,7 +644,7 @@ In such case we write $B\subseteq A$.
 \end{equation*}
 A set $B$ is a \emph{proper subset} of $A$ if $B\subseteq A$ and $B\neq A$. 
 \end{definition}
-%---EBLANK # \vskip 30mm
+%---EBLANK # \vskip 40mm
 
 
 
@@ -703,16 +707,16 @@ The \emph{intersection} of sets $A$ and $B$ is the set  $A\cap B$
 that consists of all elements that belong to both $A$ and $B$:
 $$A\cap B = \{x \ | \ x\in A \text{ and } x\in B \}$$
 \end{definition}
-%---EBLANK # \vskip 20mm
+%---EBLANK # \vskip 60mm
 
 
-%---BBLANK
+
 \begin{example} If $A = \{a, b, c, d\}$, $B= \{c, d, e, f\}$ 
-%---EBLANK
+
 then $A\cup B = \{a, b, c, d, e, f\}$ and
 $A\cap B = \{c, d\}$.
 
-%---BBLANK
+
 \begin{equation*}
 \begin{tikzpicture}
 \fill[mygray3, opacity = 0.6] (-0.75, 0) circle (1.5);
@@ -732,7 +736,7 @@ $A\cap B = \{c, d\}$.
 \end{tikzpicture}
 \end{equation*}
 \end{example}
-%---EBLANK
+
 
 
 \begin{example} If $A = \{a, b, c, d\}$ and  $C= \{ e, f, g\}$
@@ -806,7 +810,7 @@ De Morgan's Laws:
 $$A\ssmin (B\cup C) = (A\ssmin B)\cap (A\ssmin C)$$
 $$A\ssmin (B\cap C) = (A\ssmin B)\cup (A\ssmin C)$$
 \end{nn}
-%---EBLANK # \vskip 30mm
+%---EBLANK # \vskip 50mm
 
 %---BBLANK 
 \begin{definition}
@@ -883,14 +887,14 @@ $a$ and $b$ are the same element.
 
 Formally we define binary relations as follows: 
 
-%---BBLANK 
+
 \begin{definition}
 \label{BINARYREL DEF}
 \index{relation! binary@{binary $\sim$}}
 A \emph{binary relation}  on a set $A$ is a subset $R \subseteq A\times A$. 
 If $(a, b) \in R$ then we  write $a R b$.  
 \end{definition}
-%---EBLANK  # \vfill
+
 
 \begin{example}
 The divisibility relation on the set of integers is the subset $R\subseteq \Z\times \Z$ given by 
@@ -1229,11 +1233,11 @@ In general $x\neq f(k)$ for all $k\in \Z^{+}$, and so $f$ is not onto.
 %---BBLANK 
 \begin{example}
 The function $f\colon (0, 1) \to \R$ given by $f(x) = \tan \left( \pi x -\frac{\pi}{2}\right)$
-is a bijection. It follows that $|\R| = |(0, 1)|$. In particular $\R$ is an uncountable set. 
+is a bijection. It follows that $|\R| = |(0, 1)|$, and  so the set $\R$ is not countable. 
 \end{example}
-%---EBLANK #  \vfill
+%---EBLANK #  \vfill\newpage
 
-%---BBLANK 
+
 \begin{notation}
 1) If $A$ is a finite set of $n$ elements then we write $|A| = n$. 
 
@@ -1243,7 +1247,7 @@ aleph naught}  and we write $|A| = \aleph_{0}$.
 3) If   $|A| = |\R|$ then we say that $A$ has the \emph{cardinality of
 the continuum} and we write $|A| = \mathfrak{c}$.  
 \end{notation}
-%---EBLANK # \newpage
+
 
 %---BBLANK 
 \textbf{Infima and Suprema.}
@@ -1283,7 +1287,7 @@ We write: $a_{0} = \inf A$.
 
 If the set $A$ is not bounded below then we set $\inf A := -\infty$. 
 \end{definition}
-%---EBLANK # \vskip 10mm
+%---EBLANK # \vfill
 
 
 
@@ -1323,7 +1327,7 @@ We write: $a_{0} = \sup A$.
 If the set $A$ is not bounded  above then we set $\sup A := +\infty$. 
 
 \end{definition}
-%---EBLANK # \vskip 10mm
+%---EBLANK # \vfill
 
 
 \begin{example}\ \newline
@@ -1399,8 +1403,14 @@ $\delta >0$ such that if $|x_0-x|< \delta$ then $|f(x_0)-f(x)|< \varepsilon$:
 \end{scope}
 \end{tikzpicture}
 \end{equation*}
+%---EBLANK
+%---BBLANK  #\vskip 20mm
 A function is \emph{continuous} if it is continuous at every point $x_{0}\in \R$. 
-%---EBLANK # \newpage
+%---EBLANK #\vskip 10mm
+
+
+%---BBLANK #\begin{center}\includegraphics[width=0.5\textwidth]{pictures/archer.png}\end{center}
+%---EBLANK #\newpage
 
 
 %---BBLANK
@@ -1637,7 +1647,7 @@ then $\mu(f(x_{0}), f(x))) < \epsilon$.
 
 A function $f\colon X\to Y$ is \emph{continuous} if it is continuous at every point $x_{0}\in X$. 
 \end{definition}
-%---EBLANK # \vskip 20mm
+%---EBLANK # \newpage
 
 We can reformulate this definition in terms of open balls:
 
@@ -1647,7 +1657,7 @@ Let $(X, \varrho)$ be a metric space. For $x_0\in X$ and let $r>0$ the \emph{ope
 with radius $r$ and with center at $x_0$ is the set 
 $$B_{\varrho}(x_0, r) = \{ x\in X \ | \ \varrho(x_0, x) < r\}$$
 \end{definition}
-%---EBLANK # \vskip 20mm
+%---EBLANK # \vskip 40mm
 
 We will  often write $B(x_{0}, r)$ instead of $B_{\varrho}(x_{0}, r)$ when it will be  clear from the context 
 which metric is being used.  
@@ -1954,7 +1964,7 @@ is continuous.
 
 %---BBLANK
 \chapter{Open Sets}
-%---EBLANK
+%---EBLANK #\newpage
 
 \thispagestyle{firststyle}
 
@@ -1976,6 +1986,7 @@ the metrics $\varrho_{1}$ and $\varrho_{2}$ are  \emph{equivalent} if for every 
 and for every $r>0$ there exist  $s_{1}, s_{2}>0$ such that 
 $B_{\varrho_{1}}(x, s_{1})\subseteq B_{\varrho_{2}}(x, r)$  
 and $B_{\varrho_{2}}(x, s_{2})\subseteq B_{\varrho_{1}}(x, r)$.
+%---EBLANK #\end{definition}
 \begin{equation*}
 \begin{tikzpicture}[scale = 0.8] 
 \begin{scope}
@@ -1995,9 +2006,9 @@ and $B_{\varrho_{2}}(x, s_{2})\subseteq B_{\varrho_{1}}(x, r)$.
 \end{tikzpicture}
 \end{equation*}
 \end{definition}
-%---EBLANK
 
-%---BBLANK # \vskip 10mm
+
+%---BBLANK # \vskip 60mm
 \begin{proposition}
 \label{EQUIV METRIC PROP}
 Let $\varrho_{1}$, $\varrho_{2}$ be equivalent metrics on a set $X$, and let $\mu_{1}$, $\mu_{2}$ 
@@ -2032,7 +2043,7 @@ maximum metric $\varrho_{max}$ are equivalent metrics on $\R^{n}$ (exercise).
 \end{example}
 %---EBLANK
 
-%---BBLANK # \vskip 10mm
+%---BBLANK # \vskip 20mm
 \begin{example}
 \label{NONEQUIV METRIC EX}
 The following metrics on $\R^{2}$ are not equivalent to one another:
@@ -2046,7 +2057,7 @@ very differently (compare e.g. open balls in $\R^{2}$ taken with respect to $d$ 
 It turns out, however, that each metric defines also a collection of so-called \emph{open sets}, and that 
 open sets defined by two metrics are the same precisely when these metrics are equivalent.  
 
-%---BBLANK # \vskip 20mm
+%---BBLANK # \newpage
 \begin{definition}
 \label{OPEN SET DEF}
 Let $(X, \varrho)$ be a metric space. A subset $U\subseteq X$ is an \emph{open set} if 
@@ -2295,7 +2306,7 @@ From now on, unless indicated otherwise, we will consider $\R^{n}$ as a topologi
 the topology induced by the Euclidean metric. 
 \end{note}
 
-%---BBLANK # \vskip 20mm
+%---BBLANK # \vskip 10mm
 \begin{example}
 \index{topology! discrete@{discrete $\sim$}}
 Let $X$ be an arbitrary set and let 
@@ -2313,7 +2324,7 @@ $$U = \bigcup_{x\in U}B_{\varrho_{disc}}\left(x, \tfrac{1}{2}\right) $$
 \end{example}
 
 
-%---BBLANK # \vskip 30mm
+%---BBLANK # \vskip 10mm
 \begin{example}
 \label{ANTIDISCRT TOP EXAMPLE}
 \index{topology! antidiscrete@{antidiscrete $\sim$}}
@@ -2324,7 +2335,7 @@ The topology $\TT$ is called the \emph{antidiscrete topology} on $X$.
 %---EBLANK
 
 
-%---BBLANK # \newpage
+%---BBLANK # \vskip 10mm
 \begin{example}
 \index{topology! Zariski@{Zariski $\sim$}}
 Let $X= \R$ and let 
@@ -2338,7 +2349,7 @@ such that the topology $\TT$ is induced by $\varrho$. Our next goal is to show
 that this is not the case: some topologies  do not come from any metric. Thus, the notion of a topological 
 space is more general than that of a metric space.  
 
-%---BBLANK # \vskip 30mm
+%---BBLANK # \newpage
 \begin{definition}
 \index{space! metrizable@{metrizable $\sim$}}
 A topological space $(X, \TT)$ is \emph{metrizable} if there exists a metric $\varrho$ on $X$
@@ -2346,7 +2357,7 @@ such that $\TT$ is the topology induced by $\varrho$.
 \end{definition}
 %---EBLANK
 
-%---BBLANK # \vskip 30mm
+%---BBLANK # \vskip 80mm
 \begin{lemma}
 \label{METRIC SP IS T1 LEMMA}
 If $(X, \TT)$ is a metrizable topological space and $x, y\in X$ are points such that $x\neq y$
@@ -2358,7 +2369,7 @@ Exercise.
 \end{proof}
 %---EBLANK
 
-%---BBLANK # \vskip 30mm
+%---BBLANK # \vskip 20mm
 \begin{proposition}
 If $X$ is a set containing more than one point then the antidiscrete topology on $X$  
 is not metrizable.  
@@ -2721,6 +2732,7 @@ a basis of a topology than to define explicitly the whole topology (i.e. to desc
 a subbasis is even easier. The price we pay for this convenience is that it is more difficult to identify 
 which sets are open if we  know only a basis or a subbasis of a topology: 
 
+%---BBLANK # \newpage
 \begin{equation*}
 \begin{tikzpicture}
 \draw[opacity = 0] (2.5 -7, 0) -- (2.5 + 7, 0); % for centering
@@ -2742,11 +2754,11 @@ node[right, align = center, pos=0.07,  xshift = 2mm] {\small easier to identify 
 
 \end{tikzpicture}
 \end{equation*}
-
+%---EBLANK
 
 The next proposition often simplifies checking if a  function between topological spaces is continuous:
 
-%---BBLANK # \vfill
+%---BBLANK # \vskip 40mm
 \begin{proposition}
 \label{BASIS CONT FUNC PROP}
 Let $(X, \TT_{X})$, $(Y, \TT_{Y})$ be topological spaces, and let 
@@ -2836,15 +2848,15 @@ It is a topological space considered as a subspace of $\R^{n+1}$.
 \end{example}
 %---EBLANK
 
-%---BBLANK # \vskip 50mm
+
 \begin{example}
 \label{Z DISCR SUBSP EX}
 Consider $\Z$ as a subspace of $\R$. The subspace topology on $\Z$ is  the same as 
 the discrete topology (exercise). 
 \end{example}
-%---EBLANK
 
-%---BBLANK # \newpage
+
+%---BBLANK # \vskip  30mm
 \begin{proposition}
 \label{SUBSP CONT FUNCT PROP}
 Let $X$ be a topological space and let $Y$ be its subspace. 
@@ -3773,7 +3785,7 @@ we study some properties of continuous functions. We also introduce the notion o
 \emph{homeomorphism} that plays a central role in topology: from the topological 
 perspective interesting properties of spaces are the properties that are preserved by homeomorphisms.  
 
-%---BBLANK
+%---BBLANK # \vskip 20mm
  \begin{proposition}
  \label{CONT VIA CLOSED PROP}
  \index{function! continuous@{continuous $\sim$}}
@@ -3800,7 +3812,7 @@ If follows that $f^{-1}(U)$ is open  in $X$. Therefore $f$ is a continuous funct
 
 For metric spaces continuous functions are precisely the functions that preserve convergence of sequences:
 
-%---BBLANK # \vskip 30mm
+%---BBLANK # \newpage
 \begin{proposition}
 \index{function! continuous@{continuous $\sim$}}
 \label{METRIC SEQ FOR CONT FUNCT PROP}
@@ -3879,14 +3891,16 @@ and $x_{n}\to x$ for some $x\in X$ then $f(x_{n})\to f(x)$.
 \begin{proof}
 Exercise. 
 \end{proof}
-%---EBLANK
+%---EBLANK 
 
+%---BBLANK # \vskip 60mm
 \begin{example}
 We will show that the implication 2) $\Ra$ 1) in Proposition \ref{METRIC SEQ FOR CONT FUNCT PROP} is not 
 true if $X$ is a general  topological space. 
 Let  $X$ be the  space defined  in Example \ref{SEQ NOT CLOSED EXAMPLE}: $X= \R$ with the topology
 $$\TT = \{U\subseteq \R \ | \ U= \varnothing 
  \text{ or $U= (\R\ssmin S)$ for some countable set $S\subseteq \R$}\}$$
+ %---EBLANK #\end{example}
  Recall that if $\{x_{n}\}$ is a sequence in $X$ then $x_{n}\to x$ if and only if there exists $N>0$ such that 
  $x_{n}= x$ for all $n>N$. 
  Let $f\colon X \to X$ be a function  given by 
@@ -3903,7 +3917,7 @@ be a sequence and let $x_{n}\to x$. There is  $N>0$ such that $x_{n} = x$ for $n
 $f(x_{n}) = f(x)$ for all $n>N$ and so $f(x_{n})\to f(x)$.  
 \end{example}
 
-%---BBLANK # \vskip 90mm
+%---BBLANK # \newpage
 \begin{proposition}
 \label{COMP CONT PROP}
 If $f\colon X \to Y$ and $g\colon Y \to Z$ are continuous functions then the function
@@ -3919,7 +3933,7 @@ Frequently functions $f\colon X \to Y$ are constructed by gluing together severa
 functions defined on subspaces of $X$. The next two facts are useful for verifying that functions obtained in 
 this way are continuous.
 
-%---BBLANK # \newpage
+%---BBLANK # \vskip 10mm
 \begin{OPASTINGL}
 \label{OPEN PASTING LEMMA}
 \index{pasting lemma! open@{open $\sim$}}
@@ -3972,13 +3986,13 @@ we obtain that the set $f^{-1}_{i}(V)$ is open in $X$. Thus $f^{-1}(V)$ is an op
 \end{proof}
 
 
-%---BBLANK # \vskip 60mm
+%---BBLANK # \newpage
 \begin{CPASTINGL}
 \label{CLOSED PASTING LEMMA}
 \index{pasting lemma! closed@{closed $\sim$}}
-Let $X$, $Y$ be topological spaces and let $A_{1}, A_{2}\subseteq X$ be  closed sets
-such that $A_{1}\cup A_{2} = X$. Assume that for  $i = 1, 2$ we have a continuous 
-function  $f_{i}\colon A_{i}\to Y$ such that $f_{1}(x) = f_{2}(x)$ if $x\in A_{1}\cap A_{2}$. 
+Let $X$, $Y$ be topological spaces and let $A_{1}, \dots, A_{n}\subseteq X$ be a finite family of 
+closed sets such that $\bigcup_{i=1} ^{n}A_{i} = X$. Assume that for  $i = 1, 2, \dots, n$ we have a continuous 
+function  $f_{i}\colon A_{i}\to Y$ such that $f_{i}(x) = f_{j}(x)$ if $x\in A_{i}\cap A_{j}$. 
 Then the function $f\colon X\to Y$  given by $f(x) = f_{i}(x)$ for  $x\in A_{i}$ is continuous. 
 \end{CPASTINGL}
 
@@ -3987,19 +4001,13 @@ Exercise.
 \end{proof}
 %---EBLANK
 
+
 \begin{example}
 Let $f \colon \R\to \R$ be the absolute value function,  $f(x) = |{x}|$.  On the set $A_{1} = (-\infty, 0]$ 
 this function is given by $f|_{A_{1}}(x) = -x$, and on $A_{2} = [0, +\infty)$ it is given by $f|_{A_{2}}(x) = x$. Since both  
 $f|_{A_{1}}$ and $f|_{A_{2}}$ are continuous functions and $A_{1}, A_{2}$ are closed sets in $\R$  by the 
 Closed Pasting Lemma   \ref{CLOSED PASTING LEMMA} we obtain that $f\colon \R\to \R$ is continuous. 
 \end{example}
-
-\begin{note}
-Lemma \ref{CLOSED PASTING LEMMA}  holds if instead of two closed sets we take 
-any  finite number of sets $A_{1}, \dots, A_{n}$ such that $\bigcup_{i=1}^{n} A_{i} = X$. 
-On the other hand the statement of the lemma does not hold in general if the collection  
-of sets $\{A_{i}\}$ is infinite. 
-\end{note}
 
 
 
@@ -4077,12 +4085,12 @@ is open in $[0, 1)$, but $f(U)$ is not open in $S^{1}$.
 \draw[red, line width = 3pt] (0, 0) -- (1.5,0);
 \draw[draw = red, fill = red, line width = 1.5] (0, 0) circle [radius = 0.1];
 \draw[draw = red, fill = white, line width = 1.5] (1.5, 0) circle [radius = 0.1];
-
+\node[anchor = base] at (0.75, 0.25) {\small \color{red} $U$}; 
 \draw[draw = black, fill = white, line width = 1.5] (3.0, 0) circle [radius = 0.1];
 \node[anchor = base] at (0, -0.6) {\small $0$}; 
 \node[anchor = base] at (1.5, -0.6) {\small $\frac{1}{2}$}; 
 \node[anchor = base] at (3, -0.6) {\small $1$}; 
-\node[anchor = base] at (0.75, 0.25) {\small \color{red} $U$}; 
+
 
 \end{scope}
 
@@ -4096,10 +4104,10 @@ is open in $[0, 1)$, but $f(U)$ is not open in $S^{1}$.
 \end{scope}
 \draw[draw = red, fill = white, line width = 1.5] (-1.5, 0) circle [radius = 0.1] ;
 \draw[draw = red, fill = red, line width = 1] (1.5, 0) circle [radius = 0.1] ;
-
+\node[anchor = base west] at (0.8, 1.4) {\small \color{red} $f(U)$}; 
 \node[anchor = base west] at (1.5, -0.6) {\small $f(0)$}; 
 \node[anchor = base east] at (-1.5, -0.6) {\small $f(\frac{1}{2})$}; 
-\node[anchor = base west] at (0.8, 1.4) {\small \color{red} $f(U)$}; 
+
 \end{scope}
 
 \begin{scope}[xshift = 40mm]
@@ -4327,8 +4335,9 @@ a) Show that the set
 $$A = \{x\in X \ | \ f(x) \geq g(x) \}$$
 is closed in $X$. 
 
-b) Let $h\colon X \to \R$ be a function given by $h(x) = \max\{f(x), g(x)\}$. 
-Show that $h$ is continuous. 
+b) Let $h_{\text{max}}, h_{\text{min}}\colon X \to \R$ be a functions given by 
+$h_{\text{max}}(x) = \max\{f(x), g(x)\}$ and $h_{\text{min}}(x) = \min\{f(x), g(x)\}$. 
+Show that $h_{\text{max}}$  and $h_{\text{min}}$ are continuous functions. 
 \end{exercise}
 
 
@@ -4447,7 +4456,7 @@ preserved by homeomorphisms. The property of being ``in one piece''
 is captured by the definition of a connected space:
 \end{nn}
 
-%---BBLANK # \vskip 50mm
+%---BBLANK # \vskip 70mm
 \begin{definition}
 \index{space! connected@{connected $\sim$}}
 A topological space $X$ is \emph{connected} if for any  two open sets $U, V\subseteq X$
@@ -4506,7 +4515,7 @@ $U\cap V \neq \varnothing$.
 
 One can show that intervals are in fact the only subspaces of $\R$ that are connected:
 
-%---BBLANK # \vskip 150mm
+%---BBLANK # \vfill
 \begin{proposition}
 \label{CONN SUBSPACES OF R PROP}
 If $X$ is a connected subspace of $\R$ then $X$ is an interval (either open, closed, or half-closed, finite or
@@ -5427,7 +5436,7 @@ of the point $(0, 0)$ that does not contain the point $(0, 1)$ is not connected.
 
 
 
-%---BBLANK # \vskip 50mm
+%---BBLANK # \newpage
 \begin{proposition}
 \label{LOC PCONN IS LOC CONN PROP}
 If $X$ is locally path connected then it is locally connected. 
@@ -5727,7 +5736,7 @@ The following is a generalization of Proposition \ref{METRIC UNIQUE CONV PROP}
 \begin{proposition}
 \label{T2 UNIQUE CONV PROP}
 Let $X$ be a Hausdorff space and let $\{x_{n}\}$ be a sequence in $X$. If 
-$x_{n}\to y$ and $x_{n}\to z$ for some then $y=z$. 
+$x_{n}\to y$ and $x_{n}\to z$ for some  $y, z\in X$ then $y=z$. 
 \end{proposition}
 
 \begin{proof}
@@ -5763,7 +5772,7 @@ A space that satisfies the axiom $T_{3}$ is called a \emph{regular space}.
 %---EBLANK 
 
 
-%---BBLANK  # \vskip 50mm
+%---BBLANK  # \vskip 10mm
 \begin{note}
 Since in spaces satisfying $T_{1}$ sets consisting of a single point are closed 
 (\ref{T1 CLOSD POINT PROP}) it follows that if a space satisfies $T_{3}$ then it satisfies $T_{2}$.  
@@ -5827,7 +5836,7 @@ $c< z < \tfrac{1}{n}$ and $z\not\in K$ we have $z\in U_{1}\cap V_{1}$, and so $z
 \end{example}
 
 
-%---BBLANK  # \newpage
+%---BBLANK  # \vskip 40mm
 \begin{definition}
 \index{space! T4@{$T_{4}$ $\sim$} }
 \index{space! normal@{normal $\sim$} }
@@ -5855,7 +5864,7 @@ A space that satisfies the axiom $T_{4}$ is called a \emph{normal space}.
 \end{definition}
 %---EBLANK 
 
-%---BBLANK  # \vskip 50mm
+%---BBLANK  # \vskip 10mm
 \begin{note}
 If $X$ satisfies $T_{4}$ then it satisfies $T_{3}$.
 \end{note}
@@ -5893,7 +5902,7 @@ $$\varrho(x, A):= \inf\{ \varrho(x, a) \ | \  a\in A \} $$
 \end{definition}
 %---EBLANK 
 
-%---BBLANK  # \newpage
+%---BBLANK  # \vfill
 \begin{lemma}
 \label{DIST CLOSED SET LEMMA}
 If $(X, \varrho)$ is a metric space and $A\subseteq X$ is a closed set then $\varrho(x, A) = 0$ 
@@ -5906,7 +5915,7 @@ Exercise.
 %---EBLANK 
 
 
-%---BBLANK  # \vskip 30mm
+%---BBLANK  # \newpage
 \begin{lemma}
 \label{CONT SET DIST LEMMA}
 Let $(X, \varrho)$ be a metric space and $A\subseteq X$.  The function $\varphi\colon X\to \R$
@@ -5957,7 +5966,7 @@ Notice that the function $f$ constructed in the proof of Theorem \ref{METRIC IS 
 a condition that is stronger than the assumption of Proposition \ref{URYSOHN CONVERSE PROP}:
 we have $f(x) = 0$ if and only if $x\in A$ and $f(x)=1$ if and only if $x\in B$. Thus we obtain: 
 
-%---BBLANK  # \vfill
+%---BBLANK  #\newpage \  \vfill
 \begin{corollary}
 \label{METRIC PERFECTLY NORMAL COR}
 If $(X, \varrho)$ is a metric space and $A, B\subseteq X$ are closed sets such that $A\cap B = \varnothing$
@@ -5992,11 +6001,12 @@ The results described above can be summarized by the following picture:
  
 \end{tikzpicture}
 \end{equation*}
+%---EBLANK  #\end{note}
 Each rectangle represents the  class of topological spaces satisfying the corresponding separation
 axiom. No area of this diagram is empty. Even though we have not seen here an example of a space 
 that satisfies $T_{3}$ but not $T_{4}$ such spaces do exist.
 \end{note}
-%---EBLANK 
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -6156,7 +6166,7 @@ that normal spaces retain some useful properties of metrizable spaces. Recall th
 seen that for any metric space $X$, and any pair of disjoint closed sets in $X$ we can find is a continuous function 
 $f\colon X \to [0,1]$ which maps one set to $0$ and the other set to $1$. The Urysohn lemma says that  the same property holds for any normal space:   
 
-%---BBLANK # \vskip 60mm
+%---BBLANK # \vskip 80mm
 \begin{ULEMMA}
 \label{URYSOHN LEMMA}
 \index{Urysohn! lemma@{$\sim$ lemma}}
@@ -6173,8 +6183,8 @@ The proof of this fact will use a couple of lemmas:
 \label{URYSOHNFUNC LEMMA}
 Let $X$ be a topological space. Assume that  for each $r\in [0,1]\cap \Q$ we are given  
 an open set $V_{r}\subseteq X$ such that $\xov{V}_{r}\subseteq V_{r'}$ if $r < r'$. 
-There exists a continuous function $f\colon X \to [0,1]$ such that if $x\in V_{r}$ then 
-$f(x) \leq r$ and if $x\not\in V_{1}$ then $f(x)=1$. 
+There exists a continuous function $f\colon X \to [0,1]$ such that if $x\in V_{0}$ then 
+$f(x) = 0$ and if $x\not\in V_{1}$ then $f(x)=1$. 
 
 \begin{equation*}
 \begin{tikzpicture}
@@ -6236,6 +6246,7 @@ Since the sets $X\ssmin \xov{V}_{r}$ are open it follows that  $f^{-1}((a, 1])$ 
 Let $X$ be a normal space, let $A\subseteq X$ be a closed set and let $U\subseteq X$ be an open 
 set such that $A\subseteq U$. There exists an open set $V$ such that $A\subseteq V$
 and $\xov{V}\subseteq U$. 
+%---EBLANK #  \end{lemma}
 
 \begin{equation*}
 \begin{tikzpicture}
@@ -6250,12 +6261,13 @@ and $\xov{V}\subseteq U$.
 \end{equation*}
 \end{lemma} 
 
+%---BBLANK #\vskip 20mm
 \begin{proof}
 Exercise. 
 \end{proof}
-%---EBLANK # \newpage
+%---EBLANK # 
   
- 
+ %---BBLANK
  \begin{proof}[Proof of Urysohn Lemma \ref{URYSOHN LEMMA}]
  We will  show  that for each $r\in [0, 1]\cap \Q$ there exists an open set $V_{r}\subseteq X$ such that 
  \benu
@@ -6282,9 +6294,10 @@ Exercise.
 \draw[very thick, fill = mygray3] (6.5, 1) rectangle (7.5, 2) node[pos = 0.5] {\small $B$}; 
 \end{tikzpicture}
 \end{equation*}
+%---EBLANK  #\end{proof} \newpage
 
 By Lemma \ref{URYSOHNFUNC LEMMA} this will give a continuous function $f\colon X \to [0,1]$
-such that  $f(x) \leq r$ for all $x\in V_{r}$ and $f(x)=1$ for all $x\not\in V_{1}$. 
+such that  $f(x) = 0$ for all $x\in V_{0}$ and $f(x)=1$ for all $x\not\in V_{1}$. 
 By 1) we will get then that $f(x) = 0$ for all $x\in A$ and by 2) that $f(x) =1$  for all $x\in B$. 
  
 Construction of sets $V_{r}$ proceeds as follows. Since the set $[0, 1]\cap \Q$ is countable we can arrange its elements into a sequence:
@@ -6313,7 +6326,7 @@ regular spaces:  given a regular space $X$, a point $x\in X$, and a closed set $
 $x\not \in A$ is there a continuous function $f\colon X\to [0,1]$ such that $f(x) = 0$ and $f(A)\subseteq \{1\}$? 
 It turns out that this is not true, but it provides motivation for one more separation axiom:
 
-%---BBLANK
+%---BBLANK #\quad\vskip 80mm
 \begin{definition}
 \label{COMPLETELY REG DEF}
 \index{space! T312@{$T_{3{\nicefrac{1}{2}}}$ $\sim$} }
@@ -6447,8 +6460,37 @@ but not metrizable.
 \thispagestyle{firststyle}
 
  
-The main goal of this chapter is to prove the following fact which describes
-one of the most useful properties of normal spaces: 
+ 
+ 
+ The Urysohn Lemma, which we proved in the last chapter, shows that every normal space  $X$
+ is equipped with an ample supply of continuous functions $X\to [0, 1]$: any two closed, disjoint sets
+ in $X$ give one such function. However, an inconvenient constraint  is that these
+ functions are of very special type: they map one closed set to 0, and the other one to 1. 
+ 
+ It is easy to modify the Urysohn Lemma to expand this collection of functions a bit:
+  
+  
+  %---BBLANK
+\begin{GULEMMA}
+\label{GEN URYSOHN LEMMA}
+Let $X$ be a normal space and let $A, B\subseteq X$ be closed sets such that 
+$A\cap B = \varnothing$. For any $a, b\in \R$, $a < b$ there exists a continuous function $f\colon X\to [a, b]$
+such that $A\subseteq f^{-1}(\{a\})$ and $B \subseteq f^{-1}(\{b\})$. 
+\end{GULEMMA}
+%---EBLANK # \vskip 30mm
+
+
+\begin{proof}
+By the Urysohn Lemma \ref{URYSOHN LEMMA}  we can find a function $g\colon X\to [0,1]$
+such that $g(A) = \{0\}$ and $g(B) = \{1\}$. Take $f = h\circ f$, where 
+$h\colon [0, 1] \to [a, b]$ is any continuous function such that $h(0) = a$ and $h(1) = b$. 
+\end{proof}
+
+The collection of functions described by Lemma \ref{GEN URYSOHN LEMMA} is still very narrow: 
+these functions are constant  when restricted to either set $A$ or $B$. The main result of this chapter 
+is to show that such restriction is not necessary;  any function defined on a closed subset of a normal space
+gives a function defined on the whole space:
+
 
  %---BBLANK
 \begin{TIETZE1}
@@ -6458,9 +6500,11 @@ Let $X$ be a normal space, let $A\subseteq X$ be a closed subspace, and let
 $f\colon A\to [a, b]$ be a continuous function for some $[a, b]\subseteq \R$. 
 There exits a continuous function $\bar{f}\colon X \to [a, b]$ such that $\bar{f}|_{A} = f$. 
 \end{TIETZE1} 
-%---EBLANK # \vskip 30mm
+%---EBLANK # \newpage
 
-The main idea of the proof is to use Urysohn Lemma \ref{URYSOHN LEMMA} to construct functions
+
+
+The main idea of the proof is to use the Urysohn Lemma \ref{URYSOHN LEMMA} to construct functions
 $\bar{f}_{n}\colon X \to [a, b]$ for $n=1, 2, \dots$ such that as $n$ increases $\bar{f}_{n}|_{A}$ gives 
 ever closer approximations of $f$. Then we  take $\bar{f}$ to be the limit of the sequence  
 $\{\bar{f}_{n}\}$.  We  start by looking at sequences of functions and their convergence.  
@@ -6473,7 +6517,7 @@ Let $X, Y$ be a topological spaces and let $\{f_{n}\colon X\to Y\}$ be a sequenc
 We say that the sequence $\{f_{n}\}$ \emph{converges pointwise} to a function $f\colon X\to Y$ 
 if for each $x\in X$ the sequence  $\{f_{n}(x)\}\subseteq Y$ converges to the point $f(x)$. 
 \end{definition}  
-%---EBLANK # \newpage
+%---EBLANK # \vskip 90mm
  
  
 \begin{note}
@@ -6504,14 +6548,14 @@ there exists $N>0$ such that
 $$\varrho(f(x), f_{n}(x)) < \varepsilon$$
 for all $x\in X$ and for all $n> N$. 
 \end{definition}
-%---EBLANK # \vskip 40mm
+%---EBLANK # \vfill
 
 %---BBLANK
 \begin{note}
 If a sequence $\{f_{n}\}$ converges uniformly to $f$ then it also converges pointwise to $f$, 
 but the converse is not true in general. 
 \end{note}
-%---EBLANK # \vskip 20mm
+%---EBLANK # \newpage
 
 %---BBLANK
 \begin{proposition}
@@ -6600,7 +6644,7 @@ coordinates{ (2.2, 2) (2.1, 1.6) (2.5, 1.5) (3, 1.2) (3.3, 1.6) (3.6, 1.8) (3.3,
 %---BBLANK
 \begin{lemma}
 \label{TIETZE LEMMA}
-Let $X$ be a normal space, $A\subseteq X$ be a closed subspace, and let $f\colon A\to \R$
+Let $X$ be a normal space, $A\subseteq X$ be a closed set, and let $f\colon A\to \R$
 be a continuous function such that for some $C> 0$ we have $|f(x)|\leq C$ for all $x\in A$. 
 There exists a continuous function $g\colon X\to \R$ such that $|g(x)|\leq \frac{1}{3}C$ for all $x\in X$
 and $|f(x)-g(x)| \leq \frac{2}{3}C$ for all $x\in A$. 
@@ -6613,32 +6657,35 @@ and $|f(x)-g(x)| \leq \frac{2}{3}C$ for all $x\in A$.
 \begin{proof}
 Define $Y := f^{-1}([-C, -\frac{1}{3}C])$, $Z:= f^{-1}([\frac{1}{3}C, C])$. Since $f\colon A \to \R$ 
 is a continuous function these sets are closed in $A$, but since $A$ is closed in $X$ the sets $Y$ and $Z$
-are also closed in $X$. Since $Y\cap Z = \varnothing$  by the Urysohn Lemma \ref{URYSOHN LEMMA}
-there is a continuous function $h\colon X\to [0, 1]$ such that $h(Y) \subseteq \{0\}$ and $h(Z) \subseteq \{1\}$. 
-Define  $g\colon X\to \R$ by 
-$$g(x) := \frac{2C}{3}\left(h(x)-\frac{1}{2}\right)$$  
+are also closed in $X$. Since $Y\cap Z = \varnothing$  by the Generalized Urysohn Lemma \ref{GEN URYSOHN LEMMA}
+there exists a continuous function $g\colon X\to [-\frac{C} {3}, \frac{C}{3}]$ such that $h(x) = - \frac{C}{3}$ for all $x\in Y$ 
+and $h(x) = \frac{C}{3}$ for all $x\in Z$.  It is straightforward to check that  $|f(x) - g(x)| \leq \frac{2}{3}C$ for all $x\in A$. 
 \end{proof}
 
 
-
+%---BBLANK #\ \ \ \ \vskip 15mm 
 \begin{proof}[Proof of Theorem \ref{TIETZE1 THM}]
-Without loss of generality we can assume that $[a, b] = [0, 1]$. For $n=1, 2, \dots$ we will construct 
-continuous functions $g_{n}\colon X\to \R$ such that 
+%---EBLANK # \ \ \vfill \end{proof} \newpage
+Since $f$ takes values in an interval $[a, b]$, we can find a number $C > 0$ such that $|f(x)| \leq C$ for 
+all $x\in A$. For  $n=1, 2, \dots$ we will construct  continuous functions $g_{n}\colon X\to \R$ such that 
 \bit
-\item[(i)] $|g_{n}(x)| \leq \frac{1}{3}\cdot \left( \frac{2}{3}\right)^{n-1}$ for all $x\in X$;
-\item[(ii)] $\left| f(x) - \sum_{i=1}^{n}g_{i}(x) \right| \leq \left(\frac{2}{3}\right)^{n}$ for all $x\in A$.
+\item[(i)] $|g_{n}(x)| \leq \frac{1}{3}\cdot \left( \frac{2}{3}\right)^{n-1}\cdot C$ for all $x\in X$;
+\item[(ii)] $\left| f(x) - \sum_{i=1}^{n}g_{i}(x) \right| \leq \left(\frac{2}{3}\right)^{n}\cdot C$ for all $x\in A$.
 \eit
 We argue by induction. Existence of $g_{1}$ follows directly from Lemma \ref{TIETZE LEMMA}. 
 Assume that for some $n\geq 1$ we already have functions $g_{1}, \dots, g_{n}$ satisfying 
-(i) and (ii). In Lemma \ref{TIETZE LEMMA} take $f$ to be the function $ f-\sum_{i=1}^{n} g_{i}$
-and take $C= \left(\frac{2}{3}\right)^{n}$. Then we can take $g_{n+1} := g$ where $g$ is the function 
-given by the lemma. 
+(i) and (ii). Apply Lemma \ref{TIETZE LEMMA} to the function $ f-\sum_{k=1}^{n} g_{k}$. 
+We can take $g_{n+1} := g$ where $g$ is the function  given by the lemma. 
 
-Let $\bar{f_{n}} := \sum_{i=1}^{n} g_{n}$ and let $\bar{f} := \sum_{i=1}^{\infty} g_{n}$. Using 
+Let $\bar{f_{n}} := \sum_{k=1}^{n} g_{k}$ and let $\bar{f}_{\infty} := \sum_{k=1}^{\infty} g_{k}$. Using 
 condition (i) we obtain that the sequence $\{\bar{f}_{n}\}$ converges uniformly to $\bar{f}$
-(exercise). Since each of the functions $\bar{f}_{n}$ is continuous, thus  by Proposition 
-\ref{UNIFORM CONV PROP} we obtain that $\bar{f}$ is a continuous function. Also, using (ii)
-be obtain that $\bar{f}(x) = f(x)$ for all $x\in A$ (exercise).  
+(exercise). Since each of the functions $\bar{f}_{n}$ is continuous, by Proposition 
+\ref{UNIFORM CONV PROP} we obtain that $\bar{f}_{\infty}$ is a continuous function. Also, using (ii)
+be obtain that $\bar{f}_{\infty}(x) = f(x)$ for all $x\in A$ (exercise).  
+
+The only remaining issue is that the function $\bar{f}_{\infty}$ takes its values in $\R$, and not in the interval 
+$[a, b]$. However, it is not difficult to modify it to obtain a continuous function $\bar{f}\colon X \to [a, b]$ such that 
+$\bar{f}(x) = \bar{f}_{\infty}(x)$ for all $x\in A$ (exercise).  
 \end{proof}
 
 
@@ -6652,7 +6699,7 @@ Let $X$ be a normal space, let $A\subseteq X$ be a closed subspace, and let
 $f\colon A\to \R$ be a continuous function. There exits a continuous function 
 $\bar{f}\colon X \to \R$ such that $\bar{f}|_{A} = f$. 
 \end{TIETZE2}  
-%---EBLANK # \vskip 100mm
+%---EBLANK # \vskip 130mm
  
  
 \begin{proof}
@@ -6731,6 +6778,19 @@ The proof of implication 3) $\Ra$ 1) is an exercise.
 
 \exercises
 
+
+\begin{exercise}
+The goal of this exercise is to fill a gap in the proof of Theorem \ref{TIETZE1 THM}. 
+For a topological space $X$ and $A\subseteq X$ let  $f\colon A \to [a, b]$ and  
+$\bar{f}\colon X \to \R$ be continuous functions satisfying $\bar{f}(x) = f(x)$
+for all $x\in A$. Show that there exists a continuous function $\bar{f}'\colon X \to [a, b]$
+such that  $\bar{f}'(x) = f(x)$ for all $x\in A$.
+\end{exercise}
+
+
+
+
+
 \begin{exercise}
 Prove implication 3) $\Ra$ 1) of Theorem \ref{EQUIV NORMALITY THM}.
 \end{exercise}
@@ -6808,14 +6868,14 @@ We have seen already that any metrizable space must be normal, but that not ever
 We will show, however,  that if a normal space space satisfies one extra condition then it is  metrizable. 
 Recall that a space $X$ is second countable if it has a countable basis. We have:
 
-%---BBLANK
+%---BBLANK #\vskip 70mm
 \begin{UMETR THM}  
 \label{NORMAL URYSOHN METR THM}
 \index{Urysohn!metrization theorem@{$\sim$ metrization theorem}}
 \index{metrization theorem! Urysohn@{Urysohn $\sim$}}
 Every second countable normal space is metrizable.   
 \end{UMETR THM}
-%---EBLANK # \vskip 30mm
+%---EBLANK # \newpage
 
 The main idea of the proof is to show that any space as in the theorem can be identified 
 with a subspace of some metric space. To make this more precise we need the following: 
@@ -6827,7 +6887,7 @@ with a subspace of some metric space. To make this more precise we need the foll
 A continuous function $i\colon X\to Y$ is an \emph{embedding} if  its restriction 
 $i\colon X \to i(X)$ is a homeomorphism (where $i(X)$ has the topology of a subspace of $Y$).  
 \end{definition}
-%---EBLANK # \newpage
+%---EBLANK # \vfill
 
 \begin{example}
 The function $i\colon (0, 1) \to \R$ given by $i(x)= x$ is an embedding. The function 
@@ -6859,7 +6919,7 @@ $f\colon \N \to f(\N)$ is not a homeomorphism.
 \label{EBM INTO METRIC LEMMA}
 If $j\colon X\to Y$ is an embedding and $Y$ is a metrizable space then $X$ is also metrizable. 
 \end{lemma}
-%---EBLANK # \vskip 50mm
+%---EBLANK #\ \vskip 40mm \newpage
 
 \begin{proof}
 Let $\mu$ be a metric on $Y$. Define a metric $\varrho$ on $X$ by 
@@ -6918,7 +6978,7 @@ where $n\geq 0$ and  $U_{i}\subseteq X_{i}$ is an open set for $i=1, \dots, n$.
 \end{note}
 
 
-%---BBLANK 
+%---BBLANK  # \ \vskip 90mm 
 \begin{proposition}
 \label{UNIV PROP PROD PROP}
 Let $\{X_{i}\}_{i\in I}$ be a family of topological spaces and for $j\in I$ let 
@@ -6944,10 +7004,28 @@ where $i_{1}, \dots, i_{n}\in I$ and
  $U_{i_{1}}\subseteq X_{i_{1}}, \dots,  U_{i_{n}}\subseteq X_{i_{n}}$ are open  sets.    
 \end{note}
 
+
+%---BBLANK 
+\begin{proposition}
+\label{FINITE PROD OF METRIC SP PROP}
+If $X_{1}, \dots, X_{n}$ are metrizable spaces then $X_{1}\times \dots \times X_{n}$
+is also a metrizable space. 
+\end{proposition}
+%---EBLANK # \vskip 40mm
+
+\begin{proof}
+Let $\varrho_{i}$ be a metric on $X_{i}$. For 
+$(x_{1}, \dots, x_{n}), (x'_{1}, \dots, x'_{n}) \in  X_{1}\times \dots \times X_{n}$ define 
+$$\varrho((x_{1}, \dots, x_{n}), (x'_{1}, \dots, x'_{n})) = \sum_{i=1}^{n} \varrho_{i}(x_{i}, x'_{i})$$
+One can show that $\varrho$ is a metric, and that the topology induced by this metric 
+is the product topology on $X_{1}\times \dots \times X_{n}$ (exercise).
+\end{proof}
+
+
 %---BBLANK 
 \begin{proposition}
 \label{CONTABLE PROD OF METRIC SP PROP}
-If $\{X_{i}\}_{i=1}^{\infty}$ is a countable family of metrizable spaces then $\prod_{i=1}^{\infty} X_{i}$
+If $\{X_{i}\}_{i=1}^{\infty}$ is an infinite countable family of metrizable spaces then $\prod_{i=1}^{\infty} X_{i}$
 is also a metrizable space. 
 \end{proposition}
 %---EBLANK # \vfill
@@ -6987,21 +7065,11 @@ $$\varrho((t_{i}), (s_{i})) = \sum_{i=1}^{\infty} \frac{1}{2^{i}}|t_{i}-s_{i}|$$
 %---EBLANK # \newpage
 
 
-Theorem \ref{NORMAL URYSOHN METR THM} is a consequence of  the following fact:
-
-%---BBLANK 
-\begin{theorem}
-\label{HILBERT CUBE EMBEDDING}
-If $X$ is a second countable normal space then there exists an embedding 
-$j\colon  X \to [0, 1]^{\aleph_{0}}$. 
-\end{theorem}
-%---EBLANK # \vskip 70mm
-
-Theorem \ref{HILBERT CUBE EMBEDDING} will follow in turn from a more general result 
+Theorem \ref{NORMAL URYSOHN METR THM} will follow from a result 
 on embeddings of topological spaces: 
 
 
-%---BBLANK 
+%---BBLANK #\ \vskip 30mm
 \begin{definition}
 \label{SEP PTCLO FAMILY DEF}
 Let $X$ be a topological space and let $\{f_{i}\}_{i\in I}$ be a family of continuous 
@@ -7010,10 +7078,10 @@ functions $f_{i}\colon X \to [0, 1]$. We say that the family $\{f_{i}\}_{i\in I}
 $A\subseteq X$ such that $x_{0}\not\in A$ there is a function $f_{j}\in \{f_{i}\}_{i\in I}$
 such that $f_{j}(x_{0}) > 0$ and $f_{j}|_{A} = 0$.    
 \end{definition}
-%---EBLANK # \newpage
+%---EBLANK  #\newpage
 
 
-%---BBLANK 
+%---BBLANK   #  \vspace* {-20mm}
 \begin{EMBEDDINGL}
 \label{EMBEDDING LEMMA}
 Let $X$ be a $T_{1}$-space. If  $\{f_{i}\colon X \to [0, 1]\}_{i\in I}$ is a family 
@@ -7029,47 +7097,6 @@ If the family $\{f_{i}\}_{i\in I}$ in Lemma \ref{EMBEDDING LEMMA} is infinitely
 countable then $f_{\infty}$ is an embedding of $X$ into the Hilbert cube $[0, 1]^{\aleph_{0}}$.
 \end{note}
 
-We will  show first that Theorem \ref{HILBERT CUBE EMBEDDING} follows from 
-Lemma \ref{EMBEDDING LEMMA}, and then we will  prove the lemma.  
-
-
-%---BBLANK 
-\begin{proof}[Proof of Theorem \ref{HILBERT CUBE EMBEDDING}]
-%---EBLANK #\  \vfill \end{proof} \newpage
-Let $\BB= \{V_{i}\}_{i=1}^{\infty}$ be a countable basis of $X$, and let $S$ the set given by 
-$$S := \{(i, j)\in \Z^{+}\times \Z^{+} \ | \ \ \overline{V}_{i} \subseteq V_{j} \}$$
- If $(i, j) \in S$ then the sets $\overline{V}_{i}$ and $X\ssmin V_{j}$ are closed and disjoint, 
-so by the Urysohn Lemma  \ref{URYSOHN LEMMA} there is a continuous function 
-$f_{ij} \colon X\to [0, 1]$ such that 
-$$
-f_{ij}(x) = 
-\begin{cases}
-1  & \text{if $x\in \overline{V_{i}}$} \\
-0  & \text{if $x\in X\ssmin V_{j}$} 
-\end{cases}
-$$
-We will show that the family $\{f_{ij}\}_{(i, j)\in S}$ separates points from closed sets. 
-Take $x_{0}\in X$ and let $A\subseteq X$ be an closed  set
-such that $x_{0}\not\in A$. 
-Since $\BB= \{V_{i}\}_{i=1}^{\infty}$ is a basis of $X$ there is $V_{j}\in \BB$ such that 
-$x_{0}\in V_{j}$ and $V_{j} \subseteq X\ssmin A$. 
-Using Lemma \ref{AVU LEMMA} we also obtain that there exists 
-$V_{i}\in \BB$ such that $x_{0}\in V_{i}$ and $\overline{V}_{i} \subseteq V_{j}$. We have 
-$f_{ij}(x_{0}) =1$. Also, since $A\subseteq X\ssmin V_{j}$ we have $f_{ij}|_{A} = 0$. 
-
-By the Embedding Lemma \ref{EMBEDDING LEMMA} the family $\{f_{_ij}\}_{(i, j)\in S}$  defines an  embedding 
-$$f_{\infty} \colon X \to \prod_{(i, j)\in S} [0, 1]$$
-The set $S$ is countable. If it is infinite then $\prod_{(i, j)\in S}\  [0, 1] \cong [0, 1]^{\aleph_{0}}$.
-If $S$ is finite then $\prod_{(i, j)\in S}\  [0, 1] \cong [0, 1]^{N}$ for some $N \geq 0$ and $ [0, 1]^{N}$ can be 
-identified with a subspace of $[0, 1]^{\aleph_{0}}$. 
-\end{proof}
-
-\begin{proof}[Proof of Theorem \ref{NORMAL URYSOHN METR THM}]
-Follows from Theorem \ref{HILBERT CUBE EMBEDDING}, Lemma \ref{EBM INTO METRIC LEMMA}, 
-and the fact that the Hilbert cube is a metric space (\ref{HILBERT CUBE EX}). 
-\end{proof}
-
-It remains to prove Lemma \ref{EMBEDDING LEMMA}:
 
 \begin{proof}[Proof of Lemma \ref{EMBEDDING LEMMA}]
 We need to show that the function $f_{\infty}$ satisfies the following conditions:
@@ -7108,6 +7135,44 @@ V & = \{f_{\infty}(x) \ | \ \ x\in X \text{ and } p_{j}f_{\infty}(x) > 0  \}  \\
 Since $f_{j}(x_{0}) >0$ we have $f_{\infty}(x_{0}) \in V$. Finally, since $f_{j}(x) = 0$  for all $x\in X \ssmin U$
 we get that $V\subseteq f_{\infty}(U)$.
 \end{proof} 
+
+
+We are now ready to prove the Urysohn Metrization Theorem:
+
+%---BBLANK   #  \vspace* {40mm}
+\begin{proof}[Proof of Theorem \ref{NORMAL URYSOHN METR THM}]
+%---EBLANK #\  \vfill \end{proof} \newpage
+Let $\BB= \{V_{i}\}_{i=1}^{\infty}$ be a countable basis of $X$, and let $S$ the set given by 
+$$S := \{(i, j)\in \Z^{+}\times \Z^{+} \ | \ \ \overline{V}_{i} \subseteq V_{j} \}$$
+ If $(i, j) \in S$ then the sets $\overline{V}_{i}$ and $X\ssmin V_{j}$ are closed and disjoint, 
+so by the Urysohn Lemma  \ref{URYSOHN LEMMA} there is a continuous function 
+$f_{ij} \colon X\to [0, 1]$ such that 
+$$
+f_{ij}(x) = 
+\begin{cases}
+1  & \text{if $x\in \overline{V_{i}}$} \\
+0  & \text{if $x\in X\ssmin V_{j}$} 
+\end{cases}
+$$
+We will show that the family $\{f_{ij}\}_{(i, j)\in S}$ separates points from closed sets. 
+Take $x_{0}\in X$ and let $A\subseteq X$ be an closed  set
+such that $x_{0}\not\in A$. 
+Since $\BB= \{V_{i}\}_{i=1}^{\infty}$ is a basis of $X$ there is $V_{j}\in \BB$ such that 
+$x_{0}\in V_{j}$ and $V_{j} \subseteq X\ssmin A$. 
+Using Lemma \ref{AVU LEMMA} we also obtain that there exists 
+$V_{i}\in \BB$ such that $x_{0}\in V_{i}$ and $\overline{V}_{i} \subseteq V_{j}$. We have 
+$f_{ij}(x_{0}) =1$. Also, since $A\subseteq X\ssmin V_{j}$ we have $f_{ij}|_{A} = 0$. 
+
+By the Embedding Lemma \ref{EMBEDDING LEMMA} the family $\{f_{_ij}\}_{(i, j)\in S}$  defines an  embedding 
+$$f_{\infty} \colon X \to \prod_{(i, j)\in S} [0, 1]$$
+The set $S$ is countable. If it is infinite then $\prod_{(i, j)\in S}\  [0, 1] \cong [0, 1]^{\aleph_{0}}$ which is a metrizable space
+by Proposition \ref{CONTABLE PROD OF METRIC SP PROP}. 
+If $S$ is finite then $\prod_{(i, j)\in S}\  [0, 1] \cong [0, 1]^{N}$ for some $N \geq 0$ and $ [0, 1]^{N}$
+which is again metrizable by Proposition \ref{FINITE PROD OF METRIC SP PROP}. 
+
+The statement of Theorem  \ref{NORMAL URYSOHN METR THM} follows now from  
+Lemma \ref{EBM INTO METRIC LEMMA}.
+\end{proof}
 
 
 
@@ -7270,7 +7335,13 @@ $X_{i}$ ? Justify your answer.
 
 
 
-
+\begin{exercise}
+The goal of this exercise is to complete the proof of Proposition \ref{FINITE PROD OF METRIC SP PROP}. 
+For $i = 1, 2, \dots n$ let $(X_{i}, \varrho_{i})$ be a metric space. Let $\varrho$ be a metric  the Cartesian 
+product $X_{1}\times \dots \times X_{n}$ given by 
+$$\varrho((x_{1}, \dots, x_{n}), (x'_{1}, \dots, x'_{n})) = \sum_{i=1}^{n} \varrho_{i}(x_{i}, x'_{i})$$
+Show that the topology defined by $\varrho$ is the same as the product topology.
+\end{exercise}
 
 \begin{exercise}
 The goal of this exercise is to complete the proof of Proposition \ref{CONTABLE PROD OF METRIC SP PROP}. 
