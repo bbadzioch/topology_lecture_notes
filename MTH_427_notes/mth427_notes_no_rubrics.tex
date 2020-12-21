@@ -38,15 +38,16 @@
 %%%%%%%%%%%%%%%%%%
 %   RUBRICS
 %%%%%%%%%%%%%%%%%%
-
 \usepackage{ifthen}
 \newboolean{ShowRubrics}
 \newcommand{\Rubrics}[1]{\ifthenelse{\boolean{ShowRubrics}}{{\footnotesize\color{red}{#1}}}}{}
 \setboolean{ShowRubrics}{false}
 
-
-
-
+%%%%%%%%%%%%%%%%%%
+%   BACKGROUND COLOR
+%%%%%%%%%%%%%%%%%%
+\usepackage{pagecolor}
+\newcommand{\bgdcolor}{\pagecolor{green!55!yellow!65!}}
 
 
 %%%%%%%%%%%%%%%%%%
@@ -466,7 +467,7 @@
 
 \newcommand{\RP}{{\mathbb R\mathbb P}}
 \DeclareMathOperator\supp{supp}
-
+\DeclareMathOperator\cl{cl}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   COLORS
@@ -490,13 +491,13 @@
 
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   BEGIN DOCUMENT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-
+%backround color
+%\bgdcolor
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -506,7 +507,6 @@
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 \thispagestyle{empty}
 
@@ -529,7 +529,7 @@ Introduction to Topology I \\
 {\Large Bernard Badzioch}
 
 \vskip 85mm
-{\large 2020.07.10}
+{\large 2020.12.20}
 \end{center}
 
 {\small This work is licensed under CC BY-NC-SA 4.0. To view a copy of this license, visit 
@@ -3638,6 +3638,14 @@ a set $B$ closed in $X$ such that $Y\cap B = A$.
 
 
 
+\begin{exercise}
+Let $X$ be a topological space and let $Y\subseteq X$ be a subspace. For a set 
+$A\subseteq Y$  let $\cl_{Y}(A)$ denote the closure of $A$ in $Y$ and $\cl_{X}(A)$
+the closure of $A$ taken in $X$. Show that $\cl_{Y}(A) = \cl_{X}(A)\cap Y$.
+\end{exercise}
+
+
+
         
 \begin{exercise}
 \label{OPEN CLOSED SETS IN SUBSP EXERCISE}
@@ -3706,7 +3714,7 @@ $Y$ is a bounded set then $\xov{Y}$ is also bounded.
 
 
 
-           
+
                      
 \begin{exercise}
 Let $X$ be a topological space and let $Y_{1}, Y_{2}\subseteq X$. 
@@ -4791,6 +4799,18 @@ to the half-closed interval $(a, b]$.
 
 
 \begin{exercise}
+Let $a<b$. Show that the circle $S^{1}$ is not homeomorphic to any of the intervals:
+$(a, b)$, $[a, b]$, $[a, b)$. 
+\end{exercise}
+
+
+
+
+
+
+
+
+\begin{exercise}
 A function $f\colon \R\to \R$ is \emph{strictly increasing} is for all $x, y\in \R$ such that $x> y$ we have 
 $f(x) > f(y)$, and is it \emph{strictly decreasing} is for all $x, y\in \R$ such that $x> y$ we have 
 $f(x) < f(y)$. Show that if $f\colon \R\to\R$ is a continuous 1-1 function then $f$ is either strictly increasing 
@@ -4865,7 +4885,7 @@ consists of countably many points. Show that $X$ is not connected.
 \begin{exercise}
 Let $X$ be the subspace of $\R^{2}$ consisting of the positive $x$-axis and of the graph of the function 
 $f(x) = \tfrac{1}{x}$ for $x> 0$:
-$$X := \{(x, 0)\in \R^{2} \ | \ x\geq 0\} \cup \{(x, \tfrac{1}{x}) \in \R^{2} \ | \ x>0  \}$$
+$$X := \{(x, 0)\in \R^{2} \ | \ x > 0\} \cup \{(x, \tfrac{1}{x}) \in \R^{2} \ | \ x>0  \}$$
 \begin{equation*}
 \begin{tikzpicture}[scale =1] 
 \draw[->, >=latex, thick] (-0.3,0.2) -- (3.8,0.2);
@@ -4907,7 +4927,7 @@ Show that $Y$ is  connected.
 
 
 \begin{exercise}
-Let $f, g\colon \R\to \R$ be continuous functions such that $g(x) < f(x)$ for all $x\in \R$. 
+Let $f, g\colon \R\to \R$ be continuous functions such that $g(x) \leq f(x)$ for all $x\in \R$. 
 Let $Z$ be the subspace of $\R^{2}$ given by 
 $$Z = \{(x, y) \ | \ g(x) \leq y \leq f(x) \}$$
 \begin{equation*}
@@ -4917,8 +4937,8 @@ $$Z = \{(x, y) \ | \ g(x) \leq y \leq f(x) \}$$
 (-0.5, -0.5) 
 .. controls (0, -0.2) and (1, -1.5) .. (1.5, -1.5)
 .. controls (2.2, -1.5) and (2.2, -0.5) .. (2.5, -0.5)
-.. controls (2.6, -0.5) and (2.9, -0.8) .. (3.1, -0.8)
-.. controls (3.5, -0.8) and (3.8, 0.4) .. (4.2, 0.4)
+.. controls (2.6, -0.5) and (2.7, -0.7) .. (3.0, -0.7)
+.. controls (3.5, -0.7) and (3.8, 0.4) .. (4.2, 0.4)
 .. controls (4.5, 0.4) and (4.8, -0.4) .. (5, -0.4)
 -- (5, 1.5) -- (-0.5, 1.5) -- cycle;
 \fill[mypink, opacity = 0.8] 
@@ -4926,8 +4946,8 @@ $$Z = \{(x, y) \ | \ g(x) \leq y \leq f(x) \}$$
 .. controls (0, 0.6) and (0.25, 1) .. (0.5, 1)
 .. controls (1, 1) and (1.2, -0.5) .. (1.5, -0.5)
 .. controls (1.8, -0.5) and (2,  0.5) .. (2.3,  0.5)
-.. controls (2.6,  0.5) and (2.7,  -0.5) .. (3,  -0.5)
-.. controls (3.3,  -0.5) and (3.5,  1) .. (4.2,  1)
+.. controls (2.6,  0.5) and (2.5,  -0.7) .. (3,  -0.7)
+.. controls (3.5,  -0.7) and (3.5,  1) .. (4.2,  1)
 .. controls (4.5,  1) and (4.9,  0.8) .. (5,  0.8)
 -- (5, -1.5) -- (-0.5, -1.5) -- cycle;
 \end{scope}
@@ -4939,14 +4959,14 @@ $$Z = \{(x, y) \ | \ g(x) \leq y \leq f(x) \}$$
 .. controls (0, 0.6) and (0.25, 1) .. (0.5, 1)
 .. controls (1, 1) and (1.2, -0.5) .. (1.5, -0.5)
 .. controls (1.8, -0.5) and (2,  0.5) .. (2.3,  0.5)
-.. controls (2.6,  0.5) and (2.7,  -0.5) .. (3,  -0.5)
-.. controls (3.3,  -0.5) and (3.5,  1) .. (4.2,  1)
+.. controls (2.6,  0.5) and (2.5,  -0.7) .. (3,  -0.7)
+.. controls (3.5,  -0.7) and (3.5,  1) .. (4.2,  1)
 .. controls (4.5,  1) and (4.9,  0.8) .. (5,  0.8)
 (-0.6, -0.5) 
 .. controls (0, -0.2) and (1, -1.5) .. (1.5, -1.5)
 .. controls (2.2, -1.5) and (2.2, -0.5) .. (2.5, -0.5)
-.. controls (2.6, -0.5) and (2.9, -0.8) .. (3.1, -0.8)
-.. controls (3.5, -0.8) and (3.8, 0.4) .. (4.2, 0.4)
+.. controls (2.6, -0.5) and (2.7, -0.7) .. (3.0, -0.7)
+.. controls (3.5, -0.7) and (3.8, 0.4) .. (4.2, 0.4)
 .. controls (4.5, 0.4) and (4.8, -0.4) .. (5, -0.4)
 ;
 \end{scope}
@@ -4960,6 +4980,8 @@ $$Z = \{(x, y) \ | \ g(x) \leq y \leq f(x) \}$$
 
 Show that $Z$ is  connected. 
 \end{exercise}
+
+
 
 
 
@@ -5536,7 +5558,7 @@ Prove Proposition \ref{LOC PCONN COMP OPEN PROP}.
 \begin{exercise}
 Let $M_{n}(\R)$ denote the set of all $n\times n$ matrices with coefficients in $\R$. Since 
 each matrix consists of $n^{2}$ real numbers the set $M_{n}(\R)$ can be identified with $\R^{n^{2}}$.
-Using this identification we can consider $M_{n}(\R)$ as a metric space. Let $GL_{n}(\R)$ be the 
+Using this identification we can consider $M_{n}(\R)$ as a topological space. Let $GL_{n}(\R)$ be the 
 subspace of $M_{n}(\R)$ consisting of all invertible matrices. Equivalently:
 $$GL_{n}(\R) = \{ A\in M_{n}(\R) \ | \ \det A \neq 0\}$$
 where $\det A$ is the determinant of $A$. Show that $GL_{n}(R)$ has exactly two path connected components:
@@ -6658,8 +6680,8 @@ and $|f(x)-g(x)| \leq \frac{2}{3}C$ for all $x\in A$.
 Define $Y := f^{-1}([-C, -\frac{1}{3}C])$, $Z:= f^{-1}([\frac{1}{3}C, C])$. Since $f\colon A \to \R$ 
 is a continuous function these sets are closed in $A$, but since $A$ is closed in $X$ the sets $Y$ and $Z$
 are also closed in $X$. Since $Y\cap Z = \varnothing$  by the Generalized Urysohn Lemma \ref{GEN URYSOHN LEMMA}
-there exists a continuous function $g\colon X\to [-\frac{C} {3}, \frac{C}{3}]$ such that $h(x) = - \frac{C}{3}$ for all $x\in Y$ 
-and $h(x) = \frac{C}{3}$ for all $x\in Z$.  It is straightforward to check that  $|f(x) - g(x)| \leq \frac{2}{3}C$ for all $x\in A$. 
+there exists a continuous function $g\colon X\to [-\frac{C} {3}, \frac{C}{3}]$ such that $g(x) = - \frac{C}{3}$ for all $x\in Y$ 
+and $g(x) = \frac{C}{3}$ for all $x\in Z$.  It is straightforward to check that  $|f(x) - g(x)| \leq \frac{2}{3}C$ for all $x\in A$. 
 \end{proof}
 
 
@@ -6839,6 +6861,36 @@ such that $A\cap B = \varnothing$ then there exists a continuous function $f\col
 such that $A = f^{-1}(\{0\})$ and $B = f^{-1}(\{1\})$.
 \end{exercise}
 
+
+
+
+
+\begin{exercise}
+Recall that $S^{1}$ denotes the unit circle $S^{1} = \{(x_{1}, x_{2}) \in \R^{2} \ | \ x_{1}^{2} + x_{2}^{2} = 1\}$.
+Let $X$ be A normal space, $A\subseteq X$ be a closed set, and let $f\colon A \to S^{1}$ be 
+a continuous function. Show that there exists an open set $U\subseteq X$  and a continuous 
+function $\bar{f}\colon U \to S^{1}$ such that  $A\subseteq U$ and $\bar{f}|_{A} = f$.
+ 
+\end{exercise}
+
+
+
+
+
+
+\begin{exercise}
+Assume that we have a sequence of spaces
+$$X_{1} \subseteq X_{1} \subseteq X_{2} \subseteq \dots$$
+Let $X_{\infty} = \bigcup_{n=1}^{\infty}$. Define a topology on $X_{\infty}$ in such way that 
+a set $U\subseteq X_{\infty}$ is open in $X_{\infty}$ if and only if the set $U\cap X_{n}$ is open in $X_{n}$
+for each $n=1, 2, \dots$.
+
+a) Show that a function $f\colon X_{\infty}\to Y$ is continuous if and only if its restriction 
+$f|_{X_{n}}\colon X_{n}\to Y$ is continuous for each $n=1, 2, \dots$. 
+
+b) Assume that for each $n$ the space $X_{n}$ is normal, and that $X_{n}$ is closed in $X_{n+1}$. 
+Show that $X_{\infty}$ is normal. (Hint: Use Proposition \ref{URYSOHN CONVERSE PROP}).
+\end{exercise}
 
 
 
@@ -7394,6 +7446,8 @@ Verify this fact without using Proposition \ref{CONTABLE PROD OF METRIC SP PROP}
 
 
 
+
+
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -7428,7 +7482,7 @@ open subset of $\R^{n}$ (we say that $M$ is \emph{locally homeomorphic} to $\R^{
 \end{definition}
 %---EBLANK
 
-%---BBLANK #\vskip 30mm
+
 \begin{note}
 Let $M$ be a manifold of dimension $n$. If $U\subseteq M$ is an open set and  $\varphi\colon U \to V$
 is a homeomorphism of $U$ with some open set $V\subseteq \R^{n}$ then we say that  
@@ -7436,6 +7490,7 @@ $U$ is a \emph{coordinate neighborhood} and  $\varphi$ is
 a \emph{coordinate chart} on $M$.  
 \end{note}
 
+%---BBLANK #\vskip 10mm
 \begin{tikzpicture}
 \node[anchor=south west,inner sep=0] at (0,0) 
 {{\includegraphics[width=\textwidth, trim=0mm 155mm 0mm 65mm, clip]{pictures/MTH427p003.pdf}}};
@@ -7454,7 +7509,7 @@ x
 %---EBLANK
 
 
-%---BBLANK #\newpage
+%---BBLANK  #\vfill
 \begin{lemma}
 \label{COORD LEMMA}
 If $M$ is an $n$-dimensional manifold then:
@@ -7471,7 +7526,7 @@ Exercise.
 \end{proof}
 %---EBLANK
 
-%---BBLANK #\vskip 20mm
+%---BBLANK #\newpage
 \begin{example}
 A space $M$ is a manifold of dimension $0$ if and only if $M$ is a countable (finite or infinite) discrete space.
 \end{example}
@@ -7504,7 +7559,7 @@ If $x_{i} <0$ then we can construct in a similar way a coordinate chart $h^{-}_{
 where $U^{-}_{i} = \{(y_{1}, \dots, y_{n+1})\in S^{n} \ | \ y_{i} <  0 \}$.
 \end{example}
 
-%---BBLANK #\newpage
+%---BBLANK #\vskip 60mm
 \begin{proposition}
 \label{MANIFOLDPROD PROP}
 If $M$ is an $m$-dimensional manifold and $N$ is an $n$-dimensional manifold then $M\times N$
@@ -7525,7 +7580,7 @@ Exercise.
 \end{example}
 
 
-%---BBLANK #\vskip 70mm
+%---BBLANK #\newpage
 \begin{note}
 There exist topological spaces that are locally homeomorphic to $\R^{n}$, 
 but do not satisfy the the other conditions of the definition of a manifold (\ref{MANIFOLD DEF}). 
@@ -7560,7 +7615,7 @@ Therefore $L$ is not a manifold.  There exist also spaces (e.g. Alexandroff long
 
 The following theorem says that the dimension of a manifold is well defined:
 
-%---BBLANK #\vfill
+%---BBLANK #\vskip 80mm
 \begin{INVDIMTHM}
 \label{INVDIM THM}
 If $M$ is a non-empty topological space such that $M$ is a manifold of dimension $m$ and 
@@ -7576,7 +7631,7 @@ An slight generalization of the notion of a manifold is a manifold with boundary
 Let $\HH^{n}$ denote the subspace of $\R^{n}$ given by 
 $\HH^{n} = \{(x_{1}, \dots, x_{n})\in \R^{n} \ | \ x_{n} \geq 0 \}$. 
 
-%---BBLANK #\newpage \vskip 50mm
+%---BBLANK #\newpage  \vspace*{50mm}
 \begin{definition}
 \label{MANIFOLD WITH BOUNDARY DEF}
 A \emph{topological $n$-dimensional manifold with boundary} is a topological space $M$
@@ -7591,7 +7646,7 @@ and $\varphi\colon U\to V$ is a homeomorphism then we say that $\varphi$ is a co
 
 
 
-%---BBLANK # \vskip 30mm
+
 \begin{nn}
 Let $\partial \HH^{n} = \{ (x_{1}, \dots, x_{n})\in \HH^{n} \ | \ x_{n} = 0\}$.  If $M$ is an $n$-dimensional 
 manifold with boundary,  $\varphi\colon U\to V$ is a coordinate chart, and $x\in U$ then 
@@ -7601,6 +7656,7 @@ there are two possibilities:
 \item $\varphi(x) \not\in \partial \HH^{n}$
 \eenu
 
+%---BBLANK # \vskip 10mm
 \begin{tikzpicture}
 
 \node[anchor=south west,inner sep=0] at (0,0) 
@@ -7620,10 +7676,10 @@ there are two possibilities:
 \node at (12.7,3.4){\small $\HH^{n}$};
 
 \end{tikzpicture}
-
+%---EBLANK 
 In the first case we say that the point $x$ is a \emph{boundary point} of $M$, and in the
 the second case that $x$ is an \emph{interior point} of $M$. 
-%---EBLANK # \end{nn}
+
 The next theorem says that a point cannot be a boundary point and an interior point of $M$ at the same time:
 \end{nn}
 
@@ -7641,7 +7697,7 @@ such that $x_{0}\in U'$ we have $\psi(x_{0})\in \partial \HH^{n}$.
 The proof in the general case requires similar machinery as the proof of Theorem \ref{INVDIM THM}, and so 
 we will omit it here. The case when $n=1$ is much simpler (exercise). 
 
-%---BBLANK # \newpage
+%---BBLANK # \vfill
 \begin{definition}
  \index{boundary ! of a manifold@{$\sim$ of a manifold}}
 Let $M$ be a manifold with boundary. The subspace of $M$ consisting of all boundary points of 
@@ -7649,7 +7705,7 @@ $M$ is called \emph{the boundary of $M$} and it is denoted by $\partial M$.
 \end{definition}
 %---EBLANK 
 
-%---BBLANK # \vskip 20mm
+%---BBLANK # \newpage
 \begin{example}
 The space $\HH^{n}$ is trivially an $n$-dimensional manifold with boundary. 
 \end{example}
@@ -7665,16 +7721,18 @@ In this case we have $\partial \overline{B}^{n} = S^{n-1}$.
 \end{example}
 %---EBLANK 
 
-%---BBLANK # \vskip 20mm
+%---BBLANK # \vskip 50mm
 \begin{example}
 If $M$ is a manifold (without boundary) then we can consider  it as a manifold with boundary. 
 where $\partial M = \varnothing$. 
 \end{example}
 %---EBLANK 
 
+%---BBLANK # \vskip 30mm
 \begin{example}
 If $M$ is an $m$-dimensional manifold with boundary and $N$ is an $n$-dimensional manifold 
 without boundary then $M\times N$ is an $(m+n)$-dimensional manifold with boundary (exercise). 
+%---EBLANK  #\end{example}
 In such case we have: $\partial (M\times N) = \partial M \times N$. For example the \emph{solid torus} 
 $\overline{B}^{2}\times S^{1}$ is a $3$-dimensional manifold with boundary, and 
 $\partial (\overline{B}^{2}\times S^{1}) = S^{1}\times S^{1} = T^{2}$.   
@@ -7685,7 +7743,7 @@ with boundary and $\partial (M\times N) = (\partial M \times N) \cup (M \times \
 \end{example}
 
 
-%---BBLANK # \newpage
+
 \begin{proposition}
 \label{BOUNDARY INT SUBMANIFOLD PROP}
 If $M$ is an $n$-dimensional manifold with boundary then:
@@ -7698,10 +7756,10 @@ If $M$ is an $n$-dimensional manifold with boundary then:
 \begin{proof}
 Exercise. 
 \end{proof}
-%---EBLANK 
 
 
-%---BBLANK # \vskip 10mm
+
+%---BBLANK # \newpage
 \begin{theorem}
 \label{MANIFOLD METRIZATION THM}
 Every topological manifold (with or without boundary) is metrizable. 
@@ -7734,7 +7792,7 @@ in $\R^{n}$. Since $0 = \varphi(x)\in \R^{n}\ssmin\varphi(A\cap U)$ we can find 
 $B(0, \varepsilon)$ such that $B(0, \varepsilon) \subseteq \R^{n}\ssmin\varphi(A\cap U)$:
 
 
-%---BBLANK # \vskip 40mm
+%---BBLANK # \vskip 60mm
 \begin{tikzpicture}
 \node[anchor=south west,inner sep=0] at (0,0) 
 {{\includegraphics[width=\textwidth, trim=0mm 163mm 0mm 50mm, clip]{pictures/MTH427p005.pdf}}};
@@ -7910,7 +7968,7 @@ If $\mathcal{Y}$ consists of finitely many sets then $\mathcal{Y}$ is a \emph{fi
 \end{definition}  
 %---EBLANK
 
- %---BBLANK
+ %---BBLANK #\vskip 20mm
 \begin{definition}
 Let $\mathcal{Y} = \{Y_{i}\}_{i\in I}$ be a cover of $X$. A \emph{subcover} of $\mathcal{Y}$ is 
 cover $\mathcal{Y}'$ of $X$ such that every element of $\mathcal{Y}'$ is in $\mathcal{Y}$. 
@@ -7925,22 +7983,27 @@ $$\YY' = \{(-n, n) \subseteq \R\ | \ n= 1, 2, \dots  \}$$
 is a subcover of $\YY$.  
 \end{example}
 
- %---BBLANK # \newpage
+ %---BBLANK # \vfill
 \begin{definition}
 \index{space! compact@{compact $\sim$}}
 A space $X$ is \emph{compact} if every open cover of $X$ contains a finite subcover. 
 \end{definition}
 %---EBLANK 
 
+ %---BBLANK # \newpage
 \begin{example}
 A discrete topological space $X$ is compact if and only if  $X$ consists of finitely many points. 
 \end{example}
+%---EBLANK 
 
 
+ %---BBLANK # \vskip 50mm
 \begin{example}
 Let $X$ be a subspace of $\R$ given by 
 $$X = \{0 \} \cup \{\ \tfrac{1}{n} \ | \ n= 1, 2, \dots \}$$
-The space $X$ is compact. Indeed, let $\UU = \{ U_{i} \}_{i\in I}$ be any open cover of $X$
+The space $X$ is compact. 
+%---EBLANK # \end{example}
+Indeed, let $\UU = \{ U_{i} \}_{i\in I}$ be any open cover of $X$
 and let $0\in U_{0}$. Then there exists $N>0$ such that $\frac{1}{n}\in U_{i_{0}}$ for all $n> N$. 
 For $n=1, \dots, N$ let $U_{i_{n}}\in \UU$ be a set such that $\frac{1}{n}\in U_{i_{n}}$. We have:
 $$X = U_{i_{0}} \cup U_{i_{1}} \cup \dots \cup U_{i_{N}}$$
@@ -7948,11 +8011,51 @@ so $\{U_{i_{0}}, U_{i_{1}}, \dots, U_{i_{N}}\}$ is a finite subcover of $\UU$.
 \end{example}
 
 
+ %---BBLANK # \vskip 50mm
 \begin{example}
-The real line $\R$ is not compact since the open cover 
+The real line $\R$ is not compact
+%---EBLANK #\end{example}
+since the open cover 
 $$\YY = \{(n-1, n+1) \subseteq \R \ | \ n\in \Z \}$$
 does not have any finite subcover. 
 \end{example}
+
+
+
+
+%---BBLANK # \newpage \vspace*{-25mm}
+\begin{proposition}
+\label{CLOSEDINT COMPACT PROP}
+For any $a< b$ the closed interval $[a, b]\subseteq \R$ is compact.  
+\end{proposition}
+%---EBLANK 
+
+\begin{proof}
+Let $\UU$ be an open cover of $[a, b]$ and let 
+$$A = \{x\in [a, b] \ | \  \text{the interval $[a, x]$ can be covered by a finite number of elements of $\UU$}\}$$
+Let $x_{0} := \sup A$. 
+
+\emph{Step 1.} We will show that $x_{0} > a$. Indeed, let $U\in \UU$ be a set such that $a\in U$. 
+Since $U$ is open we have $[a, a+\varepsilon ) \subseteq U$ for some $\varepsilon > 0$. It follows 
+that $x\in A$ for all $x\in [a, a+\varepsilon)$. Therefore $x_{0}\geq a+\varepsilon$. 
+
+
+\emph{Step 2.} Next, we  will show  that $x_{0}\in A$. Let $U_{0}\in \UU$ be a set such that 
+$x_{0}\in U_{0}$. Since $U_{0}$ is open and $x_{0}> a$ there exists $\varepsilon _{1} >0$ such that
+$(x_{0}-\varepsilon_{1} , x_{0}] \subseteq U_{0}$. Also, since $x_{0} = \sup A$  there is $x\in A$
+such that $x\in (x_{0}-\varepsilon_{1} , x_{0}]$. Notice that  
+$$[a, x_{0}] = [a, x]\cup (x_{0}-\varepsilon_{1}, x_{0}]$$
+By assumption the interval $[a, x]$ can be covered by a finite number of sets from  $\UU$ and 
+$(x_{0}-\varepsilon_{1}, x_{0}]$ is covered by $U_{0}\in \UU$. As a consequence $[a, x_{0}]$
+can be covered by a finite number of elements of $\UU$, and so $x_{0}\in A$. 
+
+\emph{Step 3.} In view of Step 2 it suffices to show  that $x_{0} = b$.  To see this take again 
+$U_{0}\in \UU$ to be a set such that $x_{0}\in \UU$. If $x_{0}< b$ then there exists $\varepsilon_{2} >0$
+such that $[x_{0}, x_{0}+\varepsilon_{2} ) \subseteq U_{0}$. Notice that for any  
+$x\in (x_{0}, x_{0}+\varepsilon_{2})$ the interval $[a, x]$ can be covered by a finite number of elements of 
+$\UU$, and thus $x\in A$. Since $x> x_{0}$ this contradicts the assumption that $x_{0} = \sup A$.  
+
+\end{proof}
 
 
 %---BBLANK # \newpage
@@ -7988,7 +8091,7 @@ Let $f\colon X\to Y$ be a continuous function. If  $A\subseteq X$ is compact  th
 The function $f|_{A}\colon A \to f(A)$ is onto, so this follows from Proposition \ref{COMPACT ONTO PROP}.
 \end{proof}
 
-%---BBLANK # \vskip 30mm
+%---BBLANK # \vskip 70mm
 \begin{corollary}
 \label{COMP TOP INV PROP}
 Let $X$, $Y$ be topological spaces.
@@ -8006,41 +8109,6 @@ For any $a< b$ the open interval $(a, b)\subseteq \R$ is not compact since $(a, 
 \end{example}
 
 
-
-
-%---BBLANK # \newpage
-\begin{proposition}
-\label{CLOSEDINT COMPACT PROP}
-For any $a< b$ the closed interval $[a, b]\subseteq \R$ is compact.  
-\end{proposition}
-%---EBLANK 
-
-\begin{proof}
-Let $\UU$ be an open cover of $[a, b]$ and let 
-$$A = \{x\in [a, b] \ | \  \text{the interval $[a, x]$ can be covered by a finite number of elements of $\UU$}\}$$
-Let $x_{0} := \sup A$. 
-
-\emph{Step 1.} We will show that $x_{0} > a$. Indeed, let $U\in \UU$ be a set such that $a\in U$. 
-Since $U$ is open we have $[a, a+\varepsilon ) \subseteq U$ for some $\varepsilon > 0$. It follows 
-that $x\in A$ for all $x\in [a, a+\varepsilon)$. Therefore $x_{0}\geq a+\varepsilon$. 
-
-
-\emph{Step 2.} Next, we  will show  that $x_{0}\in A$. Let $U_{0}\in \UU$ be a set such that 
-$x_{0}\in U_{0}$. Since $U_{0}$ is open and $x_{0}> a$ there exists $\varepsilon _{1} >0$ such that
-$(x_{0}-\varepsilon_{1} , x_{0}] \subseteq U_{0}$. Also, since $x_{0} = \sup A$  there is $x\in A$
-such that $x\in (x_{0}-\varepsilon_{1} , x_{0}]$. Notice that  
-$$[a, x_{0}] = [a, x]\cup (x_{0}-\varepsilon_{1}, x_{0}]$$
-By assumption the interval $[a, x]$ can be covered by a finite number of sets from  $\UU$ and 
-$(x_{0}-\varepsilon_{1}, x_{0}]$ is covered by $U_{0}\in \UU$. As a consequence $[a, x_{0}]$
-can be covered by a finite number of elements of $\UU$, and so $x_{0}\in A$. 
-
-\emph{Step 3.} In view of Step 2 it suffices to show  that $x_{0} = b$.  To see this take again 
-$U_{0}\in \UU$ to be a set such that $x_{0}\in \UU$. If $x_{0}< b$ then there exists $\varepsilon_{2} >0$
-such that $[x_{0}, x_{0}+\varepsilon_{2} ) \subseteq U_{0}$. Notice that for any  
-$x\in (x_{0}, x_{0}+\varepsilon_{2})$ the interval $[a, x]$ can be covered by a finite number of elements of 
-$\UU$, and thus $x\in A$. Since $x> x_{0}$ this contradicts the assumption that $x_{0} = \sup A$.  
-
-\end{proof}
 
 %---BBLANK # \newpage
 \begin{proposition}
@@ -8060,7 +8128,7 @@ Exercise.
 \end{proof}
 %---EBLANK 
 
-%---BBLANK # \vskip 20mm
+%---BBLANK # \vskip 10mm
 \begin{proposition}
 \label{COMPACT SUBSPACE PROP}
 Let $X$ be a  Hausdorff space and let  $Y\subseteq X$. If $Y$ is compact then it is closed in $X$. 
@@ -8070,7 +8138,7 @@ Let $X$ be a  Hausdorff space and let  $Y\subseteq X$. If $Y$ is compact then it
 
 Proposition \ref{COMPACT SUBSPACE PROP} is a direct consequence of the following fact: 
 
-%---BBLANK # \vskip 20mm
+%---BBLANK # \vskip 10mm
 \begin{lemma}
 \label{COMPACT SET SEPARATION LEMMA}
 Let $X$ be a Hausdorff space, let $Y\subseteq X$ be a compact subspace, and let $x\in X \ssmin Y$. 
@@ -8157,23 +8225,24 @@ Follows from Proposition \ref{CLOSED SUBSP OF COMPACT PROP} and
 Proposition \ref{COMPACT SUBSPACE PROP}.
 \end{proof}
 
-
+%---BBLANK  # \vskip 20mm
 \begin{proposition}
 \label{COMPACT TO HAUSDORFF CLOSED MAP PROP}
 Let $f\colon X\to Y$ be a continuous function, where $X$ is a compact space and $Y$ is a Hausdorff space. 
 For any closed set $A\subseteq X$ the set $f(A)$ is closed in $Y$.  
 \end{proposition}
+%---EBLANK
 
-%---BBLANK  # \vskip 40mm
+
 \begin{proof}
 Let $A\subseteq X$ be a closed set. By Proposition \ref{CLOSED SUBSP OF COMPACT PROP}
 $A$ is  a compact space and thus by Corollary  \ref{COMPACT IMAGE COR}  $f(A)$ is  a 
 compact   subspace of $Y$. Since $Y$ is a Hausdorff space, 
 using Proposition \ref{COMPACT SUBSPACE PROP} we obtain that $f(A)$ is closed in $Y$. 
 \end{proof}
-%---EBLANK
 
-%---BBLANK  # \vskip 20mm
+
+%---BBLANK  # \vskip 50mm
 \begin{proposition}
 \label{COMPACT TO HAUSDORF BIJ PROP}
 Let $f\colon X\to Y$ be a continuous bijection. If $X$ is a compact space and $Y$ is a Hausdorff 
@@ -8267,8 +8336,8 @@ $\bigcap_{i=1}^{\infty} A_{i} = \varnothing$.
 closed, connected set. Show that if $A_{i+1} \subseteq A_{i}$ for all $i$
 then $\bigcap_{i=1}^{\infty}A_{i}$ is connected. 
 
-b) Give an example of a space $X$ and subspaces $A_{1}\subseteq A_{2}\subseteq {\dots} \subseteq X$
-such that $A_{i}$ is connected for each $i$ but $\bigcap_{i=1}^{\infty}A_{i}$ is not connected.
+b) Give an example of a space $X$ and  subspaces $A_{1}\supseteq A_{2}\supseteq {\dots}$
+such that $A_{i}$ is connected and closed in $X$ for each $i$, but $\bigcap_{i=1}^{\infty}A_{i}$ is not connected.
 \end{exercise}
 
 
@@ -8429,7 +8498,7 @@ is  bounded  since $d(x, y) < 1$ for all $x, y\in A$. However $A$ is not compact
 
 The proof of Heine-Borel Theorem will make use of the following fact:
 
-%---BBLANK # \newpage
+%---BBLANK # \newpage \vspace* {-30mm}
 \begin{theorem}
 \label{PROD 2 COMPACT THM}
 If  $X$, $Y$ are compact spaces then the space $X\times Y$ is also compact. 
@@ -8448,8 +8517,9 @@ such that $Z_{x}\times Y$ can be covered by a finite number of elements of $\UU$
 Consider the subspace $\{x\}\times Y \subseteq X\times Y$. Since 
 $\{x\}\times Y \cong Y$ is  compact there is a finite number of sets 
 $V_{i_{1}}\times W_{i_{1}}, \dots, V_{i_{n}}\times W_{i_{n}} \in \UU$  such that 
-$\{x\}\times Y \subseteq \bigcup_{j=1}^{n} V_{i_{j}}\times W_{i_{j}}$. 
-We can take $Z_{x} = \bigcap_{j=1}^{n} V_{i_{j}}$. 
+$\{x\}\times Y \subseteq \bigcup_{j=1}^{n} V_{i_{j}}\times W_{i_{j}}$.  We can assume that 
+$(\{x\}\times Y)\cap (V_{i_{j}}\times W_{i_{j}})\neq\varnothing$ for $j=1, \dots, n$. 
+Then we can take $Z_{x} = \bigcap_{j=1}^{n} V_{i_{j}}$. 
 
 \begin{equation*}
 \begin{tikzpicture}[scale = 1.1]
@@ -8558,7 +8628,7 @@ This follows from Proposition \ref{CLOSEDINT COMPACT PROP} and
 Corollary \ref{ITER PROD COMPACT COR}. 
 \end{proof}
 
-%---BBLANK # \vskip 30mm
+%---BBLANK # \vskip 50mm
 \begin{proof}[Proof of Theorem \ref{HEINE-BOREL THEM}]
 ($\Ra$) Exercise.
 
@@ -8636,6 +8706,23 @@ Prove Lemma \ref{MFLD LOCAL CLOSED BALL LEMMA}.
 
 
 
+\begin{exercise}
+Let $M_{n}(\R)$ denote the set of all $n\times n$ matrices with coefficients in $\R$. Since 
+each matrix consists of $n^{2}$ real numbers the set $M_{n}(\R)$ can be identified with $\R^{n^{2}}$.
+Using this identification we can consider $M_{n}(\R)$ as a topological space. 
+
+
+Recall that an $n\times n$ matrix $A$ is an orthogonal matrix if $AA^{T} = I_{n}$ where 
+$A^{T}$ is the transpose of $A$ and $I_{n}$ is the $n\times n$ identity matrix. Let 
+$O_{n}(\R)$ denote the subspace of $M_{n}(\R)$ consisting of all orthogonal matrices. 
+Show that the space $O_{n}(\R)$  is compact. 
+\end{exercise}
+
+
+
+
+
+
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -8668,7 +8755,7 @@ $\{x_{n}\}\subseteq X$ contains a convergent subsequence.
 \end{definition}
 %---EBLANK #
 
-%---BBLANK # \vskip 30mm
+%---BBLANK # \vskip 60mm
 \begin{theorem}
 \label{COMPACT METRIC THM}
 A metric space $(X, \varrho)$ is compact if and only if it is sequentially compact.
@@ -8693,7 +8780,7 @@ Exercise.
 \end{proof}
 %---EBLANK #
 
-%---BBLANK # \vskip 30mm
+%---BBLANK # \vskip 20mm
 \begin{lemma}
 \label{NONCONV SUBSEQ BALL LEMMA}
 Let $(X, \varrho)$ be a metric space. If a sequence $\{x_{n} \}\subseteq X$
@@ -8907,7 +8994,7 @@ for every compact set $K\subseteq X$. Show that $A$ is closed in $X$.
 \begin{exercise}
 Let $(X, \varrho)$ be a metric space and $A_{1}\subseteq A_{2} \subseteq \dots$ be subsets of $X$. 
 Assume for each $n=1, 2, \dots$ the set  $A_{n}$ is compact and connected. Show that 
-$A = \bigcup_{n=1}^{\infty} A_{n}$ is compact and connected.  
+$A = \bigcap_{n=1}^{\infty} A_{n}$ is compact and connected.  
 
 \end{exercise}
 
@@ -8940,10 +9027,10 @@ if there is $K > 0$ such that $|f(x)| < K$ for all $x\in X$. Show that the follo
 \item[(i)] $X$ is compact 
 \item[(ii)] every continuous function $f\colon X \to \R$ is bounded.
 \eenu
-(Hint: Show that if $X$ is non-compact then it contains a sequence $\{x_{n}\}$ 
-with no convergent subsequence and such that $x_{n}\neq x_{m}$ for all $n\neq m$.  
-Let $A$ be the subspace of $X$ consisting of all points of this sequence. Show the function 
-$f\colon A\to \R$ given by $f(x_{n}) = n$ is continuous). 
+%(Hint: Show that if $X$ is non-compact then it contains a sequence $\{x_{n}\}$ 
+%with no convergent subsequence and such that $x_{n}\neq x_{m}$ for all $n\neq m$.  
+%Let $A$ be the subspace of $X$ consisting of all points of this sequence. Show the function 
+%$f\colon A\to \R$ given by $f(x_{n}) = n$ is continuous). 
 \end{exercise}
 
 
@@ -9222,11 +9309,11 @@ we can try to prove the  Theorem \ref{TYCHONOFF THM} in the following way. Given
 family $\AA$ of subsets of $\prod_{s\in S}X_{s}$ we need to show that $\bigcap_{A\in \AA} A \neq \varnothing$. 
 Let $p_{s_{0}}\colon \prod_{s\in S} X_{s} \to X_{s_{0}}$ be the projection onto the $s_{0}$-th factor.  
 For each $s\in S$ the family $\, \{\, \overline{p_{s}(A)}\, \}_{A\in \AA}\,$ is a centered family of closed subsets  
-of $X_{s}$. Since $X_{s}$ is  compact  we can find $x_{s}\in X_{s}$ such that 
-$x_{s}\in \bigcap_{A\in \AA} \, \overline{p_{s}(A)}$. If we can show that the point 
-$(x_{s})_{s\in S}\in \prod_{s\in S} X_{s}$ is in  $\bigcap_{A\in \AA} A$ then we are done. 
+of $X_{s}$. Since $X_{s}$ is  compact  we can find $\tilde x_{s}\in X_{s}$ such that 
+$\tilde x_{s}\in \bigcap_{A\in \AA} \, \overline{p_{s}(A)}$. If we can show that the point 
+$(\tilde x_{s})_{s\in S}\in \prod_{s\in S} X_{s}$ is in  $\bigcap_{A\in \AA} A$ then we are done. 
 
-%---BBLANK # \newpage \ \vskip 30mm 
+%---BBLANK # \newpage \ \vskip 60mm 
 \begin{equation*}
 \begin{tikzpicture}[scale = 1]
 \draw (0, 0) rectangle (5, 3);
@@ -9255,9 +9342,9 @@ $(x_{s})_{s\in S}\in \prod_{s\in S} X_{s}$ is in  $\bigcap_{A\in \AA} A$ then we
 \draw[red, densely dotted] (-0.7, 2+0.003) -- (0.3, 2+0.003);
 \draw[red, densely dotted] (-0.55, 2+0.4+0.003) -- (0.3+0.7, 2+0.4+0.003);
 
-\fill (1.3, -1) circle (0.07) node[below, xshift = 1] {\small $x_{1}$};
-\fill (-1, 1.1) circle (0.07) node[left] {\small $x_{2}$};
-\fill (1.3, 1.1) circle (0.07) node[right] {\small $(x_{1}, x_{2})$};
+\fill (1.3, -1) circle (0.07) node[below, xshift = 1] {\small $\tilde x_{1}$};
+\fill (-1, 1.1) circle (0.07) node[left] {\small $\tilde x_{2}$};
+\fill (1.3, 1.1) circle (0.07) node[right] {\small $(\tilde x_{1},\tilde x_{2})$};
 \draw[densely dotted] (1.3, -1) -- (1.3, 1.1) -- (-1, 1.1);
 
 \node[anchor = north east] at (4.85, 2.8) {\small $X_{1}\times X_{2}$}; 
@@ -9267,11 +9354,11 @@ $(x_{s})_{s\in S}\in \prod_{s\in S} X_{s}$ is in  $\bigcap_{A\in \AA} A$ then we
 %---EBLANK #
 
 The problem with this approach is that  in general  not every choice  of  points 
-$x_{s}\in \bigcap_{A\in \AA} \, \overline{p_{s}(A)}$ will give a  point $(x_{s})_{s\in S}$
+$\tilde x_{s}\in \bigcap_{A\in \AA} \, \overline{p_{s}(A)}$ will give a  point $(\tilde x_{s})_{s\in S}$
 that belongs to $\bigcap_{A\in \AA} A$:
 
 
-%---BBLANK # \vskip 30mm
+%---BBLANK # \vskip 0mm
 \begin{equation*}
 \begin{tikzpicture}[scale = 1]
 \draw (0, 0) rectangle (5, 3);
@@ -9300,9 +9387,9 @@ that belongs to $\bigcap_{A\in \AA} A$:
 \draw[red, densely dotted] (-0.7, 2+0.003) -- (0.3, 2+0.003);
 \draw[red, densely dotted] (-0.55, 2+0.4+0.003) -- (0.3+0.7, 2+0.4+0.003);
 
-\fill (3, -1) circle (0.07) node[below, xshift = 1] {\small $x_{1}$};
-\fill (-1, 1.7) circle (0.07) node[left] {\small $x_{2}$};
-\fill (3, 1.7) circle (0.07) node[right] {\small $(x_{1}, x_{2})$};
+\fill (3, -1) circle (0.07) node[below, xshift = 1] {\small $\tilde x_{1}$};
+\fill (-1, 1.7) circle (0.07) node[left] {\small $\tilde x_{2}$};
+\fill (3, 1.7) circle (0.07) node[right] {\small $(\tilde x_{1}, \tilde x_{2})$};
 \draw[densely dotted] (3, -1) -- (3, 1.7) -- (-1, 1.7);
 
 \node[anchor = north east] at (4.85, 2.8) {\small $X_{1}\times X_{2}$}; 
@@ -9316,8 +9403,8 @@ details)  can be outlined as follows.  We will start with an arbitrary centered 
 of $\prod_{s\in S} X_{s}$,  but then we will replace it by a certain family $\MM$ such that  $\AA\subseteq \MM$.  
 This inclusion  will give $\bigcap_{M\in \MM} M \subseteq \bigcap_{A\in \AA} A$, so it will be enough to show 
 that $\bigcap_{M\in \MM} M \neq \varnothing$.  The advantage of working with the family $\MM$
-will be that for any  choice of points $x_{s}\in \bigcap_{M\in \MM} \,  \overline{p_{s}(M)}$ the point
-$(x_{s})_{s\in S}$ will belong to $\bigcap_{M\in \MM} M$, which will let us avoid the issues indicated above. 
+will be that for any  choice of points $\tilde x_{s}\in \bigcap_{M\in \MM} \,  \overline{p_{s}(M)}$ the point
+$(\tilde x_{s})_{s\in S}$ will belong to $\bigcap_{M\in \MM} M$, which will let us avoid the issues indicated above. 
 
 
 The main difficulty is to show that for a given centered family $\AA$  we can find 
@@ -9326,7 +9413,7 @@ using  Zorn's Lemma.  This lemma is a very useful result in set theory that appe
 in proofs of many theorems in various areas of mathematics.  Here is a  concise introduction 
 to  Zorn's Lemma:
 
-%---BBLANK # \newpage
+
 \begin{definition}
 \label{PARTIAL ORDER DEF}
 \index{set! partially ordered@{partially ordered $\sim$}}
@@ -9341,16 +9428,8 @@ satisfying
 \eenu
 
 \end{definition}
-%---EBLANK #
 
-%---BBLANK # \vskip 30mm 
-\begin{definition}
-\label{LINEAR ORDER DEF}
-\index{set! linearly ordered@{linearly ordered $\sim$}}
-A \emph{linearly ordered set} is a poset $(S, \leq)$ such that for any $x, y\in S$ we have 
-either $x\leq y$ or $y\leq x$.
-\end{definition}
-%---EBLANK #
+
 
 \begin{example}
 If $A$ is a set and $S$ is the set of all subsets of $A$ then $S$ is a poset with ordering 
@@ -9358,12 +9437,19 @@ given by inclusion of subsets.
 \end{example}
 
 
-%---BBLANK # \vskip 30mm 
+\begin{definition}
+\label{LINEAR ORDER DEF}
+\index{set! linearly ordered@{linearly ordered $\sim$}}
+A \emph{linearly ordered set} is a poset $(S, \leq)$ such that for any $x, y\in S$ we have 
+either $x\leq y$ or $y\leq x$.
+\end{definition}
+
+
 \begin{definition}
 If $(S, \leq)$ is a poset then an element $x\in S$ is a \emph{maximal element} of $S$
 if  we have $x\leq y$ only for $y= x$.
 \end{definition}
-%---EBLANK #
+
 
 
 \begin{example}
@@ -9386,21 +9472,19 @@ If $(S, \leq)$ is a poset and $T\subseteq S$ then $T$ is also a poset with order
 $S$. 
 \end{note}
 
-%---BBLANK # \newpage
+
 \begin{definition}
 Let $(S, \leq)$ is a poset and let  $T\subseteq S$. An \emph{upper bound of $T$} is an element 
 $x\in S$ such that  $y\leq x$ for all $y\in T$.  
 \end{definition}
-%---EBLANK #
 
-%---BBLANK # \vskip 30mm 
+
 \begin{definition}
 If $(S, \leq)$ is a poset. A \emph{chain} in $S$ is a subset  $T\subseteq S$ such that 
 $T$ is linearly ordered.   
 \end{definition}
-%---EBLANK #
 
-%---BBLANK # \vskip 50mm 
+
 \begin{ZORNLEMMA}
 \label{LEMMA_ZL}
 If $(S, \leq)$ is a non-empty poset such that every chain in $S$ has an upper bound in $S$
@@ -9410,13 +9494,12 @@ then $S$ contains a maximal element.
 \begin{proof}
 See any book on set theory. 
 \end{proof}
-%---EBLANK #
+
 
 We are finally ready for the proof of the Tychonoff Theorem: 
 
-%---BBLANK # \newpage
+
 \begin{proof}[Proof of Theorem \ref{TYCHONOFF THM}]
-%---EBLANK # \ \vskip 180mm \end{proof}
 Let $X = \prod_{s\in S} X_{s}$ where $X_{s}$ is a compact space for each $s\in S$. 
 Let $\AA$ be a  centered family of closed subsets of $X$. 
 We will show that there exists $x = (x_{s})_{s\in S}\in X$ such that $x\in \bigcap_{A\in \AA} A$.
@@ -9431,20 +9514,20 @@ upper bound of $\{\FF_{j}\}_{j\in J}$.
 
 
 By Zorn's Lemma \ref{LEMMA_ZL} we obtain that the set $T$ contains a maximal element $\MM$. 
-We will show that there exists $x\in X$ such that 
-$$x\in \bigcap_{M\in \MM} \overline{M}$$
+We will show that there exists $\tilde x\in X$ such that 
+$$\tilde x\in \bigcap_{M\in \MM} \overline{M}$$
 Since $\AA\subseteq \MM$ and $\AA$ consists of closed sets 
 we have $\bigcap_{M\in \MM} \overline{M} \subseteq \bigcap_{A\in\AA} A$. Therefore it will
-follow that $x\in \bigcap_{A\in \AA} A$, and thus $\bigcap_{A\in \AA} A\neq \varnothing$. 
+follow that $\tilde x\in \bigcap_{A\in \AA} A$, and thus $\bigcap_{A\in \AA} A\neq \varnothing$. 
 
-Construction of the element $x$ proceeds as follows. For $s\in S$ let $p_{s}\colon X\to X_{s}$
+Construction of the element $\tilde x$ proceeds as follows. For $s\in S$ let $p_{s}\colon X\to X_{s}$
 by the projection onto the $s$-th coordinate. For each $s\in S$ the family 
 $\{\overline{p_{s}(M)}\}_{M\in \MM}$ is a centered family of closed subsets of $X_{s}$, so by 
-compactness of $X_{s}$ there is $x_{s}\in X_{s}$ such that 
-$x_{s}\in \bigcap_{M\in \MM} \overline{p_{s}(M)}$. We set $x= (x_{s})_{s\in S}$.  
+compactness of $X_{s}$ there is $\tilde x_{s}\in X_{s}$ such that 
+$\tilde x_{s}\in \bigcap_{M\in \MM} \overline{p_{s}(M)}$. We set $\tilde x= (\tilde x_{s})_{s\in S}$.  
 
 
-In order to see that $x\in \bigcap_{M\in \MM} \overline{M}$ notice that $\MM$ has the following property:
+In order to see that $\tilde x\in \bigcap_{M\in \MM} \overline{M}$ notice that $\MM$ has the following property:
 \begin{equation*}
 \label{MAX CENT PROP EQ}
 \text{if $B\subseteq X$ and $B\cap M\neq \varnothing$ for all $M\in \MM$ then $B\in \MM$}
@@ -9454,8 +9537,8 @@ Indeed, if  $\MM' = \MM \cup \{B\}$ then $\MM' \in T$ (exercise) and $\MM\subset
 so by the maximality of $\MM$ we must have $\MM= \MM'$. 
 
 
-For $s\in S$ let $U_{s}\subseteq X_{s}$ be an open neighborhood of $x_{s}$. Since
-$x_{s}\in \overline{p_{s}(M)}$ for all $M\in \MM$, thus $U_{s}\cap p_{s}(M)\neq \varnothing$ for all $M\in \MM$.
+For $s\in S$ let $U_{s}\subseteq X_{s}$ be an open neighborhood of $\tilde x_{s}$. Since
+$\tilde x_{s}\in \overline{p_{s}(M)}$ for all $M\in \MM$, thus $U_{s}\cap p_{s}(M)\neq \varnothing$ for all $M\in \MM$.
 Equivalently,  $p_{s}^{-1}(U_{s})\cap M \neq \varnothing $ for all $M\in \MM$. 
 By property (\ref{MAX CENT PROP EQ})
 we obtain that $p^{-1}(U_{s})\in \MM$ for all $s\in S$. Since $\MM$ is a centered family we obtain 
@@ -9466,11 +9549,11 @@ p^{-1}(U_{s_{1}})\cap \dots \cap p^{-1}(U_{s_{n}}) \cap M \neq \varnothing \text
 \end{equation*}
 Recall that by (\ref{PROD BASIS NOTE}) 
 the sets of the form $p^{-1}(U_{s_{1}})\cap \dots \cap p^{-1}(U_{s_{n}})$. are precisely the open 
-neighborhoods of $x$ that belong to the basis of the product topology on $X$, and thus 
-any open neighborhood of $X$ contains a neighborhood of this type. Therefore 
+neighborhoods of $\tilde x$ that belong to the basis of the product topology on $X$, and thus 
+any open neighborhood of $\tilde x$ contains a neighborhood of this type. Therefore 
 using (\ref{MAX CENT PROP2 EQ}) we obtain that if $M\in \MM$ then for any open neighborhood 
-$U$ of $x$ we have $M\cap U \neq \varnothing$. This means that for every $M\in \MM$ we have 
-$x\in \overline{M}$, and thus $x\in \bigcap_{M\in \MM} \overline{M}$. 
+$U$ of $\tilde x$ we have $M\cap U \neq \varnothing$. This means that for every $M\in \MM$ we have 
+$\tilde x\in \overline{M}$, and thus $\tilde x\in \bigcap_{M\in \MM} \overline{M}$. 
  
 
 
@@ -9479,7 +9562,7 @@ $x\in \overline{M}$, and thus $x\in \bigcap_{M\in \MM} \overline{M}$.
 \end{proof}
 
 
-
+%---BBLANK # \newpage
 \begin{proposition}
 \label{PROD HAUSDORFF PROP}
 If $X_{i}$ is a Hausdorff  space for  each $i\in I$ then the product space $\prod_{i\in I}X_{i}$ is also Hausdorff. 
@@ -9488,13 +9571,15 @@ If $X_{i}$ is a Hausdorff  space for  each $i\in I$ then the product space $\pro
 \begin{proof}
 Exercise.
 \end{proof}
+%---EBLANK #
 
+%---BBLANK # \vskip 20mm
 \begin{corollary}
 \label{PROD HAUS COMP COR}
 If  $X_{i}$ is a compact Hausdorff space space for  each $i\in I$ then the product 
 space $\prod_{i\in I}X_{i}$ is also compact Hausdorff. 
 \end{corollary}
-
+%---EBLANK #
 
 \begin{proof}
 Follows from Tychonoff Theorem \ref{TYCHONOFF THM} and Proposition \ref{PROD HAUSDORFF PROP}.
@@ -9794,7 +9879,7 @@ a subspace of a normal space need not  be normal. For this reason it is not true
 a space that has a compactification must be a normal space. 
 \end{note}
 
-%---BBLANK # \vfill
+%---BBLANK # \newpage \ \vskip 30mm
 \begin{definition}
 \label{CECH STONE COMPACTIF DEF}
 \index{compactification!Cech-Stone@{\v{C}ech-Stone $\sim$}}
@@ -9810,7 +9895,7 @@ in $\prod_{f\in C(X)} [0, 1]$. The compactification $j_{X}\colon X \to \beta(X)$
 The \v{C}ech-Stone compactification is the largest compactification of a space $X$ in the following sense:
 
 
-%---BBLANK # \newpage
+%---BBLANK # \vskip 20mm
 \begin{definition}
 \label{COMPACTIFI ORDER DEF}
 \index{compactification!partial order}
@@ -9838,7 +9923,7 @@ edge node[below] {$g$} (m-2-3)
 \end{definition}
 %---EBLANK # 
 
-%---BBLANK # \vskip 40mm
+%---BBLANK # \vfill
 \begin{proposition}
 \label{COMPACTIF ORDER PROP}
 Let $i_{1}\colon X \to Y_{1}$,   $i_{2}\colon X \to Y_{2}$ be compactifications of a space $X$.
@@ -9867,7 +9952,7 @@ compactification of $X$. For any   compactification $i\colon X \to Y$ of $X$ we 
 The proof Theorem \ref{CECH STONE UNIVERSAL THM} will use the following fact:
 
 
-%---BBLANK # \vskip 15mm
+%---BBLANK # \vskip 10mm
 \begin{lemma}
 \label{F CLOSURE EQ CLOSURE F LEMMA}
 If $f\colon X_{1} \to X_{2}$ is a continuous map of compact Hausdorff spaces then 
@@ -10101,11 +10186,11 @@ The next proposition says that one-point compactification, when it exists, is th
 space in the sense of Definition \ref{COMPACTIFI ORDER DEF}:
 
 
-%---BBLANK # \vskip 40mm
+%---BBLANK # \vskip 60mm
 \begin{proposition}
 \label{ONE POINT COMPACTIFI SMALLEST PROP}
 \index{compactification!one-point@{one-point $\sim$} ! is the smallest@{$\sim$ is the smallest}}
-Let $X$ be a non-compact, locally compact space and let $j\colon X \to X^{+}$ be the one-point compactification 
+Let $X$ be a non-compact, locally compact Hausdorff space and let $j\colon X \to X^{+}$ be the one-point compactification 
 of $X$. For every compactification $i\colon X \to Y$ of $X$ we have  $Y\geq X^{+}$. 
 \end{proposition}
 
@@ -10126,6 +10211,8 @@ One can also show that if a space $X$ is not locally compact (and so it does not
 
 \exercises
 
+
+
 \begin{exercise}
 Show that a subspace of a completely regular space is completely regular (this will complete 
 the proof of Theorem \ref{COMPL REG COMPACTIF THM}). 
@@ -10137,6 +10224,16 @@ the proof of Theorem \ref{COMPL REG COMPACTIF THM}).
 Prove Proposition \ref{COMPACTIF ORDER PROP}. 
 \end{exercise}
 
+
+
+
+\begin{exercise}
+For $k=1, 2$ let $i_{k}\colon X\to Y_{k}$ be a compactification of $X$. Assume that $Y_{1}\geq Y_{2}$
+and let $g\colon Y_{1} \to Y_{2}$ be a continuous function such that $gi_{1} = i_{2}$. Show that 
+$g(Y_{1}\setminus i_{1}(X))\subseteq g(Y_{2}\setminus i_{2}(X))$. Note: to simplify notation 
+you can assume that $X\subseteq Y_{1}$, $X\subseteq Y_{2}$, and that $i_{1}$ and  $i_{2}$
+are the inclusion maps, $i_{k}(x) = x$.
+\end{exercise}
 
 
 
@@ -10206,6 +10303,8 @@ function. Show that the following conditions are equivalent:
 $f^{+}(\infty) = \infty$ is continuous. 
 \eenu
 \end{exercise}  
+
+
 
 
 \begin{exercise}
@@ -10404,7 +10503,7 @@ a relation $\sim$ on $X$ such that $x\sim y$ if and only if both $x$ and $y$ are
 This relation is an equivalence relation and its equivalence classes are the sets $A_{i}$. 
 \end{note}
 
-%---BBLANK # \newpage
+%---BBLANK # \vskip 30mm
 \begin{definition}
 Let $X$ be a set with an equivalence relation $\sim$. The \emph{quotient set} of $X$ is the set 
 $X/{\sim}$ whose elements are all distinct equivalence classes of $\sim$. The function 
@@ -10438,11 +10537,11 @@ edge node[auto] {$\overline{f}$} (m-2-2)
 \end{equation*}
 \end{note}
 
-%---BBLANK # \vskip 70mm
+%---BBLANK # \newpage
 \begin{definition}
 Let $X$ be a topological space and let $\sim$ be an equivalence relation on  $X$. 
 The \emph{quotient topology} on the set $X/{\sim}$ is the topology where a set $U\subseteq X/{\sim}$ 
-is open  if the set $\pi^{-1}(U)$ is open in $X$. The set $X/{\sim}$ with this topology is called the
+is open  if and only if the set $\pi^{-1}(U)$ is open in $X$. The set $X/{\sim}$ with this topology is called the
  \emph{quotient space} of $X$ taken with respect to the relation $\sim$. 
 \end{definition}
 %---EBLANK #
@@ -10459,7 +10558,7 @@ Exercise.
 \end{proof}
 %---EBLANK #
 
-%---BBLANK # \newpage
+%---BBLANK # \vskip 20mm
 \begin{proposition}
 \label{QUOTIENT SPACE FUNCTIONS PROP}
 Let $X, Y$ be a topological spaces  and let $\sim$ be an equivalence 
@@ -10551,7 +10650,7 @@ homeomorphic to the cylinder $S^{1}\times [0,1]$:
 \end{example}
 %---EBLANK # 
 
-%---BBLANK # \vskip 20mm
+%---BBLANK # \vskip 40mm
 \begin{example}
 Take the square $[0,1]\times [0,1]$ with the equivalence relation given by $(0,t)\sim (1, 1-t)$
 for all $t\in [0,1]$. The space obtained as a quotient space is called the \emph{M\"obius band}:
@@ -10563,7 +10662,7 @@ The M\"obius band is a $2$-dimensional manifold with boundary, and its boundary 
 to $S^{1}$. 
 \end{example}
 
-%---BBLANK # \vskip 20mm
+%---BBLANK # \newpage
 \begin{example}
 Take the square $[0,1]\times [0,1]$ with the equivalence relation given by $(0,t)\sim (1, t)$
 for all $t\in [0,1]$ and $(s, 0)\sim (s,1)$ for all $s\in [0,1]$. Using arguments similar to these given in 
@@ -10575,7 +10674,7 @@ case is homeomorphic to the torus:
 \end{example}
 %---EBLANK # 
 
-%---BBLANK # \newpage
+%---BBLANK # \vskip 40mm
 \begin{example}
 \label{KLEIN BOTTLE EXAMPLE}
 Take the square $[0,1]\times [0,1]$ with the equivalence relation given by $(0,t)\sim (1, t)$
@@ -10587,7 +10686,7 @@ is called the \emph{Klein bottle}. One can show that the Klein bottle is a two d
 \end{example}
 %---EBLANK # 
 
-%---BBLANK # \vskip 30mm
+%---BBLANK # \newpage
 \begin{example}
 \label{RP2 EXAMPLE}
 Following the scheme of the last two examples we can consider the square
@@ -10710,7 +10809,7 @@ If $\bigsqcup_{i\in I} X_{i}$ is the disjoint union of a family $\{X_{i}\}_{i\in
 $j\in I$ we have an embedding $k_{j}\colon X_{j} \to \bigsqcup_{i\in I} X_{i}$. The following fact is
 an essential property of the space $\bigsqcup_{i\in I} X_{i}$:
 
-%---BBLANK #  \newpage \ \vskip 70mm
+
 \begin{proposition}
 \label{COPROD OF FUNCTIONS PROP}
 For any family of continuous functions  $\{f_{i}\colon X_{i}  \to Y\}_{i\in I}$, there exists a unique continuous 
@@ -10721,7 +10820,7 @@ function $f\colon \bigsqcup_{i\in I} X_{i} \to Y$ such that $k_{j}f = f_{j}$ for
 \begin{proof}
 Exercise. 
 \end{proof}
-%---EBLANK #
+
 
 \begin{note}
 The function $f\colon \bigsqcup_{i\in I} X_{i} \to Y$ in Proposition \ref{COPROD OF FUNCTIONS PROP}  
@@ -10747,6 +10846,9 @@ Prove Proposition \ref{QUOTIENT SPACE FUNCTIONS PROP}.
 \end{exercise}
 
 
+
+
+
 \begin{exercise}
 Consider the real line $\R$ with the equivalence relation defined  as in Example \ref{EQUIV REL2 EXAMPLE}. 
 Show that the quotient space $\R/{\sim}$ is homeomorphic with $S^{1}$. 
@@ -10759,6 +10861,8 @@ Example \ref{INTERVAL MOD BOUNDARY EXAMPLE}. Let
 $\pi\colon [0,1] \to [0,1]/{\sim}$ be the quotient map. The set $U=[0, \frac{1}{2})$
 which is open subset  of $[0,1]$. Show that $\pi(U)$ is not open in $[0,1]/{\sim}$.
 \end{exercise}
+
+
 
 
 \begin{exercise}
@@ -10803,6 +10907,8 @@ Show that the space $Y/Y_{1}$ is homeomorphic to the  half line $[0, +\infty)$.
 
 
 
+
+
 \begin{exercise}
 \label{RPN CONSTRUCTION EXERCISE}
 Consider the unit sphere $S^{n}$ with the equivalence relation that identifies 
@@ -10833,6 +10939,10 @@ Since $\RP^{n}$ is obtained by identifying antipodal points we get a bijective c
 between elements of $\RP^{n}$ and lines in $\R^{n+1}$ passing through the origin.  
 \end{exercise}
 
+
+
+
+
 \begin{exercise}
 A \emph{pointed topological space} is a pair $(X, x_{0})$ where $X$ is a topological space and 
 $x_{0} \in X$. 
@@ -10844,7 +10954,7 @@ where $A = (X\times \{y_{0}\}) \cup (\{x_{0}\} \times Y)$
 a) Let $X, Y$ be a locally compact spaces (\ref{LOCALLY COMPACT DEF}). 
 Show that the space $X\times Y$ is locally compact. 
 
-b) By part a) and Corrollary \ref{PROD HAUS COMP COR} if $X, Y$ are locally compact 
+b) By part a) and Corollary \ref{PROD HAUS COMP COR} if $X, Y$ are locally compact 
 Hausdorff spaces then the space $X\times Y$ is also locally compact and Hausdorff. 
 By Theorem \ref{ONE POINT COMPACT THM}  we have in such case one-point compactifications 
 $X^{+}$, $Y^{+}$, and $(X\times Y)^{+}$ of the spaces $X$, $Y$, and $X\times Y$ respectively. 
@@ -10892,8 +11002,15 @@ Notice that the point $(0, 0)$ is the intersection of all circles $C_{n}$.
 For $n=1, 2, \dots$ let $C_{n}$ be the circle defined as above, and let $Y$ be the quotient space  of 
 the disjoint union $\bigsqcup_{i=1}^{\infty} C_{n}$ obtained by identifying points  $(0, 0)\in C_{n}$ 
 for all $n$. Show that $Y$ is not homeomorphic to $X$. 
-
 \end{exercise}
+
+
+
+
+
+
+
+
 
 
 
@@ -10977,8 +11094,39 @@ Show that $\R^{n}_{+}\cup_{h} \R^{n}_{-}$ is homeomorphic to $\R^{n}$.
 
 \end{tikzpicture}
 \end{equation*}
-
+\vskip 2mm
 \end{exercise}
+
+
+\begin{exercise}
+For $n > 0$ consider the sphere $S^{n-1} = \{(x_{1}, \dots, x_{n})\in \R^{n} \ | \ \sum_{i=1}^{n} x_{i} = 1\}$ 
+as a subspace of the closed ball $D^{n} = \{(x_{1}, \dots, x_{n})\in \R^{n} \ | \ \sum_{i=1}^{n} x_{i} \leq 1\}$.
+Given a continuous function $f\colon S^{n-1} \to X$ define a space $X\cup_{f} D^{n}$ as a quotient
+space:
+$$X\cup_{f}D^{n} = X \sqcup D^{n}/{\sim}$$ 
+where $x \sim f(x)$ for each $x\in S^{n-1}$.
+We say that the space $X\cup_{f}D^{n} $ is obtained by attaching an $n$-cell to the space $X$. 
+
+\vskip -5mm
+\begin{equation*}
+\begin{tikzpicture}
+\node[anchor=south west,inner sep=0] at (0,0) 
+{{\includegraphics[width=\textwidth, trim=0mm 192mm 0mm 49mm, clip]{pictures/MTH427p012.pdf}}};
+
+%%% COORDINATE GRID
+%\draw[step=0.5, help lines] (0,0) to[grid with coordinates] (15,9);
+%%% 
+
+\node[anchor=  base]  at (6.7 , 1.6){\color{red} \small  $f$};
+\node[anchor=  east]  at (5.6 , 2.5){ \small  $D^{n}$};
+\node[anchor=  east]  at (5.0 , 1.0){ \small  $X$};
+\node[anchor=  west]  at (11.5 , 1.0){ \small  $X\cup_{f}D^{n}$};
+\end{tikzpicture}
+\end{equation*}
+\end{exercise}
+
+Show that if $X$ is a normal space then the space $X\cup_{f} D^{n}$ is normal. 
+
 
 
 
@@ -11062,7 +11210,7 @@ $v_{1}$ with $v_{2}$.  The complex $K(\Gamma)$ has no simplices in dimensions gr
 Let $X$ be a set, and let $\mathcal{A} = \{A_{i}\}_{i\in I}$ be a collection of subsets of $X$. 
 The \emph{nerve} of $\mathcal{A}$ is the simplicial complex $N(\mathcal{A})$ whose  vertices are elements of 
 $\mathcal{A}$. A set $\{A_{i_{0}}, \dots, A_{i_{n}}\}$ is a simplex in $N(\mathcal{A})$ if
-$A_{i_{1}}\cap {\dots} \cap A_{i_{n}} = \varnothing$. 
+$A_{i_{1}}\cap {\dots} \cap A_{i_{n}} \neq \varnothing$. 
 \end{example}
 
 \begin{example}
@@ -11313,10 +11461,10 @@ the picture on the right shows the geometric realization $|K|$:
 \draw[line1] (a) -- (b);
 \
 
-\draw[line1]  (bul) --  node[above, sloped, fill = white] {\small $bc$} (cul);
-\draw[line1]  (aur) --  node[above, sloped, fill = white] {\small $ac$} (cur);
-\draw[line1]  (adr) --  node[below, sloped, fill = white] {\small $ad$} (ddr);
-\draw[line1]  (bdl) --  node[below, sloped, fill = white] {\small $bd$} (ddl);
+\draw[line1]  (bul) --  node[above, sloped] {\small $bc$} (cul);
+\draw[line1]  (aur) --  node[above, sloped] {\small $ac$} (cur);
+\draw[line1]  (adr) --  node[below, sloped] {\small $ad$} (ddr);
+\draw[line1]  (bdl) --  node[below, sloped] {\small $bd$} (ddl);
 \node at ($(30:0.58)+(su)$) {\small $abc$}; 
 \node at ($(-30:0.58)-(su)$) {\small $abd$}; 
 \node[above] at (0:0.5) {\small $ab$}; 
@@ -11326,7 +11474,7 @@ the picture on the right shows the geometric realization $|K|$:
 \fill[] (left) circle (0.05) node[above, yshift =3pt, yshift =1pt] {\small $b$};
 \fill[] (right) circle (0.05) node[above, yshift =3pt, yshift =1pt] {\small $a$};
 \fill[] ($(left)!2!(right)$) circle (0.05) node[above, yshift =3pt, yshift =1pt] {\small $e$};
-\draw[line1] ($(a)!2!(right)$) --  node[above, sloped, fill = white] {\small $ae$} ($(b)!2!(right)$);
+\draw[line1] ($(a)!2!(right)$) --  node[above, sloped] {\small $ae$} ($(b)!2!(right)$);
 \end{scope}
 
 %arrow
@@ -11715,11 +11863,11 @@ an insight into the data.
 \node[anchor=north] at (2.7, -1) {\small a set of data points};
 \end{scope}
 
-\begin{scope}[xshift = 100mm]
+\begin{scope}[xshift = 100mm, even odd rule]
 \draw[fill = mygray2] (2, 1.8+1.8) arc [radius = 1.8, start angle = 90, end angle = 270] 
 ..controls +(1.3, 0) and +(0, -1).. (4.5, 1.8)  
-..controls +(0, 1) and +(1.3, 0).. (2, 1.8+1.8);
-\draw[fill=white] (2, 1.8) circle [radius = 1];
+..controls +(0, 1) and +(1.3, 0).. (2, 1.8+1.8) 
+(2, 1.8) circle [radius = 1];
 
 \draw[xshift = 42mm, yshift = -12mm,fill = mygray2, xscale = 0.7, yscale = 1] 
 plot [smooth cycle, tension = 0.8] coordinates{(1, 1.5) (2.3, 1.0) (3, 2.2) (2, 2.8) (1, 2.7) };
