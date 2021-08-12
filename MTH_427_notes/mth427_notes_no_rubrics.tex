@@ -41,7 +41,7 @@
 \usepackage{ifthen}
 \newboolean{ShowRubrics}
 \newcommand{\Rubrics}[1]{\ifthenelse{\boolean{ShowRubrics}}{{\footnotesize\color{red}{#1}}}}{}
-\setboolean{ShowRubrics}{false}
+\setboolean{ShowRubrics}{true}
 
 %%%%%%%%%%%%%%%%%%
 %   BACKGROUND COLOR
@@ -7329,6 +7329,14 @@ Prove Proposition \ref{UNIV PROP PROD PROP}
 
 
 
+\begin{exercise}
+Let $i\colon X \to Y$ be an embedding (\ref{EMBEDDING DEF}) and let 
+$f\colon X \to Z$ be a continuous function. Show that the function $g\colon X \to Y\times Z$
+given by $g(x) = (i(x), f(x))$ is an embedding. 
+\end{exercise}
+
+
+
 
 \begin{exercise}
 Let $\{X_{i}\}_{i\in I}$ be a family of topological spaces and for $i\in I$ let $A_{i}$ be a closed 
@@ -8667,9 +8675,21 @@ space then $X$ and $Y$ are compact spaces.
 
 
 \begin{exercise}
-Let $f\colon X\times [0, 1] \to Y$ be a continuous function, and let $U\subseteq Y$
-be an open set. Show that the set 
-$$V = \{x\in X \ | \ f(\{x\}\times [0, 1]) \subseteq U\}$$ is open in $X$.
+\label{TUBE EXE}
+Let $X$, $Y$ be topological spaces such that $Y$ is compact. Let $U\subseteq X\times Y$ be 
+an open set. Assume that for some $x_{0}\in X$ we have $\{x_{0}\}\times Y \subseteq U$. Show 
+that there exists an open set $V\subseteq X$ such that $x_{0}\in X$ and $V\times Y \subseteq U$.   
+\end{exercise}
+
+
+
+
+\begin{exercise}
+Let $X$, $Y$ be topological spaces such that $Y$ is compact. Let $f\colon X\times Y \to \R$ be
+a continuous function. For $x\in X$ let $m(x)\in \R$ denote the maximum value of the function
+$$f|_{\{x\}\times Y}\colon \{x\}\times Y \to \R$$  
+(such maximum value exists by Exercise \ref{COMP MINMAX EXE}). This defines a function 
+$m\colon X \to \R$. Show that this function is continuous. 
 \end{exercise}
 
 
@@ -8983,6 +9003,45 @@ Show that $\{x_{n}\}$ does not contain any convergent subsequence.
 
 
 
+
+\begin{exercise}
+Let $(X, \varrho)$ be a metric space. A sequence $\{x_{n}\}$ in $X$ is called a \emph{Cauchy sequence}
+if for every $\varepsilon > 0$ there exists $N > 0$ such that if $n, m > N$ then 
+$\varrho(x_{n}, x_{m}) <\varepsilon$. 
+
+a) Show that if $(X, \varrho)$ is a metric space and  $\{x_{n}\}$ is a convergent sequence in $X$, 
+then  $\{x_{n}\}$ is a Cauchy sequence. 
+
+b) Give an example of a metric space $(X, \varrho)$ and a Cauchy sequence $\{x_{n}\}$ in $X$
+such that $\{x_{n}\}$ does not converge.
+
+c) Show that if $(X, \varrho)$ is a compact metric space then every Cauchy sequence in $X$
+is convergent. 
+\end{exercise} 
+
+
+
+
+
+
+\begin{exercise}
+\index{metric space! complete@{complete $\sim$}}
+\index{space! complete metric@{complete metric $\sim$}}
+Recall that if $(X, \varrho)$ is a metric space then a sequence $\{x_{n}\}$ in $X$ is a Cauchy sequence
+if for each $\varepsilon > 0$ there exists $N > 0$ such that $\varrho(x_{n}, x_{m}) < \varepsilon$
+for all $n, m > N$. The space $(X, \varrho)$ is called a \emph{complete metric space} 
+if each Cauchy sequence in $X$ is convergent.  
+
+Let $(X, \varrho)$ be a complete metric space such that for any $\varepsilon >0$ there exists 
+a finite $\varepsilon$-net in $X$.  Show that $X$ is compact. 
+\end{exercise}
+
+
+
+
+
+
+
 \begin{exercise}
 Let $(X, \varrho)$ be a metric space and let $A\subseteq X$  be a set such that $A\cap K$ is compact
 for every compact set $K\subseteq X$. Show that $A$ is closed in $X$. 
@@ -8998,24 +9057,6 @@ $A = \bigcap_{n=1}^{\infty} A_{n}$ is compact and connected.
 
 \end{exercise}
 
-
-
-
-\begin{exercise}
-\index{metric space! complete@{complete $\sim$}}
-\index{space! complete metric@{complete metric $\sim$}}
-Recall that if $(X, \varrho)$ is a metric space then a sequence $\{x_{n}\}$ in $X$ is a Cauchy sequence
-if for each $\varepsilon > 0$ there exists $N > 0$ such that $\varrho(x_{n}, x_{m}) < \varepsilon$
-for all $n, m > N$. The space $(X, \varrho)$ is a \emph{complete metric space} if each Cauchy sequence 
-in $X$ is convergent.  
-
-Let $(X, \varrho)$ be a metric space. Show that the following conditions are equivalent.
-\benu
-\item[(i)] $X$ is compact
-\item[(ii)] The space $X$ is a complete metric space and for any $\varepsilon >0$ there exists 
-a finite $\varepsilon$-net in $X$. 
-\eenu
-\end{exercise}
 
 
 
@@ -10250,6 +10291,17 @@ Prove Lemma \ref{F CLOSURE EQ CLOSURE F LEMMA}.
 Consider the set $\Q$ of rational numbers with the subspace topology of the real line. Show that $\Q$
 is not locally compact. 
 \end{exercise}
+
+
+
+
+\begin{exercise}
+Show that every topological manifold is a locally compact space. 
+\end{exercise}
+
+
+
+
 
 
 
