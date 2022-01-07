@@ -37,7 +37,7 @@
 \usepackage{etoolbox}
 \newtoggle{ShowRubrics}
 \newcommand{\Rubrics}[1]{ \iftoggle{ShowRubrics} { {\footnotesize\color{red}{#1}   } } {}     }
-\settoggle{ShowRubrics}{true}
+\settoggle{ShowRubrics}{false}
 %\settoggle{ShowRubrics}{true}
 
 
@@ -497,7 +497,7 @@ Introduction to Topology II \\
 
 
 \vskip 85mm
-{\large 2019.02.27}
+{\large 2021.12.12}
 \end{center}
 
 {\small This work is licensed under CC BY-NC-SA 4.0. To view a copy of this license, visit 
@@ -2483,14 +2483,18 @@ $\omega_{0x}(s) = h(0, s)$ and $\omega_{1x} = h(1, s)$.
 \end{tikzpicture}
 \end{equation*}
 
-
-
 \noindent Show that the path $\omega_{x0}\ast\omega_{1x}$ is path homotopic to 
 $\omega_{0x}\ast\omega_{x1}$.  
 \end{exercise}
 
 
 
+\begin{exercise}
+Let $S^{n}$ be the $n$-dimensional sphere:
+$$S^{n} = \{ (x_{1}, \dots, x_{n+1}) \in \R^{n+1} \ | \ x_{1}^{2} + {\dots} + x_{n+1}^{2} = 1\}$$
+Show that $S^{n}$ is simply connected. (Hint: show that any path $\omega\colon [0, 1] \to S^{n}$
+is path homotopic to a path which is not onto.)
+\end{exercise}
 
 
 \begin{exercise}
@@ -2802,6 +2806,7 @@ Show that $\omega(s)=\tau(t)$ for some $s,t\in [0,1]$. (Hint: use Brouwer fixed 
 \chapter[Higher Homotopy Groups]{Higher Homotopy \\ Groups}
 %---EBLANK  
 \chaptermark{Higher Homotopy Groups}
+\label{HIGHER HOMOTOPY GROUPS CHAPTER}
 
 \thispagestyle{firststyle}
 
@@ -3217,6 +3222,7 @@ If $X$ is a space such that $X \simeq \{\ast\}$ then we say that $X$ is a \emph{
 
 %---BBLANK  # \vskip 10mm
 \begin{proposition}
+\label{CONTRACTIBLE COND PROP}
 Let $X$ be a topological space. The following conditions are equivalent:
 \benu
 \item[1)] $X$ is contractible; 
@@ -3597,6 +3603,11 @@ $f$ is a homotopy equivalence then $f_{\ast}$ is a bijection.
 
 
 \begin{exercise}
+Prove Proposion \ref{CONTRACTIBLE COND PROP}.
+\end{exercise}
+
+
+\begin{exercise}
 Let $f, g\colon X \to Y $ be two homeomorphisms and let $f^{-1}, g^{-1}\colon Y\to X$
 be their respective inverses. Show that if $f\simeq g$ then $f^{-1}\simeq g^{-1}$. 
 \end{exercise}
@@ -3635,6 +3646,15 @@ is a retraction.  Show that if $f$ is a homotopy equivalence then $f'$ is a homo
 b) Let $X$ be a contractible space and let $A\subseteq X$ be a retract of $X$. Show that $A$
 is contractible. 
 \end{exercise}
+
+
+
+\begin{exercise}
+Let $X$, $Y$ be topological spaces. Show that any map $f\colon X\times \R^{k} \to Y\times \R^{k}$
+is homotopic to a map $g \times \id_{\R^{k}} \colon X \times \R^{k} \to Y\times \R^{k}$
+for some $g\colon X \to Y$. 
+\end{exercise}
+
 
 
 \begin{exercise}
@@ -5402,13 +5422,13 @@ of a complicated space we may try to decompose the space into simpler pieces. In
 about these pieces and how they fit together suffices to determine the fundamental group
 of the whole space. A similar approach works in many settings, and for this reason 
 it is useful if we can represent a given space as a collection of some simple building blocks 
-that are assembled together. In this chapter we discuss the notion of a CW-complex that provides 
+that are assembled together. In this chapter we discuss the notion of a CW complex that provides 
 a scheme for constructing such representations of spaces. In this scheme as the building blocks
 one uses  closed discs of various dimensions. We will see that many interesting spaces can be given 
-the structure of a CW-complex. In the next chapters we will see how to compute the fundamental 
-group of an arbitrary CW-complex. Building on this result we will  also show that any 
+the structure of a CW complex. In the next chapters we will see how to compute the fundamental 
+group of an arbitrary CW complex. Building on this result we will  also show that any 
 group can be realized as the fundamental group of some space: given a group $G$ we will 
-construct a CW-complex $X$ such that $\pi_{1}(X)\cong G$. 
+construct a CW complex $X$ such that $\pi_{1}(X)\cong G$. 
 
 
 %---BBLANK  
@@ -5440,6 +5460,7 @@ $j\colon S^{n-1} \to D^{n}$ is the inclusion map.
 
 %---BBLANK  #
 \begin{nn}
+\label{CW TERMINOLOGY NN}
 %---EBLANK  #  {\bf Some terminology.}
 %---BBLANK  #
 Here is some terminology associated to the operation of cell attachment:
@@ -5523,7 +5544,7 @@ Follows from Lemma \ref{CONEEQCELL LEMMA} and Proposition \ref{CONESLIDE PROP}.
 \begin{definition}
 \label{RELCW DEF}
 Let $X$ be topological space and let $Y\subseteq X$. The pair $(X, Y)$ is 
-a \emph{relative CW-complex} (or a \emph{relative cell complex}) if $X = \bigcup_{n=-1}^{\infty} X^{(n)}$
+a \emph{relative CW complex} if $X = \bigcup_{n=-1}^{\infty} X^{(n)}$
 where 
 \benu
 \item[1)]
@@ -5537,7 +5558,8 @@ $U\cap X^{(n)}$ is open in $X^{(n)}$ for all $n$.
 
 %---BBLANK # \vskip 60mm
 \begin{note}
-By part 3) of Definition \ref{RELCW DEF} if $(X, Y)$ is a relative CW-complex then a function 
+\label{CW CONT FUNCTIONS NOTE}
+By part 3) of Definition \ref{RELCW DEF} if $(X, Y)$ is a relative CW complex then a function 
 $f\colon X\to Z$ is continuous if and only if $f|_{X^{(n)}}\colon X^{(n)} \to Z$ is continuous for all $n\geq -1$. 
 \end{note}
 %---EBLANK 
@@ -5545,25 +5567,25 @@ $f\colon X\to Z$ is continuous if and only if $f|_{X^{(n)}}\colon X^{(n)} \to Z$
 
 %---BBLANK # \vskip 40mm
 \begin{note}
-If $(X, Y)$ is a relative CW-complex then the space $X^{(n)}$ is called \emph{the $n$-skeleton}
+If $(X, Y)$ is a relative CW complex then the space $X^{(n)}$ is called \emph{the $n$-skeleton}
 of $X$. 
 \end{note}
 %---EBLANK 
 
 %---BBLANK # \vskip 20mm
 \begin{definition}
-A \emph{CW-complex} (or a \emph{cell complex}) is a space $X$ such that $(X, \varnothing)$
-is a relative CW-complex.  
+A \emph{CW complex}  is a space $X$ such that $(X, \varnothing)$
+is a relative CW complex.  
 \end{definition}
 %---EBLANK # \newpage
 
 %---BBLANK
 \begin{definition}
-1) A CW-complex $X$ is \emph{finite} if it consists of finitely many cells. 
+1) A CW complex $X$ is \emph{finite} if it consists of finitely many cells. 
 
-2) A CW-complex $X$ is \emph{finite dimensional} if $X= X^{(n)}$ for some $n$. 
+2) A CW complex $X$ is \emph{finite dimensional} if $X= X^{(n)}$ for some $n$. 
 
-3) The \emph{dimension} of a CW-complex $X$ is defined by 
+3) The \emph{dimension} of a CW complex $X$ is defined by 
 $$
 \dim X =
 \begin{cases}
@@ -5574,13 +5596,13 @@ $$
 \end{definition}
 %---EBLANK # \newpage
 
-\begin{example} The only CW-complex of dimension $-1$ is the empty space. A CW-complex of 
+\begin{example} The only CW complex of dimension $-1$ is the empty space. A CW complex of 
 dimension $0$ is a discrete topological space (with each point defining a $0$-cell). 
 
 
 \begin{example}
-If a space can be equipped with a structure of a CW-complex of dimension greater than $0$ then such 
-structure is not unique. Here  are two different CW-complex structures on $S^{1}$, one  with two $0$-cells and 
+If a space can be equipped with a structure of a CW complex of dimension greater than $0$ then such 
+structure is not unique. Here  are two different CW complex structures on $S^{1}$, one  with two $0$-cells and 
 two $1$-cells, and  the other with one $0$-cell and one $1$-cell:
 \end{example}
 
@@ -5604,7 +5626,7 @@ two $1$-cells, and  the other with one $0$-cell and one $1$-cell:
 \end{example}
 
 \begin{example}
-Here are two examples of CW-complex structures on $S^{2}$. The first  has two cells in in each of the dimensions $0$, $1$, and $2$. The second has one $0$-cell $e^{0}$ and one $2$-cell which is attached 
+Here are two examples of CW complex structures on $S^{2}$. The first  has two cells in in each of the dimensions $0$, $1$, and $2$. The second has one $0$-cell $e^{0}$ and one $2$-cell which is attached 
 using the constant attaching map $S^{1}\to e^{0}$:
 
 \begin{tikzpicture}
@@ -5628,7 +5650,7 @@ using the constant attaching map $S^{1}\to e^{0}$:
 \end{example}
 
 \begin{example}
-The cylinder $S^{1}\times [0, 1]$ can be given a CW-complex structure with two $0$-cells, 
+The cylinder $S^{1}\times [0, 1]$ can be given a CW complex structure with two $0$-cells, 
 three $1$-cells, and one $2$-cell. It is easier to visualize this structure if we consider the cylinder 
 as a quotient space obtained by gluing together two vertical edges of a square. The pair 
 of the upper vertices of the square represents one $0$-cell of the cylinder, and the  pair of lower vertices 
@@ -5660,7 +5682,7 @@ edges. The interior of the square corresponds to the interior of the $2$-cell of
 
 
 Since the M\"{o}bius band, the torus, and the Klein bottle also can be constructed 
-by gluing together some edges of the square we can describe CW-complex structures on these spaces 
+by gluing together some edges of the square we can describe CW complex structures on these spaces 
 in a similar way:
 
 %---BBLANK
@@ -5737,7 +5759,7 @@ in a similar way:
 Recall that the $2$-dimensional real projective space $\RP^{2}$ can be constructed 
 as a quotient space of the  disc $D^{2}$ obtained by identifying antipodal points 
 on the boundary of $D^{2}$: $x\sim (-x)$ for  $x\in S^{1}$. This space can be 
-given a CW-complex structure with one $0$-cell, one $1$-cell, and one $2$-cell:
+given a CW complex structure with one $0$-cell, one $1$-cell, and one $2$-cell:
 
 
 \begin{tikzpicture}
@@ -5760,15 +5782,15 @@ given a CW-complex structure with one $0$-cell, one $1$-cell, and one $2$-cell:
 
 %---BBLANK
 \begin{note}
-It is not true that every space can be given a structure of a CW-complex. 
+It is not true that every space can be given a structure of a CW complex. 
 %---EBLANK # \end{note} \newpage
 For example, 
 consider the following subspace of the real line:
 $$X = \{\tfrac{1}{n} \in \R \ | \ n = 1, 2, \dots \} \cup \{0\}$$
-This space is not homeomorphic or even homotopy equivalent to a $CW$-complex.
-To show this we will use the fact that if $Y$ is a CW-complex then each path connected component of $Y$
+This space is not homeomorphic or even homotopy equivalent to a CW complex.
+To show this we will use the fact that if $Y$ is a CW complex then each path connected component of $Y$
 is open in $Y$ (exercise). Assume  that there exists a homotopy equivalence $f\colon X \to Y$ where 
-$Y$ is a CW-complex. This implies that the induced map $f_{\ast}\colon \pi_{0}(X) \to \pi_{0}(Y)$
+$Y$ is a CW complex. This implies that the induced map $f_{\ast}\colon \pi_{0}(X) \to \pi_{0}(Y)$
 is a bijection. On the other hand let $\{Y_{i}\}_{i\in I}$ be the family of all path connected components 
 of $Y$. The sets $Y_{i}$ are open in $Y$, so the sets $f^{-1}(Y_{i})$ are open in $X$ 
 and they define an open cover of $X$.  The space $X$ is compact, so this cover has a finite subcover 
@@ -5789,8 +5811,11 @@ The following fact if often useful:
 %---BBLANK
 \begin{proposition}
 \label{COMPACT CW COMPLEX PROP}
-Let $X$ be a CW-complex. A set $A\subseteq X$ is compact if and only if $A$ is closed and $A$ has 
-a non-empty intersection with  finitely many open cells of $X$ only.  
+1) Let $(X, Y)$ be a relative CW complex. If $A\subseteq X$ is a compact set then $A$ is closed 
+in $X$ and it has a non-empty intersection with  finitely many open cells of $X$ only.  
+
+2) If $X$ is a CW complex and $A\subseteq X$ is a closed set which has a non-empty intersection 
+with  only finitely many open cells of $X$  then $A$ is compact. 
 \end{proposition}
 
 \begin{proof}
@@ -5802,7 +5827,7 @@ Exercise.
 %---BBLANK
 \begin{corollary}
 \label{FINITE CW COMPACT COR}
-A CW-complex is compact if and only if it is a finite. 
+A CW complex is compact if and only if it is a finite. 
 \end{corollary}
 %---EBLANK # \newpage
 
@@ -5821,7 +5846,7 @@ Follows from Proposition \ref{COMPACT CW COMPLEX PROP}
 \exercises
 
 \begin{exercise}
-Show that a CW-complex $X$ is path connected if and only if its 1-skeleton $X^{(1)}$ is path connected. 
+Show that a CW complex $X$ is path connected if and only if its 1-skeleton $X^{(1)}$ is path connected. 
 \end{exercise}
 
 \begin{exercise}
@@ -5851,9 +5876,9 @@ Show that if $X$ is a retract of $Y$ then $Y \simeq X \vee S^{n}$.
 \thispagestyle{firststyle}
 
 
-In this chapter we begin work toward computing fundamental groups of CW-complexes.  Since 
-a 0-dimensional CW-complex is a discrete space, the fundamental group of any such complex is trivial. 
-The first non-trivial case we will develop a formula for the fundamental group of a  CW-complex of 
+In this chapter we begin work toward computing fundamental groups of CW complexes.  Since 
+a 0-dimensional CW complex is a discrete space, the fundamental group of any such complex is trivial. 
+The first non-trivial case we will develop a formula for the fundamental group of a  CW complex of 
 dimension 1.  Our main tool will be the homotopy extension property, which is one of the most important 
 notions of algebraic topology. 
 
@@ -5974,7 +5999,7 @@ $\pi_{1}(W)\cong \{1\}$ (exercise). Therefore $W/A$ is not homotopy equivalent t
  %---BBLANK
 \begin{theorem}
 \label{HEP REL CW THM}
-Any relative CW-complex $(X, Y)$ has the homotopy extension property. 
+Any relative CW complex $(X, Y)$ has the homotopy extension property. 
 \end{theorem}
 %---EBLANK  # \vskip 30mm
 
@@ -6040,7 +6065,7 @@ gives the desired retraction $X\times [0, 1] \to X\times \{0\} \cup Y\times [0, 
 
 
 \begin{proof}[Proof of Theorem \ref{HEP REL CW THM}]
-Recall (\ref{RELCW DEF}) that if $(X, Y)$ is a relative $CW$-complex then $X = \bigcup_{n=-1}^{\infty} X^{(n)}$
+Recall (\ref{RELCW DEF}) that if $(X, Y)$ is a relative CW complex then $X = \bigcup_{n=-1}^{\infty} X^{(n)}$
 where $X^{(-1)} = Y$ and for $n\geq 0$ the subspace of $X^{(n)}\subseteq X$ obtained by attaching 
 $n$-cells to $X^{(n-1)}$. By Lemma \ref{HEP CELL ATTACHMENT LEMMA} for each $n\geq 0$
 there exists a retraction 
@@ -6058,7 +6083,7 @@ if $x\in X^{(-1)} = Y$.  One can check that $r$ is a well defined, continuous re
  %---BBLANK
 \begin{theorem}
 \label{FINCWDIM1HOTYPE THM}
-If $X$ is a  path connected finite CW-complex of dimension $1$ then $X \simeq \bigvee_{i=1}^{n} S^{1}$
+If $X$ is a  path connected finite CW complex of dimension $1$ then $X \simeq \bigvee_{i=1}^{n} S^{1}$
 where 
 $$n = \begin{pmatrix}
 \text{number of} \\[1mm]
@@ -6076,7 +6101,7 @@ $$
 
  %---BBLANK
 \begin{corollary}
-If $X$ is a  path connected finite CW-complex of dimension $1$  then 
+If $X$ is a  path connected finite CW complex of dimension $1$  then 
 $\pi_{1}(X) \cong \ast_{i=1}^{n}\Z$
 where $n$ is defined as in Theorem \ref{FINCWDIM1HOTYPE THM}.
 \end{corollary}
@@ -6090,12 +6115,12 @@ This follows from Theorem \ref{FINCWDIM1HOTYPE THM} and Example \ref{PI1S1VS1 EX
 We will argue by induction with respect to the number $k$ of $0$-cells in $X$. If $k=1$
 then the statement is obvious. Assume then that the statement of theorem is true for  
 all complexes whose number of $0$-cells is $k$, and let $X$ be a path connected 
-finite $1$-dimensional CW-complex whose set of $0$-cells is $\{x_{1}, x_{2}, \dots, x_{k+1}\}$
+finite $1$-dimensional CW complex whose set of $0$-cells is $\{x_{1}, x_{2}, \dots, x_{k+1}\}$
 for some $k\geq 1$. Since $X$ is path connected 
 there exists a $1$-cell $e$ in $X$  that joins $x_{1}$ with some other $0$-cell $x_{i}$. 
 Let $A$ denote the subcomplex of $X$ consisting of the cells $x_{1}$, $x_{i}$ and $e$. 
 Notice that $A$ is homeomorphic to the closed interval $[0, 1]$.
-The pair $(X, A)$ is a relative CW-complex, so by Theorem \ref{HEP REL CW THM}
+The pair $(X, A)$ is a relative CW complex, so by Theorem \ref{HEP REL CW THM}
 it satisfies the homotopy extension property. Since $A$ is contractible, by  
 Proposition \ref{CONTR QUOTIENT WITH HEP PROP} the quotient map 
 $q\colon X \to X/A$ is a homotopy equivalence.  
@@ -6174,7 +6199,7 @@ cycle;
 \end{tikzpicture}
 \end{equation*}
 
-The space $X/A$ has the structure of a  1-dimensional  CW-complex 
+The space $X/A$ has the structure of a  1-dimensional  CW complex 
 with one 0-cell and one 1-cell less than $X$. Therefore, by the inductive assumption 
 the statement of the theorem holds for $X/A$, and so it also holds for $X$. 
 
@@ -6187,7 +6212,8 @@ the statement of the theorem holds for $X/A$, and so it also holds for $X$.
 Theorem \ref{FINCWDIM1HOTYPE THM} can be generalized to infinite 1-dimensional complexes:
 
 \begin{theorem}
- If $X$ is a path connected $1$-dimensional CW-complex then $X\simeq  \bigvee_{I\in I} S^{1}$ for some 
+\label{CWDIM1HOTYPE THM}
+ If $X$ is a path connected $1$-dimensional CW complex then $X\simeq  \bigvee_{I\in I} S^{1}$ for some 
 set $I$. As a consequence $\pi_{1}(X) \cong \ast_{i\in I} \Z$.  
 \end{theorem}
 
@@ -6197,12 +6223,12 @@ set $I$. As a consequence $\pi_{1}(X) \cong \ast_{i\in I} \Z$.
  %---BBLANK
 \begin{note}
  %---EBLANK # Euler characteristic. \end{note} \newpage
-For a finite CW-complex $X$, let $c_{n}(X)$ denote the number of $n$-cells of $X$. 
-Theorem \ref{FINCWDIM1HOTYPE THM} implies that if $X$ is a path connected CW-complex 
+For a finite CW complex $X$, let $c_{n}(X)$ denote the number of $n$-cells of $X$. 
+Theorem \ref{FINCWDIM1HOTYPE THM} implies that if $X$ is a path connected CW complex 
 of dimension 1,  then the number $c_{1}(X) - c_{0}(X)$ depends only on the homotopy type of $X$: if 
-$Y$ is another such CW-complex and $X\simeq Y$ then $c_{1}(X) - c_{0}(X) = c_{1}(Y) - c_{0}(Y)$. 
-This observation can be generalized as follows. The \emph{Euler characteristic} of a finite CW-complex
-$X$ is the integer $\chi(X) = \sum_{n} (-1)^{n} c_{n}(X)$. One can show that if $X$ and $Y$ are finite CW-complexes
+$Y$ is another such CW complex and $X\simeq Y$ then $c_{1}(X) - c_{0}(X) = c_{1}(Y) - c_{0}(Y)$. 
+This observation can be generalized as follows. The \emph{Euler characteristic} of a finite CW complex
+$X$ is the integer $\chi(X) = \sum_{n} (-1)^{n} c_{n}(X)$. One can show that if $X$ and $Y$ are finite CW complexes
 and $X\simeq Y$ then $\chi(X) = \chi(Y)$.  
 \end{note}
 
@@ -6295,7 +6321,7 @@ b) Show that the pair $(X, x_{0})$ does not have the homotopy extension property
 
 
 \begin{exercise}
-Let $(X, Y)$ be a relative CW-complex, let $j\colon Y \to X$ be the inclusion map, 
+Let $(X, Y)$ be a relative CW complex, let $j\colon Y \to X$ be the inclusion map, 
 and let $C_{j}$ be the mapping cone of $j$. Show that $C_{j}$ is homotopy equivalent to 
 the space $X/Y$. 
 \end{exercise}
@@ -6313,9 +6339,19 @@ b) Show that $A$ is a strong deformation retract of $X$.
 
 \begin{exercise}
 Let $f\colon (X, x_{0}) \to (Y, y_{0})$ be a map of pointed spaces. Show that if $X$ is a path connected 
-1-dimensional CW-complex and $f_{\ast}\colon \pi_{1}(X, x_{0}) \to \pi_{1}(Y, y_{0})$ is the trivial homomorphism 
+1-dimensional CW complex and $f_{\ast}\colon \pi_{1}(X, x_{0}) \to \pi_{1}(Y, y_{0})$ is the trivial homomorphism 
 then $f$ is homotopic to a constant map. 
 \end{exercise}
+
+\begin{exercise}
+Let $X$ be a finite, path connected CW complex. 
+
+a) Show that $X$ is homotopy equivalent to a CW complex $X'$ which has only one 0-cell. 
+
+b) Show that if $\pi_{1}(X) = \{1\}$ then $X$ is homotopy equivalent to a CW complex $X''$  which 
+has only one 0-cell and no 1-cells. 
+\end{exercise}
+
 
 
 \newpage
@@ -6336,7 +6372,7 @@ then $f$ is homotopic to a constant map.
 In this  chapter  we make here a brief algebraic interlude  from the task of computing 
 fundamental groups in order to discuss how groups can be described by means 
 their \emph{presentations}. This concept will be used in the next chapter where 
-we will consider fundamental groups of 2-dimensional CW-complexes.
+we will consider fundamental groups of 2-dimensional CW complexes.
 
  %---BBLANK
 \begin{definition}
@@ -6374,7 +6410,7 @@ $$F(S) \cong \ast_{a\in S} F(\{a\}) \cong \ast_{a\in S}\Z$$
 \begin{note}
 We will say that a group $G$ is free if $G$ is isomorphic to the group $F(S)$ for some set $S$. 
 Notice that by Theorem \ref{CWDIM1HOTYPE THM} the fundamental group of any 1-dimensional 
-CW-complex is free. 
+CW complex is free. 
 \end{note}
  %---EBLANK
 
@@ -6529,10 +6565,10 @@ c) $G_{3}=\langle a, b \ |  \  a^{4}, b^{4}, a^{2}b^{2}\rangle$
 
 
 
-We return  to the problem of computing fundamental groups of CW-complexes. 
-Building on results of Chapter \ref{HEP CHAPTER} we will consider here CW-complexes 
+We return  to the problem of computing fundamental groups of CW complexes. 
+Building on results of Chapter \ref{HEP CHAPTER} we will consider here CW complexes 
 of dimension 2. Any such complex $X$ is obtained by 
-glueing some $2$-cells to its $1$-skeleton $X^{(1)}$. Since $X^{(1)}$ is a CW-complex of 
+glueing some $2$-cells to its $1$-skeleton $X^{(1)}$. Since $X^{(1)}$ is a CW complex of 
 dimension $1$ its fundamental group  is described  by Theorems \ref{FINCWDIM1HOTYPE THM}
 and  \ref{CWDIM1HOTYPE THM}. In effect, we only need to determine how the fundamental 
 group of a space changes if we attach to it  $2$-cells. We will consider first  the 
@@ -6711,7 +6747,7 @@ of $\pi_{1}(Y, x_{0})$  generated by set  $\{[\tau_{i} \ast \omega_{f_{i}}\ast \
  %---BBLANK 
 \begin{example}
  %---EBLANK  # Torus
-Recall that the torus $T$ has a CW-complex structure with one 0-cell, two 1-cells and one 2-cell:
+Recall that the torus $T$ has a CW complex structure with one 0-cell, two 1-cells and one 2-cell:
  
   %---BBLANK 
  \begin{tikzpicture}
@@ -6767,7 +6803,7 @@ we obtained before  (\ref{PI1TORUS EXAMPLE}) using the product formula for the f
  %---BBLANK 
 \begin{example} 
  %---EBLANK  # Klein bottle
-Recall the CW-complex structure on the Klein bottle K:
+Recall the CW complex structure on the Klein bottle K:
 
   %---BBLANK 
  \begin{tikzpicture}
@@ -6895,13 +6931,13 @@ we get that  the $K\not\simeq T$ and $K\not \simeq \RP^{2}$.
 \end{note}
 
 As the final result of this chapter we will show that any group can be realized as the fundamental group 
-of some CW-complex:
+of some CW complex:
 
 
  %---BBLANK  
 \begin{theorem}
 \label{REALIZINGGPBYP1X THM}
-For any group $G$ there exists a CW-complex $X$ such that $\pi_{1}(X)\cong G$. 
+For any group $G$ there exists a CW complex $X$ such that $\pi_{1}(X)\cong G$. 
 \end{theorem}
  %---EBLANK  # \newpage
 
@@ -6919,7 +6955,7 @@ $\xov{f}\colon \pi_{1}(X^{(1)}, x_{0}) \to G$. Moreover, since $f$ is onto thus 
 As a consequence we obtain that $G\cong \pi_{1}(X^{(1)}, x_{0})/\Ker(\xov{f})$. For each 
 element $r\in \Ker(\xov{f})$ let $\sigma_{r}\colon [0, 1] \to X^{(1)}$ be a loop representing $r$. 
 Recall (\ref{PI1THROUGHS1 NOTE}) that such loop can be identified with a map $S^{1}\to X^{(1)}$. 
-By abuse of notation we will denote this map also by $\sigma_{r}$. Let $X$ be the CW-complex 
+By abuse of notation we will denote this map also by $\sigma_{r}$. Let $X$ be the CW complex 
 obtained from $X^{(1)}$ by attaching one $2$-cell for each element $r\in \Ker(\xov{f})$ with the 
 attaching map given by $\sigma_{r}$. By Theorem \ref{PI1OF2DIMCW THM} we obtain 
 $$\pi_{1}(X, x_{0})\cong \pi_{1}(X^{(1)}, x_{0})/\Ker{(\xov{f})} \cong G$$
@@ -6929,10 +6965,10 @@ $$\pi_{1}(X, x_{0})\cong \pi_{1}(X^{(1)}, x_{0})/\Ker{(\xov{f})} \cong G$$
 \begin{note}
 By modifying the proof Theorem \ref{REALIZINGGPBYP1X THM} we can show that 
 if a group $G$ has a presentation $G\cong \langle S \ | \ R \rangle$ then $G$ is isomorphic 
-to the fundamental group of a CW-complex $X$ which has one $1$-cell for each element of 
+to the fundamental group of a CW complex $X$ which has one $1$-cell for each element of 
 $S$ and one $2$-cell for each element of $R$. In particular $G$ is finitely generated if and only if 
-$G\cong \pi_{1}(X)$ for some $CW$-complex $X$ such that $X^{(1)}$ is finite, and and 
-$G$ is finitely presented if and only if $G\cong \pi_{1}(X)$ for some finite CW-complex $X$.  
+$G\cong \pi_{1}(X)$ for some CW complex $X$ such that $X^{(1)}$ is finite, and and 
+$G$ is finitely presented if and only if $G\cong \pi_{1}(X)$ for some finite CW complex $X$.  
 \end{note}
 
 
@@ -6944,7 +6980,7 @@ $G$ is finitely presented if and only if $G\cong \pi_{1}(X)$ for some finite CW-
 
 \begin{exercise}
 Let $x_{1}, x_{2}, x_{3} \in S^{2}$ and let $X$ be the quotient space obtained by identifying 
-these three points. Put a CW-complex structure on $X$ and use it to compute $\pi_{1}(X)$. 
+these three points. Put a CW complex structure on $X$ and use it to compute $\pi_{1}(X)$. 
 \end{exercise}
 
 \begin{exercise}
@@ -6960,7 +6996,7 @@ of the torus, cutting out a hole in each copy, and glueing the boundaries of the
 {{\includegraphics[width=100mm, trim=0mm 153mm 0mm 65mm, clip]{pictures/MTH428p082.pdf}}}
 \end{center}
 
-a) Put a CW-complex structure on $T\# T$ and use it to find a presentation of the fundamental group of $T\# T$. 
+a) Put a CW complex structure on $T\# T$ and use it to find a presentation of the fundamental group of $T\# T$. 
 
 b) Show that $T\#T$ is not homotopy equivalent to $T$. 
 
@@ -6979,7 +7015,7 @@ show that if $n\neq m$ then $T_{n}$ is not homotopy equivalent to $T_{m}$.
 \end{exercise}
 
 \begin{exercise}
-Let $X$ be a 2-dimensional CW-complex. Assume that $X$ has only one 0-cell $x_{0}\in X$.  
+Let $X$ be a 2-dimensional CW complex. Assume that $X$ has only one 0-cell $x_{0}\in X$.  
 Let $(Y, y_{0})$ be a pointed space.  Show that for any group homomorphism 
 $\varphi \colon \pi_{1}(X, x_{0}) \to \pi_{1}(Y, y_{0})$ there exists 
 a map $f\colon (X, x_{0}) \to (Y, y_{0})$ such that $f_{\ast} = \varphi$. 
@@ -7004,19 +7040,17 @@ a map $f\colon (X, x_{0}) \to (Y, y_{0})$ such that $f_{\ast} = \varphi$.
 \label{P1CWI CHAPTER}
 \thispagestyle{firststyle}
 
-Our next goal will be to develop some methods of computing  fundamental groups of 
-arbitrary CW-complexes. The approach we will take is as follows. In this chapter we will establish 
-some preliminary results that will  show that the general problem of finding 
-the fundamental group of a CW-complex can be reduced to the case of 
-CW-complexes of dimension at most 2. We will also describe the structure of fundamental groups 
-of 1-dimensional CW-complexes. In order to proceed further we will develop in Chapter 
-\ref{PRESENTOFGPS CHAPTER} some convenient algebraic language for describing  
-groups in general. This language will be put to use in Chapter \ref{P1CWII CHAPTER} where we will 
-continue our investigation of fundamental groups of CW-comolexes. 
+Results of the last few chapters tell us how to compute the fundamental group of 
+a CW complex of dimension 2 or lower. In this chapter we show that this actually suffices 
+to compute the fundamental group of any CW complex $X$, since the fundamental group 
+of $X$ is always isomorphic to the fundamental group of its 2-skeleton $X^{(2)}$. 
+This fact is a consequence of the Cellular Approximation Theorem which, in general, is one 
+of the main tools used when working with CW complexes. 
+
 
  %---BBLANK  
 \begin{definition}
-Let $X, Y$ be CW-complexes. A map $f\colon X \to Y$ is \emph{cellular} if $f(X^{(n)}) \subseteq Y^{(n)}$
+Let $X, Y$ be CW complexes. A map $f\colon X \to Y$ is \emph{cellular} if $f(X^{(n)}) \subseteq Y^{(n)}$
 for all $n\geq 0$. 
 \end{definition}
  %---EBLANK  # \vskip 30mm
@@ -7024,20 +7058,20 @@ for all $n\geq 0$.
  %---BBLANK  
 \begin{CELLAPPROXTHM}
 \label{CELLAPPROX THM}
-Let $X, Y$ be CW-complexes. For any map $f\colon X \to Y$ there exists a cellular map 
+Let $X, Y$ be CW complexes. For any map $f\colon X \to Y$ there exists a cellular map 
 $g\colon X \to Y$ such that $f\simeq g$. Moreover, if $A\subseteq X$ is a subcomplex and 
 $f|_{A}\colon A \to Y$ is a cellular map then $g$ can be selected so that   
 $f|_{A} = g|_{A}$ and $f\simeq g \ (\rel A)$.
 \end{CELLAPPROXTHM}
  %---EBLANK  # \newpage
 
-We will skip the proof of this theorem.  While this result is  of major importance in algebraic topology we will use 
-it only once, to prove the following fact:
+Before proving this result we will show how it lets us identify the fundamental group
+of any CW complex with the fundamental group of its 2-skeleton.
 
  %---BBLANK  
 \begin{theorem}
 \label{FPI12SKINC THM }
-Let $X$ be a $CW$-complex and let $x_{0} \in X^{(2)}$. The inclusion map $i\colon X^{(2)} \to X$
+Let $X$ be a CW complex and let $x_{0} \in X^{(2)}$. The inclusion map $i\colon X^{(2)} \to X$
 induces an isomorphism $i_{\ast}\colon \pi_{1}(X^{(2)}, x_{0}) \to \pi_{1}(X, x_{0})$.
 \end{theorem}
  %---EBLANK # \newpage
@@ -7047,19 +7081,19 @@ We can assume that $x_{0}$ is a $0$-cell in $X$. We will prove first that $i_{\a
 Let $\omega\colon [0, 1] \to X$ be a loop based at $x_{0}$. We need to show that there exists 
 a loop $\omega'\colon [0, 1] \to X$ such that $\omega'([0, 1])\subseteq X^{(2)}$ and that 
 $\omega\simeq \omega' \ (\rel \{0, 1\})$. 
-We can consider the interval $[0, 1]$ as a CW-complex with two $0$-cells joined by one $1$-cell. 
+Consider the interval $[0, 1]$ as a CW complex with two $0$-cells joined by one $1$-cell. 
 The $0$-skeleton of $[0, 1]$ is the subspace $\{0, 1\}\subseteq [0, 1]$. 
 Since  $\omega(0) = \omega(1) = x_{0}\in X^{(0)}$ the map $\omega|_{\{0, 1\}}$ is cellular. 
 By Theorem \ref{CELLAPPROX THM} there exists a cellular map $\omega'\colon [0, 1] \to X$
 such that $\omega'\simeq \omega \ (\rel \{0, 1\})$. This means that $[\omega] = [\omega']$ 
-in $\pi_{1}(X, x_{0})$. Moreover, since $[0, 1]$ is a CW-complex of dimension $1$ thus 
+in $\pi_{1}(X, x_{0})$. Moreover, since $[0, 1]$ is a CW complex of dimension $1$ thus 
 $\omega'$ is a loop in $X^{(1)}\subseteq X^{(2)}$. 
  
  Next, we will show that $i_{\ast}$ is 1-1. Let $[\omega], [\tau]\in \pi_{1}(X^{(2)}, x_{0})$.
 Using the same argument as above we can assume that $\omega, \tau \colon [0, 1] \to X^{(2)}$
 are cellular maps. Assume that $i_{\ast}([\omega]) = i_{\ast}([\tau])$. This means that 
 there exists a path homotopy $h\colon [0, 1]\times [0, 1] \to X$ with $h_{0} = \omega$ 
-and $h_{1} = \tau$. The square $I^{2} = [0, 1]\times [0, 1]$ can be considered as a CW-complex  
+and $h_{1} = \tau$. The square $I^{2} = [0, 1]\times [0, 1]$ can be considered as a CW complex  
 whose $0$-cells are vertices of the square and whose $1$-cells are the edges.
 The 1-skeleton of $I^{2}$ is  the boundary $\partial I^{2}$. Notice that 
 $h|_{\partial I^{2}}$ is a cellular map. Using Theorem \ref{CELLAPPROX THM} we obtain that there 
@@ -7071,12 +7105,213 @@ $[\omega] = [\tau]$ in $\pi_{1}(X^{(2)}, x_{0})$
 \end{proof}
 
 
+The rest of this chapter will be devoted to a proof of Theorem \ref{CELLAPPROX THM}. 
+The proof will be split into several lemmas. 
+
+
+\begin{lemma}
+\label{NOT ONTO CELL DISC LEMMA}
+Let $Y$ be a space, and let $Y'$ be obtained from $Y$ by attaching a single $n$-cell:
+$$Y' = Y\cup e^{n}$$
+Let $f\colon D^{m} \to Y'$ be a map such that $f(S^{m-1}) \subseteq Y$. If $m< n$ then 
+there exists a map $g\colon D^{m}\to Y'$ such that $f|_{S^{m-1}} = g|_{S^{m-1}}$,  
+$f\simeq g \ (\rel S^{m-1})$ and that for some point $y_{0}\in e^{n}$ we have 
+$y_{0}\not\in g(D^{n})$. 
+\end{lemma}
+
+\begin{proof}[Idea of the proof]
+This is the most technical step in the proof of Theorem \ref{CELLAPPROX THM}. 
+Let $\varphi \colon D^{n} \to Y'$ be the characteristic map of the cell $e^{n}$. 
+Let $B_{1/2}\subseteq D^{n}$ be the open ball with the center at the origin and 
+radius $1/2$, and let $U = \varphi(B_{1/2})\subseteq Y'$.  The map $\varphi$
+restricts to a homeomorphism $U\cong B_{1/2}$, so we can identify $U$ with 
+an open set in $\R^{n}$. 
+
+
+Since the disc $D^{m}$ is homeomorphic to the cube $K = [0, 1]^{m}$, we can consider $f$
+as a function $f\colon K \to Y'$. One can show that the cube $K$  can be subdivided 
+into a finite number $m$-dimensional polyhedra  $K_{1}, \dots, K_{N}$ in such way that there 
+exists a function $g\colon K \to Y'$ satisfying the following conditions:
+\bit
+\item[(i)] $g\simeq f \ (\rel \partial K)$ (where $\partial K$ is the boundary of the cube K)
+\item[(ii)] For each polyhedron $K_{i}\subseteq K$ such that $g(K_{i})\cap U \neq \varnothing$,
+the restriction $g|_{K_{i}}\colon K_{i}\to U$ is a linear function. We use here the 
+identification of $U$ with an open set in $\R^{n}$ to make sense of linearity of these maps. 
+\eit
+Property (ii) implies that  the set $g(K)\cap U$ is contained in the set $\bigcup_{K_{i_{j}}} g(K_{i_{j}})$
+where the union is taken over all polyhedra $K_{i_{j}}$ on which $g$ is linear. Since the union of images of 
+finitely many linear (or, more precisely, affine) functions $\R^{m}\to \R^{n}$ with $m< n$ does not 
+contain any open set in $\R^{n}$, we obtain that $g(K)$ does not contain  the whole set $U$, and
+so it does not contain the whole cell $e^{n}$. 
+
+
+\end{proof}
+
+
+
+\begin{lemma}
+\label{CELLULAR ONE CELL DISC LEMMA}
+Let $Y$ be a space, and let $Y'$ be obtained from $Y$ by attaching a single $n$-cell:
+$$Y' = Y\cup e^{n}$$
+Let $f\colon D^{m} \to Y'$ be a map such that $f(S^{m-1}) \subseteq Y$. If $m< n$ then 
+there exists a map $g\colon D^{m}\to Y'$ such that $g(D^{m})\subseteq Y$, 
+$f|_{S^{m-1}} = g|_{S^{m-1}}$ and $f\simeq g \ (\rel S^{m-1})$.
+\end{lemma}
+
+\begin{proof}
+By Lemma \ref{NOT ONTO CELL DISC LEMMA} there exists a function $g'\colon D^{m} \to Y'$
+such that $f \simeq g' \ (\rel S^{m-1})$ and such that $y_{0}\not\in g'(D^{m})$ for some $y_{0}\in e^{n}$. 
+We can consider $g'$ as a map $g'\colon D^{m} \to  Y' \setminus \{y_{0}\}$. One can show (exercise) 
+that there exists a map $h\colon (Y' \setminus \{y_{0}\})\times [0, 1] \to Y' \setminus \{y_{0}\}$ which 
+is a deformation retraction of $Y' \setminus \{y_{0}\}$ onto $Y$. The function $h_{1}g$ is homotopic to $g'$
+$(\rel S^{m-1})$ and $h_{1}g'(D^{m}) \subseteq Y$. Thus we can take $g = h_{1}g'$. 
+\end{proof}
+
+
+\begin{lemma}
+\label{CELLULAR N-CELLS DISC LEMMA}
+Let $Y$ be a space, and let $Y'$ be obtained from $Y$ by attaching $n$-cells:
+$$Y' = Y\cup \bigcup_{i\in I} e^{n}_{i}$$
+Let $f\colon D^{m} \to Y'$ be a map such that $f(S^{m-1}) \subseteq Y$. If $m< n$ then 
+there exists a map $g\colon D^{m}\to Y'$ such that $g(D^{m})\subseteq Y$, 
+$f|_{S^{m-1}} = g|_{S^{m-1}}$ and $f\simeq g \ (\rel S^{m-1})$.
+\end{lemma}
+
+\begin{proof}
+Since $D^{m}$ is a compact space, by Proposition \ref{COMPACT CW COMPLEX PROP}
+the set $f(D^{m})$ has a non-empty intersection with only finitely many $n$-cells
+$e^{n}_{i_{1}}, \dots, e^{n}_{i_{k}}$. We will prove the lemma by induction with respect to the number 
+$k$ of these cells. 
+
+If $k = 0$ then $f(D^{m}) \subseteq Y$ and we can take $g = f$.  Next, assume that the 
+lemma is true for some $k\geq 0$, and let $f\colon D^{m} \to Y'$ be a functiom such that
+$f(D^{m})$ has non-empty intersections with $k+1$ cells $e^{n}_{i_{1}}, \dots, e^{n}_{i_{k+1}}$.
+Let $Z$ be the subcomplex of $Y'$ consisting of $Y$ and these cells.
+We can consider $f$ as a function $f\colon D^{m} \to Z$. Notice that $Z$ can be viewed as space 
+obtained by attaching a single cell $e^{n}_{k+1}$ to $Z' = Y \cup \bigcup_{i=1}^{k} e^{n}_{i}$. 
+Therefore, by Lemma \ref{CELLULAR ONE CELL DISC LEMMA} the function $f$ is homotopic 
+relative $S^{m-1}$ to a function $f'\colon D^{m}\to Z$ such that $f'(D^{m})\subseteq Z'$. Since 
+$f'(D^{m})$ intersects non-trivially with at most $k$ cells of dimension $n$, by the inductive assumption 
+it is homotopic $(\rel S^{m-1})$ to a function $g$ such that $g(D^{m})\subseteq Y$. Therefore 
+we obtain $f\simeq f' \simeq g \ (\rel S^{m-1})$.  
+\end{proof}
+
+
+
+
+
+\begin{lemma}
+\label{CELLULAR DISC LEMMA}
+Let $Y$ be a CW complex, and $f\colon D^{m} \to Y$ be a map such that 
+$f(S^{m-1})\subseteq Y^{(m-1)}$. Then there exists a map $g\colon D^{m} \to Y$
+such $g(D^{m})\subseteq Y^{(m)}$, $f|_{S^{m-1}} = g|_{S^{m-1}}$ and $f\simeq g \ (\rel S^{m-1})$.
+\end{lemma}
+
+\begin{proof}
+Since $D^{m}$ is a compact space, by Proposition \ref{COMPACT CW COMPLEX PROP}
+the set $f(D^{m})$ has a non-empty intersection with finitely many cells of $Y$ only. 
+In particular, $f(D^{m})$ is contained in an $n$-skeleton $Y^{(n)}$ of $Y$ for some $n \geq 0$. 
+If $n > m$, then using Lemma \ref{CELLULAR N-CELLS DISC LEMMA} we get 
+that $f$ is homotopic $(\rel S^{m-1})$ to a function $f'$ such that $f'(D^{m})\subseteq Y^{(n-1)}$. 
+Arguing inductively, we obtain the statement of the lemma. 
+\end{proof}
+
+
+\begin{lemma}
+\label{CELLULAR INDUCTIVE LEMMA}
+Let $X, Y$ be CW complexes and $A\subseteq X$ be a subcomplex. Also, let $f\colon X \to Y$
+be a map which is cellular on $A\cup X^{(m)}$ for some $m\geq -1$. Then there exists a map 
+$g\colon X \to Y$ such that $g$ is cellular on $A\cup X^{(m+1)}$, 
+$f|_{A \cup X^{(m)}} = g|_{A\cup X^{(m)}} $  and  $f\simeq g \ (\rel A\cup X^{(m)})$.
+\end{lemma}
+
+\begin{proof}
+Assume first that $m=-1$. Since $X^{(-1)} = \varnothing$, thus $f$ is a map cellular on $A$. 
+We want to show that there exists a function $g\colon X\to Y$  such that  $f\simeq g \ (\rel A)$ and 
+that $g$ is cellular on $A\cup X^{0}$. The complex  $A\cup X^{0}$ is a disjoint union  
+$$A\cup X^{0} = A \sqcup \{e^{0}_{i}\}_{\in I}$$  
+where $e^{0}_{i}$  are 0-cells of $X$ not contained in $A$. 
+Since every path connected component of $Y$ contains some $0$-cell, for each $i\in I$ we can find a path 
+$\omega_{i}\colon [0, 1] \to Y$ such that  $\omega_{i}(0) = f(e^{0}_{i})$ and $\omega_{i}(1) \in Y^{(0)}$. Define a homotopy 
+$h\colon (A\cup X^{0})\times [0, 1] \to Y$ by $h(x, t) = f(x)$ for  $x\in A$ and 
+$h(e^{0}_{i}, t) = \omega_{i}(t)$. By Theorem \ref{HEP REL CW THM} this homotopy 
+can be extended to a homotopy $\bar{h}\colon X \times [0, 1] \to Y$ between $f$
+and a certain function $g\colon X\to Y$. Directly from this construction it follows that 
+$f\simeq g \ (\rel A)$ and that $g$ is cellular on $A\cup X^{(0)}$. 
+
+
+Next, assume that $m\geq 0$. Then $f$ is a function cellular on $A\cup X^{(m)}$, and we want to 
+obtain a function $g$ cellular on $A\cup X^{(m+1)}$. We have 
+$$A\cup X^{(m+1)} = (A\cup X^{(m)}) \cup \bigcup_{i\in I} e^{m+1}_{i}$$
+where $ e^{m+1}_{i}$ are $(m+1)$-cells of $X$ not contained in $A$. 
+Let $\varphi_{i}\colon D^{m+1} \to X$ be the characteristic map of the cell $e^{m+1}_{i}$
+(\ref{CW TERMINOLOGY NN}). Since $\varphi_{i}(S^{m})\subseteq X^{(m)}$ and $f$
+is cellular on $X^{(m)}$ we obtain that $f\varphi_{i}(S^{m})\subseteq Y^{(m)}$. 
+Therefore, by Lemma \ref{CELLULAR DISC LEMMA} there exists a homotopy 
+$h_{i}\colon D^{m+1}\times [0, 1]\to Y$  $(\rel  S^{m})$ between $f\varphi_{i}$
+and some map $\psi_{i}\colon D^{m+1} \to Y$ such that $\psi_{i}(D^{m+1}) \subseteq Y^{(m+1)}$.
+Define a homotopy  $h\colon (A\cup X^{(m+1)})\times [0, 1] \to Y$ by 
+$h(x, t) = f(x)$ for $x\in A\cup X^{(m)}$ and 
+$h(x, t) = h_{i}(y, t)$ for $x = \varphi_{i}(y) \in e^{m+1}_{i}$. Using Theorem \ref{HEP REL CW THM}
+again, we can extend this homotopy to  a homotopy $\bar{h}\colon X \times [0, 1] \to Y$ between $f$
+and some function $g\colon X\to Y$. The construction of the homotopy $\bar{h}$ implies that 
+$g$ is cellular on   $A\cup X^{(m+1)}$ and that $f\simeq g \ (\rel  A\cup X^{(m)})$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{CELLAPPROX THM}]
+Let $X$, $Y$ be CW complexes,  let $A\subseteq X$ be a subcomplex, and let $f\colon X\to Y$
+be a map which is cellular on $A$. Using Lemma \ref{CELLULAR INDUCTIVE LEMMA} inductively 
+we can construct functions $f_{i}\colon X \to Y$ and homotopies $h_{i}\colon X\times [0, 1] \to Y$
+for $m=0, 1, 2, \dots$ such that:
+\bit
+\item the function $f_{m}$ is cellular on $A\cup X^{(m)}$
+\item $h_{0}$ is a homotopy $(\rel A)$ between $f$ and $f_{0}$
+\item $h_{m}$ is a homotopy  $(\rel A\cup X^{(m-1)})$ between $f_{m-1}$ 
+and $f_{m}$ for $m=1, 2, \dots$
+\eit
+Notice that if $\dim X = n < \infty$ then $X = X^{(n)}$, and so 
+$f_{n}$ is a cellular map such that $f \simeq f_{n} \ (\rel A)$. Thus we can take $g = f_{n}$. 
+
+If $\dim X = \infty$ define $g\colon X \to Y$ by $g(x) = f_{m}(x)$ if $x\in X^{(m)}$.
+Notice that since $f_{n}|_{X^{(m)}} = f_{m}|_{X^{(m)}}$ for all $n > m$ this function is well defined, 
+and it is continuous by (\ref{CW CONT FUNCTIONS NOTE}) since for each $m$ the function 
+$g|_{X^{(m)}} = f_{m}|_{X^{(m)}}$ is continuous. In addition, $g$ is a cellular function since for each
+$m$ we have $g(X^{(m)}) = f_{m}(X^{(m)}) \subseteq Y^{(m)}$, and it satisfies $f|_{A} = g|_{A}$ since 
+$f|_{A} = f_{m}|_{A}$ for all $m$. 
+
+To obtain a homotopy $h\colon X \times [0, 1] \to Y$ between $f$ and $g$, choose numbers 
+$t_{m}\in [0, 1]$ for $m=0, 1, \dots$ such that $t_{0} = 0$, $t_{m} < t_{m+1}$ for all $m$, and 
+that the sequence $t_{m}$ converges to $1$. On the subinterval $[t_{m}, t_{m+1}]$ define $h$
+by reparametrizing the homotopy $h_{m}$:
+$$h(x, t) = h_{m}(x, (t-t_{m})/(t_{m+1} - t_{m}))$$
+for $t\in [t_{m}, t_{m+1}]$. Also, set $h(x, 1) = g(x)$ for $x\in X$.  To verify that $h$ is continuous, 
+it suffices to show that it is continuous on $X^{(m)}\times [0, 1]$ for each $m$. This holds since 
+$h(x, t) = f_{m}(x)$ for $(x, t) \in X^{(m)} \times [t_{m+1}, 1]$, and $h|_{X\times [0, t_{m+1}]}$ is continuous 
+as a concatenation of a finite number of homotopies $h_{0}, \dots, h_{m}$. 
+
+
+\end{proof}
+
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  EXERCISES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \exercises  
+
+\begin{exercise}
+Recall that the $n$-th homotopy group of a pointed space 
+$(X, x_{0})$ is a group whose elements are homotopy classes of basepoint preserving 
+maps $(S^{n}, s_{0}) \to (X, x_{0})$. Let $S^{m}$ be an $m$-dimensional sphere with 
+a basepoint $s'_{0}\in S^{m}$. Show that if $n < m$ then the group $\pi_{n}(S^{m}, s'_{0})$ is
+trivial. 
+
+\end{exercise}
+
 
 \begin{exercise}
 Recall that the $n$-dimensional sphere is given by 
@@ -7086,6 +7321,19 @@ $$i( (x_{1}, \dots, x_{m+1})) = (x_{1}, \dots, x_{m+1}, 0, \dots 0)$$
 Using this embedding we can consider  $S^{m}$ as a subspace of $S^{n}$.  Show that the quotient 
 space $S^{n}/S^{m}$ is homotopy equivalent to $S^{n}\vee S^{m+1}$. 
 (Hint: Proposition \ref{CONTR QUOTIENT WITH HEP PROP} may be useful.)
+\end{exercise}
+
+\begin{exercise}
+Let $(Y, y_{0})$ be a pointed space. Show that there exists a pointed 2-dimensional CW complex 
+$(X, x_{0})$ and a function $f\colon (X, x_{0}) \to (Y, y_{0})$ such that the induced homomorphism 
+of fundamental groups $f_{\ast}\colon \pi_{1}(X, x_{0}) \to \pi_{1}(Y, y_{0})$ is an isomorphism. 
+\end{exercise}
+
+\begin{exercise}
+The goal of this exercise is to complete a missing step in the proof of 
+Lemma \ref{CELLULAR ONE CELL DISC LEMMA}. 
+Let  $Y' = Y \cup e^{n}$ be a space obtained by attaching a single $n$-dimensional cell to a space $Y$. 
+Show that for any point $y_{0}\in e^{n}$ the space $Y$ is a deformation retract of $Y' \setminus \{y_{0}\}$ 
 \end{exercise}
 
 
@@ -8374,7 +8622,7 @@ The fundamental group of the base space  is a free group on two generators:
 $\pi_{1}(S^{1}\vee S^{1}, x_{0})\cong \langle a, b \rangle$
 where $a$ is represented by the loop that traverses one copy of $S^{1}$, and $b$ by the loop 
 that traverses the second copy of $S^{1}$. The total space $T$ of this covering has the structure 
-of a $1$-dimensional path connected CW-complex with three 0-cells and six 1-cells,  
+of a $1$-dimensional path connected CW complex with three 0-cells and six 1-cells,  
 so by Theorem \ref{FINCWDIM1HOTYPE THM} the group $\pi_{1}(T)$ is a free group on 4 generators. 
 Free generators of the group $\pi_{1}(T, \ntilde{x}_{0})$ can be selected so that they are 
 represented by the following loops based at $\ntilde{x}_{0}$:
@@ -9232,7 +9480,7 @@ is an isomorphism.
 
 \begin{exercise}
 Recall that the $n$-th homotopy group of a pointed space $(X, x_{0})$
-is the group whose elements are homotopy classes of basepoint preserving 
+is a group whose elements are homotopy classes of basepoint preserving 
 maps $(S^{n}, s_{0}) \to (X, x_{0})$. Let $x_{0}\in S^{1}$. Show that 
 $\pi_{n}(S^{1}, x_{0})$ is a trival group for $n>1$. 
 \end{exercise}
@@ -9775,8 +10023,8 @@ the map $\tilde{p}|_{\tilde{p}^{-1}(A)}\colon \tilde{p}^{-1}(A) \to A$ is a univ
 \end{exercise}
 
 \begin{exercise}
-a) Let $X$ be a finite, path connected,  1-dimensional CW-complex. Show that if  $\tilde{p} \colon \widetilde{X} \to X$ is 
-the universal covering of $X$ then the space $\widetilde{X}$ has the structure of a 1-dimensional CW-complex such that 
+a) Let $X$ be a finite, path connected,  1-dimensional CW complex. Show that if  $\tilde{p} \colon \widetilde{X} \to X$ is 
+the universal covering of $X$ then the space $\widetilde{X}$ has the structure of a 1-dimensional CW complex such that 
 $\tilde{p}$ is a cellular map. 
 
 b)  Use part a) to show that if $F$ is a finitely generated free group then every subgroup of $F$ is free. 
