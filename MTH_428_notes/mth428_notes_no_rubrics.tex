@@ -497,7 +497,7 @@ Introduction to Topology II \\
 
 
 \vskip 85mm
-{\large 2021.12.12}
+{\large 2022.05.17}
 \end{center}
 
 {\small This work is licensed under CC BY-NC-SA 4.0. To view a copy of this license, visit 
@@ -946,9 +946,24 @@ $f_{4}\circ f_{3}\circ f_{2}$, and $f_{5}\circ f_{4}\circ f_{3}$ is an isomorphi
 $f_{i}$ is an isomorphism for $i=1,\dots, 5$.
 \end{exercise}
 
+
 \begin{exercise}
-Find two different functors $F, F' \colon \Gr \to \Gr$ such that $F(G) = F'(G) = G$ for each group 
-$G\in \Gr$.  
+Let $\CC$ be a category. A morphism $f\colon c\to c'$ is called an \emph{epic} morphism
+if it has the property that for any two morphism $g_{1}\colon c' \to d$,  $g_{2}\colon c' \to d$
+satisfying $g_{1}\circ f = g_{2}\circ f$ we have $g_{1} = g_{2}$. 
+
+a) Show that in the category $\Set$ of sets, a function $f\colon A\to B$ is an epic morphism
+if and only if $f$ is an onto function.
+
+b) In the category $\Top$ of topological spaces, give an example of a continuous 
+function $f\colon X \to Y$ which is an epic morphism, but it is not an onto function.
+\end{exercise}
+
+
+
+\begin{exercise}
+Find two different functors $F, F' \colon \Set \to \Set$ such that $F(A) = F'(A) = A$ for each set 
+$A\in \Set$.  
 \end{exercise}
 
 
@@ -2497,12 +2512,6 @@ $\omega_{0x}\ast\omega_{x1}$.
 
 
 
-\begin{exercise}
-Let $S^{n}$ be the $n$-dimensional sphere:
-$$S^{n} = \{ (x_{1}, \dots, x_{n+1}) \in \R^{n+1} \ | \ x_{1}^{2} + {\dots} + x_{n+1}^{2} = 1\}$$
-Show that $S^{n}$ is simply connected. (Hint: show that any path $\omega\colon [0, 1] \to S^{n}$
-is path homotopic to a path which is not onto.)
-\end{exercise}
 
 
 \begin{exercise}
@@ -2629,7 +2638,7 @@ Let $f\colon S^{1}\to S^{1}$ be a function such that $f(-x) = -f(x)$ for all $x\
 \end{equation*}
 
 
-For any $x_{0}\in X$ the homomorphism 
+For any $x_{0}\in S^{1}$ the homomorphism 
 $f_{\ast}\colon \pi_{1}(S^{1}, x_{0}) \to \pi_{1}(S^{1}, f(x_{0}))$ is non-trivial. 
 
 \end{lemma}
@@ -3656,6 +3665,16 @@ is contractible.
 \end{exercise}
 
 
+\begin{exercise}
+For $m < n$ consider $\R^{m}$ as a subspace of $\R^{n}$:
+$$\R^{m} = \{(x_{1}, \dots, x_{m}, 0, 0, \dots, 0) \ | x_{i}\in \R \}$$ 
+Show that the space $X = \R^{n}\setminus \R^{m}$ is homotopy equivalent to $S^{n-m-1}$.
+\end{exercise}
+
+
+
+
+
 
 \begin{exercise}
 Let $X$, $Y$ be topological spaces. Show that any map $f\colon X\times \R^{k} \to Y\times \R^{k}$
@@ -4641,6 +4660,27 @@ $$
 \end{exercise}
 
 
+\begin{exercise}
+Consider the following diagram in a category $\CC$:
+\begin{equation*}
+\begin{tikzpicture}[baseline=(current  bounding  box.center)]
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=2em, text height=1.5ex, text depth=0.25ex]
+{
+c_{1} & c_{0} & c_{2}  \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-2) 
+edge node[anchor = south] {$f_{1}$} (m-1-1)
+edge node[anchor = south] {$f_{2}$} (m-1-3)
+;
+\end{tikzpicture}
+\end{equation*}
+Show that if $f_{1}$ is an isomorphism then the pushout of this diagram is isomorphic to $c_{2}$.
+
+\end{exercise}
+
+
 
 \begin{exercise}
 Prove Proposition \ref{TOP PUSHOUT PROP}.
@@ -4712,6 +4752,16 @@ is path connected show that the inclusion map
 $$j\colon S^{3}- (A\cup \{x_{0}\})\hookrightarrow S^{3}- A$$
 induces an isomorphism of  fundamental groups.
 \end{exercise}
+
+
+
+
+
+\begin{exercise}
+Let $U\subseteq \R^{n}$ be an open set. 
+Show that if $n>2$ then $U$ is not homeomorphic to $\R^{2}$. 
+\end{exercise}
+
 
 
 
@@ -5819,8 +5869,7 @@ The following fact if often useful:
 %---BBLANK
 \begin{proposition}
 \label{COMPACT CW COMPLEX PROP}
-1) Let $(X, Y)$ be a relative CW complex. If $A\subseteq X$ is a compact set then $A$ is closed 
-in $X$ and it has a non-empty intersection with  finitely many open cells of $X$ only.  
+1) Let $(X, Y)$ be a relative CW complex. If $A\subseteq X$ is a compact set then it has a non-empty intersection with  finitely many open cells of $X$ only.  
 
 2) If $X$ is a CW complex and $A\subseteq X$ is a closed set which has a non-empty intersection 
 with  only finitely many open cells of $X$  then $A$ is compact. 
@@ -5931,8 +5980,7 @@ Exercise.
 %---BBLANK
 \begin{proposition}
 \label{CONTR QUOTIENT WITH HEP PROP}
-If a pair $(X, A)$ has the homotopy extension property and the space $A$ is contractible then the quotient map 
-$q\colon X \to X/A$ is a homotopy equivalence. 
+If a pair $(X, A)$ has the homotopy extension property and the space $A$ is contractible and closed in $X$ then the quotient map  $q\colon X \to X/A$ is a homotopy equivalence. 
 \end{proposition}
 
 \begin{proof}
@@ -6010,6 +6058,9 @@ $\pi_{1}(W)\cong \{1\}$ (exercise). Therefore $W/A$ is not homotopy equivalent t
 Any relative CW complex $(X, Y)$ has the homotopy extension property. 
 \end{theorem}
 %---EBLANK  # \vskip 30mm
+
+
+The proof of this theorem will use a couple of lemmas.
 
 
  %---BBLANK
@@ -6293,14 +6344,14 @@ be a function given by $\Phi([f]_{\ast}) = [f]$.
 a) Assume that the pair $(X, x_{0})$ has the homotopy extension property, and $Y$ is a  path connected space. 
 Show that $\Phi$ is onto. 
  
-b) Assume that in addition the group $\pi_{1}(X, x_{0}) $ is trivial. Show that $\Phi$ is a bijection. 
+b) Assume that in addition the group $\pi_{1}(Y, y_{0}) $ is trivial. Show that $\Phi$ is a bijection. 
 \end{exercise}
 
 
 \begin{exercise}
 The \emph{Hawaiian earring} space is a subspace $X \subseteq \R^{2}$ given by 
 $X  = \bigcup_{n=1}^{\infty} C_{n}$ where $C_{n}$ is the circle with radius $\frac{1}{n}$
-and center at the point $(0, \frac{1}{n})$:
+and center at the point $(\frac{1}{n}, 0)$:
 
 \begin{equation*}
 \begin{tikzpicture}[scale = 0.75]
@@ -8400,7 +8451,7 @@ Therefore it suffices to apply Proposition \ref{LIFTSSAMEENDS PROP}.
 $\varphi \colon \pi_{1}(X, x_{0})/H \to p^{-1}(x_{0})$ given by $\varphi([\omega]H) = \nwidetilde{\omega}(1)$
 where $\nwidetilde{\omega}$ is the lift of $\omega$ such that $\nwidetilde{\omega}(0) = \ntilde{x}_{0}$. By part 1) 
 the function $\varphi$ is well defined and it is 1-1. To see that $\varphi$ it is also onto take 
-$\ntilde{x}'_{0} \in \pi^{-1}(x_{0})$. 
+$\ntilde{x}'_{0} \in p^{-1}(x_{0})$. 
 By assumption $T$ is path connected, so  there exists a path $\tau\colon [0, 1] \to T$ such that 
 $\tau(0) = \ntilde{x}_{0}$ and $\tau(1) = \ntilde{x}'_{0}$. Notice that $p\tau$ is a loop in $X$ and that 
 $\varphi([p\tau]H) = \ntilde{x}'_{0}$.  
@@ -9012,8 +9063,10 @@ proof that for a covering $p$ the induced homomorphism $p_{\ast}$ is 1-1.
 \end{exercise}
 
 \begin{exercise}
+Let $B$ be a CW-complex and let $b_{0}\in B$ be a 0-cell.  
 Let $p\colon E \to B$ be a fibration, let $b_{0}\in B$, and  $F = p^{-1}(b_{0})$. Show that if $B$
 is a contractible space then the inclusion map $i\colon F \to E$ is a homotopy equivalence. 
+Hint: Exercise \ref{POINTED-UNPOINTED HOMOTOPY EXERCISE} can be use use here. 
 \end{exercise}
 
 
@@ -9572,7 +9625,7 @@ $
 \begin{pmatrix}
 \text{\ \ isomorphism classes\ \ } \\[1mm]
 \text{of path connected} \\[1mm]
-\text{coverings of $X$} \\
+\text{coverings of $(X, x_{0})$} \\
 \end{pmatrix}
 $
 & 
@@ -9852,7 +9905,7 @@ Semi-local simple connectedness is a necessary condition for existence of a univ
  %---BBLANK # \vskip 160mm
 \begin{proposition}
 \label{UNIVCOVERING NECESSARY COND PROP}
-If $X$ is space such that there exists a universal covering $p\colon \nwidetilde X \to X$ then $X$ is 
+If $X$ is a space such that there exists a universal covering $p\colon \nwidetilde X \to X$ then $X$ is 
 semi-locally simply connected. 
 \end{proposition} 
 
@@ -10015,7 +10068,7 @@ universal coverings. Show that if $X\simeq Y$ then $\widetilde{X} \simeq \wideti
 
 
 \begin{exercise}
-Describe explicitly all non-isomorphic coverings of the space $\R P^{2}\times \R P^{2}$
+Describe explicitly all non-isomorphic connected coverings of the space $\R P^{2}\times \R P^{2}$
 \end{exercise}
 
 
