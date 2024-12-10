@@ -1,0 +1,534 @@
+% !TEX root = mth727_lecture_notes.tex
+
+
+\chapter[Dependence on The Basepoint]{Dependence on \\ The Basepoint}
+\chaptermark{Dependence on The Basepoint}
+\label{DEPENDENCE ON BASEPONT CHAPTER}
+\thispagestyle{firststyle}
+
+
+Let $X$ be a space, and let $x_{0}, x_{1}\in X$. Recall that any path 
+$\tau\colon [0, 1]\to X$ such that $\tau(0) = x_{0}$ and $\tau(1) = x_{1}$
+defines a isomorphism of fundamental groups
+\[
+s_{\tau}\colon \pi_{1}(X, x_{1}) \to \pi_{1}(X, x_{0})
+\]
+given by $s_{\tau}([\omega]) = [\tau\ast\omega\ast \xov\tau]$, where $\xov \tau$
+is obtained from $\tau$ by reverting orientation. 
+
+
+\begin{equation*}
+\begin{tikzpicture}[
+    scale = 0.66,
+    d0/.style = {line width = 1.6pt},
+    d1/.style= {postaction={decorate}, line width = 1.6pt, decoration={markings, mark=at position 0.45 with {\arrowreversed{stealth}}}},
+    d2/.style = {postaction={decorate}, line width = 1.6pt, decoration={markings, mark=at position 0.54 with {\arrow[rotate=9]{stealth}}}},
+    d3/.style = {postaction={decorate}, line width = 1.6pt, decoration={markings, mark=at position 0.6 with {\arrow[rotate=0]{stealth}}}},
+    d4/.style = {postaction={decorate}, line width = 1.6pt, decoration={markings, mark=at position 0.4 with {\arrow[rotate=180]{stealth}}}},
+]
+
+
+\begin{scope}[xshift = -110mm]
+\draw[d3, myblue] (0,0) -- node[anchor=south, yshift = 2pt] {\small $\tau$} (1.5, 0); 
+\draw[d3, red] (1.5,0) --  node[anchor=south, yshift = 2pt] {\small $\omega$} (3, 0); 
+\draw[d4, myblue] (3.0,0) --  node[anchor=south, yshift = 2pt] {\small $\tau$} (4.5, 0); 
+
+\filldraw (0,0) circle (0.08) node[anchor = north, yshift = -2pt] {\small $0$};
+\filldraw (1.5,0) circle (0.08);
+\filldraw (3,0) circle (0.08);
+\filldraw (4.5,0) circle (0.08) node[anchor = north, yshift = -2pt] {\small $1$};
+
+\draw[thick, ->, >=latex] (5.6, 0) -- (6.8, 0);
+\end{scope}
+
+\draw[ fill = mygray1] (-3.5, -1.95) rectangle (3.8, 2.25);
+
+\draw[d2, red, rotate=25, , yscale = 0.9]  
+(0,0) .. controls (0,0) and (1,1) .. 
+(2, 1) .. controls (2.5,1) and (3, 0.5).. 
+(3,0)  ..controls (3, -0.5) and (2.5, -1)..  
+(2,-1) ..controls (1, -1) and (0,0).. 
+cycle;
+\node[red] at (3.2, 1.2)  {\small $\omega$} ;
+
+\draw[d1, myblue]  
+(0,0) .. controls +(-0.4,0.2) and +(0.5, 0.7) ..
+(-1.25, -0.65)
+ .. controls +(-0.5,-0.7) and +(0.4, 0.1) ..
+(-2.5,-1.3);
+\node[myblue, anchor=north west] at (-1.25, -0.65)  {\small $\tau$} ;
+
+\draw[fill = black] (-2.5,-1.3) circle (0.12) node[anchor=south east] {\small $x_{0}$};
+\draw[fill = black] (0,0) circle (0.12) node[anchor=south east, yshift=2pt, xshift = 4pt] {\small $x_{1}$};
+\node[anchor = north west] at (-3.5, 2.2) {\small $X$};
+
+
+\end{tikzpicture}
+\end{equation*}
+
+
+In a similar way, given a path $\tau \colon [0, 1] \to X$ with $\tau(0) = x_{0}$
+and $\tau(1) = x_{1}$ we can define a map 
+$s_{\tau}\colon \pi_{n}(X, x_{1}) \to \pi_{n}(X, x_{0})$. To do this, given a map 
+$\omega\colon (I^{n}, \pint^{n}) \to (X, x_{1})$, define a map 
+$\omega_{\tau}\colon (I^{n}, \pint^{n}) \to (X, x_{0})$ as follows: 
+
+\begin{equation*}
+\begin{tikzpicture}[
+    d1/.style= {postaction={decorate}, decoration={markings, mark=at position 0.55 with {\arrow{stealth}}}},
+]
+\begin{scope}
+\clip (-1.5,-1.5) rectangle (1.5,1.5);
+\foreach \a in {0,15,...,360}{
+\draw[d1, myblue!40, line width = 1.6pt]  (\a:2.5) -- (0:0);
+}
+\draw[d1, line width = 1.6pt, blue] (45:2.5) -- node[pos=0.45, anchor=south] {$\tau$} (0:0);
+\draw[red, fill=mypink, very thick] (-0.7,-0.7) rectangle (0.7,0.7) 
+node[pos=0.5] {$\omega$};
+\end{scope}
+\draw[very thick] (-1.5,-1.5) rectangle (1.5,1.5);
+\end{tikzpicture}
+\end{equation*}
+
+The smaller cube is mapped by $\omega$ and each  
+radial ray joining the boundaries of the larger and smaller cube is mapped by the path $\tau$. 
+
+
+Let $\pi_{1}(X, x_{0}, x_{1})$ denote the set of homotopy classes of paths 
+$\tau\colon [0, 1]\to X$ such that $\tau(0) = x_{0}$ and $\tau(1) = x_{1}$, 
+with homotopies preserving the endpoints.
+
+\begin{lemma}
+\label{PATH ACTION LEMMA}
+Let $\omega, \omega’\colon (I^{n}, \pint^{n})\to (X, x_{1})$ be maps such that 
+$\omega\simeq \omega’ \ (\rel \pint^{n})$, and let 
+$\tau, \tau’\colon [0, 1]\to X$ be paths such that $\tau(0) = \tau’(0) = x_{0}$, 
+$\tau(1) = \tau’(1) = x_{1}$ and $\tau \simeq \tau’ \ (\rel \{0, 1\})$. Then
+$\omega_{\tau} \simeq \omega’_{\tau’}  \ (\rel \pint^{n})$.
+
+Equivalently, if $[\omega] = [\omega’] \in \pi_{n}(X, x_{1})$ and $[\tau] = [\tau’]\in 
+\pi_{1}(X, x_{0}, x_{1})$
+then $[\omega_{\tau}] = [\omega’_{\tau’}]\in \pi_{n}(X, x_{0})$
+\end{lemma}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{note}
+\label{BASEPOINT CHANGE SPHERES NOTE}
+The homotopy class $[\omega_{\tau}]$ can be also described as follows. 
+Consider the homotopy $h\colon \pint^{n}\times [0, 1]\to X$ given by 
+$h(x, t) =  \tau(1-t)$. Since the pair $(I^{n}, \pint^{n})$ has the homotopy 
+extension property, we can extend $h$ to a homotopy 
+$\xov{h}\colon I^{n}\times [0, 1] \to X$ such that $\xov{h}_{0} = \omega$. 
+The map $\xov{h}_{1}$ defines an element $[\xov{h}_{1}] \in \pi_{n}(X, x_{0})$. 
+This element does not depend on the choice of the extension $\xov h$ (exercise), 
+and we have $[\xov{h}_{1}] = [\omega_{\tau}]$.
+\end{note}
+
+\begin{note}
+Recall that elements of $\pi_{n}(X, x_{1})$ can be alternatively defined 
+as pointed homotopy classes of maps $\omega\colon (S^{n}, s_{0}) \to (X, x_{1})$. 
+In this setting, for $[\tau ]\in \pi_{1}(X, x_{0}, x_{1})$ 
+the element $[\omega_{\tau}]\in \pi_{n}(X, x_{0})$ can be described
+using a similar approach as in (\ref{BASEPOINT CHANGE SPHERES NOTE}). 
+Given such  $\omega$ and $\tau$ we can define a function
+\[
+h\colon (S^{n}\times \{0\}) \cup (\{s_{0}\}\times [0, 1]) \to X
+\]
+so that $h(s, 0) = \omega(s)$ and $h(s_{0}, t) = \tau(1-t)$. 
+Since the pair $(S^{n}, s_{0})$ has the homotopy extension property, 
+thus $h$ can be extended to a homotopy $\bar{h}\colon S^{n}\times [0, 1] \to X$.
+One can check that the pointed homotopy class of the map 
+$\bar{h}_{1}\colon (S^{n}, s_{0}) \to (X, x_{0})$ 
+does not depend on the choice of the extension $\bar{h}$. 
+We set: $[\omega_{\tau}] = [h_{1}] \in \pi_{n}(X, x_{0})$.
+
+\begin{equation*}
+\begin{tikzpicture}[scale=0.9,
+    d1/.style= {postaction={decorate}, line width = 1.6pt, decoration={markings, mark=at position 0.5 with {\arrow{stealth}}}},
+]
+
+\draw[line width=1.6pt, myblue, name path=R0] (1,0) arc(360:180:1 and 0.3); 
+\draw[line width=1.6pt, dashed, myblue] (1,0) arc(0:180:1 and 0.3); 
+\draw[line width=1.6pt] (-1,0) -- (-1,2) (1,0) -- (1,2); 
+\draw[line width=1.6pt, red, name path=R2] (1,2) arc(0:360:1 and 0.3);
+
+\path[name path=L1] (-0.4, -1) -- (-0.4, 2);
+\path[name intersections={of=L1 and R0, name=LOW}];
+\path[name intersections={of=L1 and R2, name=UP}];
+\draw[d1, myblue] (UP-1) -- node[pos=0.45, anchor=west] {$\tau$} (LOW-1);
+\fill[myblue] (LOW-1) circle (0.1);
+\fill[red] (UP-1) circle (0.1);
+
+\draw[thick, ->, >=latex] (1.5, 1) -- node[above] {\small $\bar h$} (2.8, 1);
+\node at (3.5, 1) {$X$};
+\draw[thick, ->, >=latex, red] (1.5, 2) to[out=0, in=135, looseness=1] 
+node[above] {\small $\bar{h}_{1}$} (2.8, 1.5);
+\draw[thick, ->, >=latex, myblue] (1.5, 0) to[out=0, in=225, looseness=1] 
+node[below] {\small $h$} (2.8, 0.5);
+\end{tikzpicture}
+\end{equation*}
+
+
+
+
+\end{note}
+
+
+\begin{definition}
+\label{STAU DEF}
+Given $[\tau]\in \pi_{1}(X, x_{0}, x_{1})$ let
+\[
+s_{[\tau]}\colon \pi_{n}(X, x_{1}) \to \pi_{n}(X, x_{0})
+\]
+denote the function given by $s_{[\tau]}([\omega]) = [\omega_{\tau}]$.
+\end{definition}
+
+
+
+
+\begin{proposition}
+\label{PATH ACTION PROPERTIES PROP}
+1) For any $[\tau]\in \pi_{1}(X, x_{0}, x_{1})$ the function 
+$s_{[\tau]}$ is a group homomorphism. 
+
+2) If $[\tau]\in \pi_{1}(X, x_{0}, x_{1})$ and $[\sigma] \in \pi_{1}(X, x_{1}, x_{2})$
+then 
+\[
+s_{[\tau\ast\sigma]} = s_{[\tau]}\circ s_{[\sigma]}\colon 
+\pi_{n}(X, x_{2}) \to \pi_{n}(X, x_{0})
+\]
+3) If $c_{x_{0}}\colon [0, 1]\to X$ is the constant path,  
+$c_{x_{0}}(t) = x_{0}$ for all $t\in [0, 1]$, then $
+s_{[c_{x_{0}}]}\colon \pi_{n}(X, x_{0}) \to \pi_{n}(X, x_{0})$ is the identity homomorphism.
+\end{proposition}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+
+\begin{corollary}
+\label{PIN BASEPOINT INVARIANCE}
+Let $X$ be a space and let $x_{0}, x_{1}\in X$. For any path 
+$\tau\colon [0, 1]\to X$ be a path such that $\tau(0) = x_{0}$, $\tau(1) = x_{1}$ 
+the homomorphism $s_{[\tau]}\colon \pi_{n}(X, x_{1})\to  \pi_{n}(X, x_{0})$
+is an isomorphism.
+\end{corollary}
+
+\begin{proof}
+Let $\xov\tau$ be the inverse of $\tau$. This defines homomorphisms
+\[
+s_{[\tau]} \colon \pi_{n}(X, x_{1})\leftrightarrows  \pi_{n}(X, x_{0}) \colon s_{[\xov\tau]}
+\]
+We will show that $s_{[\xov \tau]} = s_{[\tau]}^{-1}$. Indeed, by
+Proposition \ref{PATH ACTION PROPERTIES PROP} we have 
+\[
+s_{[\xov \tau]} \circ s_{[\tau]} = s_{[\xov\tau\ast\tau]} = s_{[c_{x_{0}}]} = 
+\id_{\pi_{n}(X, x_{1})}
+\]
+Analogously, $s_{[\tau]} \circ s_{[\xov{\tau}]} = \id_{\pi_{n}(X, x_{0})}$.
+\end{proof}
+
+Corollary \ref{PIN BASEPOINT INVARIANCE} implies that if $x_{0}, x_{1}$ are in the 
+same path connected component of $X$ then $\pi_{n}(X, x_{0})\cong \pi_{n}(X, x_{1})$.
+On the other hand, if points $x_{0}, x_{1}\in X$ belong to different path connected 
+components of $X$, then in general there is no relationship between $\pi_{n}(X, x_{0})$ 
+and $\pi_{n}(X, x_{1})$.
+
+\begin{proposition}
+Let $X$ be a space, $x_{0}\in X$, and let $X_{0}$ be the path connected component of 
+$X$ such that $x_{0}\in X_{0}$. Then the inclusion map $i\colon X_{0}\hra X$ induces 
+an isomorphism 
+\[
+i_{\ast}\colon \pi_{n}(X_{0}, x_{0}) \overset{\cong}{\lra} \pi_{n}(X, x_{0})
+\]
+\end{proposition}
+\begin{proof}
+Since $I^{n}$ is path connected, for any map $\omega\colon (I^{n}, \pint^{n}) \to (X, x_{0})$
+we have $\omega(I^{n})\subseteq X_{0}$. This shows that $i_{\ast}$ is onto. 
+Also, if $h\colon I^{n}\times [0, 1] \to X$ is a homotopy $h\colon \omega \simeq \omega’$ 
+where $\omega, \omega’\colon I^{n}\to X_{0}$ then, since $I^{n}\times [0, 1]$ is 
+path connected, we have $h(I^{n}\times [0, 1])\subseteq X_{0}$. It implies that 
+$i_{\ast}$ is 1-1. 
+\end{proof}
+
+\begin{note}
+Given a path connected space $X$ we will sometimes write $\pi_{n}(X)$ to denote the  
+$n$-th homotopy group of $X$ taken with respect to some unspecified basepoint of $X$. 
+By Corollary  \ref{PIN BASEPOINT INVARIANCE} this will not create problems as long as we are interested  in the isomorphism type of the fundamental group only. 
+\end{note}
+
+
+Similarly as for the fundamental group we have: 
+
+\begin{proposition}
+\label{PIN HOMOTINV PROP}
+Let $f, g \colon X \to Y$ be homotopic maps and let $h\colon f\simeq g$. For $x_{0}\in X$ let $\tau$ 
+be the path in $Y$ given by $\tau(t) = h(x_{0}, t)$. The following diagram commutes:
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=1em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+ & \pi_{n}(Y, g(x_{0})) \\
+ \pi_{n}(X, x_{0}) &  \\
+ & \pi_{n}(Y, f(x_{0})) \\
+};
+\path[->, thick, font=\scriptsize]
+(m-2-1) 
+edge node[anchor = south east] {$g_{\ast}$} (m-1-2)
+edge node[anchor = north east] {$f_{\ast}$} (m-3-2)
+(m-1-2)
+edge node[anchor=  west] {$s_{[\tau]}$} node[anchor= east] {$\cong$} (m-3-2)
+
+; 
+\end{tikzpicture}
+\end{equation*}
+\end{proposition}
+
+\begin{proof}
+Exercise. 
+\end{proof}
+
+\begin{note}
+Proposition \ref{PIN HOMOTINV PROP} implies, in particular, that if 
+$f, g\colon (X, x_{0}) \to (Y, y_{0})$ are maps of pointed spaces 
+and $f\simeq g  \ (\rel \{x_{0}\})$ then $f_{\ast} = g_{\ast}$.
+\end{note}
+
+
+\begin{corollary}
+\label{PIN HOMOTINV COR}
+If $f, g\colon X \to Y$ are maps such that $f\simeq g$ then the homomorphism 
+$f_{\ast}\colon \pi_{n}(X, x_{0}) \to \pi_{n}(Y, f(x_{0}))$ is an isomorphism (or it 
+is trivial or  1-1 or onto) if and only if the homomorphism 
+$g_{\ast}\colon \pi_{n}(X, x_{0}) \to \pi_{n}(Y, g(x_{0}))$ has the same property. 
+\end{corollary}
+
+
+\begin{proposition}
+\label{HOMOTEQ PIN PROP}
+If $f\colon X \to Y$ is a homotopy equivalence then for any $x_{0}\in X$ the homomorphism 
+$f_{\ast}\colon \pi_{n}(X, x_{0}) \to \pi_{n}(Y, f(x_{0}))$ is an isomorphism. 
+\end{proposition}
+%---EBLANK  
+
+\begin{proof}
+Let $g\colon Y \to X$ be a homotopy inverse of $f$. Consider the sequence of homomorphisms 
+$$\pi_{n}(X, x_{0}) \overset{f_{\ast}}{\lra} \pi_{n}(Y, f(x_{0})) 
+\overset{g_{\ast}}{\lra} \pi_{n}(X, gf(x_{0}))
+\overset{f_{\ast}}{\lra} \pi_{n}(Y, fgf(x_{0})) $$
+Composition of the first two homomorphisms satisfies $g_{\ast}f_{\ast} = (gf)_{\ast}$. Since 
+$gf\simeq \id_{X}$ and $\id_{X\ast}$ is an isomorphism, by Corollary \ref{PIN HOMOTINV COR}
+we obtain that $g_{\ast}f_{\ast}$ is an isomorphism. This implies in particular that $g_{\ast}$ is onto. 
+Similarly, composing the last two homomorphisms we obtain $f_{\ast}g_{\ast} = (fg)_{\ast}$
+and since $fg\simeq \id_{Y}$ we get that $f_{\ast}g_{\ast}$ is an isomorphism. This means
+that $g_{\ast}$ is 1-1. As a consequence $g_{\ast}$ is an isomorphism. It follows that the first 
+homomorphism $f_{\ast}$ is a composition of two isomorphisms: $f_{\ast} = g_{\ast}^{-1}(g_{\ast}f_{\ast})$, 
+and so $f_{\ast}$ is an isomorphism. 
+\end{proof}
+
+
+\begin{corollary}
+\label{PATHCON HOMOTEQ PIN ISO COR}
+If $X$, $Y$ are path connected spaces and $X \simeq Y$ then 
+$\pi_{n}(X, x_{0}) \cong \pi_{n}(Y, y_{0})$ for any $x_{0}\in X$, $y_{0}\in Y$. 
+\end{corollary}
+
+
+\begin{nn}{\bf The action of $\pi_{1}$.}
+\label{PI1 ACTION NN}
+If $[\tau]\in \pi_{1}(X, x_{0})$ then $s_{[\tau]}$ is an isomorphism 
+\[
+s_{[\tau]} \colon \pi_{n}(X, x_{0}) \to \pi_{n}(X, x_{0})
+\]
+Denote $[\tau]\odot [\omega] := s_{[\tau]}(\omega)$.
+\end{nn}
+
+\begin{definition}
+For $n\geq 0$ the \emph{action of $\pi_{1}(X, x_{0})$ on $\pi_{n}(X, x_{0})$}
+is the map  
+\begin{alignat*}{2}
+\pi_{1}(X, x_{0}) \times \pi_{n}(X, x_{0}) & \  \to\  & \pi_{n}(X, x_{0}) \\
+([\tau]\ ,\  [\omega]) \ \ \ \ \ \ \  &  \ \mapsto\  & [\tau]\odot [\omega] \\
+\end{alignat*}
+\end{definition} 
+
+\begin{note}
+By Proposition \ref{PATH ACTION PROPERTIES PROP}, for any 
+$[\tau], [\tau’]\in \pi_{1}(X, x_{0})$ and $\omega, \omega’\in\pi_{n}(X, x_{0})$
+we have:
+\benu
+\item[\textbullet] $[\tau] \odot([\omega]\cdot[\omega’]) 
+= ([\tau] \odot[\omega])\cdot([\tau \odot[\omega’])$
+\item[\textbullet] $([\tau]\cdot[\tau’])\odot [\omega] = [\tau]\odot ([\tau’]\odot[\omega])$
+\item[\textbullet] $[c_{x_{0}}]\odot [\omega] = [\omega]$ 
+where $[c_{x_{0}}]\in \pi_{1}(X, x_{0})$ is the trivial element.
+\item[\textbullet] $[\tau]\odot [c_{x_{0}}] = [c_{x_{0}}]$ 
+where $[c_{x_{0}}]\in \pi_{n}(X, x_{0})$ is the trivial element.
+\eenu
+\end{note}
+
+
+\begin{proposition}
+\label{PI1 ACTION BASEPOINT CHANGE PROP}
+For any map $f\colon (X, x_{0}) \to (Y, y_{0})$ the following diagram commutes: 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+\pi_{1}(X, x_{0}) \times \pi_{n}(X, x_{0}) & \pi_{n}(X, x_{0}) \\
+\pi_{1}(Y, y_{0}) \times \pi_{n}(Y, y_{0}) & \pi_{n}(Y, y_{0}) \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[auto] {$\odot$} (m-1-2)
+edge node[anchor = east] {$f_{\ast}\times f_{\ast}$} (m-2-1)
+(m-1-2)
+edge node[anchor=  west] {$f_{\ast}$} (m-2-2)
+(m-2-1)
+edge node[anchor=  north] {$\odot$} (m-2-2)
+; 
+\end{tikzpicture}
+\end{equation*}
+\end{proposition}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{example} The action of $\pi_{1}(X, x_{0})$ on $\pi_{1}(X, x_{0})$ if given by 
+conjugation: 
+\[
+[\tau]\odot [\omega] = [\tau]\cdot [\omega] \cdot [\tau]^{-1}
+\]
+\end{example}
+
+\begin{definition}
+\label{SIMPLE SPACE DEF}
+A path connected space $X$ is \emph{$n$-simple} if for some $x_{0}\in X$ the action
+of $\pi_{1}(X, x_{0})$ on $\pi_{n}(X, x_{0})$ is trivial: $[\tau]\odot [\omega] = [\omega]$
+for all  $[\tau]\in \pi_{1}(X, x_{0})$ and $[\omega]\in \pi_{n}(X, x_{0})$.
+A path connected space is \emph{simple} if it is $n$-simple for all $n\geq 1$. 
+\end{definition}
+
+The following fact implies that $n$-simplicity of a space $X$ does not depend on 
+the choice of a basepoint $x_{0}\in X$:
+
+\begin{proposition}
+\label{PI1 ACTION NATURAL PROP}
+Let $X$ be a space, let $x_{0}, x_{1}\in X$, and let $\tau\colon [0, 1] \to X$ be 
+a path such that $\tau(0) = x_{0}$ and $\tau(1) = x_{1}$. Then the following diagram 
+commutes: 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+\pi_{1}(X, x_{1}) \times \pi_{n}(X, x_{1}) & \pi_{n}(X, x_{1}) \\
+\pi_{1}(X, x_{0}) \times \pi_{n}(X, x_{0}) & \pi_{n}(X, x_{0}) \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[auto] {$\odot$} (m-1-2)
+edge node[anchor = east] {$s_{[\tau]}\times s_{[\tau]}$} (m-2-1)
+(m-1-2)
+edge node[anchor=  west] {$s_{[\tau]}$} (m-2-2)
+(m-2-1)
+edge node[anchor=  north] {$\odot$} (m-2-2)
+; 
+\end{tikzpicture}
+\end{equation*}
+\end{proposition}
+\begin{proof}
+Exercise.
+\end{proof}
+
+
+For spaces $X$, $Y$ let $[X, Y]$ denote the set of homotopy classes of maps $X\to Y$. 
+Notice that for any space $X$ and any $n$ we have a map of sets 
+\[
+\phi\colon  \pi_{n}(X, x_{0}) \to [S^{n}, X]
+\]
+which maps the pointed homotopy class of map $\omega\colon (S^{n}, s_{0})\to (X, x_{0})$
+to the unpointed homotopy class of the same map. 
+
+\begin{proposition}
+Let $X$ be a path connected space, and let $n\geq 1$. 
+The following conditions are equivalent:
+\benu
+\item[1)] $X$ is $n$-simple. 
+\item[2)] For any $x_{0}, x_{1}\in X$,  $[\tau], [\sigma]\in \pi_{1}(X, x_{0}, x_{1})$ and 
+$[\omega]\in \pi_{n}(X, x_{1})$ we have $s_{[\tau]}([\omega]) = s_{[\sigma]}([\omega])$. 
+Thus there is a canonical isomorphism 
+$\pi_{n}(X, x_{1}) \overset{\cong}{\to} \pi_{n}(X, x_{0})$.
+\item[3)] For any $x_{0}\in X$ the map $\phi\colon \pi_{n}(X, x_{0}) \to [S^{n}, X]$
+is a bijection. Therefore any (unpointed) map $f\colon S^{n}\to X$ defines a unique 
+element of $\pi_{n}(X, x_{0})$.
+\eenu
+\end{proposition}
+
+
+\begin{proof}
+1) $\Ra$ 2) Let $[\tau], [\sigma]\in \pi_{1}(X, x_{0}, x_{1})$ and 
+$[\omega]\in \pi_{n}(X, x_{1})$. Since $[\xov\tau\ast\sigma]\in \pi_{1}(X, x_{1})$, 
+by 1) we obtain 
+\[
+s_{[\xov\tau]}s_{[\sigma]}([\omega]) = s_{[\xov\tau\ast\sigma]}([\omega]) = [\omega]
+\]
+Also, since $s_{[\xov\tau]}$ is the inverse isomorphism of $s_{[\tau]}$ we get
+\[
+s_{[\sigma]}([\omega]) = s_{[\tau]}s_{[\xov\tau]}s_{[\sigma]}([\omega]) = s_{[\tau]}([\omega])
+\]
+
+2) $\Ra$ 1) Let $[\tau], [c_{x_{0}}]\in\pi_{1}(X, x_{0})$, where $[c_{x_{0}}]$ is the trivial 
+elemment. By 2) we have 
+\[
+s_{[\tau]}([\omega]) = s_{[c_{x_{0}}]}([\omega])  = [\omega]
+\]
+for any $[\omega]\in \pi_{n})(X, x_{0})$. Therefore $X$ is $n$-simple.
+
+1) $\Ra$ 3) The map $\phi$ is always onto. Indeed, take any map $\omega\colon S^{n}\to X$. 
+Since $X$ is path connected, there exists a path $\tau\colon [0, 1]\to X$ such that 
+$\tau(0) = x_{0}$ and $\tau(1) = \omega(s_{0})$. Consider the map
+
+\[
+h\colon (S^{n}\times \{0\}) \cup (\{s_{0}\}\times [0, 1]) \to X
+\]
+so that $h(s, 0) = \omega(s)$ and $h(s_{0}, t) = \tau(1-t)$. 
+The pair $(S^{n}, s_{0})$ has the homotopy extension property, 
+so $h$ can be extended to a homotopy $\bar{h}\colon S^{n}\times [0, 1] \to X$.
+The for the map $h_{1}$ we have $h_{1}(s_{0}) = x_{0}$, so 
+$[h_{1}]\in \pi_{n}(X, x_{0})$. Also, $h$ is homotopic to $h_{0}=\omega$. 
+Therefore we have $\phi([h_{1}]) = [\omega]$. 
+
+To show that $\phi$ is 1-1, we will use the description of $s_{[\tau]}$ in terms of
+maps from spheres given in Note \ref{BASEPOINT CHANGE SPHERES NOTE}. Given two elements 
+$[\omega_{0}], [\omega_{1}]\in \pi_{n}(X, x_{0})$ assume that $\phi([\omega_{0}])
+= \phi[\omega_{1}]$. This means that there exists a homotopy 
+$h \colon S^{n}\times [0, 1] \to X$ such that $h_{0} = \omega_{0}$ and $h_{1}= \omega_{1}$. 
+Let $\tau\colon [0, 1] \to X$ be a path given by $\tau(t) = h(s_{0}, t)$. 
+Then $[\tau]\in \pi_{1}(X, x_{0})$, and by (\ref{BASEPOINT CHANGE SPHERES NOTE}) we have 
+\[
+[\omega_{1}] = [\xov\tau]\odot[\omega_{0}] = s_{[\xov\tau]}([\omega_{0}])
+\]
+By 1) we have $s_{[\xov\tau]}([\omega_{0}]) = [\omega_{0}]$. Thus 
+$[\omega_{1}] = [\omega_{0}] \in \pi_{n}(X, x_{0})$.
+
+3) $\Ra$ 1) Let $[\tau]\in \pi_{1}(X, x_{0})$, $[\omega]\in \pi_{n}(X, x_{0})$. 
+Let $\omega_{\tau}\colon (S^{n}, s_{0}) \to (X, x_{0})$ be some map such that 
+$[\omega_{\tau}] = s_{[\tau]}([\omega])$. By (\ref{BASEPOINT CHANGE SPHERES NOTE}) 
+the maps $\omega_{\tau}$ and $\omega$ are freely homotopic, i.e. $\phi([\omega_{\tau}])
+= \phi([\omega])$. By assumption $\phi$ is 1-1, thus we obtain 
+\[
+[\omega] = [\omega_{\tau}] = s_{[\tau]}([\omega]) = [\tau]\odot[\omega]
+\]
+in $\pi_{n}(X, x_{0})$.
+
+\end{proof}
+
+

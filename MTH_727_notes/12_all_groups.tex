@@ -1,0 +1,487 @@
+% !TEX root = mth727_lecture_notes.tex
+
+
+\chapter[All Groups Are Homotopy Groups]{All Groups Are\\ Homotopy Groups}
+\chaptermark{All Groups Are Homotopy Groups}
+\label{ALL GROUPS}
+\thispagestyle{firststyle}
+
+
+Recall that van Kampen’s Theorem implies that for any group $G$ we can find 
+a space $X$ such that $\pi_{1}(X)\cong G$. The goal of this chapter is to extend 
+this result to higher homotopy groups. Since all groups $\pi_{n}(X)$ with $n\geq 2$
+are abelian (\ref{HIGHER HOMOT GPS ABELIAN THM}), we will show that the following 
+holds:
+
+\begin{theorem}
+\label{GROUP REALIZATION THM}
+For any abelian group $G$ and any $n\geq 2$ there exists a space $X$ such that 
+$\pi_{n}(X)\cong G$. Moreover, such space $X$ can be constructed in such way, 
+that $X$ is a CW complex and $X^{(n-1)} = \ast$.
+
+\end{theorem}
+
+For every abelian group $G$ there exists an epimorphism 
+$\varphi \colon \bigoplus_{i\in I}\Z \to G$ for some set $I$. Indeed, it is enough
+to take $I = G$, the set of elements of the group $G$. Then we can define 
+$\varphi$ by $\varphi(e_{g}) = g$, where $e_{g}$ is the generator of the copy 
+of $\Z\subseteq \bigoplus_{h\in G}\Z$ indexed by $g$. Given such a homomorphism $\varphi$
+we get $G \cong \bigoplus_{i\in I} \Z /\ker(\varphi)$.    
+
+
+Based on this, in order to prove Theorem \ref{GROUP REALIZATION THM} 
+it will suffice to show that:
+\benu
+\item[1)] for any set $I$ and $n\geq 2$ there exists a space $X$ such that 
+$\pi_{n}(X)\cong \bigoplus_{i\in I}\Z$. 
+\item[2)] for any subgoup $H\subseteq \bigoplus_{i\in I}\Z$ and any $n\geq 2$ there 
+exists a space $X$ such that $\pi_{n}(X)\cong \bigoplus_{i\in I}\Z/H$. 
+\eenu
+
+
+\begin{lemma} 
+\label{PIN VEE XI EPI LEMMA}
+Let $\{(X_{i}, \xov{x}_{i})\}_{i\in I}$ be a family of pointed Hasdorff spaces. 
+Let $X = \bigvee_{i\in I} X_{i}$, and let $\ast\in X$ denote the basepoint. For $k\in I$ 
+let $r_{k}\colon X \to X_{k}$ be the retraction map. Then for any $n\geq 2$ 
+we an epimorphism $\varphi\colon \pi_{n}(X, \ast) \to 
+\bigoplus_{i\in I} \pi_{n}(X_{i}, \xov{x}_{i})$
+given by $\varphi([\omega]) = \sum_{i\in I} r_{i\ast}([\omega])$. 
+\end{lemma}
+ 
+\begin{proof}
+For each $k\in I$ let $j_{k}\colon X_{k} \to X$ be the inclusion map. 
+We have a homomorphism
+\[
+\textstyle
+\psi := \bigoplus_{i\in I} j_{i\ast}\colon \bigoplus_{i\in I} \pi_{n}(X_{i}, \xov{x}_{i}) \to 
+\pi_{n}(X, \ast)
+\]
+The retractions $r_{i}$ define a map
+\[
+\textstyle
+\varphi := \prod_{i\in I} r_{i\ast}\colon 
+\pi_{n}(X, \ast) \to 
+\prod_{i\in I}\pi_{n}(X_{i}, \xov{x}_{i})
+\]
+We claim that $\Im(\varphi) \subseteq \bigoplus_{i\in I} \pi_{n}(X_{i}, \xov{x}_{i}) \subseteq 
+\prod_{i\in I}\pi_{n}(X_{i}, \xov{x}_{i})$. Indeed, if 
+$\omega\colon (I^{n}, \pint^{n}) \to (X, \ast)$ is a map 
+representing an element $[\omega]\in \pi_{n}(X, \ast)$, then, 
+by compactness of $I^{n}$, we have $\omega(I^{n})\cap X_{i} \neq \ast$ for finitely many 
+$i\in I$ only, and so $r_{i\ast}([\omega]) \neq 0$ for finitely many $i\in I$. 
+Thus $\varphi([\omega]) \subseteq \bigoplus_{i\in I} \pi_{n}(X_{i},\xov{x}_{i})$. 
+It follows that we can consider $\varphi$ as a homomorphism 
+$\pi_{n}(X, \ast)\to \bigoplus_{i\in I}\pi_{n}(X_{i}, \xov{x}_{i})$. 
+
+Since $r_{i}j_{i} = \id_{X_{i}}$ for all $i\in I$, and $r_{i’}j_{i}$ is the constant map 
+for all $i\neq i’$, it follows that $\varphi\psi$
+is the identity homomorphism, and so $\varphi$ is onto. 
+\end{proof}
+
+\begin{note}
+In general, the epimorphism $\varphi$ in Lemma \ref{PIN VEE XI EPI LEMMA}
+is not an isomorphism. For example, recall (\ref{PIN S1vSm EXAMPLE}) that for $n\geq 2$
+we have $\pi_{n}(S^{1}\vee S^{n}) \cong \pi_{n}(\bigvee_{i\in \Z} S^{n})$. By 
+Lemma \ref{PIN VEE XI EPI LEMMA} we get an epimorphism
+\[
+\textstyle
+\pi_{n}(S^{1}\vee S^{n}) \cong \pi_{n}(\bigvee_{i\in \Z} S^{n}) \to 
+\bigoplus_{i\in \Z}\Z
+\]
+which shows that the group $\pi_{n}(S^{1}\vee S^{n})$ is not finitely generated. 
+Therefore  $\pi_{n}(S^{1}\vee S^{n})\not \cong \pi_{n}(S^{1})\oplus \pi_{n}(S^{n}) \cong \Z$. 
+\end{note}
+
+
+
+
+\begin{proposition} 
+\label{PIN VEE XI MONO PROP}
+Let $\{(X_{i}, \xov{x}_{i})\}_{i\in I}$ be a family of pointed CW-complexes. 
+Given $n\geq 1$, assume that each complex $X_{i}$ is $n$-connected. Then the homomorphism 
+$\varphi \colon \pi_{m}(\bigvee_{i\in I}X_{i}, \ast) \to 
+\bigoplus_{i\in I} \pi_{m}(X_{i}, \xov{x}_{i})$
+is an isomorphism for $m\leq 2n$. 
+\end{proposition}
+
+\begin{proof}
+For each CW complex $X_{i}$ we can assume that $\xov{x}_{i}$ is a $0$-cell of 
+$X_{i}$. Also, by Proposition \ref{N SKELETON FOR N CONNECTED PROP} we can assume that 
+$X_{i}$ has no other $0$-cells, and no $k$-cells for $k \leq n$
+\footnote{This uses the fact that if $X_{i}\simeq X’_{i}$ for all $i\in I$ then 
+$\bigvee_{i\in I} X_{i} \simeq \bigvee X’_{i\in I}$. This holds for well-pointed, path connected spaces.}. 
+
+
+By Proposition \ref{PIN VEE XI MONO PROP} $\varphi$ is onto. It will suffice 
+to show that $\ker \varphi = 0$ for $m \leq 2n$.
+
+Assume first, that the set $I$ is finite, so 
+$\bigvee_{i\in I}X_{i} = X_{1}\vee \dots \vee X_{k}$ 
+for some $k\geq 0$. Take the product $X_{1} \times {\dots}\times X_{k}$. The inclusion 
+maps $\psi_{j}\colon X_{j} \to X_{1} \times {\dots}\times X_{k}$ 
+given by $\psi_{j}(x) = 
+(\xov{x}_{1}, \dots, \xov{x}_{j-1}, x, \xov{x}_{j+1}, \dots \xov{x}_{k})$
+define an embedding 
+$\psi \colon X_{1} \vee{\dots}\vee X_{k} \to 
+X_{1} \times {\dots}\times X_{k}$. 
+This gives a commutative diagram:
+
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+\pi_{m}(X_{1} \vee{\dots}\vee X_{k}) & 
+\pi_{m}(X_{1} \times {\dots}\times X_{k}) \\
+\bigoplus_{j=1}^{k} \pi_{k+1}(X_{i}) & \prod_{j=1}^{k} \pi_{k+1}(X_{i}) \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[auto] {$\psi_{\ast}$} (m-1-2)
+edge node[anchor = east] {$\varphi$} (m-2-1)
+(m-1-2)
+edge node[anchor = east] {$\cong$} (m-2-2)
+(m-2-1)
+edge node[anchor = south] {$=$} (m-2-2)
+; 
+\end{tikzpicture}
+\end{equation*}
+This shows that $\varphi$ is a monomorphism if any only if $\psi_{\ast}$ is one. 
+If $X_{1}, \dots, X_{k}$ are finite CW complexes, then the space 
+$X_{1}\times \dots \times X_{k}$ also has the structure of a CW complex, with cells 
+given by products $e_{1}\times \dots \times e_{k}$ where $e_{i}$ is a cell in $X_{i}$.  
+All cells of $X_{1}\times \dots \times X_{k}$ that are not contained 
+in $X_{1}\vee \dots \vee X_{k}$ have dimension $2n + 2$ or higher, so 
+$X_{1}\vee \dots \vee X_{k}$ is the $(2n + 1)$-skeleton of $X_{1}\times \dots \times X_{k}$. 
+Thus, by Proposition \ref{PIN FOR CW SKELETON PROP},  $\psi_{\ast}$ is an isomorphism 
+for all $m \leq 2n$. 
+
+Next, assume that the set $I$ is infinite, and let 
+$\omega\colon (I^{m}, \pint^{m}) \to (\bigvee_{i\in I} X_{i}, \ast)$ be a map 
+such that $\varphi([\omega]) = 0$. 
+By compactness of $I^{m}$ we have 
+$\omega(I^{m})\cap X_{i}\neq \ast$ for finitely many $i\in I$ only. Thus 
+we can consider $\omega$ as a map 
+$\omega\colon (I^{m}, \pint^{m}) \to 
+(X_{i_{1}} \vee{\dots}\vee X_{i_{k}}, \ast)$ for some $i_{1}, \dots, i_{k} \in I$. 
+Since $\varphi([\omega]) = 0$, the homomorphism 
+$\pi_{m}(X_{i_{1}} \vee{\dots}\vee X_{i_{k}}) \to \bigoplus_{j=1}^{k} \pi_{k+1}(X_{i_{j}})$
+also maps $[\omega]$ to $0$. By the finite case this means that $[\omega] = 0$.
+\end{proof}
+
+
+\begin{note}
+The proof of Proposition \ref{PIN VEE XI MONO PROP} uses the fact that if 
+$X$ and $Y$ are CW complexes, then $X\times Y$ has the structure of a CW 
+complex with cells given by products of cells in $X$ and $Y$. An issue with 
+this statement is that the topology induced on $X\times Y$ by this cell structure
+(where a set $U\subseteq X\times Y$ is open if and only if its intersection with 
+each cell is an open subset of the cell) need not be the same as the product 
+topology on $X\times Y$. The topology induced by the cell structure 
+on $X\times Y$ is called the compactly generated topology. Let $X\times_{cg} Y$
+denote the product taken with this topology, and let $X\times Y$ denote the product 
+taken with the product topology. Every open set in $X\times Y$ is also open in 
+$X\times_{cg} Y$, so the identity map $\id \colon X\times_{cg} Y \to X\times Y$
+is continuous. Moreover, this map induces an isomorphism of homotopy groups 
+$\pi_{n}(X\times_{cg}Y)\overset{\cong}{\lra}\pi_{n}(X\times Y)$ for all $n$. 
+For this reason this change of topology does not affect the proof of 
+Proposition \ref{PIN VEE XI MONO PROP}. 
+\end{note}
+
+
+\begin{corollary}
+\label{WEDGE SN PIN COR}
+For any set $I$ and any $n\geq 2$ we have an isomorphism 
+\[
+\textstyle
+\pi_{n}(\bigvee_{i\in I} S^{n})\cong \bigoplus_{i\in I}\Z
+\]
+Moreover, the group $\pi_{n}(\bigvee_{i\in I} S^{n})$ is generated by
+elements $[j_{k}]$ for $k\in I$ where $j_{k}\colon S^{n}\hra \bigvee_{i\in I} S^{n}$
+is the inclusion of the $k$-th copy of $S^{n}$. 
+\end{corollary}
+
+
+\begin{proposition}
+\label{1CONN PIN XCUPE PROP}
+Let $(X, x_{0})$ be a simply connected space, and let 
+$\varphi_{i}\colon (S^{n}, s_{0}) \to (X, x_{0})$ be maps representing  elements of 
+$\pi_{n}(X, x_{0})$ for some $n\geq 2$. Consider the space $Y = X\cup \bigcup_{i} e_{i}^{n+1}$ 
+obtained by attaching $(n+1)$-cells to $X$ using $\varphi_{i}$ 
+as the attaching maps. If $j\colon X \hra Y$ is the inclusion map, then the induced homomorphism 
+\[
+j_{\ast}\colon \pi_{k}(X, x_{0}) \to \pi_{k}(Y, x_{0})
+\]
+is an isomorphism for $k < n$ and an epimorphism for $k=n$. Moreover, 
+$\ker(j_{\ast}\colon \pi_{n}(X, x_{0}) \to \pi_{n}(Y, x_{0}))$ is the subgroup of 
+$\pi_{n}(X, x_{0})$ generated by the elements $[\varphi_{i}]$. 
+\end{proposition}
+
+\begin{proof}
+We can consider the pair $(Y, X)$ as a relative CW complex with the $n$-skeleton 
+given by $X$. Then $j_{\ast}$ is an isomorphism for $k<n$ and epimorphism for 
+$k=n$ by Proposition \ref{PIN FOR CW SKELETON PROP}. Notice that by 
+Proposition \ref{N CONNECTED PAIR PROP} this is equivalent to saying that 
+the pair $(X, Y)$ is $n$-connected.
+
+It remains to verify the statement about the kernel of $j_{\ast}$ for $k=n$. 
+Consider the exact sequence of the pair $(Y, X)$:
+\[
+\dots \to \pi_{n+1}(Y, X) \overset{\partial}{\lra} 
+\pi_{n}(X) \overset{j_{\ast}}{\lra} \pi_{n}(Y) \to \pi_{n}(Y, X) \to \dots
+\]  
+We have $\ker j_{\ast} = \Im \partial$. Since the pair $(X, Y)$ is 
+$n$-connected and, by assumption, the space $X$
+is 1-connected, from Theorem \ref{PIK QUOTIENT PROP} we obtain that the quotient
+map $q\colon Y \to Y/X$ induces an isomorphism 
+\[
+q_{\ast}\colon \pi_{n+1}(Y, X) \overset{\cong}{\lra} \pi_{n+1}(Y/X) \cong 
+\pi_{n+1}(\textstyle{\bigvee_{i}S^{n+1}}) \cong \oplus_{i}\Z
+\]
+This implies that $\pi_{n+1}(Y, X)$ is generated by homotopy classes of maps 
+$\xov{\varphi}_{i}\colon D^{n+1} \to Y$ which are the characteristic maps 
+of the cells $e_{i}^{n+1}$. The boundary homorphism is given by 
+$\partial[\xov{\varphi}_{i}] = [\varphi_{i}]$. Therefore $\Im \partial = \ker j_{\ast}$
+is the subgroup of $\pi_{n}(X)$ generated by the elements $[\varphi_{i}]$.
+\end{proof}
+
+
+Proposition \ref{1CONN PIN XCUPE PROP} can be generalized to non-simply connected 
+spaces as follows. Recall (\ref{PI1 ACTION NN})  that higher homotopy groups admit 
+the action of the fundamental group:
+\begin{alignat*}{2}
+\pi_{1}(X, x_{0}) \times \pi_{n}(X, x_{0}) & \  \to\  & \pi_{n}(X, x_{0}) \\
+([\tau]\ ,\  [\omega]) \ \ \ \ \ \ \  &  \ \mapsto\  & [\tau]\odot [\omega] \\
+\end{alignat*}
+\vskip -10mm
+We have: 
+
+\begin{proposition}
+Let $(X, x_{0})$ be a space which is connected, locally path connected, and semi-locally 
+simply connected. Let 
+$\varphi_{i}\colon (S^{n}, s_{0}) \to (X, x_{0})$ be maps representing  elements of 
+$\pi_{n}(X, x_{0})$ for some $n\geq 2$. Consider the space $Y = X\cup \bigcup_{i} e_{i}^{n+1}$ 
+obtained by attaching $(n+1)$-cells to $X$ using $\varphi_{i}$ 
+as the attaching maps. If $j\colon X \hra Y$ is the inclusion map, then the induced homomorphism 
+\[
+j_{\ast}\colon \pi_{k}(X, x_{0}) \to \pi_{k}(Y, x_{0})
+\]
+is an isomorphism for $k\leq n$ and an epimorphism for $k=n$. Moreover, 
+$\ker(j_{\ast}\colon \pi_{n}(X, x_{0}) \to \pi_{n}(Y, x_{0}))$ is the subgroup of 
+$\pi_{n}(X, x_{0})$ generated by the elements 
+$[\omega]\odot[\varphi_{i}]$ for all $[\omega]\in \pi_{1}(X, x_{0})$.
+\end{proposition}
+
+\begin{proof}
+The only non-trivial part is the statement about $\ker j_{\ast}$. The conditions 
+on the space $X$ guarantee that it has a universal covering $p_{X}\colon \widetilde{X} \to X$. 
+Let $p_{X}^{-1}(x_{0}) = \{\widetilde{x}_{k}\}_{k\in K}$ and let 
+$\widetilde{\varphi}_{i, k}\colon S^{n} \to \widetilde{X}$ denote the lift of $\varphi_{i}$
+such that $\widetilde{\varphi}_{i, k}(s_{0}) = \widetilde{x}_{k}$. 
+Let $\widetilde{Y} = \widetilde{X}\cup \bigcup_{i,j} e^{n+1}_{i, k}$ be the space 
+obtained by attaching $(n+1)$-cells to $\widetilde X$ using $\varphi_{i, k}$ as 
+attaching maps. The natural map $p_{Y}\colon \widetilde{Y} \to Y$ is a universal covering 
+of $Y$. We get a commutative diagram:
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+\pi_{n}(\widetilde{X}, \widetilde{x}_{0}) & \pi_{n}(\widetilde{Y}, \widetilde{x}_{0}) \\
+\pi_{n}(X, x_{0}) & \pi_{n}(Y, x_{0}) \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[auto] {$\tilde{j}_{\ast}$} (m-1-2)
+edge node[anchor = east] {$p_{X\ast}$} node[anchor=west] {$\cong$} (m-2-1)
+(m-1-2)
+edge node[anchor=  west] {$p_{Y\ast}$} node[anchor=east] {$\cong$} (m-2-2)
+(m-2-1)
+edge node[anchor=  north] {$j_{\ast}$} (m-2-2)
+; 
+\end{tikzpicture}
+\end{equation*}
+where $\tilde{j}\colon \widetilde{X} \to \widetilde{Y}$ is the inclusion and 
+$\widetilde{x}_{0}\in p_{X}^{-1}(x_{0})$. Since $p_{X\ast}$ and $p_{Y\ast}$
+are isomorphisms (\ref{COVERING PIN PROP}), we obtain that 
+$\ker j_{\ast} = p_{X\ast}(\ker \tilde{j}_{\ast})$. 
+
+For each $\widetilde{x}_{k}\in p^{-1}(x_{0})$ let $\widetilde{\omega}_{k}$ be a path 
+in $\widetilde X$ such that $\widetilde{\omega}_{k}(0) = \widetilde{x}_{0}$ and 
+$\widetilde{\omega}_{k}(1) = \widetilde{x}_{k}$. Then for each 
+$[\omega]\in \pi_{1}(X, x_{0})$ we have $[\omega] = [p_{X}\widetilde{\omega}_{k}]$
+for some $k$. Let 
+$s_{k}\colon  \pi_{n}(\widetilde{X}, \widetilde{x}_{k}) \to 
+\pi_{n}(\widetilde{X}, \widetilde{x}_{0})$ be the change of the basepoint 
+isomorphism defined by $\widetilde{\omega}_{k}$ (\ref{STAU DEF}). 
+Since $\widetilde X$ is simply connected, using Proposition \ref{1CONN PIN XCUPE PROP}
+we obtain that $\ker \tilde{j}_{\ast}$ is generated by the elements
+$s_{k}[\widetilde{\varphi}_{i, k}]$ for all $i, k$. Thus 
+$\ker j_{\ast}$ is generated by elements $p_{X\ast}s_{k}[\widetilde{\varphi}_{i, k}]$. 
+It remains to notice that $p_{X\ast}s_{k}[\widetilde{\varphi}_{i, k}] = 
+[p_{X}\omega_{k}]\odot [p_{X}\widetilde{\varphi}_{i, k}] = 
+[p_{X}\omega_{k}]\odot [\varphi_{i}]$ (exercise).
+
+\end{proof}
+
+
+\begin{proof}[Proof of Theorem \ref{GROUP REALIZATION THM}]
+Given an abelian group $G$ and $n\geq 2$, we can find a set $I$ and 
+an epimorphism
+\[
+\Phi \colon \pi_{n}(\bigvee_{i\in I}S^{n}) \cong \bigoplus_{i\in I}\Z \to G 
+\]
+Let $\ker \Phi = \{[\varphi_{k}\colon S^{n}\to \bigvee_{i\in I}S^{n}]\}_{k\in K}$, 
+and let $X$ be the space obtained by attaching $(n+1)$-cells to $\bigvee_{i\in }S^{n}$
+using the maps $\varphi_{i}$. By Proposition \ref{1CONN PIN XCUPE PROP} we obtain
+$\pi_{n}(X)\cong \pi_{n}(\bigvee_{i\in I}S^{n})/\ker \Phi \cong G$.  
+\end{proof}
+
+\begin{definition}
+\label{K(G, N) DEF}
+Given a group $G$ and an integer $n\geq 1$, an \emph{Eilenberg-MacLane space} 
+of the type $K(G, n)$ is a path connnected CW complex $X$ such that 
+\[
+\pi_{i}(X) \cong 
+\begin{cases}
+G & \text{if } i = n\\
+0 & \text{otherwise}
+\end{cases}
+\]
+\end{definition}
+
+\begin{note}
+Eilenberg-MacLane spaces are not uniquely defined, but as we will see later 
+(\ref{EM SPACES HOMOT UNIQUE PROP}), 
+they are unique up to homotopy equivalence. By abuse of notation we will 
+write $X=K(G, n)$ to indicate that $X$ has the type of $K(G, n)$.
+\end{note}
+
+\begin{example}
+$S^{1} = K(\Z, 1)$. 
+\end{example}
+
+\begin{example}
+Recall that the $n$-dimensional real projective space $\RP^{n}$ is the 
+quotient space of $S^{n}$ obtained by identifying antipodal points: 
+$\RP^{n} = S^{n}/\sim$ where $x\sim -x$ for all $x\in S^{n}$. The quotient 
+map $q\colon S^{n} \to \RP^{n}$ is the 2-fold universal cover of $\RP^{n}$. 
+It follows that 
+\[
+\pi_{i}(\RP^{n})
+\cong
+\begin{cases}
+\Z/2 & \text{if } i = 1\\
+\pi_{i}(S^{n}) & i\geq 2
+\end{cases}
+\]
+Embeddings of spheres $S^{1} \hra S^{2} \hra \dots$ induce embeddings of 
+projective spaces $\RP^{1} \hra \RP^{2} \hra \dots$. Take 
+$S^{\infty} = \bigcup_{n=1}^{\infty} S^{n}$ and 
+$\RP^{\infty} = \bigcup_{n=1}^{\infty} \RP^{n}$. The quotient map 
+$q\colon S^{\infty} \to \RP^{\infty}$ is a 2-fold universal covering of $\RP^{\infty}$. 
+Since $S^{\infty}$ is a contractible space (\ref{SINFTY CONTRACTIBLE PROP}), we obtain 
+\[
+\pi_{i}(\RP^{\infty})
+\cong
+\begin{cases}
+\Z/2 & \text{if } i = 1\\
+0 & i \text{if } \geq 2
+\end{cases}
+\]
+Therefore $\RP^{\infty} = K(\Z/2, 1)$. 
+\end{example}
+
+\begin{example}
+Recall (\ref{CPN BUNDLE EXAMPLE}) that for a complex projective space the quotient 
+map $p\colon S^{2n+1} \to \CP^{n}$ is a Serre fibration with the fiber $S^{1}$. The long 
+exact sequence of this fibration gives 
+\[
+\pi_{i}(\CP^{n})
+\cong
+\begin{cases}
+0 & \text{if } i = 1\\
+\Z & \text{if } i = 2\\
+\pi_{i}(S^{2n+1}) & \text{if } i \geq 3 \\
+\end{cases}
+\]
+\end{example}
+The embedding maps $S^{3} \hra S^{5} \hra \dots$ induce embeddings
+$\CP^{1}\hra \CP^{2} \hra \dots$. We again have $S^{\infty} = \bigcup_{n=1}^{\infty}S^{2n+1}$. 
+Also, define $\CP^{\infty} = \bigcup_{n=1}^{\infty}\CP^{n}$. The map 
+$p\colon S^{\infty} \to \CP^{\infty}$ is again a Serre fibration with fiber $S^{1}$. 
+Since $S^{\infty}$ is contractible, the long exact sequence of this fibration gives
+\[
+\pi_{i}(\CP^{\infty})
+\cong
+\begin{cases}
+0 & \text{if } i = 1\\
+\Z & \text{if } i = 2\\
+0 &  \text{if } i\geq 3 \\
+\end{cases}
+\]
+Thus $\CP^{\infty} = K(\Z, 2)$.
+
+
+
+\begin{proposition}
+\label{EM SPACES EXIST PROP}
+For any $n\geq 1$ and any group $G$ (abelian if $n\geq 2$) there exists 
+an Eilenberg-MacLane space $K(G, n)$. Moreover, it is possible to construct 
+such space so that $K(G, n)^{(n-1)} = \ast$. 
+\end{proposition}
+
+
+
+
+
+\begin{proof}
+By Theorem \ref{GROUP REALIZATION THM}, if $n\geq 2$ then we can find a path 
+connected CW complex $(X_{n}, x_{0})$ such that $X_{n}^{(n-1)} = \ast$ and
+\[
+\pi_{i}(X_{n}, x_{0}) \cong 
+\begin{cases}
+G & \text{if } i = n\\
+0 & \text{if } i < n\\
+\end{cases}
+\]
+For $n=1$ such CW complex can be constructed using van Kampen’s theorem.
+Let $X_{n+1}$ be the space obtained by attaching an $(n+2)$-cells to $X_{n}$
+using all possible maps $(S^{n+1}, s_{0}) \to (X_{n}, x_{0})$. 
+Then $X_{n}\subseteq X_{n+1}$, and using Proposition \ref{PIN FOR CW SKELETON PROP} 
+we obtain 
+\[
+\pi_{i}(X_{n+1}, x_{0}) \cong 
+\begin{cases}
+0 & \text{if } i = n+1\\
+G & \text{if } i = n\\
+0 & \text{if } i < n\\
+\end{cases}
+\]
+In the same way, for any $m > n+1$ we can can inductively construct a space $X_{m}$
+such that $X_{m}$ is obtained by attaching $(m+1)$-cells to $X_{m-1}$ and  
+\[
+\pi_{i}(X_{m}, x_{0}) \cong 
+\begin{cases}
+0 & \text{if } n < i \leq m\\
+G & \text{if } i = n\\
+0 & \text{if } i < n\\
+\end{cases}
+\]
+Then we can take $K(G, n) = \bigcup_{m=n}^{\infty} X_{m}$.
+\end{proof}
+
+\begin{corollary}
+For any sequence of groups $G_{1}, G_{2}, \dots$ such that $G_{i}$ is abelian for 
+$i\geq 2$, there exists a path connected CW complex $X$ such that 
+$\pi_{i}(X) \cong G_{i}$ for all $i\geq 1$. 
+
+\end{corollary}
+
+\begin{proof}
+Take $X = \prod_{i=1}^{\infty} K(G_{i}, i)$. 
+\end{proof}
+
+
+

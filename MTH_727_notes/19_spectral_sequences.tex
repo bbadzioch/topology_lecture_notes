@@ -1,0 +1,379 @@
+% !TEX root = mth727_lecture_notes.tex
+
+
+\chapter[Spectral Sequences]{Spectral Sequences}
+\chaptermark{Spectral Sequences}
+\label{SPECTRAL SEQUENCES CHAPTER}
+\thispagestyle{firststyle}
+
+\begin{nn}{\bf Motivation.}
+Hurewicz Isomorphism Theorem \ref{HUREWICZ ISOMORPHISM THM} lets us compute
+the first non-trivial homotopy group of a space $X$ using homological methods. 
+In order to extend this to to higher homotopy groups of $X$, one can attempt the following 
+approach. Assume that $\pi_{k}(X) = 0$ for $k < n$ and that we know 
+homology groups of $X$. This in particular gives us $\pi_{n}(X) \cong H_{n}(X)$.
+We can construct a map $f_{n}\colon X \to K(\pi_{n}(X), n)$ which induces an isomorphism 
+on $n$-th homotopy groups. Let $X_{n}$ denote the homotopy fiber of $f_{n}$. 
+The long exact sequence of a fibration shows that $\pi_{k}(X_{n}) = 0$ for $k < n+1$
+and $\pi_{k}(X) \cong \pi_{k}(X_{n})$ for $k\geq n+1$. In particular using 
+the Hurewicz Isomorphism Theorem we obtain 
+\[
+\pi_{n+1}(X) \cong \pi_{n+1}(X_{n}) \cong H_{n+1}(X_{n})
+\]
+Thus computations of $\pi_{n+1}(X)$ are reduced to computing a homology group of
+the space $X_{n}$.
+
+This procedure can be repeated: once we know $ \pi_{n+1}(X_{n})$, 
+we can construct a map $f_{n+1} \colon X_{n} \to K(\pi_{n+1}(X_{n}), n+1)$
+that induces an isomorphism on $(n+1)$-st homotopy groups. Taking $X_{n+1}$
+to be the homotopy fiber of this map we obtain isomorphisms
+\[
+\pi_{n+2}(X) \cong \pi_{n+2}(X_{n}) \cong \pi_{n+2}(X_{n+1}) \cong H_{n+2}(X_{n+1})
+\]
+Proceeding recursively, we obtain that in order to compute homotopy groups of $X$ 
+it suffices to compute homology groups of spaces $X_{k}$ for $k\geq n-1$ such 
+that $X_{n-1} = X$ and which are connected by fibration sequences
+\[
+X_{k+1} \to X_{k} \to K(\pi_{k+1}(X), k+1)
+\]   
+In order to carry out this program we would need to; 
+\bit
+\item calculate homology groups of Eilenberg-MacLane spaces $K(G, k)$;
+\item given a fibration sequence $F \to E \to B$ find a relationship between 
+homology groups of the spaces $F$, $E$, and $B$. 
+\eit
+\end{nn}
+\vskip -6mm
+
+Spectral sequences provide a tool for achieving the second of these objectives. 
+They are helpful with the first one as well.
+
+
+
+In this chapter we give the definition of
+a spectral sequence and some examples how spectral sequences are used. 
+Explanation in which circumstances spectral sequences occur 
+is left for later.
+
+\begin{definition}
+A \emph{bigraded} abelian group $G_{\ast\ast}$ is a collection of abelian groups
+$G_{p, q}$ for $p, q\in \Z$.  
+\end{definition}
+
+\begin{definition}
+A \emph{(first quadrant, homological) spectral sequence} $(E^{r}_{\ast\ast}, d^{r})$ 
+is a sequence of bigraded abelian groups 
+$E_{\ast\ast}^{r}$ for $r = 1, 2, \dots$ such that:
+\benu
+\item[1)] $E^{r}_{p, q} = 0$ if $p< 0$ or $q < 0$.
+\item[2)] Each $E_{\ast\ast}^{r}$ is equipped with homomorphisms (\emph{differentials})
+\[
+d^{r}\colon E^{r}_{p, q} \to E^{r}_{p-r, q+r-1}
+\]
+satisfying $d^{r}d^{r} = 0$.
+\item[3)] For each $r\geq 0$ we have $E^{r+1}_{p, q} \cong H_{p, q}(E^{r}_{\ast\ast})$
+where 
+\[
+H_{p, q}(E^{r}_{\ast\ast})
+= \frac{\Ker(d^{r}\colon E^{r}_{p, q} \to E^{r}_{p-r, q+r-1})}
+{\Im(d^{r}\colon E^{r}_{p+r, q-r+1} \to E^{r}_{p, q})}
+\]
+\eenu
+\end{definition}
+
+\begin{note}
+The bigraded group $E^{r}_{\ast\ast}$ is called the \emph{$r$-th page} of the spectral sequence.
+\end{note}
+
+Below are pictures of the first three pages of a spectral sequence. 
+Notice that the differentials $d^{r}$ always go between  groups 
+$E^{r}_{p, q}$ where $p+q = n$ for some $n$ and groups where $p+q=n-1$. 
+
+\begin{equation*}
+\begin{tikzpicture}[scale=0.8]
+\matrix (m) [matrix of math nodes,
+    nodes in empty cells,
+    row sep=0.5em, 
+    column sep=0.5em,
+    nodes={minimum width=5ex, anchor=center, minimum height=5ex,outer sep=-1pt, font=\footnotesize}
+    ]{          
+  &[-3mm]  \vdots &  \vdots       & \vdots        &  \vdots       &  \vdots &[0mm]  \\[-3mm]
+2 &  E^{1}_{2, 0} &  E^{1}_{2, 1} & E^{1}_{2, 2}  &  E^{1}_{2, 3} &  E^{1}_{2, 3}& \cdots \\
+1 &  E^{1}_{1, 0} &  E^{1}_{1, 1} & E^{1}_{1, 2}  &  E^{1}_{1, 3} &  E^{1}_{2, 3}& \cdots \\
+0 &  E^{1}_{0, 0} &  E^{1}_{0, 1} & E^{1}_{0, 2}  &  E^{1}_{0, 3} &  E^{1}_{2, 3}& \cdots \\[-5mm]
+  &   0  &  1  &  2  &  3 & 4 & \\};
+
+\path[->, font=\scriptsize]
+(m-4-3.west) edge   (m-4-2.east)
+(m-3-3.west) edge   (m-3-2.east)
+(m-2-3.west) edge   (m-2-2.east)
+(m-4-4.west) edge   (m-4-3.east)
+(m-3-4.west) edge   (m-3-3.east)
+(m-2-4.west) edge   (m-2-3.east)
+(m-4-5.west) edge   (m-4-4.east)
+(m-3-5.west) edge   (m-3-4.east)
+(m-2-5.west) edge   (m-2-4.east)
+(m-4-6.west) edge   (m-4-5.east)
+(m-3-6.west) edge   (m-3-5.east)
+(m-2-6.west) edge   (m-2-5.east)
+(m-4-7.west) edge   (m-4-6.east)
+(m-3-7.west) edge   (m-3-6.east)
+(m-2-7.west) edge   (m-2-6.east)
+;
+\draw[line width=3mm, color=red, opacity=0.2, shorten >= 2.5mm, shorten <=  0.6mm] 
+(m-2-6.north west) -- (m-2-6.south east);
+\draw[line width=3mm, color=red, opacity=0.2, shorten >= 2.5mm, shorten <=  0mm] 
+(m-4-2.north west) -- (m-4-2.south east);
+\draw[line width=3mm, color=red, opacity=0.2, shorten >=-3mm, shorten <= -4mm] 
+(m-3-2.center) -- (m-4-3.center);
+\draw[line width=3mm, color=red, opacity=0.2, shorten >=-3mm, shorten <= -4mm] 
+(m-2-2.center) -- (m-4-4.center);
+\draw[line width=3mm, color=red, opacity=0.2, shorten >=-3mm, shorten <= -4mm] 
+(m-2-3.center) -- (m-4-5.center);
+\draw[line width=3mm, color=red, opacity=0.2, shorten >=-3mm, shorten <= -4mm] 
+(m-2-4.center) -- (m-4-6.center);
+\draw[line width=3mm, color=red, opacity=0.2, shorten >= 2.3mm, shorten <=  1.5mm] 
+(m-2-5.north west) -- (m-3-6.south east);
+
+\draw[very thick] ([yshift=2mm]m-1-1.east) -- ([yshift=-1mm]m-5-1.east);
+\draw[very thick] ([yshift=-1mm]m-5-1.north) -- ([yshift=-1mm, xshift=3mm]m-5-7.north);
+\end{tikzpicture}
+\end{equation*}
+
+
+\begin{equation*}
+\begin{tikzpicture}[scale=0.8]
+\matrix (m) [matrix of math nodes,
+    nodes in empty cells,
+    row sep=0.5em, 
+    column sep=0.5em,
+    nodes={minimum width=5ex, anchor=center, minimum height=5ex,outer sep=-1pt, font=\footnotesize}
+    ]{          
+  &[-3mm]  \vdots &  \vdots       & \vdots        &  \vdots       &  \vdots &[0mm]  \\[-3mm]
+2 &  E^{2}_{2, 0} &  E^{2}_{2, 1} & E^{2}_{2, 2}  &  E^{2}_{2, 3} &  E^{2}_{2, 3}& \cdots \\
+1 &  E^{2}_{1, 0} &  E^{2}_{1, 1} & E^{2}_{1, 2}  &  E^{2}_{1, 3} &  E^{2}_{2, 3}& \cdots \\
+0 &  E^{2}_{0, 0} &  E^{2}_{0, 1} & E^{2}_{0, 2}  &  E^{2}_{0, 3} &  E^{2}_{2, 3}& \cdots \\[-5mm]
+  &   0  &  1  &  2  &  3 & 4 & \\};
+\path[->, font=\scriptsize]
+(m-3-6) edge[shorten >=-1mm, shorten <= -1mm]    (m-2-4)
+(m-4-6) edge[shorten >=-1mm, shorten <= -1mm]    (m-3-4)
+(m-4-4) edge[shorten >=-1mm, shorten <= -1mm]    (m-3-2)
+(m-4-5) edge[shorten >=-1mm, shorten <= -1mm]    (m-3-3)
+(m-3-5) edge[shorten >=-1mm, shorten <= -1mm]    (m-2-3)
+(m-3-4) edge[shorten >=-1mm, shorten <= -1mm]    (m-2-2)
+(m-3-7) edge[shorten >=-1mm, shorten <= -1mm]    (m-2-5)
+(m-4-7) edge[shorten >=-1mm, shorten <= -1mm]    (m-3-5)
+;
+\draw[line width=3mm, color=red, opacity=0.2, shorten >= 2.5mm, shorten <=  0.6mm] 
+(m-2-6.north west) -- (m-2-6.south east);
+\draw[line width=3mm, color=red, opacity=0.2, shorten >= 2.5mm, shorten <=  0mm] 
+(m-4-2.north west) -- (m-4-2.south east);
+\draw[line width=3mm, color=red, opacity=0.2, shorten >=-3mm, shorten <= -4mm] 
+(m-3-2.center) -- (m-4-3.center);
+\draw[line width=3mm, color=red, opacity=0.2, shorten >=-3mm, shorten <= -4mm] 
+(m-2-2.center) -- (m-4-4.center);
+\draw[line width=3mm, color=red, opacity=0.2, shorten >=-3mm, shorten <= -4mm] 
+(m-2-3.center) -- (m-4-5.center);
+\draw[line width=3mm, color=red, opacity=0.2, shorten >=-3mm, shorten <= -4mm] 
+(m-2-4.center) -- (m-4-6.center);
+\draw[line width=3mm, color=red, opacity=0.2, shorten >= 2.3mm, shorten <=  1.5mm] 
+(m-2-5.north west) -- (m-3-6.south east);
+
+\draw[very thick] ([yshift=2mm]m-1-1.east) -- ([yshift=-1mm]m-5-1.east);
+\draw[very thick] ([yshift=-1mm]m-5-1.north) -- ([yshift=-1mm, xshift=3mm]m-5-7.north);
+\end{tikzpicture}
+\end{equation*}
+
+\begin{equation*}
+\begin{tikzpicture}[scale=0.8]
+\matrix (m) [matrix of math nodes,
+    nodes in empty cells,
+    row sep=0.5em, 
+    column sep=0.5em,
+    nodes={minimum width=5ex, anchor=center, minimum height=5ex,outer sep=-1pt, font=\footnotesize}
+    ]{          
+  &[-3mm]  \vdots &  \vdots       & \vdots        &  \vdots       &  \vdots &[0mm]  \\[-3mm]
+2 &  E^{3}_{2, 0} &  E^{3}_{2, 1} & E^{0}_{2, 2}  &  E^{3}_{2, 3} &  E^{3}_{2, 3}& \cdots \\
+1 &  E^{3}_{1, 0} &  E^{3}_{1, 1} & E^{0}_{1, 2}  &  E^{3}_{1, 3} &  E^{3}_{2, 3}& \cdots \\
+0 &  E^{3}_{0, 0} &  E^{3}_{0, 1} & E^{0}_{0, 2}  &  E^{3}_{0, 3} &  E^{3}_{2, 3}& \cdots \\[-5mm]
+  &   0  &  1  &  2  &  3 & 4 & \\};
+
+\path[->, font=\scriptsize]
+(m-4-5) edge  (m-2-2)
+(m-4-6) edge  (m-2-3)
+(m-4-7) edge  (m-2-4)
+;
+\draw[line width=3mm, color=red, opacity=0.2, shorten >= 2.5mm, shorten <=  0.6mm] 
+(m-2-6.north west) -- (m-2-6.south east);
+\draw[line width=3mm, color=red, opacity=0.2, shorten >= 2.5mm, shorten <=  0mm] 
+(m-4-2.north west) -- (m-4-2.south east);
+\draw[line width=3mm, color=red, opacity=0.2, shorten >=-3mm, shorten <= -4mm] 
+(m-3-2.center) -- (m-4-3.center);
+\draw[line width=3mm, color=red, opacity=0.2, shorten >=-3mm, shorten <= -4mm] 
+(m-2-2.center) -- (m-4-4.center);
+\draw[line width=3mm, color=red, opacity=0.2, shorten >=-3mm, shorten <= -4mm] 
+(m-2-3.center) -- (m-4-5.center);
+\draw[line width=3mm, color=red, opacity=0.2, shorten >=-3mm, shorten <= -4mm] 
+(m-2-4.center) -- (m-4-6.center);
+\draw[line width=3mm, color=red, opacity=0.2, shorten >= 2.3mm, shorten <=  1.5mm] 
+(m-2-5.north west) -- (m-3-6.south east);
+
+\draw[very thick] ([yshift=2mm]m-1-1.east) -- ([yshift=-1mm]m-5-1.east);
+\draw[very thick] ([yshift=-1mm]m-5-1.north) -- ([yshift=-1mm, xshift=3mm]m-5-7.north);
+\end{tikzpicture}
+\end{equation*}
+
+
+Since all groups $E^{r}_{p, q}$ with negative $p$ or $q$ are trivial, the differentials 
+$d^{r}$ originating at $E^{r}_{p, q}$ are trivial for $r > p$. Likewise, the differentials 
+$d^{r}$ terminating at $E^{r}_{p, q}$ are trivial if $r > q+1$. As a consequence, 
+for $r \leq \text{max(p+1, q+2)}$ we get
+\[
+E^{r}_{p, q} = E^{r+1}_{p, q} = E^{r+2}_{p, q} = \dots
+\]
+For each $p, q$, let $E^{\infty}_{p, q}$ denote this recurring group. These groups 
+form a bigraded group $E^{\infty}_{\ast\ast}$.  
+
+In typical applications of spectral sequences, $E^{\infty}_{\ast\ast}$ is related to some 
+object of interest, e.g. homology groups of some space. This is done as follows. 
+We start with a graded abelian group $H_{\ast}$ i.e. a collection of abelian groups 
+$H_{n}$ for $n\in \Z$. A \emph{filtration} of $H_{\ast}$ is a sequence of graded subgrops: 
+\[
+0 = F_{-1}H_{\ast} \subseteq F_{0}H_{\ast} \subseteq F_{1}H_{\ast} 
+\subseteq {\dots} \subseteq H_{\ast}
+\]
+such that $\bigcup_{p=0}^{\infty} F_{p}H_{\ast} = H_{\ast}$. 
+
+\begin{definition}
+We say that a spectral sequence $(E^{r}_{\ast\ast}, d^{r})$ \emph{converges} to 
+a graded group $H_{\ast}$ if there exists a filtration of $H_{\ast}$ such that 
+\[
+E^{\infty}_{p, q} \cong F_{p}H_{p+q}/F_{p-1}H_{p+q}
+\]
+for all $p, q$.
+\end{definition}
+
+
+Results on existence spectral sequences usually say that there exists
+a spectral sequence for which we can say describe in some useful way groups 
+$E^{r}_{p, q}$ for some fixed $r$, and that this sequence converges to some 
+interesting graded group $H_{\ast}$. Here is one example of such a statement: 
+
+\begin{theorem}
+\label{SERRE SS THM}
+Let $p\colon E \to B$ be a Serre fibration and let $F = p^{-1}(b_{0})$ for some $b_{0}\in B$. 
+If the space $B$ is simply connected then there exists a spectral sequence 
+$(E^{r}_{\ast\ast}, d^{r})$ such that 
+\[
+E^{2}_{p, q} \cong H_{p}(B, H_{q}(F))
+\]
+for all $p, q$, and which converges to $H_{\ast}(E)$. 
+\end{theorem}
+
+The spectral sequence described in this theorem is called the 
+\emph{Serre spectral sequence} of the fibration $p$.
+
+
+The next result provides an example how spectral sequences are used in 
+computations.
+ 
+\begin{theorem}
+\label{HOMOLOGY LOOP SPHERE THM}
+If $n\geq 2$ then 
+\[
+H_{m}(\Omega S^{n}) \cong 
+\begin{cases}
+\Z & \text{ if } (n-1)|m \\
+0  & \text{otherwise}
+\end{cases}
+\]
+\end{theorem}
+
+\begin{proof}
+The space $\Omega S^{n}$ is the fiber of a Serre fibration $p\colon P \to S^{n}$
+with a contractible space $P$. Consider the Serre spectral sequence of this fibration. 
+We have 
+\[
+E^{2}_{p, q} \cong H_{p}(S^{n}, H_{q}(\Omega S^{n})) \cong 
+\begin{cases}
+H_{q}(\Omega S^{n}) & \text{ if } p=0, n \\
+0 & \text{otherwise}
+\end{cases}
+\]
+For example, for $n=4$ the second page of this spectral sequence looks as follows:
+\begin{equation*}
+\begin{tikzpicture}[scale=0.8]
+\matrix (m) [matrix of math nodes,
+    nodes in empty cells,
+    row sep=0.1em, 
+    column sep=0.5em,
+    nodes={minimum width=5ex, anchor=center, minimum height=5ex,outer sep=-1pt,
+    font=\footnotesize}
+    ]{          
+5 &  H_{5}(\Omega S^{4}) &   &    &   &  H_{5}(\Omega S^{4}) \\
+4 &  H_{4}(\Omega S^{4}) &   &    &   &  H_{4}(\Omega S^{4}) \\
+3 &  H_{3}(\Omega S^{4}) &   &    &   &  H_{3}(\Omega S^{4}) \\
+2 &  H_{2}(\Omega S^{4}) &   &    &   &  H_{2}(\Omega S^{4}) \\
+1 &  H_{1}(\Omega S^{4}) &   &    &   &  H_{1}(\Omega S^{4}) \\
+0 &  H_{0}(\Omega S^{4}) &   &    &   &  H_{0}(\Omega S^{4})  \\[-3mm]
+  &   0  &  1  &  2  &  3 & 4 & \\};
+\path[->, thick, font=\scriptsize]
+(m-6-6) edge[shorten >=-1mm, shorten <= -1mm] node[above]{$d_{4}$}    (m-3-2)
+(m-5-6) edge[shorten >=-1mm, shorten <= -1mm] node[above]{$d_{4}$}   (m-2-2)
+(m-4-6) edge[shorten >=-1mm, shorten <= -1mm] node[above]{$d_{4}$}   (m-1-2)
+
+;
+\draw[very thick] ([yshift=2mm]m-1-1.east) -- ([yshift=-1mm]m-7-1.east);
+\draw[very thick] ([yshift=-1mm]m-7-1.north) -- ([yshift=-1mm, xshift=3mm]m-7-7.north);
+\end{tikzpicture}
+\end{equation*}
+All differentials in the spectral sequence are trivial, except, possibly
+$d^{n}\colon E^{n}_{p, q} \to E^{n}_{0, q+n-1}$. It follows that 
+$E^{2}_{\ast\ast} = E^{n}_{\ast\ast}$ and 
+$E^{n+1}_{\ast\ast} = E^{\infty}_{\ast\ast}$.
+The total space $P$ of the fibration is contractible, so
+$H_{0}(P) = \Z$ and $H_{p}(P) = 0$ for $p> 0$. By Theorem \ref{SERRE SS THM}
+we have $E^{\infty}_{p, q} \cong F_{p}H_{p+q}(P)/F_{p-1}H_{p+q}(P)$ for some 
+filtration $\{F_{p}H_{\ast}(P)\}$ of $H_{\ast}(P)$. It follows that 
+\[
+E^{n+1}_{p, q} = E^{\infty}_{p, q} \cong
+\begin{cases}
+\Z & \text{ if } (p, q) = (0, 0) \\
+0 & \text{otherwise}
+\end{cases}
+\]
+Since $E^{n+1}_{p, q} \cong H_{p, q}(E^{2}_{\ast\ast})$ we obtain that 
+$H_{0}(\Omega S^{n}) \cong \Z$ and $H_{p}(\Omega S^{n}) = 0$ for $0 < p \leq n-2$. 
+Also, all differentials $d^{n}$ must be isomorphisms. 
+This gives:
+\[
+H_{p}(\Omega S^{n}) \cong H_{p+(n-1)}(\Omega S^{n}) \cong H_{p+2(n-1)}(\Omega S^{n}) 
+\cong H_{p+3(n-1)}(\Omega S^{n}) \cong
+\dots 
+\]
+Taking $p=0$ we obtain that $H_{m}(\Omega S^{n})\cong \Z$ if $(n-1)|m$. In all other cases
+$H_{m}(\Omega S^{n}) \cong H_{p}(\Omega S^{n})$ for some $0< p \leq n-2$, and so it is 
+a trivial group. 
+\end{proof}
+
+\begin{note}
+The proof of Theorem \ref{HOMOLOGY LOOP SPHERE THM} used the observation 
+that all differentials $d^{r}$ in the Serre spectral sequence of the fibration 
+$p\colon P \to S^{n}$ were trivial for $r\geq n+1$. 
+A situation like this appears frequently in computations involving spectral sequences, 
+which motivates the next definition.
+\end{note}
+
+\begin{definition}
+We say that a spectral sequence \emph{collapses} at the page $r_{0}$ if all differentials 
+$d^{r}$ are trivial for $r\geq r_{0}$.
+\end{definition}
+
+If a spectral sequence collapses at the page $r_{0}$ then we have 
+$E^{r_{0}}_{p, q} = E^{r_{0}+1}_{p, q} = {\dots} = E^{\infty}_{p, q}$.
+
+
+
+
+
+

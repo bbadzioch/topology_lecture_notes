@@ -1,0 +1,572 @@
+% !TEX root = mth727_lecture_notes.tex
+
+
+\chapter[From Maps to Fibrations]{From Maps \\ to Fibrations}
+\chaptermark{From Maps to Fibrations}
+\label{MAPS TO FIBRATIONS CHAPTER}
+\thispagestyle{firststyle}
+
+
+
+As we have seen any fibration $F\to E \overset{p}{\to} B$ has the associated long exact sequence 
+\[
+\dots \to \pi_{n}(F) \lra \pi_{n}(E) \overset{p_{\ast}}{\lra} \pi_{n}(B) \to \dots
+\]
+that relates the homotopy groups of the spaces $B$, $E$, and $F$. 
+The main goal of this chapter is to show that this approach to computing homotopy 
+groups can be used with an arbitrary map $f\colon X \to Y$ taken in place of a fibration $p$. 
+We will show that the following holds:
+
+\begin{theorem}
+\label{FIBRATION REPLACEMENT THM}
+Given any map $f\colon X \to Y$ there exists a commutative diagram 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep= 2em, column sep=1.5em, text height=1.5ex, text depth=0.25ex]
+{
+X & & E_{f} \\
+& Y & \\ 
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[above] {$g_{f}$} node[below] {$\simeq$}(m-1-3)
+edge node[anchor=north east] {$f$} (m-2-2)
+(m-1-3)
+edge node[anchor= north west] {$p_{f}$} (m-2-2)
+; 
+\end{tikzpicture}
+\end{equation*}
+such that $p_{f}\colon E_{f}\to Y$ is a Hurewicz fibration and $g\colon E_{f} \to X$
+is a homotopy equivalence. 
+\end{theorem}
+
+
+For $x_{0}\in X$ and $e_{0} = g_{f}(x_{0})\in E_{f}$
+we will get $\pi_{n}(X, x_{0})\cong \pi_{n}(E_{f}, e_{0})$ for all $n\geq 0$. 
+In this way, the long exact sequence of a fibration gives an exact sequence
+\[
+\dots \to \pi_{n}(F, e_{0}) \lra \pi_{n}(X, x_{0}) \overset{f_{\ast}}{\lra} \pi_{n}(Y, y_{0}) \to \dots
+\] 
+where $F = p_{f}^{-1}(y_{0})$. 
+
+\begin{nn}{\bf Mapping spaces.} 
+For spaces $X, Y$, let $\Map(X, Y)$ denote the set of all continuous functions 
+$X \to Y$. For $A\subseteq X$ and $U\subseteq Y$ let $P(A, U)\subseteq \Map(X, Y)$
+be the set 
+\[
+P(A, U) = \{f\in \Map(X, Y) \ |\ f(A) \subseteq U\}
+\] 
+\end{nn}
+
+\begin{definition}
+The compact-open topology on $\Map(X, Y)$ is the topology with subbasis given by 
+all sets of the form $P(A, U)$ where $A\subseteq X$ is compact and $U\subseteq Y$
+is open. 
+\end{definition}
+
+
+Let $X$, $Y$, $Z$ be spaces. For a function $\varphi \colon Z \to \Map(X, Y)$
+denote by $\varphi^{\sharp}\colon Z\times X \to Y$ the function given by 
+$\varphi^{\sharp}(z, x) = \varphi(z)(x)$. We will say that $\varphi^{\sharp}$
+is the \emph{adjoint} of $\varphi$.
+
+\begin{theorem}
+If $X$ is a locally compact Hausdorff space, then the compact-open topology on $\Map(X, Y)$
+is the unique topology with the property that a map $\varphi\colon Z \to \Map(X, Y)$
+is continuous if and only if $\varphi^{\sharp}\colon Z\times X \to Y$ is continuous.
+\end{theorem}
+
+\begin{nn} 
+\label{MAPPING SPACE PROPERTIES NN}
+All mapping spaces below are equipped with the compact-open topology. 
+The following properties hold:
+\benu
+\item[1)] The evaluation map $\ev\colon \Map(X, Y)\times X \to Y$ given by $\ev(f, x) = f(x)$
+is continuous. \\[-2mm]
+
+\item[2)] In particular for every $x_{0}\in X$ the map 
+$\ev_{x_{0}}\colon \Map(X, Y) \to Y$, $\ev_{x_{0}}(f) = f(x_{0})$ is continuous. \\[-2mm]
+
+\item[3)] If $\{\ast\}$ is a one point space, then the map 
+$\ev_{\ast}\colon \Map(\{\ast\}, Y) \to Y$ is a homeomorphism. \\[-2mm]
+
+\item[4)] For any continuous function $f\colon X \to Y$ and any space $Z$
+the induced function $f_{\ast}\colon \Map(Z, X) \to \Map(Z, Y)$ given by 
+$f_{\ast}(g) = f\circ g$ is continuous. \\[-2mm]
+
+\item[5)] For any continuous function $f\colon X \to Y$ and any space $Z$
+the induced function $f^{\ast}\colon \Map(Y, Z) \to \Map(Y, X)$ given by 
+$f^{\ast}(g) = g\circ f$ is continuous. \\[-2mm]
+
+\item[6)] If $Y$ is a locally compact Hausdorff space, then for any spaces 
+$X$ and $Y$ the map $F\colon \Map(X, Y)\times \Map(Y, Z) \to \Map(X, Z)$
+given by $F(f, g) = g\circ f$ is continuous. \\[-2mm]
+
+\item[7)] If $Y$ is a locally compact Hausdorff space and $X$ is a Hausdorff space
+then for any space $Z$ the map $\adj\colon \Map(X, \Map(Y, Z)) \to \Map(X\times Y, Z)$  
+given by $\adj(\varphi) = \varphi^{\sharp}$ is a homeomorphism. \\[-2mm]
+
+\eenu
+\end{nn}
+
+
+From now on, all mapping spaces will taken with the compact-open topology.
+
+\begin{example}
+\label{MAP PATH COMPONENTS EXAMPLE}
+Let $X$ be a locally compact space and let $f, g\colon X \to Y$. 
+Giving a map $\omega \colon [0, 1] \to \Map(X, Y)$ such that $\omega(0) = f$ 
+and $\omega(1) = g$ is equivalent to giving a homotopy 
+$\omega^{\sharp} \colon X\times [0, 1] \to Y$ between $f$ and $g$. 
+In effect, homotopy classes of maps $X\to Y$ correspond to path connected components 
+of the space $\Map(X, Y)$. 
+\end{example}
+
+\begin{example}
+\label{LOOP SPACE EXAMPLE}
+Let $X$ be a space. The \emph{path space} of $X$ is the space 
+$PX = \Map([0, 1], X)$.
+
+For $x_{0}\in X$ consider the subspace of $PX$ given by
+\[
+\Omega_{x_{0}}X = \{\omega \in PX \ | \ \omega(0) = \omega(1) = x_{0}\} 
+\]
+This space is called the \emph{loop space} of $X$ based at $x_{0}$. 
+Denote by $c_{x_{0}}\in \Omega_{x_{0}}X$ the constant loop $c_{x_{0}}(t) = x_{0}$
+for all $t\in [0, 1]$.
+
+Notice that every element  $\omega\in\Omega_{x_{0}}X$ represents an element of 
+$\pi_{1}(X, x_{0})$. Similarly as in Example \ref{MAP PATH COMPONENTS EXAMPLE} we also 
+obtain that path connected components of $\Omega_{x_{0}}X$ correspond to homotopy classes 
+of loops in $X$. In this way, the assignment $[\omega] \mapsto [\omega^{\sharp}]$
+gives a bijection
+\[
+\pi_{0}(\Omega_{x_{0}}X, c_{x_{0}}) \overset{\cong}{\lra} \pi_{1}(X, x_{0})
+\]
+Concatenation of loops defines a map 
+$\Omega_{x_{0}}X \times \Omega_{x_{0}}X \to  \Omega_{x_{0}}X$ which, in turn, 
+induces a map 
+\[
+\pi_{0}(\Omega_{x_{0}}X, c_{x_{0}}) \times \pi_{0}(\Omega_{x_{0}}X, c_{x_{0}})
+\to \pi_{0}(\Omega_{x_{0}}X, c_{x_{0}})
+\]
+This defines a group structure on $\pi_{0}(\Omega_{x_{0}}X, c_{x_{0}})$ such that 
+the bijection $\pi_{0}(\Omega_{x_{0}}X, c_{x_{0}}) \cong \pi_{1}(X, x_{0})$
+becomes an isomorphism of groups.
+
+
+Generalizing this, any element of $\pi_{n}(\Omega_{x_{0}}, c_{x_{0}})$ is represented by a map 
+$\omega \colon (I^{n}, \pint^{n}) \to (\Omega_{x_{0}}X, c_{x_{0}})$. The adjoint 
+of $\omega$ is a map $\omega^{\sharp} \colon I^{n}\times [0, 1] = I^{n+1} \to X$ 
+such that $\omega^{\sharp}(\pint^{n+1}) = x_{0}$. In other words, we obtain a map 
+$\omega^{\sharp}\colon (I^{n+1}, \pint^{n+1}) \to (X, x_{0})$. It is easy to verify that maps 
+$\omega_{1}, \omega_{2}\colon (I^{n}, \pint^{n})\to (\Omega_{x_{0}}X, c_{x_{0}})$ 
+are homotopic if and only of their adjoints $\omega_{1}^{\sharp}$, $\omega_{2}^{\sharp}$
+are homotopic. Thus the correspondence $[\omega] \mapsto [\omega^{\sharp}]$ defines 
+a bijection 
+\[
+\pi_{n}(\Omega_{x_{0}}X, c_{x_{0}}) \overset{\cong}{\lra} \pi_{n+1}(X, x_{0})
+\]
+One can check that this is an isomorphism of groups.
+\end{example}
+
+\begin{note}
+A map of pointed spaces $f\colon (X, x_{0}) \to (Y, y_{0})$ induces a map 
+of loop spaces $\Omega f \colon \Omega_{x_{0}}X \to \Omega_{y_{0}} Y$. In this 
+way we obtain a functor 
+\[
+\Omega \colon \Top_{\ast} \to \Top_{\ast}
+\]
+\end{note}
+
+
+
+\begin{example}
+\label{REL HOMOT GPS PATH SPACE EXAMPLE}
+Let $x_{0}\in A \subseteq X$. Denote 
+\[
+P(X, A, x_{0}) = \{\omega\colon [0, 1]\to X \ | \ \omega(0)\in A, \ \omega(1) = x_{0}\}
+\]
+Similarly as in Example \ref{LOOP SPACE EXAMPLE}, one can check 
+that for any map $\omega \colon (I^{n}, \pint^{n}) \to (P(X, A, x_{0}), c_{x_{0}})$
+the adjoint $\omega^{\sharp}\colon I^{n+1} \to X$ represents an element 
+$[\omega^{\sharp}]\in \pi_{n+1}(X, A, x_{0})$. The assignment 
+$[\omega] \to [\omega^{\sharp}]$ gives an isomorphism
+\[
+\pi_{n}(P(X, A, x_{0})) \overset{\cong}{\lra} \pi_{n+1}(X, A, x_{0})
+\]
+for any $n\geq 1$. 
+\end{example}
+
+
+Let $f\colon X \to Y$ be a map, and let $PY$ be the path space of $Y$. 
+Define
+\[
+E_{f} = \{(x, \omega) \in  X \times PY \ |\ f(x) = \omega(0)\} \subseteq X\times PY
+\]
+We have a map $r_{f}\colon PX \to E_{f}$ give  by $r_{f}(\omega) = (\omega(0), f\omega))$
+
+
+\begin{proposition}
+\label{FIBRATION EQUIV CONDITIONS PROP}
+For a map $f\colon X\to Y$ the following conditions are equivalent:
+\benu
+\item[1)] The map $f$ is a Hurewicz fibration.
+\item[2)] The map $f$ has the homotopy lifting property for the space $E_{f}$
+\item[3)] There exists a map $s_{f}\colon E_{f} \to PX$ such that $r_{f}s_{f} = \id_{E_{f}}$
+\eenu
+\end{proposition}
+
+\begin{proof}
+1) $\Ra$ 2) Obvious.
+
+2) $\Ra$ 3) Consider the following commutative diagram:
+
+\begin{equation*}
+\label{HOMOT LIFT EQUIV EQ}
+\tag{$\ast$}
+\begin{tikzpicture}[baseline=(current  bounding  box.center)]
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+E_{f} \times \{0\} & X \\
+E_{f} \times [0, 1] &  Y \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-2) 
+edge node[anchor = west] {$f$} (m-2-2)
+(m-1-1) 
+edge node[above] {$\xov{k}$} (m-1-2)
+(m-2-1) 
+edge node[below] {$g$} (m-2-2)
+;
+\path[right hook-latex, thick, font=\scriptsize]
+(m-1-1) 
+edge (m-2-1);
+\path[dashed, ->,  thick, font=\scriptsize]
+(m-2-1) 
+edge node[anchor=south east] {$\xov{g}$} (m-1-2);
+\end{tikzpicture}
+\end{equation*}
+Here  $\xov{k}((x, \omega), 0) = x$ and $g((x, \omega), t) = \omega(t)$. 
+By 2) there exists a homotopy $\xov{g}$ that commutes this the rest of the diagram.
+Take $s_{f} = \xov{g}^{\sharp}$, the adjoint of $\xov{g}$.
+
+3) $\Ra$ 1) Assume that we have the following commutative diagram and we want to show 
+that a homotopy lift $\xov{h}$ exists: 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+Z \times \{0\} & X \\
+Z \times [0, 1] &  Y \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-2) 
+edge node[anchor = west] {$f$} (m-2-2)
+(m-1-1) 
+edge node[above] {$\xov{d}$} (m-1-2)
+(m-2-1) 
+edge node[below] {$h$} (m-2-2)
+;
+\path[right hook-latex, thick, font=\scriptsize]
+(m-1-1) 
+edge (m-2-1);
+\path[dashed, ->,  thick, font=\scriptsize]
+(m-2-1) 
+edge node[anchor=south east] {$\xov{h}$} (m-1-2);
+\end{tikzpicture}
+\end{equation*}
+For $z\in Z$ let $\omega_{z}\colon [0, 1]\to Y$ be the path given by 
+$\omega_{z}(t) = h(z, t)$. Define a map $u\colon Z \to E_{f}$ by 
+$u(z) = (\xov{k}(z, 0), \omega_{z})$. Notice that, in the notation of 
+diagram (\ref{HOMOT LIFT EQUIV EQ}) we have $\xov{d} = \xov{k} (u\times \id_{\{0\}})$
+and $h = g (u\times \id_{[0, 1]})$. As a consequence, we can take 
+$\xov{h} = \xov{g} (u\times \id_{[0, 1]})$.
+\end{proof}
+
+
+
+\begin{proof}[Proof of Theorem \ref{FIBRATION REPLACEMENT THM}]
+Let $f\colon X \to Y$ be a map. As before, define
+\[
+E_{f} = \{(x, \omega) \in  X \times PY \ |\ f(x) = \omega(0)\}
+\]
+Let $g_{f}\colon X \to E_{f}$ be given by $g_{f}(x) = (x, c_{f(x)})$ where 
+$c_{f(x)}\colon [0, 1]\to Y$ is the constant path at $f(x)$. Also, let 
+$p_{f}\colon E_{f}\to Y$ be given by $p_{f}(x, \omega) = \omega(1)$. 
+We have $f = p_{f}g_{f}$. 
+
+We will show that $g_{f}$ is a homotopy equivalence with the homotopy inverse 
+given by the projection map $\pr\colon E_{f} \to X$, $\pr(x, \omega) = x$. 
+We have $\pr g_{f} = \id_{X}$. The composition $g_{f} \pr\colon E_{f}\to E_{f}$
+is given by $g_{f}\pr(x, \omega) = (x, c_{x})$. A homotopy 
+$h\colon g_{f}\pr \simeq \id_{E_{f}}$ is defined by
+$h((x, \omega), t) = (x, \omega_{t}(x))$, where $\omega_{t}\colon [0, 1] \to Y$, 
+$\omega_{t}(s) = \omega(ts)$. 
+
+It remains to show that $p_{f}\colon E_{f}\to Y$ is a Hurewicz fibration. 
+To see this, assume that we have a commutative diagram
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+Z\times\{0\} & E_{f} \\
+Z\times [0, 1] &  Y \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-2) 
+edge node[anchor = west] {$p_{f}$} (m-2-2)
+(m-1-1) 
+edge node[above] {$\xov{k}$} (m-1-2)
+(m-2-1) 
+edge node[below] {$h$} (m-2-2)
+;
+\path[right hook-latex, thick, font=\scriptsize]
+(m-1-1) 
+edge (m-2-1);
+\path[dashed, ->,  thick, font=\scriptsize]
+(m-2-1) 
+edge node[anchor=south east] {$\xov{h}$} (m-1-2);
+\end{tikzpicture}
+\end{equation*}
+Denote $\xov{k}(z) = (x_{z}, \omega_{z})$. By commutativity of the diagram 
+we have $\omega_{z}(1) = h_{0}(z)$. Then the lift $\xov{h}$ can be defined 
+by 
+\[
+\xov{h}(z, t) = (x_{z}, \tau_{z, t}\ast\omega_{z})
+\]
+where $\tau_{z, t}\ast\omega_{z}$ is the concatenation of $\omega_{z}$
+with the path $\tau_{z, t}\colon [0, 1]\to Y$ given by 
+$\tau_{z, t}(s) = h(z, st)$. 
+\end{proof}
+
+
+\begin{definition}
+Let $f\colon X\to Y$ be a map, and let $p_{f}\colon E_{f}\to Y$ be the Hurewicz 
+fibration associated to $f$, as in Theorem \ref{FIBRATION REPLACEMENT THM}. 
+The \emph{homotopy fiber} of $f$ over a point $y_{0}\in Y$ is the space 
+\[
+\hofib_{y_{0}}f = p_{f}^{-1}(y_{0})
+\]
+Explicitly: 
+\[
+\hofib_{y_{0}}f = \{(x, \omega) \in X \times PY \ |\ 
+f(x)=\omega(0), \ \omega(1) = y_{0}\}
+\]
+\end{definition}
+
+
+\begin{corollary}
+\label{HOMOTOPY FIBRATION EX SEQ COR}
+Let $f\colon (X, x_{0})\to (Y, y_{0})$ be map of pointed spaces.
+Denote $v_{0} = (x_{0}, c_{y_{0}})\in \hofib_{y_{0}}f$. 
+We have a long exact sequence of homotopy groups
+\begin{multline*}
+{\dots}\lra \pi_{n+1}(Y, y_{0})  {\lra} 
+\pi_{n}(\hofib_{x_{0}}f , v_{0}) \overset{i(f)_{\ast}}{\lra}
+\pi_{n}(X, x_{0}) \overset{f_{\ast}}{\lra}
+\pi_{n}(Y, y_{0}) {\lra} {\dots} \\
+{\dots} \overset{f_{\ast}}{\lra} \pi_{1}(Y, y_{0}) {\lra} 
+\pi_{0}(\hofib_{x_{0}}f , v_{0})\overset{i(f)_{\ast}}{\lra} 
+\pi_{0}(X, x_{0}) \overset{f_{\ast}}{\lra} 
+\pi_{0}(Y, y_{0}) 
+\end{multline*}
+Here the map 
+\[
+i(f)\colon 
+\hofib_{y_{0}}f = \{(x, \omega) \in X \times PY \ |\ 
+f(x)=\omega(0), \ \omega(1) = y_{0}\} \lra Y
+\]
+is given by $i(f)(x, \omega) = x$.
+\end{corollary}
+
+\begin{example}
+Given a space $X$ and $x_{0}\in X$, consider a map $f\colon \{\ast\} \to X$, 
+$f(\ast) = x_{0}$. Then 
+\begin{align*}
+\hofib_{x_{0}}f & = \{(\ast, \omega) \in \{\ast\} \times PX \ |\
+\omega(0) = x_{0} = \omega(1) \} \\
+& \cong \{ \omega \in  PX \ |\ \omega(0) = x_{0} = \omega(1) \} \\
+& = \Omega_{x_{0}}X
+\end{align*}
+
+Since $\pi_{n}(\{\ast\}) = 0$ for all $n\geq 0$ the exact sequence 
+becomes 
+\begin{multline*}
+{\dots}\lra 
+0 {\lra}
+\pi_{n}(X, x_{0}) {\lra}
+\pi_{n-1}(\Omega_{x_{0}}X, c_{x_{0}}) {\lra} 
+0 \lra{\dots}\lra 
+0  {\lra}
+\pi_{1}(X, x_{0}) {\lra}
+\pi_{0}(\Omega_{x_{0}}X, c_{x_{0}}){\lra} 
+0
+\end{multline*}
+where $c_{x_{0}}\in \Omega_{x_{0}}X$ is the constant loop at $x_{0}$.
+This recovers the isomorophisms 
+$\pi_{n}(\Omega_{x_{0}}X, c_{x_{0}})\cong \pi_{n+1}(X, x_{0})$, which we obtained 
+in Example \ref{LOOP SPACE EXAMPLE}
+
+
+Notice that if $x_{1}$ belongs to a different path connected component 
+of $X$ than $x_{0}$, then $\hofib_{x_{1}}f = \varnothing$. 
+\end{example}
+
+
+\begin{example}
+The map $f\colon {\ast} \to X$ in Example \ref{LOOP SPACE EXAMPLE} can
+be interpreted as an inclusion $\{x_{0}\}\hra X$. Generalizing it, 
+for $A\subseteq X$, consider the inclusion map $j\colon A\hra X$. 
+In this case we have
+\begin{align*}
+E_{j} = \ & \{(a, \omega)\in A\times PX \ | \ j(a) = \omega(0)\} \\
+\cong \ & \{\omega \in P(X) \ | \ \omega(0)\in A\}
+\end{align*}
+For $x_{0}\in X$ we get:
+\begin{align*}
+\hofib_{x_{0}}j & = \{\omega \in PX \ | \ \omega(0) \in A, \ \omega(1) = x_{0}\} \\
+& = P(X, A, x_{0})
+\end{align*}
+Recall (\ref{REL HOMOT GPS PATH SPACE EXAMPLE}) that we have isomorphisms 
+$\pi_{n}(P(X, A, x_{0}), c_{x_{0}}) \overset{\cong}{\to} \pi_{n+1}(X, A, x_{0})$. They fit into 
+a commutative diagram of exact sequences:
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=2em, text height=1.5ex, text depth=0.25ex]
+{
+{\dots} & \pi_{n+1}(X, A, x_{0}) & \pi_{n}(A, x_{0}) & \pi_{n}(X, x_{0}) 
+& \pi_{n}(X, A, x_{0}) & {\dots} \\
+{\dots} & \pi_{n}(P(X, A, x_{0}), c_{x_{0}}) & \pi_{n}(E_{j}, c_{x_{0}}) 
+& \pi_{n}(X, x_{0}) & \pi_{n-1}(P(X, A, x_{0}), c_{x_{0}}) & {\dots} \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1)
+edge (m-1-2)
+(m-1-2) 
+edge node[above] {$\partial$} (m-1-3)
+(m-1-3) 
+edge node[above] {$j_{\ast}$} (m-1-4)
+(m-1-4) 
+edge (m-1-5)
+(m-1-5) 
+edge (m-1-6)
+
+(m-2-1)
+edge (m-2-2)
+(m-2-2) 
+edge (m-2-3)
+edge node[pos=0.45, anchor = south, rotate=90] {$\cong$} (m-1-2)
+(m-2-3) 
+edge node[below] {$p_{j\ast}$} (m-2-4)
+edge 
+node[pos=0.45, anchor = south, rotate=90] {$\cong$} 
+node[pos=0.45, anchor = west] {$g_{j\ast}$} (m-1-3)
+(m-2-4) 
+edge node[below] {$\partial$} (m-2-5)
+edge node[anchor=south, rotate=90] {$=$}(m-1-4)
+(m-2-5) 
+edge node[below] {$i_{\ast}$} (m-2-6)
+edge node[pos=0.45, anchor = south, rotate=90] {$\cong$} (m-1-5)
+;
+\end{tikzpicture}
+\end{equation*}
+Here $g_{j}\colon E_{j} \to A$ and $p_{j}\colon E_{j} \to X$ are given by 
+$g_{j}(\omega) = \omega(0)$ and $p_{j}(\omega) = \omega(1)$.
+
+\end{example}
+
+
+\begin{definition}
+\label{FIBREWISE HOMOT EQUIV DEF}
+Consider a commutative diagram 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep= 2em, column sep=1.5em, text height=1.5ex, text depth=0.25ex]
+{
+E_{1} & & E_{2} \\
+& B & \\ 
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[above] {$f$} (m-1-3)
+edge node[anchor=north east] {$p_{1}$} (m-2-2)
+(m-1-3)
+edge node[anchor= north west] {$p_{2}$} (m-2-2)
+; 
+\end{tikzpicture}
+\end{equation*}
+where $p_{1}, p_{2}$ are Hurewicz fibrations. The map $f$ is a 
+\emph{fibrewise homotopy equivalence} if there exists a map $g\colon E_{2}\to E_{1}$
+such that $p_{1}g = p_{2}$ and homotopies $h\colon gf \simeq \id_{E_{1}}$, 
+$h’\colon fg \simeq \id_{E_{2}}$ such that $p_{1}h_{t} = p_{1}$ and $p_{2}h’_{t} = p_{2}$
+for all $t\in [0, 1]$ 
+\end{definition}
+
+\begin{note}
+\label{FIBERWISE HOMOT EQ NOTE}
+In the notation of Definition \ref{FIBREWISE HOMOT EQUIV DEF}, 
+if $f\colon E_{1}\to E_{2}$ is a fibrewise homotopy equivalence then for any 
+subspace $A\subseteq B$ the map $f|_{p_{1}^{-1}(A)}\colon p_{1}^{-1}(A) \to p_{2}^{-1}(A)$
+is a homotopy equivalence. In particular, for any $b_{0}\in B$ the map of fibers 
+$f|_{p_{1}^{-1}(b_{0})}\colon p^{-1}(b_{0}) \to p_{2}^{-1}(b_{0})$ is a homotopy equivalence.
+\end{note}
+
+
+\begin{proposition}
+\label{FIBRATIONS FIBERWISE HOMOT EQ PROP}
+For a map $f\colon X\to Y$ consider the commutative diagram as in
+Theorem \ref{FIBRATION REPLACEMENT THM}:
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep= 2em, column sep=1.5em, text height=1.5ex, text depth=0.25ex]
+{
+X & & E_{f} \\
+& Y & \\ 
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[above] {$g_{f}$} node[below] {$\simeq$}(m-1-3)
+edge node[anchor=north east] {$f$} (m-2-2)
+(m-1-3)
+edge node[anchor= north west] {$p_{f}$} (m-2-2)
+; 
+\end{tikzpicture}
+\end{equation*}
+where $E_{f} = \{(x, \omega) \in  X \times PY \ |\ f(x) = \omega(0)\}$, 
+$p_{f}(x, \omega) = \omega(1)$ and $g_{f}(x) = (x, c_{f(x)})$. 
+
+If $f$ is a Hurewicz fibration then $g_{f}$ is a fiberwise homotopy equivalence.
+\end{proposition}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{corollary}
+\label{FIBER VS HOFIBER COROLLARY}
+Let $f\colon X \to Y$ is a Hurewicz fibration and let $g_{f}\colon X \to E_{f}$ 
+be given as in Proposition \ref{FIBRATIONS FIBERWISE HOMOT EQ PROP}. 
+Then for $y_{0}\in Y$ the map 
+\[
+g_{f}|_{f^{-1}(y_{0})}\colon f^{-1}(y_{0}) \to p_{f}^{-1}(y_{0}) = \hofib_{y_{0}}f
+\]
+is a homotopy equivalence.
+\end{corollary}
+
+\begin{proof}
+It follows from Proposition \ref{FIBRATIONS FIBERWISE HOMOT EQ PROP}
+and Note \ref{FIBERWISE HOMOT EQ NOTE}. 
+\end{proof}
+
+
+
+
+

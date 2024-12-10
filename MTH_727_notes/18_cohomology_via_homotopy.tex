@@ -1,0 +1,720 @@
+% !TEX root = mth727_lecture_notes.tex
+
+
+\chapter[Cohomology via Homotopy]{Cohomology \\ via Homotopy}
+\chaptermark{Cohomology via Homotopy}
+\label{HOMOLOGY VIA HOMOTOPY CHAPTER}
+\thispagestyle{firststyle}
+
+
+Recall (\ref{K(G, N) DEF}) that for an abelian group $G$ by $K(G, n)$ 
+we denote the Eilenberg-MacLane space such that $\pi_{n}(K(G,n)) \cong G$. 
+We will also denote by $K(G, 0)$ the discrete space consisting of elements 
+of the group $G$. Notice that for every $n$ we have a weak equivalence
+\[
+K(G, n) 
+\overset{\simeq}{\lra} \Omega K(G, n+1) 
+\overset{\simeq}{\lra} \Omega^{2} K(G, n+2)
+\]
+For any pointed CW complex $X$ this induces a bijection of sets of pointed 
+homotopy classes 
+\[
+[X, K(G, n)]_{\ast} \overset{\cong}{\lra} [X, \Omega^{2} K(G, n+2)]_{\ast}
+\]
+Since $[X, \Omega^{2} K(G, n+2)]_{\ast}$ has a natural structure of an 
+abelian group (\ref{LOOP SPACE TO GROUP STRUCTURE NOTE}), we obtain in 
+this way an abelian group structure on $[X, K(G, n)]_{\ast}$.
+
+The main goal of this chapter is to show that the following holds:
+
+\begin{theorem}
+\label{COHOMOLOGY REPRESENTABILITY THM}
+Let $G$ be an abelian group. 
+
+1) For any pointed CW complex $X$ and $n \geq 0$ there exists 
+an isomorphism 
+\[
+T_{X}\colon [X, K(G, n)]_{\ast} \overset{\cong}{\lra} \widetilde{H}^{n}(X; G)
+\]
+where $\widetilde{H}^{n}(X; G)$ is the $n$-th reduced singular cohomology group of 
+$X$ with coefficients in $G$. 
+
+2) These isomorphisms are natural. That is, if $f\colon X \to Y$ is a map 
+of pointed CW complexes then the following diagram commutes: 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+[X, K(G, n)]_{\ast} &  {[Y, K(G, n)]_{\ast}} \\
+\widetilde{H}^{n}(X; G) & \widetilde{H}^{n}(Y; G) \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-2) 
+edge node[above] {$f^{\ast}$} (m-1-1)
+edge node[anchor = west] {$T_{Y}$} node[anchor=east] {$\cong$} (m-2-2)
+(m-2-2)
+edge node[below] {$f^{\ast}$} (m-2-1)
+(m-1-1)
+edge node[anchor=  east] {$T_{X}$} node[anchor=west] {$\cong$} (m-2-1)
+; 
+\end{tikzpicture}
+\end{equation*}
+\end{theorem}
+
+
+\begin{note}
+Let $\varphi\colon X \to K(G, n)$ be a pointed map. By part 2) of 
+Theorem \ref{COHOMOLOGY REPRESENTABILITY THM} we obtain a commutative diagram
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+[X, K(G, n)]_{\ast} &  {[K(G, n), K(G, n)]_{\ast}} \\
+\widetilde{H}^{n}(X; G) & \widetilde{H}^{n}(K(G, n); G) \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-2) 
+edge node[above] {$\varphi^{\ast}$} (m-1-1)
+edge node[anchor = west] {$T_{K(G, n)}$} node[anchor=east] {$\cong$} (m-2-2)
+(m-2-2)
+edge node[below] {$\varphi^{\ast}$} (m-2-1)
+(m-1-1)
+edge node[anchor=  east] {$T_{X}$} node[anchor=west] {$\cong$} (m-2-1)
+; 
+\end{tikzpicture}
+\end{equation*}
+This gives: 
+\[
+T_{X}([\varphi]) 
+= T_{X}(\varphi^{\ast}([\id_{K(G, n)}])) 
+= \varphi^{\ast}T_{K(G, n)}([\id_{K(G, n)}])
+\]
+This implies that for any pointed CW complex $X$ the bijection $T_{X}$
+is determined by the cohomology class 
+$\alpha_{n} = T_{K(G, n)}([\id_{K(G, n)}])\in \widetilde{H}^{n}(K(g, n); G)$.
+This class is called the \emph{fundamental class}.
+\end{note}
+
+\begin{note}
+An unpointed version of Theorem \ref{COHOMOLOGY REPRESENTABILITY THM} also 
+holds: for any CW complex $X$ there exists a natural isomorphism 
+$T_{X}\colon [X, K(G, n)] \overset{\cong}{\lra} H^{n}(X; G)$. This can be derived
+from Theorem \ref{COHOMOLOGY REPRESENTABILITY THM} as follows. For a CW complex 
+$X$ let $X_{+}$ denote the space obtained by adding one $0$-cell to $X$:
+$X_{+} = X \sqcup \{ + \}$. We consider $+$ as the basepoint of $X_{+}$. 
+We have bijections $[X, K(G, n)] \cong [X_{+}, K(G, n)]_{\ast}$ and 
+$H^{n}(X; G) \cong \widetilde{H}^{n}(X_{+}; G)$. Thus if 
+$[X_{+}, K(G, n)]_{\ast} \cong \widetilde{H}^{n}(X_{+}; G)$ then 
+$[X, K(G, n)] \cong H^{n}(X; G)$.
+\end{note}
+
+\begin{example}
+For any CW complex X we have:
+\bit
+\item $[X, S^{1}] \cong H^{1}(X, \Z)$
+\item $[X, \CP^{\infty}] \cong H^{2}(X, \Z)$
+\item $[X, \RP^{\infty}] \cong H^{2}(X, \Z/2)$
+\eit
+\end{example}
+
+
+
+The proof of Theorem \ref{COHOMOLOGY REPRESENTABILITY THM} will proceed as follows. 
+First, we will define a general notion of a cohomology theory, which 
+consists of a sequence of functors $\{ h^{n} \}_{n\in \Z}$ from the category 
+of pointed CW complexes to the category of abelian groups satisfying certain axioms.
+We will show that both assignments $X \mapsto \widetilde{H}^{n}(X; G)$ and 
+$X \mapsto [X, K(G, n)]_{\ast}$ satisfy this definition. Then
+we will prove that if $\{h^{n}\}$ is any generalized cohomology 
+theory such that $h^{n}(S^{0})\cong \widetilde{H}^{n}(S^{0} ; G)$ for all $n$, 
+then for every pointed CW complex $X$ and every $n$ there is a natural isomorphism 
+$h^{n}(X) \to H^{n}(X; G)$. Since the cohomology theory defined by Eilenberg-MacLane
+space satisfies this property, Theorem \ref{COHOMOLOGY REPRESENTABILITY THM} will follow.   
+
+
+\begin{definition}
+Let $\CW_{\ast}$ denote the category of pointed CW complexes and basepoint 
+preserving maps. A \emph{(reduced) cohomology theory} consists of: 
+\benu
+\item[\textbullet] A sequence contravariant functors 
+$\{h^{n}\colon \CW_{\ast} \to \Ab\}_{n\in \Z}$. 
+\item[\textbullet] For every $X\in \CW_{\ast}$ and every $n\in \Z$ a natural isomorphism 
+$\Sigma \colon h^{n}(X) \to h^{n+1}(\Sigma X)$. Naturality means that for any map 
+$f\colon X \to Y$ we have a commutative diagram 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+h^{n}(Y) & h^{n+1}(\Sigma Y) \\
+h^{n}(X) & h^{n+1}(\Sigma X) \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[anchor= south] {$\Sigma$}  node[anchor= north] {$\cong$} (m-1-2)
+edge node[anchor = east] {$f^{\ast}$} (m-2-1)
+(m-1-2)
+edge node[anchor=  west] {$\Sigma f ^{\ast}$}  (m-2-2)
+(m-2-1)
+edge node[anchor=  north] {$\Sigma$} node[anchor= south] {$\cong$} (m-2-2)
+; 
+\end{tikzpicture}
+\end{equation*}
+\eenu
+Moreover, the following axioms are satisfied:
+\benu
+\item[\textbullet] ({\bf Homotopy axiom}) 
+If $f, g\colon X\to Y$ are maps such that $f\simeq g$ then 
+$f^{\ast} = g^{\ast}\colon h^{n}(Y) \to h^{n}(X)$ for all $n$.
+
+\item[\textbullet] ({\bf Exactness axiom}) 
+For any pair $(X, A)$ where $A\subseteq X$ is a subcomplex, 
+$i\colon A \hra X$ is the inclusion and $q\colon X \to X/A$ is the quotient map, 
+the following sequence is exact:
+\[
+h^{n}(A) \overset{i^{\ast}}{\lla} h^{n}(X)  \overset{q^{\ast}}{\lla} h^{n}(X/A)  
+\]
+
+\item[\textbullet] ({\bf Wedge axiom})  
+For any family of pointed CW complexes $\{X_{i} \}_{i\in I}$
+the inclusion maps $X_{j}\hra \bigvee_{i\in I} X_{i}$ induce isomorphisms 
+$h^{n}\left(\bigvee_{i\in I} X_{i} \right) 
+\overset{\cong}{\lra} \prod_{i\in I} h^{n}(X_{i})$ for all $n$. 
+\eenu
+\end{definition}
+
+
+\begin{nn}{\bf Some consequences of the axioms.}
+\bit
+\item $h^{n}(\ast) = 0$ for all $n$.
+\item For any pair $(X, A)$ where $A\subseteq X$ is a subcomplex, there is a long exact 
+sequence 
+\[
+\dots \lla 
+h^{n}(A) \overset{i^{\ast}}{\lla} h^{n}(X)  \overset{q^{\ast}}{\lla} h^{n}(X/A)  
+\overset{\delta}{\lla} h^{n-1}(A)
+\lla \dots
+\]
+The map $\delta \colon  h^{n-1}(A) \to h^{n}(X/A)$ is the composition of the suspension 
+isomorphism $\Sigma \colon h^{n-1}(A) \to h^{n}(\Sigma A)$, the homomorphism induced by 
+the quotient map $C_{i} \to C_{i}/X \cong \Sigma A$, where $C_{i}$ is the cone of the inclusion
+$i\colon A \hra X$, and the  isomorphism induced by the homotopy equivalence 
+$X/A \overset{\simeq}{\to} C_{i}$. 
+\eit
+\end{nn}
+
+\begin{example}
+Given an abelian group $G$, consider the reduced singular cohomology functors 
+$X \mapsto \widetilde{H}^{n}(X; G)$. For $n < 0$ set $\widetilde{H}^{n}(X; G) = 0$ 
+for all $X$. Then the functors $\{\widetilde{H}^{n}(-; G)\}$ define 
+a cohomology theory.
+\end{example}
+
+
+\begin{example}
+\label{K(G, N) COHOMOLOGY EXAMPLE}
+For an abelian group $G$, let $h^{n}_{G}(X) = [X, K(G, n)]_{\ast}$. For $n <0$
+we set $K(G, n) = \ast$. Then the functors $\{ h^{n}_{G}\}$ form 
+a cohomology theory. To define the suspension isomorphism
+\[
+\Sigma \colon h^{n}_{G}(X) = [X, K(G, n)]_{\ast} \lra 
+[\Sigma X, K(G, n+1)]_{\ast} = h^{n+1}_{G}(\Sigma X)
+\]
+choose a week equivalence $\varphi_{n}\colon K(G, n) \to \Omega K(G, n+1)$. 
+This induces an isomorphism  
+$\varphi_{n}^{\ast} \colon [X, K(G, n)]_{\ast} \to [X, \Omega K(G+1, n)]_{\ast}$. 
+Then we compose it with the adjunction isomorphism 
+$[X, \Omega K(G+1, n)]_{\ast} \overset{\cong}{\to} [\Sigma X, K(G+1, n)]_{\ast}$
+
+It is obvious that $\{h_{G}^{n}\}$ satisfies the homotopy axiom.
+The exactness axiom is also satisfied by
+Proposition \ref{HOMOTOPY CLASSES COEXACT SEQ PROP}. The wedge axiom holds 
+since for any family of well-pointed spaces $\{X_{i}\}_{i\in I}$ 
+and any pointed space $Z$, inclusion maps induce a bijection 
+$[\bigvee_{i\in I} X_{i}, Z]_{\ast} \to \prod_{i\in I} [X_{i}, Z]_{\ast}$.
+\end{example}
+
+Notice that the only property of the spaces $K(G, n)$ used in 
+Example \ref{K(G, N) COHOMOLOGY EXAMPLE}  is that for each $n$ there exist a weak 
+homotopy equivalence $\varphi_{n}\colon K(G, n) \to \Omega K(G, n+1)$. 
+This motivates the following definition. 
+
+\begin{definition}
+An \emph{$\Omega$-spectrum} $(K_{n}, \varphi_{n})_{n\in\Z}$ is a sequence of pointed spaces 
+$K_{n}$ and weak homotopy equivalences 
+$\varphi_{n}\colon K_{n} \overset{\simeq}{\to} \Omega K_{n+1}$.  
+\end{definition}
+
+By the same argument as in Example \ref{K(G, N) COHOMOLOGY EXAMPLE} we obtain:
+
+\begin{proposition}
+Every $\Omega$-spectrum $(K_{n}, \varphi_{n})_{n\in\Z}$ defines a cohomology 
+theory $\{h^{n}\}_{n\in \Z}$ given by $h^{n}(X) = [X, K_{n}]_{\ast}$.
+\end{proposition}
+
+
+\begin{definition}
+\label{DIMENSION AXIOM DEF}
+A cohomology theory $\{h^{n}\}$ satisfies the \emph{dimension axiom} if 
+$h^{n}(S^{0}) = 0$ for $n\neq 0$.
+\end{definition}
+
+\begin{theorem}
+\label{SINGULAR COHOMOLOGY UNIQUE THM}
+Let $\{h_{1}^{n}\}_{n\in \Z}$ and $\{h_{2}^{n}\}_{n\in \Z}$ be cohomology theories 
+that satisfy the dimension axiom and such that $h^{0}_{1}(S^{0}) \cong h^{0}_{2}(S^{0})$.
+Then for each pointed CW complex there exists natural isomorphism 
+$T_{X}\colon h_{1}^{n}(X) \overset{\cong}{\to} h_{2}^{n}(X)$.
+Naturality means that each pointed map $f\colon X \to Y$ gives a commutative diagram
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+h_{1}^{\ast}(Y) & h_{1}^{\ast}(X) \\
+h_{2}^{\ast}(Y) & h_{2}^{\ast}(X) \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[anchor= south] {$f^{\ast}$}   (m-1-2)
+edge node[anchor = east] {$T_{Y}$} node[anchor= west] {$\cong$} (m-2-1)
+(m-1-2)
+edge node[anchor=  west] {$T_{X}$} node[anchor= east] {$\cong$}  (m-2-2)
+(m-2-1)
+edge node[anchor=  north] {$f^{\ast}$}  (m-2-2)
+; 
+\end{tikzpicture}
+\end{equation*}
+\end{theorem}
+
+
+
+\begin{proof}[Proof of Theorem \ref{COHOMOLOGY REPRESENTABILITY THM}]
+For the reduced singular cohomology theory we have
+\[
+\widetilde{H}^{n}(S^{0}; G) \ \cong \ 
+\begin{cases}
+G & \text{if $n=0$} \\
+0 & \text{otherwise} \\
+\end{cases}
+\]
+Also, 
+\[
+[S^{0}, K(G, n)]_{\ast} \ \cong \ \pi_{0}(K(G, n)) \ \cong \ 
+\begin{cases}
+G & \text{if $n=0$} \\
+0 & \text{otherwise} \\
+\end{cases}
+\]
+Therefore we can apply Theorem \ref{SINGULAR COHOMOLOGY UNIQUE THM}.   
+\end{proof}
+
+The proof of Theorem \ref{SINGULAR COHOMOLOGY UNIQUE THM} will require some 
+preparation. 
+
+\begin{lemma} 
+\label{COHOMOLOGY DIM AXIOM LEMMA}
+Let $\{h^{n}\}$ be a cohomology theory satisfying the dimension 
+axiom. Then: 
+\benu
+\item[1)] $h^{q}(\bigvee_{i\in I} S^{n}) = 0$ for $q \neq n$. 
+
+\item[2)] For any CW complex $X$ the inclusion of the $n$-th skeleton
+$j\colon X^{(n)} \hra X$ induces an isomorphism 
+$j^{\ast}\colon h^{q}(X) \overset{\cong}{\lra} h^{q}(X^{(n)})$ for all $q< n$
+Also, $h^{q}(X^{(n)}) = 0$ for $q>n$. 
+\eenu
+\end{lemma}
+
+\begin{proof}
+1) This follows from the isomorphisms 
+\[
+h^{q}(\bigvee_{i\in I }S^{n}) \cong 
+\prod_{i\in I} h^{q}(S^{n}) \cong 
+\prod_{i\in I} h^{q}(\Sigma^{n} S^{0}) \cong 
+\prod_{i\in I} h^{q - n}(S^{0})
+\]
+
+2) For finite-dimensional CW complexes this can be proved by induction on skeleta 
+of $X$, using cofibration sequences 
+$X^{(k-1)} \hra X^{(k)} \to \bigvee S^{k}$. This can be generalized to 
+the case $\dim X = \infty$ using the infinite telescope construction 
+(see e.g. Hatcher, \emph{Algebraic Topology} pp. 138-139), which gives a 
+cofibration sequence $\bigvee_{k} X^{(k)} \to X \to \bigvee_{k} \Sigma X^{(k)}$. 
+\end{proof}
+
+
+For abelian groups $G, H$ let $\Hom(G, H)$ denote the set of homomorphisms 
+$G\to H$. This set has a group structure with addition defined by 
+$(\varphi + \psi)(g) = \varphi(g) + \psi(g)$ for $\varphi, \psi\in \Hom(G, H)$.
+
+\begin{proposition}
+\label{COHOMOLOGY MAP ADDITIVITY PROP}
+Let $\{h^{n}\}$ be a cohomology theory. For a pointed CW complex $X$ and $n\geq 1$ 
+consider the map 
+\[
+\Phi\colon \pi_{n}(X) \to \Hom(h^{q}(X), h^{q}(S^{n}))
+\]
+that sends an element $[\varphi\colon S^{n} \to X]\in \pi_{n}(X)$ to the induced 
+homomorphism $\varphi^{\ast}\colon h^{q}(X) \to h^{q}(S^{n})$. Then the map $\Phi$ 
+is a homomorphism of groups.
+\end{proposition}
+
+\begin{proof}
+The constant map $S^{n}\to X$ induces the trivial homomorphism 
+$h^{q}(X) \to h^{q}(S^{n})$, so $\Phi$ preserves trivial elements.
+Let $[\varphi], [\psi]\in \pi_{n}(X)$. The element 
+$[\varphi]\cdot[\psi]\in \pi_{n}(X)$ is the homotopy class of the map 
+\[
+S^{n} \overset{p}{\lra} S^{n}\vee S^{n} \overset{\varphi\vee\psi}{\lra} S^{n}
+\]  
+where $p$ is the pinch map. We need to show that 
+$p^{\ast}(\varphi\vee\psi)^{\ast} = \varphi^{\ast} + \psi^{\ast}\colon
+h^{q}(X)\to h^{q}(S^{n})$. This follows from commutativity of the following diagram: 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+h^{q}(X) & h^{q}(S^{n}\vee S^{n}) & h^{q}(S^{n}) \\
+& h^{q}(S^{n}) \times h^{q}(S^{n}) & \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[anchor= south] {$(\varphi\vee\psi)^{\ast}$} (m-1-2)
+edge [bend right = 20] node[anchor= north east] {$\varphi^{\ast}\times \psi^{\ast}$} (m-2-2) 
+(m-1-2)
+edge node[anchor= west] {$\cong$} (m-2-2)
+edge  node[anchor= south] {$p^{\ast}$} (m-1-3)
+(m-2-2)
+edge [bend right = 20] node[anchor= north west] {$\mu$} (m-1-3)
+; 
+\end{tikzpicture}
+\end{equation*}
+Here the isomorphism $h^{q}(S^{n}\vee S^{n})\to h^{q}(S^{n})\times h^{q}(S^{n})$
+is induced by the inclusion maps and $\mu$ is given by $\mu(x, y) = x+y$. 
+\end{proof}
+
+\begin{corollary}
+\label{COHOMOLOGY SN NATURAL COR}
+Let $\{h^{n}_{1}\}$, $\{h^{n}_{2}\}$ be cohomology theories and let 
+$T\colon h^{q}_{1}(S^{n}) \to h^{q}_{2}(S^{n})$ be an arbitrary homomorphism. 
+Then for any map $f\colon S^{n}\to S^{n}$ the following diagram commutes:
+\begin{equation*}
+\label{COHOMOLOGY SN NATURALITY EQ}
+\tag{$\ast$}
+\begin{tikzpicture}[baseline=(current  bounding  box.center)]
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+h_{1}^{q}(S^{n}) & h_{1}^{q}(S^{n}) \\
+h_{2}^{q}(S^{n}) & h_{2}^{q}(S^{n}) \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[anchor= south] {$f^{\ast}$}   (m-1-2)
+edge node[anchor = east] {$T$}  (m-2-1)
+(m-1-2)
+edge node[anchor=  west] {$T$}  (m-2-2)
+(m-2-1)
+edge node[anchor=  north] {$f^{\ast}$}  (m-2-2)
+; 
+\end{tikzpicture}
+\end{equation*}
+\end{corollary}
+
+\begin{proof}
+Using Proposition \ref{COHOMOLOGY MAP ADDITIVITY PROP} 
+we obtain that homotopy classes of maps $f$ for which the diagram 
+(\ref{COHOMOLOGY SN NATURALITY EQ}) commutes form a subgroup of $\pi_{n}(S^{n})$. 
+Since the homotopy class of the identity map $\id_{S^{n}}\colon S^{n}\to S^{n}$ 
+belongs to this subgroup, the subgroup contains all elements of $\pi_{n}(S^{n})$.
+\end{proof}
+
+
+
+
+Let $\{h^{n}\}$ be a cohomology theory and let $X$ be a CW complex. 
+For  $n\geq 0$ consider the map 
+\[
+\varphi_{n} \colon X^{(n+1)}/X^{(n)} \to \Sigma X^{(n)} \to \Sigma (X^{(n)}/X^{(n-1)})
+\]
+Let $d^{n}\colon h^{n}(X^{(n)}/X^{(n-1)}) \to h^{n+1}(X^{(n+1)}/X^{(n)})$
+be a homomorphism given by the composition
+\[
+d^{n}\colon h^{n}(X^{(n)}/X^{(n-1)}) \overset{\Sigma}{\lra} 
+h^{n+1}(\Sigma (X^{(n)}/X^{(n-1)})) \overset{\varphi_{n}^{\ast}}{\lra}
+h^{n+1}(X^{(n+1)}/X^{(n)})
+\]
+
+\begin{proposition}
+\label{CELLULAR CHAIN FOR GEN COHOMOLOGY PROP}
+Let $\{h^{n}\}$ be a cohomology theory. For a CW complex $X$
+consider the maps
+\[
+h^{n-1}(X^{(n-1)}/X^{(n-2)})\overset{d^{n-1}}{\lra}
+h^{n}(X^{(n)}/X^{(n-1)}) \overset{d^{n}}{\lra}
+h^{n+1}(X^{(n+1)}/X^{(n)})
+\] 
+Then $\Im(d^{n-1}) \subseteq \Ker(d^{n})$. Moreover, of $\{h^{n}\}$ satisfies
+the dimension axiom then $h^{n}(X) \cong h^{n}(X^{(n+1)}) \cong \Ker(d^{n})/ \Im(d^{n-1})$.
+
+\end{proposition}
+
+\begin{proof}
+Exercise. Use Lemma \ref{COHOMOLOGY DIM AXIOM LEMMA} and long exact sequences 
+for the pairs $(X^{(n+1)}, X^{(n)})$, $(X^{(n)}, X^{(n-1)})$ and $(X^{(n-1)}, X^{(n-2)})$.
+\end{proof}
+
+
+
+\begin{proof}[Proof of Theorem \ref{SINGULAR COHOMOLOGY UNIQUE THM}]
+We will construct natural isomorphisms $T_{X}\colon h_{1}^{\ast}(X) \to h_{2}^{\ast}(X)$
+in a few steps. 
+
+1) We define $T_{S^{n}} \colon h_{1}^{\ast}(S^{n}) \to h_{2}^{\ast}(S^{n})$
+by induction with respect to $n$. By assumption we have isomorphisms 
+$T_{S^{0}}\colon h_{1}^{\ast}(S^{0}) \to h_{2}^{\ast}(S^{0})$.
+Assume that $T_{S^{n}}$ is already defined for some $n$. Choose a homeomorphism 
+$f_{n+1}\colon S^{n+1} \to \Sigma S^{n}$ and define $T_{S^{n+1}}$ so that the 
+following diagram commutes:
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+h_{1}^{\ast}(S^{n}) & h_{1}^{\ast}(S^{n+1}) \\
+h_{2}^{\ast}(S^{n}) & h_{2}^{\ast}(S^{n+1}) \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[anchor= south] {$f_{n}^{\ast}\Sigma$}  node[anchor=north] {$\cong$} (m-1-2)
+edge node[anchor = east] {$T_{S^{n}}$} node[anchor= west] {$\cong$} (m-2-1)
+(m-1-2)
+edge node[anchor=  west] {$T_{S^{n+1}}$}   (m-2-2)
+(m-2-1)
+edge node[anchor=  north]{$f_{n}^{\ast}\Sigma$}  node[anchor=south] {$\cong$}  (m-2-2)
+; 
+\end{tikzpicture}
+\end{equation*} 
+
+2) By the definition of a cohomology theory, for any set $J$ inclusion maps 
+$S^{n} \to \bigvee_{j\in J} S^{n}$ induce isomorphisms 
+$h^{\ast}_{i}(\bigvee_{j\in J}S^{n}) \overset{\cong}{\lra} \prod_{j\in J} h_{i}^{\ast}(S^{n})$
+Choose isomorphisms $T_{\bigvee_{j\in J}S^{n}}$ so that the following diagram commutes: 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+h^{\ast}_{1}(\bigvee_{j\in J}S^{n}) & \prod_{j\in J} h_{1}^{\ast}(S^{n}) \\
+h^{\ast}_{2}(\bigvee_{j\in J}S^{n}) & \prod_{j\in J} h_{2}^{\ast}(S^{n}) \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge  node[anchor=north] {$\cong$} (m-1-2)
+edge node[anchor = east] {$T_{\bigvee_{j\in J}S^{n}}$} node[anchor= west] {$\cong$} (m-2-1)
+(m-1-2)
+edge node[anchor=  west] {$\prod_{j\in J} T_{S^{n}}$} node[anchor= east] {$\cong$}  (m-2-2)
+(m-2-1)
+edge  node[anchor=south] {$\cong$}  (m-2-2)
+; 
+\end{tikzpicture}
+\end{equation*} 
+
+We claim that isomorphisms $T_{\bigvee_{j\in J}S^{n}}$ defined above are natural with 
+respect to all maps $f\colon \bigvee_{j\in J}S^{n} \to \bigvee_{k\in K}S^{n}$. That is, for any 
+such map the following diagram commutes:
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+h^{\ast}_{1}(\bigvee_{k\in K}S^{n}) & h^{\ast}_{1}(\bigvee_{j\in J}S^{n}) \\
+h^{\ast}_{2}(\bigvee_{k\in K}S^{n}) & h^{\ast}_{2}(\bigvee_{j\in J}S^{n}) \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge  node[anchor=south] {$f^{\ast}$} (m-1-2)
+edge node[anchor = east] {$T_{\bigvee_{k\in K}S^{n}}$} node[anchor= west] {$\cong$} (m-2-1)
+(m-1-2)
+edge node[anchor=  west] {$T_{\bigvee_{j\in J}S^{n}}$} node[anchor= east] {$\cong$}  (m-2-2)
+(m-2-1)
+edge  node[anchor=north]  {$f^{\ast}$}  (m-2-2)
+; 
+\end{tikzpicture}
+\end{equation*} 
+Using the isomorphisms 
+$h^{\ast}_{i}(\bigvee_{j\in J}S^{n}) \cong \prod_{j\in J} h_{i}^{\ast}(S^{n})$
+and compactness of spheres, this can be reduced (exercise) to checking that for any 
+pointed map $f\colon S^{n} \to S^{n}$ we have $f^{\ast}T_{S^{n}} = T_{S^{n}}f_{\ast}$. 
+This,  however, follows from Corollary \ref{COHOMOLOGY SN NATURAL COR}. 
+
+3) There are now two possible ways of obtaining an isomorphism 
+$h^{\ast}_{1}(\Sigma \bigvee_{i\in I} S^{n}) \to h^{\ast}_{2}(\Sigma \bigvee_{i\in I} S^{n})$.
+One is to use the suspension isomorphisms 
+$\Sigma \colon h_{k}^{\ast}(\bigvee_{i\in I} S^{n}) 
+\to  h_{k}^{\ast +1}(\Sigma \bigvee_{i\in I} S^{n})$ and the already defined 
+isomorphism $T_{\bigvee_{i\in I} S^{n}}$. Another is to use the 
+homeomorphism 
+\[
+\bigvee_{i\in I} S^{n+1} \overset{\bigvee f_{n+1}}{\lra}
+\bigvee_{i\in I} \Sigma S^{n} \overset{\bigvee \Sigma j_{i}}{\lra} 
+\Sigma \bigvee_{i\in I} S^{n}
+\]
+and the isomorphism $T_{\bigvee_{i\in I} S^{n+1}}$. Here 
+$f_{n+1}\colon S^{n+1}\to \Sigma S^{n}$ is a homeomorphism and 
+$\Sigma j_{i}$ is the suspension of the inclusion map 
+$j_{i}\colon S^{n} \to \bigvee_{i\in I} S^{n}$. One can check that both these methods 
+give the same isomorphism 
+$T_{\Sigma \bigvee S^{n}} \colon 
+h^{\ast}_{1}(\Sigma \bigvee_{i\in I} S^{n}) \to h^{\ast}_{2}(\Sigma \bigvee_{i\in I} S^{n})$.
+Using naturality of isomorphisms $T_{\bigvee S^{n+1}}$ established in 2), we obtain that 
+for any map $f\colon \bigvee_{j\in J} S^{n+1} \to \Sigma \bigvee_{k\in K} S^{n}$ we have 
+a commutative diagram 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+h^{\ast-1}_{1}(\bigvee_{k\in K}S^{n}) &
+h^{\ast}_{1}(\Sigma \bigvee_{k\in K}S^{n}) & h^{\ast}_{1}(\bigvee_{j\in J}S^{n+1}) \\
+h^{\ast-1}_{2}(\bigvee_{k\in K}S^{n}) &
+h^{\ast}_{2}(\Sigma \bigvee_{k\in K}S^{n}) & h^{\ast}_{2}(\bigvee_{j\in J}S^{n+1}) \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[anchor = east] {$T_{\bigvee_{k\in K}S^{n}}$}  
+node[anchor= west] {$\cong$} (m-2-1)
+edge node[anchor = south] {$\Sigma$}
+node[anchor= north] {$\cong$} (m-1-2)
+(m-2-1) 
+edge node[anchor = north] {$\Sigma$}
+node[anchor= south] {$\cong$} (m-2-2)
+(m-1-2) 
+edge  node[anchor=south] {$f^{\ast}$} (m-1-3)
+edge node[anchor = east] {$T_{\Sigma \bigvee_{k\in K}S^{n}}$} 
+node[anchor= west] {$\cong$} (m-2-2)
+(m-1-3)
+edge node[anchor=  west] {$T_{\bigvee_{j\in J}S^{n+1}}$} 
+node[anchor= east] {$\cong$}  (m-2-3)
+(m-2-2)
+edge  node[anchor=north]  {$f^{\ast}$}  (m-2-3)
+; 
+\end{tikzpicture}
+\end{equation*} 
+
+4) Let now $X$ be an arbitrary pointed CW complex. 
+By Proposition \ref{CELLULAR CHAIN FOR GEN COHOMOLOGY PROP} for $k=1, 2$
+we have isomorphisms $h^{n}_{k}(X) \cong \Ker(d_{k}^{n})/ \Im(d_{k}^{n-1})$ where 
+$d_{k}^{n}\colon h^{n}_{k}(X^{(n)}/X^{(n-1)}) \to h^{n+1}_{k}(X^{(n+1)}/X^{(n)})$. 
+If we could find isomorphisms 
+$T_{X, n} \colon h^{n}_{1}(X^{(n)}/X^{(n-1)}) \to h^{n}_{2}(X^{(n)}/X^{(n-1)})$ such that 
+$d_{2}^{n}T_{X, n} = T_{X, n+1}d_{1}^{n}$, then they would induce isomorphisms 
+\[
+T_{X}\colon h_{1}^{n}(X) \cong \Ker(d_{1}^{n})/ \Im(d_{1}^{n-1})
+\lra
+\Ker(d_{2}^{n})/ \Im(d_{2}^{n-1}) \cong  h_{2}^{n}(X)
+\]
+Such isomorphisms $T_{X, n}$ can be constructed as follows. For each $n$ choose a 
+homeomorphism $f_{n}\colon \bigvee_{i\in I_{n}} S^{n} \to X^{(n)}/X^{(n-1)}$.
+Then define $T_{X, n}$ so that the following diagram commutes: 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+h^{n}_{1}(X^{(n)}/X^{(n-1)}) & h^{n}_{1}(\bigvee_{i\in I_{n}}S^{n})  \\
+h^{n}_{2}(X^{(n)}/X^{(n-1)}) & h^{n}_{2}(\bigvee_{i\in I_{n}}S^{n}) \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge  node[anchor=south] {$f_{n}^{\ast}$} node[anchor= north] {$\cong$} (m-1-2)
+edge node[anchor = east] {$T_{X, n}$}  (m-2-1)
+(m-1-2)
+edge node[anchor=  west] {$T_{\bigvee_{i\in I_{n}}S^{n}}$} 
+node[anchor= east] {$\cong$}  (m-2-2)
+(m-2-1)
+edge  node[anchor=north]  {$f_{n}^{\ast}$}  node[anchor= south] {$\cong$} (m-2-2)
+; 
+\end{tikzpicture}
+\end{equation*}
+Commutativity of isomorphisms $T_{X, n}$ with the maps $d^{n}_{k}$ follows from 
+commutativity of the following diagram: 
+
+
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3.5em, text height=1.5ex, text depth=0.25ex]
+{
+h^{n}_{1}(X^{(n)}/X^{(n-1)}) & 
+h^{n+1}_{1}(\Sigma (X^{(n)}/X^{(n-1)})) & 
+h^{n+1}_{1}(X^{(n+1)}/X^{(n)}) \\
+h^{n}_{1}(\bigvee_{i\in I_{n}} S^{n}) & 
+h^{n+1}_{1}(\Sigma \bigvee_{i\in I_{n}} S^{n}) & 
+h^{n+1}_{1}(\bigvee_{i\in I_{n+1}} S^{n}) \\
+h^{n}_{2}(\bigvee_{i\in I_{n}} S^{n}) & 
+h^{n+1}_{2}(\Sigma \bigvee_{i\in I_{n}} S^{n}) & 
+h^{n+1}_{2}(\bigvee_{i\in I_{n+1}} S^{n}) \\
+h^{n}_{2}(X^{(n)}/X^{(n-1)}) & 
+h^{n+1}_{2}(\Sigma (X^{(n)}/X^{(n-1)})) & 
+h^{n+1}_{2}(X^{(n+1)}/X^{(n)}) \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1.south west)
+edge [bend right = 20] node[anchor=east] {$T_{X, n}$} (m-4-1.north west)
+(m-1-3.south east)
+edge [bend left = 20] node[anchor=west] {$T_{X, n+1}$} (m-4-3.north east)
+(m-1-1) 
+edge [bend left = 20] node[anchor=south] {$d^{n}_{1}$} (m-1-3)
+edge  node[anchor=south] {$\Sigma$} node[anchor= north] {$\cong$} (m-1-2)
+edge node[anchor = east] {$f_{n}^{\ast}$}  node[anchor= west] {$\cong$} (m-2-1)
+(m-1-2)
+edge node[anchor=  west] {$(\Sigma f_{n})^{\ast}$} node[anchor= east] {$\cong$}  (m-2-2)
+edge  node[anchor=south]  {$\varphi_{n}^{\ast}$} (m-1-3)
+(m-1-3)
+edge node[anchor = west] {$f_{n+1}^{\ast}$}  node[anchor= east] {$\cong$} (m-2-3)
+(m-2-1)
+edge  node[anchor=south]  {$\Sigma$}  node[anchor= north] {$\cong$} (m-2-2)
+edge node[anchor = east] {$T_{\bigvee_{i\in I^{n}} S^{n}}$}  node[anchor= west] {$\cong$} (m-3-1)
+(m-2-2)
+edge  node[anchor=south]  {$((\Sigma f_{n})^{-1}\varphi_{n}f_{n+1})^{\ast}$}   (m-2-3)
+edge node[anchor = east] {$T_{\Sigma \bigvee_{i\in I^{n}} S^{n}}$}  node[anchor= west] {$\cong$} (m-3-2)
+(m-2-3)
+edge node[anchor = west] {$T_{\bigvee_{i\in I^{n+1}} S^{n+1}}$}  node[anchor= east] {$\cong$} (m-3-3)
+(m-3-1)
+edge  node[anchor=south] {$\Sigma$} node[anchor= north] {$\cong$} (m-3-2)
+(m-3-2)
+edge node[anchor=south]  {$((\Sigma f_{n})^{-1}\varphi_{n}f_{n+1})^{\ast}$} (m-3-3) 
+(m-4-1)
+edge [bend right = 20] node[anchor=north] {$d^{n}_{2}$} (m-4-3)
+edge node[anchor = east] {$f_{n}^{\ast}$}  node[anchor= west] {$\cong$} (m-3-1)
+edge  node[anchor=south] {$\Sigma$} node[anchor= north] {$\cong$} (m-4-2)
+(m-4-2)
+edge  node[anchor=south]  {$\varphi_{n}^{\ast}$} (m-4-3)
+edge node[anchor=  west] {$(\Sigma f_{n})^{\ast}$} node[anchor= east] {$\cong$}  (m-3-2)
+(m-4-3)
+edge node[anchor = west] {$f_{n+1}^{\ast}$}  node[anchor= east] {$\cong$} (m-3-3)
+;
+\end{tikzpicture}
+\end{equation*}
+The maps $\varphi_{n}$ are defined as in 
+Proposition \ref{CELLULAR CHAIN FOR GEN COHOMOLOGY PROP}. The middle squares commute 
+by 3). 
+
+To check that the isomorphisms $T_{X}$ are natural with respect to maps $f\colon X \to Y$, 
+notice that we can assume that $f$ is cellular and so it induces homomorphisms 
+$f^{\ast}\colon h^{n}_{k}(Y^{(n)}/Y^{(n-1)}) \to h^{n}_{k}(X^{(n)}/X^{(n-1)})$ 
+which commute with the maps $d^{n}_{k}$. Then it remains check that 
+$f^{\ast}T_{Y, n} = T_{X, n}f^{\ast}$. This can be verified using naturality of 
+the isomorphisms $T_{\bigvee S^{n}}$ established in 2).
+
+
+
+
+
+
+\end{proof}

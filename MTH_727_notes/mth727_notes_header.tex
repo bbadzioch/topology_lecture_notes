@@ -1,0 +1,475 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%   (C)  Bernard Badzioch 
+%.  This work is licensed under CC BY-NC-SA 4.0. To view a copy of this license, visit 
+%   https://creativecommons.org/licenses/by-nc-sa/4.0
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% !TEX root = mth727_lecture_notes.tex
+
+\documentclass[11pt, letterpaper, oneside]{report}
+\usepackage{amsmath,amssymb,amsthm,eucal, graphicx, units, stackrel}
+\usepackage{framed}
+\usepackage{accents}
+\usepackage{color}
+\usepackage{pifont}
+\usepackage[headings]{fullpage}
+\usepackage{tocloft}
+\usepackage{wrapfig}
+\usepackage{microtype}
+\usepackage{tikz}
+\usetikzlibrary{calc,through,intersections, arrows, shapes, decorations.markings, matrix, patterns, cd}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{bending}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.12}
+\tikzset{>=latex}
+\usetikzlibrary{external} 
+\tikzexternalize[prefix=tikz/] 
+
+
+
+%%%%%%%%%%%%%%%%%%
+%   RUBICS
+%%%%%%%%%%%%%%%%%%
+
+\usepackage{etoolbox}
+\newtoggle{ShowRubrics}
+\newcommand{\Rubrics}[1]{ \iftoggle{ShowRubrics} { {\footnotesize\color{red}{#1}   } } {}     }
+\settoggle{ShowRubrics}{false}
+%\settoggle{ShowRubrics}{true}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   COLORS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{mypink}{RGB}{255, 178, 164}
+\definecolor{myblue}{RGB}{0, 0, 238}
+
+\definecolor{mygray1}{RGB}{238, 238, 238}
+\definecolor{mygray2}{RGB}{221, 221, 221}
+\definecolor{mygray3}{RGB}{187, 187, 187}
+\definecolor{mygray4}{RGB}{170, 170, 170}
+\definecolor{mygray5}{RGB}{119, 119, 119}
+\definecolor{mygray6}{RGB}{85, 85, 85}
+\definecolor{mygray7}{RGB}{68, 68, 68}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%
+%  GRID WITH COORDS
+%  NEEDED FOR TIKZ GRID
+%%%%%%%%%%%%%%%%%%
+\makeatletter
+\def\grd@save@target#1{%
+  \def\grd@target{#1}}
+\def\grd@save@start#1{%
+  \def\grd@start{#1}}
+\tikzset{
+  grid with coordinates/.style={
+    to path={%
+      \pgfextra{%
+        \edef\grd@@target{(\tikztotarget)}%
+        \tikz@scan@one@point\grd@save@target\grd@@target\relax
+        \edef\grd@@start{(\tikztostart)}%
+        \tikz@scan@one@point\grd@save@start\grd@@start\relax
+        \draw[minor help lines] (\tikztostart) grid (\tikztotarget);
+        \draw[major help lines] (\tikztostart) grid (\tikztotarget);
+        \grd@start
+        \pgfmathsetmacro{\grd@xa}{\the\pgf@x/1cm}
+        \pgfmathsetmacro{\grd@ya}{\the\pgf@y/1cm}
+        \grd@target
+        \pgfmathsetmacro{\grd@xb}{\the\pgf@x/1cm}
+        \pgfmathsetmacro{\grd@yb}{\the\pgf@y/1cm}
+        \pgfmathsetmacro{\grd@xc}{\grd@xa + \pgfkeysvalueof{/tikz/grid with coordinates/major step}}
+        \pgfmathsetmacro{\grd@yc}{\grd@ya + \pgfkeysvalueof{/tikz/grid with coordinates/major step}}
+        \foreach \x in {\grd@xa,\grd@xc,...,\grd@xb}
+        \node[anchor=north] at (\x,\grd@ya) {\pgfmathprintnumber{\x}};
+        \foreach \y in {\grd@ya,\grd@yc,...,\grd@yb}
+        \node[anchor=east] at (\grd@xa,\y) {\pgfmathprintnumber{\y}};
+      }
+    }
+  },
+  minor help lines/.style={
+    help lines,
+    step=\pgfkeysvalueof{/tikz/grid with coordinates/minor step}
+  },
+  major help lines/.style={
+    help lines,
+    line width=\pgfkeysvalueof{/tikz/grid with coordinates/major line width},
+    step=\pgfkeysvalueof{/tikz/grid with coordinates/major step}
+  },
+  grid with coordinates/.cd,
+  minor step/.initial=.2,
+  major step/.initial=1,
+  major line width/.initial=1pt,
+}
+\makeatother
+%%%% END GRID WITH COORDS
+
+
+
+
+%%%%%%%%%%%%%%%%
+% CHAPTER HEADINGS
+%%%%%%%%%%%%%%%%
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+\usepackage{cyklop}
+\definecolor{gray75}{gray}{0.5}
+\newcommand{\hsp}{\hspace{20pt}}
+\titleformat{\chapter}[hang]{\fontfamily{cyklop}\Huge\bfseries}{\thechapter
+\hsp\textcolor{red}{\raisebox{3pt}|}\hsp}{0pt}{\Huge\bfseries}[\vskip 10mm]
+
+
+\usepackage{enumitem}
+\setlist{itemsep= 0pt, parsep= 2pt, topsep=-3pt, partopsep= 0pt}
+\renewcommand{\labelenumi}{\theenumi )} % redefines enumerate labels to 1), 2) 3) etc.
+
+
+\definecolor{linkcol}{rgb}{0, 0, 0.7}
+\usepackage[ linkcolor=gray75, citecolor=linkcol, urlcolor= gray75, colorlinks=true, hypertexnames=false]
+{hyperref}
+
+
+
+%%%%%%%%%%%%%%%%
+% HEADERS
+%%%%%%%%%%%%%%%%
+\setlength{\headheight}{15pt} 
+\newcommand{\cyk}{\fontfamily{cyklop}\fontsize{9}{11}\selectfont}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[L]{
+\cyk
+\thechapter. \leftmark}
+\fancyhead[R]{
+\cyk
+\thepage}
+\renewcommand{\headrulewidth}{0.8pt}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+
+\fancypagestyle{firststyle}
+{
+\fancyhf{}
+\fancyfoot[C]{
+\cyk \thepage
+}
+\renewcommand{\headrulewidth}{0pt}
+}
+
+
+
+%%%%%%%%%%%%%%%%
+% EXERCISES HEADING
+%%%%%%%%%%%%%%%%
+\newcommand{\exercises}{
+\vskip 10mm
+\begin{tikzpicture}[scale=1]
+\draw node[inner sep = 4pt, right,text width=\textwidth -8pt, fill= black!25]
+{
+\fontfamily{cyklop}\selectfont  \raisebox{-8pt}{Exercises to Chapter \arabic{chapter}}
+ };
+\end{tikzpicture}
+}
+
+
+
+%%%%%%%%%%%%%%%%
+% FONTS
+%%%%%%%%%%%%%%%%
+\usepackage{pifont}
+\usepackage[math]{iwona}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THIS FIXES THE MISSING NORM FONT WITH IWONA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{mathtools}
+\usepackage{xparse}
+\DeclarePairedDelimiter\xnorm{\lVert}{\rVert}
+\NewDocumentCommand{\norm}{som}
+ {\IfBooleanTF{#1}
+   {\xnorm*{#3}}
+   {\IfNoValueTF{#2}
+     {\mathopen{|\mkern-.8mu|}#3\mathclose{|\mkern-.8mu|}}
+     {\xnorm[#2]{#3}}%
+   }
+ }
+
+
+
+%%%%%%%%%%%%%%%%
+% IMPROVED \overline
+%%%%%%%%%%%%%%%%
+\makeatletter
+\newsavebox\myboxA
+\newsavebox\myboxB
+\newlength\mylenA
+
+\newcommand*\xov[2][0.75]{%
+    \sbox{\myboxA}{$\m@th#2$}%
+    \setbox\myboxB\null% Phantom box
+    \ht\myboxB=\ht\myboxA%
+    \dp\myboxB=\dp\myboxA%
+    \wd\myboxB=#1\wd\myboxA% Scale phantom
+    \sbox\myboxB{$\m@th\overline{\copy\myboxB}$}%  Overlined phantom
+    \setlength\mylenA{\the\wd\myboxA}%   calc width diff
+    \addtolength\mylenA{-\the\wd\myboxB}%
+    \ifdim\wd\myboxB<\wd\myboxA%
+       \rlap{\hskip 0.5\mylenA\usebox\myboxB}{\usebox\myboxA}%
+    \else
+        \hskip -0.5\mylenA\rlap{\usebox\myboxA}{\hskip 0.5\mylenA\usebox\myboxB}%
+    \fi}
+\makeatother
+%%%%%%%%%%%%%%%%
+% END IMPROVED \overline
+%%%%%%%%%%%%%%%%
+
+
+%%% PARSKIP AND PARINDENT 
+\setlength{\parindent}{0in}
+\setlength{\parskip}{3mm}
+
+\setcounter{secnumdepth}{1}
+\setcounter{tocdepth}{2}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   ENVIRONMENTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\swapnumbers
+
+\newtheoremstyle{pplain}% name of the style to be used
+  {5mm}% measure of space to leave above the theorem. E.g.: 3pt
+  {5mm}% measure of space to leave below the theorem. E.g.: 3pt
+  {\itshape}% name of font to use in the body of the theorem
+  {0pt}% measure of space to indent
+  {\bfseries}% name of head font
+  {.}% punctuation between head and body
+  {5pt plus 1pt minus 1pt}% space after theorem head; " " = normal interword space
+  {#2 #1}% Manually specify head
+ %{\llap{ {\scriptsize  #2 \ } \  {\color{gray75}\ding{121}} \  }#1}% Manually specify head
+
+
+\newtheoremstyle{ddefinition}% name of the style to be used
+ {5mm}% measure of space to leave above the theorem. E.g.: 3pt
+ {5mm}% measure of space to leave below the theorem. E.g.: 3pt
+ {}% name of font to use in the body of the theorem
+ {0pt}% measure of space to indent
+ {\bfseries}% name of head font
+ {.}% punctuation between head and body
+ {5pt plus 1pt minus 1pt}% space after theorem head; " " = normal interword space
+  {#2 #1}% Manually specify head
+  %{\llap{ {\scriptsize  #2 \ } \  {\color{gray75}\ding{121}} \  }#1}% Manually specify head
+
+
+\newtheoremstyle{eexercise}% name of the style to be used
+ {3mm}% measure of space to leave above the theorem. E.g.: 3pt
+ {0mm}% measure of space to leave below the theorem. E.g.: 3pt
+ {}% name of font to use in the body of the theorem
+ {0pt}% measure of space to indent
+ {\bfseries}% name of head font
+ {.}% punctuation between head and body
+ {5pt plus 1pt minus 1pt}% space after theorem head; " " = normal interword space
+ {E#2 #1}% Manually specify head
+ %{\llap{ {\scriptsize  E.#2 \ } \  {\color{gray75}\ding{121}} \  }#1}% Manually specify head
+ 
+ \newtheoremstyle{nnn}% name of the style to be used
+ {5mm}% measure of space to leave above the theorem. E.g.: 3pt
+ {5mm}% measure of space to leave below the theorem. E.g.: 3pt
+ {}% name of font to use in the body of the theorem
+ {0pt}% measure of space to indent
+ {\bfseries}% name of head font
+ {}% punctuation between head and body
+ {0pt}% space after theorem head; " " = normal interword space
+  {#2 #1}% Manually specify head
+  %{\llap{ {\scriptsize  #2 \ } \  {\color{gray75}\ding{121}} \  }#1}% Manually specify head
+ 
+ 
+
+
+\theoremstyle{pplain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+
+\newtheorem{CELLAPPROXTHM}[theorem]{Cellular Approximation Theorem}
+\newtheorem{INDUCTIVEHOMOTLEMMA}[theorem]{Inductive Homotopy Lemma}
+\newtheorem{ECKMAN-HILTON THM}[theorem]{Eckmann–Hilton Theorem}
+\newtheorem{LIFTCRITTHM}[theorem]{Theorem (Lifting Criterion)}
+\newtheorem{HOMOTEXCISIONTHM}[theorem]{Excision Theorem}
+\newtheorem{FREUDENTHALTHM}[theorem]{Freudenthal Suspension Theorem}
+\newtheorem{HUREWICZISO THM}[theorem]{Hurewicz Isomorphism Theorem}
+\newtheorem{INVHUREWICZISO THM}[theorem]{Inverse Hurewicz Isomorphism Theorem}
+\newtheorem{RELINVHUREWICZISO THM}[theorem]{Relative Inverse Hurewicz Isomorphism Theorem}
+
+\theoremstyle{ddefinition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{cordef}[theorem]{Corollary/Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{examples}[theorem]{Examples}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{problem}[theorem]{Problem}     
+\newtheorem{definition/proposition}[theorem]{Definition/Proposition}  
+ 
+ 
+\theoremstyle{nnn}
+\newtheorem{nn}[theorem]{}    
+ 
+ 
+\theoremstyle{eexercise}
+\newtheorem{exercise}{Exercise}[chapter]     
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   MACROS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%% ARROWS
+
+\newcommand{\noi}{\noindent}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\la}{\leftarrow}
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\lla}{\longleftarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\La}{\Leftarrow}
+\newcommand{\hra}{\hookrightarrow}
+
+
+
+%%% RINGS AND FIELDS
+
+\newcommand{\N}{{\mathbb N}}
+\newcommand{\Z}{{\mathbb Z}}
+\newcommand{\Q}{{\mathbb Q}}
+\newcommand{\R}{{\mathbb R}}
+\newcommand{\C}{{\mathbb C}}
+\newcommand{\HH}{{\mathbb H}}
+\newcommand{\F}{{\mathbb F}}
+
+
+%%% MORPHISM SETS
+
+\newcommand{\Mor}{\mathrm{Mor}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Map}{\mathrm{Map}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\Inn}{\mathrm{Inn}}
+\newcommand{\Out}{\mathrm{Out}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\Perm}{\mathrm{Perm}}
+\newcommand{\Iso}{\mathrm{Iso}}
+\newcommand{\Orb}{\mathrm{Orb}}
+
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\Bd}{\operatorname{Bd}}
+
+\newcommand{\Ob}{\mathrm{Ob}}
+
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\inv}{\mathrm{inv}}
+
+
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Coker}{\operatorname{Coker}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\subgp}[1]{\langle#1\rangle}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\irr}{\operatorname{irr}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\nil}{\operatorname{nil}}
+\newcommand{\hofib}{\operatorname{hofib}}
+
+
+%%% CATEGORIES
+\renewcommand{\AA}{{\mathbf A}}
+\newcommand{\BB}{{\mathcal B}}
+\newcommand{\CC}{{\mathbf C}}
+\newcommand{\DD}{{\mathbf D}}
+\newcommand{\FF}{{\mathbf F}}
+\newcommand{\MM}{{\mathcal M}}
+\renewcommand{\SS}{{\mathcal S}}
+\newcommand{\UU}{{\mathcal U}}
+\newcommand{\VV}{{\mathcal V}}
+\newcommand{\TT}{{\mathcal T}}
+\newcommand{\YY}{{\mathcal Y}}
+\newcommand{\XX}{{\mathcal X}}
+\newcommand{\ZZ}{{\mathcal Z}}
+\newcommand{\Ab}{{\mathbf{Ab}}}
+\newcommand{\Gr}{{\mathbf{Gr}}}
+\newcommand{\Ring}{{\mathcal Ring}}
+\newcommand{\Top}{{\mathbf{Top}}}
+\newcommand{\Set}{{\mathbf{Set}}}
+\newcommand{\TSet}{{\mathbf{TSet}}}
+\newcommand{\Cov}{{\mathbf{Cov}}}
+\newcommand{\PCov}{{\mathbf{PCov}}}
+\newcommand{\Cat}{{\mathbf{Cat}}}
+\newcommand{\CW}{{\mathbf{CW}}}
+
+\newcommand{\Mod}{{\mathcal Mod}}
+\newcommand{\ccal}{{\mathcal C}}
+\newcommand{\cfin}{{\mathcal{C}_{\text{fin}}}}
+\newcommand{\cfg}{{\mathcal{C}_{\text{fg}}}}
+\newcommand{\ctor}{{\mathcal{C}_{\text{tor}}}}
+\newcommand{\cptor}[1]{{\mathcal{C}_{#1\text{-tor}}}}
+
+%%% SPACES
+\newcommand{\pint}{{\partial I}}
+
+
+%%% VARIA
+
+\newcommand{\ssmin}{\smallsetminus}
+\renewcommand{\setminus}{\ssmin}
+
+\newcommand{\bpm}{\begin{pmatrix}}
+\newcommand{\epm}{\end{pmatrix}}
+
+\newcommand{\benu}{\begin{enumerate}}
+\newcommand{\eenu}{\end{enumerate}}
+
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+
+
+\newcommand{\ntilde}{\skew{3}\tilde}
+\newcommand{\nwidetilde}{\skew{4}\widetilde}
+
+
+\newcommand{\vs}{\vskip 5mm}
+\newcommand{\msp}{\phantom{-}}     
+
+\newcommand{\RP}{{\mathbb R\mathbb P}}
+\newcommand{\CP}{{\mathbb C\mathbb P}}
+\DeclareMathOperator\supp{supp}
+\DeclareMathOperator\colim{colim}
+\DeclareMathOperator\pr{pr}
+\DeclareMathOperator\ev{ev}
+\DeclareMathOperator\adj{adj}
+\newcommand{\rel}{\mathrm{rel\ }}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   END MACROS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%

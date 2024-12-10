@@ -1,0 +1,384 @@
+% !TEX root = mth727_lecture_notes.tex
+
+
+\chapter[Exact Puppe Sequence]{Exact Puppe Sequence}
+\chaptermark{Exact Puppe Sequence}
+\label{EXACT PUPPE SEQUENCE CHAPTER}
+\thispagestyle{firststyle}
+
+Recall that a sequence of pointed sets 
+\[
+(S_{2}, s_{2}) \overset{f}{\lra} (S_{1}, s_{1}) \overset{g}{\lra} (S_{0}, s_{0})
+\]
+is \emph{exact at $S_{1}$} if $f(S_{2}) = g^{-1}(s_{0})$. 
+
+
+For pointed spaces $(X, x_{0})$ and $(Y, y_{0})$ let $[X, Y]_{\ast}$ denote the set of 
+pointed homotopy classes of maps $X\to Y$. This is a pointed set, with the basepoint 
+represented by the constant function $c_{y_{0}}\colon X \to Y$, $c_{y_{0}}(x) = y_{0}$
+for all $x\in X$. 
+
+
+\begin{definition}
+A pointed space $(X, x_{0})$ is well-pointed if the pair $(X, x_{0})$ has the homotopy 
+extension property.
+\end{definition}
+
+
+\begin{definition}
+A sequence of maps of spaces 
+\[
+(X_{0}, x_{0}) \overset{f_{0}}{\lra} (X_{1}, x_{1}) \overset{f_{1}}{\lra} (X_{2}, x_{2})
+\]
+is \emph{exact at $X_{1}$} is for any well-pointed space $(Y, y_{0})$ the sequence 
+pointed sets 
+\[
+[Y, X_{0}]_{\ast} \overset{f_{0\ast}}{\lra}
+[Y, X_{1}]_{\ast} \overset{f_{1\ast}}{\lra}
+[Y, X_{2}]_{\ast}
+\]
+is exact at $[Y, X_{1}]_{\ast}$.
+\end{definition}
+
+
+\begin{proposition}
+If $p\colon E\to B$ is a Hurewicz fibration, $e_{0}\in E$, $b_{0} = p(e_{0})\in B$
+$F = p^{-1}(b_{0})$, and $i\colon F \to E$ is the inclusion map 
+then the sequence $(F, e_{0}) \overset{i}{\lra}  (E, e_{0}) 
+\overset{p}{\lra} (B, b_{0})$ is exact at $E$.
+\end{proposition}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+Let $f\colon (X, x_{0}) \to (Y, y_{0})$ be any pointed map. Consider the sequence 
+\[
+\hofib f \overset{i(f)}{\lra} X \overset{f}{\lra} Y
+\]
+where 
+\[
+i(f)\colon 
+\hofib_{y_{0}}f = \{(x, \omega) \in X \times PY \ |\ 
+f(x)=\omega(0), \ \omega(1) = y_{0}\} \lra X
+\]
+is given by $i(f)(x, \omega) = x$.
+Since this sequence is homotopy equivalent to a sequence given by a Hurewicz fibration, 
+it is exact at $X$. We can continue this construction inductively, by taking  
+consecutive homotopy fibers:
+\begin{equation*}
+\label{ITERATED HOFIB EQ}
+\tag{$\ast$}
+\dots \lra
+\hofib i^{3}(f) \overset{i^{4}(f)}{\lra} 
+\hofib i^{2}(f) \overset{i^{3}(f)}{\lra} 
+\hofib i(f) \overset{i^{2}(f)}{\lra} 
+\hofib f \overset{i(f)}{\lra} X \overset{f}{\lra} Y
+\end{equation*}
+In this way we obtain a sequence which is exact at all spaces. As it turns out, 
+this sequence has a more convenient description. The starting point for it is 
+the following fact:
+
+\begin{proposition}
+\label{HOFIB MAP IS FIBRATION PROP}
+Let $f\colon X\to Y$ be a map and $y_{0}\in Y$. Then the map 
+$i(f)\colon \hofib_{y_{0}}f \lra X$ is a Hurewicz fibration.
+\end{proposition} 
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+
+\begin{corollary}
+\label{HOFIB I(F) IS LOOP SPACE COR}
+For any map of pointed spaces $f\colon (X, x_{0}) \to (Y, y_{0})$ we have 
+a commutative diagram 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep= 2em, column sep=2em, text height=1.5ex, text depth=0.25ex]
+{
+\hofib i(f)  & \hofib f & X & Y \\
+\Omega Y     & \\ 
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[above] {$i^{2}(f)$} (m-1-2)
+(m-1-2)
+
+edge node[above] {$i(f)$} (m-1-3)
+(m-1-3)
+edge node[above] {$f$} (m-1-4)
+(m-2-1)
+edge node[anchor= east] {$g$} node[anchor= west] {$\simeq$} (m-1-1)
+edge node[anchor= north west] {$j$} (m-1-2)
+; 
+\end{tikzpicture}
+\end{equation*}
+\end{corollary}
+
+
+\begin{proof}
+We have 
+\[
+i(f)^{-1}(x_{0}) = \{(x_{0}, \omega) \in X \times PY \ |\ 
+\omega(0) = f(x_{0}) = y_{0}, \ \omega(1) = y_{0}\} \cong \Omega Y
+\]
+Thus $\Omega Y$ can be identified with the fiber of $i(f)$ over $y_{0}$,
+and the map $j\colon \Omega Y \to \hofib f$, $j(\omega) = (x_{0}, \omega)$
+with the inclusion of the fiber. By Proposition \ref{HOFIB MAP IS FIBRATION PROP}
+and Corollary \ref{FIBER VS HOFIBER COROLLARY} we obtain a homotopy 
+equivalence $g\colon \Omega Y \to \hofib i(f)$ such that the above diagram commutes.
+\end{proof}
+
+\begin{note}
+The homotopy equivalence in Corollary \ref{HOFIB I(F) IS LOOP SPACE COR}
+can be explicitly described as follows. Up to a homeomorphism we have 
+\[
+\hofib i(f) = 
+\{ (\omega, \tau)\in PX \times PY \ | \ 
+f\omega(0) = \tau(0), \ \omega(1) = y_{0}, \ \tau(1) = x_{0}\}
+\]
+Then $i^{2}(f)\colon \hofib i(f) \to \hofib f$ is given by 
+$(\omega, \tau) = (\omega(0), \tau)$ and $g(\tau) = (c_{x_{0}}, \tau)$. 
+\end{note}
+
+Applying Corollary \ref{HOFIB I(F) IS LOOP SPACE COR} iteratively to the sequence 
+(\ref{ITERATED HOFIB EQ}) we get homotopy equivalences
+\begin{align*}
+& \hofib i(f) \overset{\simeq}{\longleftarrow}\Omega Y  \\
+& \hofib i^{2}(f) \overset{\simeq}{\longleftarrow}\Omega X  \\
+& \hofib i^{3}(f) \overset{\simeq}{\longleftarrow}\Omega \hofib f  \\
+& \hofib i^{4}(f) \overset{\simeq}{\longleftarrow}\Omega \hofib i(f) \simeq \Omega^{2} Y \\
+& \hofib i^{5}(f) \overset{\simeq}{\longleftarrow}\Omega \hofib i^{2}(f) \simeq \Omega^{2} X \\
+& \dots \ \ \ \dots \ \ \ \dots \ \ \ \ \dots \ \ \ \dots \\
+\end{align*}
+Moreover, one can check that the following diagram commutes up to homotopy:
+
+\begin{equation*}
+\label{PUPPE EXACT SEQ EQ}
+\tag{$\ast\ast$}
+\begin{tikzpicture}[baseline=(current  bounding  box.center)]
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=1.5em, text height=1.5ex, text depth=0.25ex]
+{
+{\dots}  & \hofib i^{4} (f) & \hofib i^{3} (f) & \hofib i^{2} (f) & \hofib i(f) & \hofib f & X & Y \\
+{\dots}  & \Omega^{2} Y & \Omega \hofib f & \Omega X & \Omega Y & \hofib f & X & Y \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1)
+edge (m-1-2)
+(m-1-2)
+edge node[above] {$i^{5}(f)$} (m-1-3)
+(m-1-3) 
+edge node[above] {$i^{4}(f)$} (m-1-4)
+(m-1-4) 
+edge node[above] {$i^{3}(f)$} (m-1-5)
+(m-1-5) 
+edge node[above] {$i^{2}(f)$} (m-1-6)
+(m-1-6) 
+edge node[above] {$i(f)$} (m-1-7)
+(m-1-7) 
+edge node[above] {$f$} (m-1-8)
+
+(m-2-1)
+edge (m-2-2)
+(m-2-2) 
+edge node[below] {$\Omega j$} (m-2-3)
+edge node[pos=0.45, anchor = south, rotate=90] {$\simeq$} (m-1-2)
+(m-2-3) 
+edge node[below] {$\Omega i(f)$} (m-2-4)
+edge node[pos=0.45, anchor = south, rotate=90] {$\simeq$} (m-1-3)
+(m-2-4) 
+edge node[below] {$\Omega f$} (m-2-5)
+edge node[pos=0.45, anchor = south, rotate=90] {$\simeq$} (m-1-4)
+(m-2-5) 
+edge node[below] {$j$} (m-2-6)
+edge node[anchor=south, rotate=90] {$\simeq$}(m-1-5)
+(m-2-6) 
+edge node[below] {$i(f)$} (m-2-7)
+edge node[pos=0.45, anchor = south, rotate=90] {$=$} (m-1-6)
+(m-2-7) 
+edge node[below] {$f$} (m-2-8)
+edge node[pos=0.45, anchor = south, rotate=90] {$=$} (m-1-7)
+(m-2-8) 
+edge node[pos=0.45, anchor = south, rotate=90] {$=$} (m-1-8)
+;
+\end{tikzpicture}
+\end{equation*}
+
+Since the upper row of this diagram is exact, the same is true for the lower row. 
+
+\begin{definition}
+The sequence in the lower row of the diagram (\ref{PUPPE EXACT SEQ EQ})
+is called the \emph{Puppe exact sequence} associated to the map $f$.
+\end{definition}
+
+As a consequence, for any map of pointed spaces $f\colon (X, x_{0}) \to (Y, y_{0})$
+and any well-pointed space $(Z, z_{0})$ we obtain a long exact sequence of sets: 
+\begin{multline*}
+\label{PUPPE EXACT HOMOTOPY CLASSES SEQ EQ}
+\tag{\maltese}
+\dots 
+\overset{\Omega^{2} f_{\ast}}{\lra} [Z, \Omega^{2} Y]_{\ast}
+\overset{\Omega j_{\ast}}{\lra} [Z, \Omega \hofib f ]_{\ast}
+\overset{\Omega i(f)_{\ast}}{\lra} [Z, \Omega X ]_{\ast} 
+\overset{\Omega f_{\ast}}{\lra} [Z, \Omega Y ]_{\ast} 
+\\
+\overset{j_{\ast}}{\lra} [Z, \hofib f ]_{\ast} 
+\overset{i(f)_{\ast}}{\lra} [Z, X ]_{\ast} 
+\overset{f_{\ast}}{\lra} [Z, Y ]_{\ast} 
+\end{multline*}
+
+\begin{note}
+\label{LOOP SPACE TO GROUP STRUCTURE NOTE}
+For any pointed space $(X, x_{0})$ and $n\geq 1$ the loop space $\Omega^{n} X$ 
+is quipped with a multiplication map 
+$\mu\colon \Omega^{n} X \times \Omega^{n} X \to \Omega^{n} X$
+given by concatenation of loops. 
+For any pointed space $(Z, z_{0})$ this defines a multiplication 
+\[
+\mu_{\ast}\colon [Z, \Omega^{n} X]_{\ast} \times [Z, \Omega^{n} X]_{\ast} 
+\to [Z, \Omega^{n} X]_{\ast}
+\]
+given by $\mu_{\ast}([\varphi], [\psi]) = [\mu\circ (\varphi\times \psi)]$.
+This equips the set $[Z, \Omega^{n} X]_{\ast}$ with a group structure.
+Moreover, for $n\geq 2$ the multiplication $\mu$ commutes up to homotopy, 
+and in effect $[Z, \Omega^{n} X]_{\ast}$ becomes an abelian group.
+
+As a result the exact sequence (\ref{PUPPE EXACT HOMOTOPY CLASSES SEQ EQ})
+becomes an exact sequence of groups starting at $[Z, \Omega Y]_{\ast}$
+and its groups are abelian starting with $[Z, \Omega^{2} Y]_{\ast}$
+\end{note}
+
+
+
+
+\begin{nn}{\bf Loop spaces and suspensions.} There is a different way of interpreting 
+group structures appearing in the sequence (\ref{PUPPE EXACT HOMOTOPY CLASSES SEQ EQ}), 
+which uses suspensions of a space in place of loop spaces.
+\end{nn}
+
+
+
+
+\begin{definition}
+Let $X$ be a space. The \emph{unreduced suspension} of $X$ if the space
+\[
+SX = X \times [0, 1]/(X\times \{0, 1\})
+\]
+\end{definition}
+
+
+
+
+
+\begin{note}
+Any map $f\colon X \to Y$ defines a map $Sf\colon SX \to SY$ given by $Sf([x, t]) = [f(x), t]$. 
+This map is called the suspension of $f$. In this way we obtain the suspension functor
+\[
+S \colon \Top \to \Top
+\]
+This functor preserves homotopy classes of maps: if $f, g\colon X \to Y$ and $f\simeq g$
+then $Sf \simeq Sg$. 
+\end{note}
+
+\begin{example}
+For a sphere $S^{n}$ we have $SS^{n} \cong S^{n+1}$. 
+\end{example}
+
+
+\begin{definition}
+Let $(X, x_{0})$ be a pointed space. The \emph{reduced suspension} of $X$ is the 
+pointed space
+\[
+\Sigma X = X \times [0, 1]/(X\times \{0, 1\}\cup \{x_{0}\}\times [0, 1])
+\]
+or equivalently $\Sigma X = SX/\{[x_{0}, t] \ | \ t\in [0, 1]\}$.
+The basepoint in $\Sigma X$ is given by $[x_{0}, 0]\in \Sigma X$. 
+\end{definition}
+
+
+\begin{note}
+If $(X, x_{0})$ is a well-pointed space, then  Proposition \ref{CONTR QUOTIENT WITH HEP PROP}
+implies that the quotient map $SX \to \Sigma X$ is a homotopy equivalence. In particular, 
+for any basepoint $x_{0}\in S^{n}$ we have $\Sigma S^{n} \simeq SS^{n} \cong S^{n+1}$. 
+One can show that actually there is a homeomorphism $\Sigma  S^{n} \cong S^{n+1}$ 
+\end{note}
+
+
+\begin{note}
+\label{SUSPENSION LOOP ADJUNCTION NOTE}
+Any map  $f\colon (X, x_{0}) \to (Y, y_{0})$ of pointed spaces, defines a map  
+$\Sigma f\colon \Sigma X \to  \Sigma Y$ given by $\Sigma f ([x, t]) = [f(x), t]$. This 
+defines the suspension functor
+\[
+\Sigma \colon \Top_{\ast} \to \Top_{\ast}
+\] 
+\end{note}
+
+Similarly as for the unreduced suspension, the reduced suspension preserves 
+homotopy classes: if $f, g\colon (X, x_{0}) \to (Y, y_{0})$ are maps of pointed spaces 
+and  $f\simeq g$ then $\Sigma f \simeq \Sigma g$. 
+
+Let $X$ be a Hausdorff space. By properties of mapping spaces 
+(\ref{MAPPING SPACE PROPERTIES NN}) the adjunction map $\adj(\omega) = \omega^{\sharp}$
+defines a homeomorphism $\adj\colon \Map(X\times [0, 1], Y) \to \Map(X, PY)$. Let 
+$(X, x_{0})$ and  $(Y, y_{0})$ be pointed spaces. Consider $\Omega_{y_{0}} Y$ as a subspace 
+of $PY$ and let $\Map_{\ast}(X, \Omega_{y_{0}} Y)$ be the subspace of    
+$\Map(X, PY)$ consisting of basepoint preserving maps. Then $\adj$ 
+restricts to a homeomorphism between this subspace and the subspace of 
+$\Map(X\times [0, 1], Y)$ consisting of all maps $f\colon X\times [0, 1]\to Y$ such that 
+$f(X\times \{0, 1\}\cup \{x_{0}\}\times [0, 1]) = y_{0}$. Such maps are in a bijective 
+correspondence with basepoint preserving maps $\Sigma X \to Y$. In this way we 
+obtain a homeomorphism 
+\[
+\adj\colon \Map_{\ast}(\Sigma X, Y) \overset{\cong}{\lra} \Map_{\ast}(X, \Omega Y)
+\]
+On the level of homotopy classes of maps this gives a bijection 
+\[
+\adj\colon [\Sigma X, Y]_{\ast} \overset{\cong}{\lra} [X, \Omega Y]_{\ast}
+\]
+The set of the right hand side has a group structure induced by concatenation of 
+loops. A group structure on the left hand side can be defined using the pinch map 
+$\Sigma X \to \Sigma X \vee \Sigma X$. In this way the above bijection becomes 
+an isomorphism of groups. 
+
+As a result, the exact sequence (\ref{PUPPE EXACT HOMOTOPY CLASSES SEQ EQ}) can be 
+equivalently written as 
+
+\begin{multline*}
+\dots 
+\overset{f_{\ast}}{\lra} [\Sigma^{2} Z, Y]_{\ast}
+\overset{j_{\ast}\adj}{\lra} [\Sigma Z,  \hofib f ]_{\ast}
+\overset{i(f)_{\ast}}{\lra} [\Sigma Z,  X ]_{\ast} 
+\overset{f_{\ast}}{\lra} [\Sigma Z, Y ]_{\ast} 
+\overset{j_{\ast}\adj}{\lra} [Z, \hofib f ]_{\ast} 
+\overset{i(f)_{\ast}}{\lra} [Z, X ]_{\ast} 
+\overset{f_{\ast}}{\lra} [Z, Y ]_{\ast} 
+\end{multline*}
+
+Consider this sequence with $Z=S^{0}$. Since $\Sigma^{n} S^{0}\cong S^{n}$ we obtain
+
+\begin{multline*}
+\dots 
+\overset{f_{\ast}}{\lra} [S^{2}, Y]_{\ast}
+\overset{j_{\ast}\adj}{\lra} [S^{1},  \hofib f ]_{\ast}
+\overset{i(f)_{\ast}}{\lra} [S^{1},  X ]_{\ast} 
+\overset{f_{\ast}}{\lra} [S^{1}, Y ]_{\ast} 
+\overset{j_{\ast}\adj}{\lra} [S^{0}, \hofib f ]_{\ast} 
+\overset{i(f)_{\ast}}{\lra} [S^{0}, X ]_{\ast} 
+\overset{f_{\ast}}{\lra} [S^{0}, Y ]_{\ast} 
+\end{multline*}
+
+Since $[S^{n}, Y]_{\ast} = \pi_{n}(Y)$ we recover the long 
+exact sequence from Corollary \ref{HOMOTOPY FIBRATION EX SEQ COR}.  
+
+
+
+
+
+
+
+

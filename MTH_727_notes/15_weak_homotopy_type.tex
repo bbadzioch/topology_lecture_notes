@@ -1,0 +1,288 @@
+% !TEX root = mth727_lecture_notes.tex
+
+
+\chapter[Weak Homotopy Type]{Weak \\ Homotopy Type}
+\chaptermark{Weak Homotopy Type}
+\label{WEAK HOMOTOPY TYPE CHAPTER}
+\thispagestyle{firststyle}
+
+
+A complication with studying weak equivalences is that two spaces can be related 
+via a chain of weak equivalences even when there is no direct weak equivalence 
+between them. For example, take $X, Y\subseteq \R$ where $X$ consist of all 
+rational numbers and $Y = \{\frac{1}{n} \ | \  n = 1, 2, \dots\} \cup \{0 \}$. 
+Since every path connected component of $X$ and $Y$ consists of a single point, 
+$\pi_{0}(X)$ and $\pi_{0}(Y)$ are countable sets and all higher 
+homotopy groups are trivial. A weak equivalence $X\to Y$ would need to be a 
+continuous bijection in order to induce a bijection $\pi_{0}(X) \to \pi_{0}(Y)$. 
+However, one can check that there is no such continuous bijection. 
+By the same argument, there is no weak equivalence $Y\to X$. 
+On the other hand, if we take the set of integers $\Z$ with 
+the discrete topology, then any bijections $\Z\to X$ and $\Z \to Y$ are continuous 
+functions and they are weak equivalences. Thus the spaces $X$ and $Y$ are related 
+by a chain of weak equivalences: 
+\[
+X \la \Z \ra Y 
+\]
+This motivates the following definition:
+
+\begin{definition}
+Spaces $X$ and $Y$ are \emph{weakly equivalent} 
+(or have the same \emph{weak homotopy type}) if they can be connected 
+by a zigzag of weak equivalences 
+\[
+X = Z_{0} \ra Z_{1} \la Z_{2} \ra \dots \la Z_{n-1} \ra Z_{n} = Y
+\]
+\end{definition}
+
+
+\begin{proposition}
+\label{CW COMPLEX WEAK TYPE PROP}
+If $X$, $Y$ are CW complexes then they are weakly equivalent if and only if 
+they are homotopy equivalent.
+\end{proposition}
+
+\begin{proof}
+Assume that $X$, $Y$ are connected by a zigzag of $n$ weak equivalences:
+\begin{equation*}
+\label{WE ZIGZAG EQ}
+\tag{$\ast$}
+X = Z_{0} \overset{f_{1}}{\ra} Z_{1} 
+\overset{f_{2}}{\la} Z_{2} \ra \dots 
+\la Z_{n-1} \overset{f_{n}}{\ra} Z_{n} = Y
+\end{equation*}
+We will show that $X\simeq Y$ by induction with respect to $n$. 
+If $n=1$, then we have a weak equivalence $X=Z_{0} \to Z_{1} = Y$, which 
+by Theorem \ref{WEAK EQUIV CW THM} is a homotopy equivalence. 
+
+Assume that the statement is true for any zigzag consisting of $n-1$ or fewer weak 
+equivalences and that $X$, $Y$ are connected by a sequence (\ref{WE ZIGZAG EQ}). 
+By Corollary \ref{N EQUIV HOMOT CLASSES COR}
+the map $f_{2\ast}\colon [X, Z_{2}]\to [X, Z_{1}]$ is a bijection. This means
+that there exists a map $g\colon X \to Z_{2}$ such that $f_{2}g \simeq f_{1}$.
+By Proposition \ref{WE PROPERTIES PROP} the map $g$ is a weak equivalence. 
+Thus we obtain a zigzag of weak equivalences of the form:
+\[
+X  \overset{g}{\ra} Z_{2} 
+\overset{f_{3}}{\ra} Z_{3} \la \dots 
+\la Z_{n-1} \overset{f_{n}}{\ra} Z_{n} = Y
+\]
+By the inductive assumption $X\simeq Y$.  
+\end{proof}
+
+For spaces that are not CW complexes, the study of their
+weak homotopy type can be simplified using the notion of a CW approximation. 
+
+\begin{definition}
+\label{CW APPROX DEF}
+A \emph{CW approximation} of a space $X$ is a CW complex $Y$ together with a 
+weak equivalence $f\colon Y\to X$. 
+
+More generally, a  \emph{CW approximation} of a pair $(X, A)$ is a relative 
+CW complex $(Y, A)$ together with a weak equivalence $f\colon Y \to X$ such that 
+$f|_{A} = \id_{A}$.  
+\end{definition}
+
+Notice that a CW approximation of a space $X$ is the same as 
+a CW approximation of the pair $(X, \varnothing)$.
+
+We will show that the following holds: 
+
+\begin{theorem}
+\label{CW APPROX THM}
+Any pair $(X, A)$ has a CW approximation. Moreover, any two CW approximations 
+for such a pair are homotopy equivalent.
+\end{theorem}
+
+\begin{corollary}
+Spaces $X$, $Y$ are weakly eqivalent if and only if there exists a space 
+$Z$ and weak equivalences $X \la Z \ra Y$. 
+\end{corollary}
+
+\begin{proof} 
+If such a space $Z$ exists, then by definition $X$ and $Y$ are weakly equivalent. 
+Conversely, assume that we have a zigzag of weak equivalences connecting $X$ and $Y$:
+\[
+X = Z_{0} \overset{f_{1}}{\ra} Z_{1} 
+\overset{f_{2}}{\la} Z_{2} \ra \dots 
+\la Z_{n-1} \overset{f_{n}}{\ra} Z_{n} = Y
+\]
+We can extend it to 
+\[
+X’ \overset{g_{X}}{\ra}
+X = Z_{0} \overset{f_{1}}{\ra} Z_{1} 
+\overset{f_{2}}{\la} Z_{2} \ra \dots 
+\la Z_{n-1} \overset{f_{n}}{\ra} Z_{n} = Y
+\overset{g_{Y}}{\la} Y’
+\]
+where $g_{X}\colon X’\to X$ and $g_{Y}\colon Y’\to Y$ are CW approximations 
+of $X$ and $Y$, respectively. By Proposition \ref{CW COMPLEX WEAK TYPE PROP}
+there exists a homotopy equivalence $h\colon X’ \to Y’$. Thus we obtain 
+a diagram of weak equivalences:
+$X \overset{g_{X}}{\longleftarrow} X’ \overset{g_{Y}h}{\lra} Y$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{CW APPROX THM}]
+Assume first that $X$ is a path connected space.
+For $n=0, 1, \dots $ we will construct relative CW complexes $(Y^{(n)}, A)$ 
+and maps $f^{(n)}\colon Y^{(n)}\to X$ such that 
+\benu
+\item[1)] $Y^{(n)}$ is obtained from $Y^{(n-1)}$ by attaching $n$-cells. 
+\item[2)] $f^{(0)}|_{A} = \id_{A}$ and $f^{(n)}|_{Y^{(n-1)}} = f^{(n-1)}$
+\item[3)] $f^{(n)}_{\ast}\colon \pi_{i}(Y^{(n)})\to \pi_{i}(X)$ is an 
+isomorphism for $i < n$ and epimorphism for $i=n$.
+\eenu
+Then the map $\bigcup_{n} f^{(n)}\colon \bigcup_{n} Y^{(n)} \to X$ will give 
+a CW approximation of $(X, A)$. 
+
+
+Let $\{A_{i}\}_{i\in I}$ be path connected components of $A$. Also, let 
+$x_{0}\in X$. For each $i\in I$ choose a point $a_{i}\in A_{i}$. Let $(Y^{(1)}, A)$ 
+be a 1-dimensional relative CW complex obtained by:
+\benu
+\item[\textbullet] adding to $A$ a single $0$-cell $e^{0}$;
+\item[\textbullet] for each $i\in I$ adding to $A\cup e^{0}$ a $1$-cell $e_{i}^{1}$
+attached to the points $e_{0}$ and $a_{i}$. 
+\item[\textbullet] for each element $[\tau\colon (S^{1}, s_{0}) \to (X, x_{0})]
+\in \pi_{1}(X, x_{0})$ attaching to the resulting space a circle $S^{1}_{\tau}$, 
+by identifying $s_{0}$ with $e^{0}$.
+\eenu
+Since $X$ is path connected, for each $i\in I$
+there is a path $\omega_{i}\colon [0, 1]\to X$ such that $\omega_{i}(0) = x_{0}$
+and $\omega_{i}(1) = a_{i}$. Take a map $f^{(1)}\colon Y^{(1)} \to X$ 
+such that $f^{(1)}(x) = x$ for all $x\in A$, $f^{(1)}(e^{0}) = x_{0}$. 
+Also, $f^{(1)}$ maps each cell $e^{1}_{i}$ using the path $\omega_{i}$, and each 
+circle $S^{1}_{\tau}$ using the map $\tau$. Notice that 
+$f^{(1)}_{\ast}\colon \pi_{i}(Y^{(1)}, e_{0}) \to \pi_{i}(X, x_{0})$ 
+is a bijection for $i=0$ and it is onto for $i=1$.
+
+
+Next, assume that for $i=1, \dots, n$ we already constructed spaces 
+$Y^{(i)}$ and maps $f^{(i)}\colon Y^{(i)}\to X$ satisfying conditions 1)-3). 
+Take the epimorphism  $f^{(n)}_{\ast}\colon \pi_{n}(Y^{(n)}, e^{0})\to \pi_{n}(X, x_{0})$.
+Let $\xov{Y}^{(n+1)}$ denote the space obtained by attaching to $Y^{(n)}$
+an $(n+1)$-cell $e^{n+1}_{\omega}$ for each element $[\omega\colon (S^{n}, s_{0}) \to (Y^{(n)}, e^{0})]\in \ker f^{(n)}_{\ast}$, using $\omega$ as the attaching map. 
+Since $[f^{(n)}\omega] = 0$ in $\pi_{n}(X, x_{0})$, the map $f^{(n)}\omega\colon S^{n}\to X$
+can be extended to a map $D^{n+1}\to X$. We can use this to extend $f^{(n)}$ to 
+a map $\xov{f}^{({n+1})}\colon \xov{Y}^{(n+1)}\to X$.  
+Subsequently, take $Y^{(n+1)}$ to be the space obtained 
+by attaching to $\xov{Y}^{(n+1)}$ a sphere $S^{(n+1)}_{\tau}$ for each
+$[\tau\colon (S^{n+1}, s_{0})\to (X, x_{0})]\in \pi_{n+1}(X, x_{0})$, 
+by identifying $s_{0}$ with $e^{0}$. Extend $\xov{f}^{(n+1)}$ to 
+$f^{(n+1)}\colon Y^{(n+1)}\to X$, mapping $S^{(n+1)}_{\tau}$ using $\tau$.
+
+We have a commutative 
+diagram
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep= 2em, column sep=1em, text height=1.5ex, text depth=0.25ex]
+{
+\pi_{n}(Y^{(n)}, e^{0}) & & \pi_{n}(Y^{(n+1)}, e^{0}) \\
+& \pi_{n}(X, x_{0}) & \\ 
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[above] {$i_{\ast}$} (m-1-3)
+edge node[anchor=north east] {$f^{(n)}_{\ast}$} (m-2-2)
+(m-1-3)
+edge node[anchor= north west] {$f^{(n+1)}_{\ast}$} (m-2-2)
+;
+\end{tikzpicture}
+\end{equation*}
+where $i\colon Y^{(n)}\hra Y^{(n+1)}$ is the inclusion map. Since $f^{(n)}_{\ast}$
+is onto, thus so is $f^{(n+1)}_{\ast}$. Also, by construction 
+$\ker f^{(n+1)} = 0$. Therefore 
+$f^{(n+1)}_{\ast}\colon \pi_{i}(Y^{(n+1)}, e^{0})\to \pi_{i}(X, x_{0})$
+is an isomorphism for $i\leq n$ and it is an epimorphism for $i=n+1$.
+
+Next, assume that $X$ is not path connected and let  $\{X_{i}\}_{i\in I}$ be path connected components of $X$. Construct a CW approximation $Y_{i}$ for each pair 
+$(X_{i}, A\cap X_{i})$, using the procedure described above. Then a CW approximation 
+of $(X, A)$ can be obtained by taking the quotient space 
+$A \sqcup \bigsqcup_{i\in I} Y_{i}/ \sim$,  where the relation $\sim$
+identifies points of $X_{i}\cap A\subseteq Y_{i}$ with the corresponding points of $A$. 
+
+Finally, assume that for $i=1, 2$ a map $f_{i}\colon (Y_{i}, A) \to (X, A)$ is a 
+CW approximation of $(X, A)$. This gives a commutative diagram
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+A & Y_{2} \\
+Y_{1} &  X \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-2) 
+edge node[anchor = west] {$f_{2}$} (m-2-2)
+(m-2-1) 
+edge node[below] {$f_{1}$} (m-2-2)
+;
+\path[right hook-latex, thick, font=\scriptsize]
+(m-1-1)
+edge (m-1-2) 
+edge
+(m-2-1);
+\path[dashed, ->,  thick, font=\scriptsize]
+(m-2-1) 
+edge node[anchor=south east] {$g$} (m-1-2);
+\end{tikzpicture}
+\end{equation*}
+By Corollary \ref{HELP COR} there exists $g\colon Y_{1}\to Y_{2}$
+such that $g(x) = x$ for all $x\in A$ and $f_{2}g\simeq f_{1} \ (\rel A)$
+By the same argument, there exists $h\colon Y_{2}\to Y_{1}$ such that 
+$h(x) = x$ for all $x\in A$ and $f_{1}h\simeq f_{2} \ (\rel A)$. 
+This shows that there exists a map  
+$\varphi\colon Y_{1}\times [0, 1] \to X$ which gives a homotopy 
+$f_{1}\simeq f_{1}hg \ (\rel A)$. 
+
+Consider the space 
+$Z_{1} = Y_{1}\times \{0, 1\} \cup A\times [0, 1] \subseteq Y_{1}\times [0, 1]$.
+Then $(Y_{1}\times [0, 1], Z_{1})$ is a relative CW complex. We have a commutative 
+diagram
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3.5em, text height=1.5ex, text depth=0.25ex]
+{
+Z_{1} & Y_{1} \\
+Y_{1}\times [0, 1] &  X \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1)
+edge node[above] {$\psi$} (m-1-2) 
+(m-1-2) 
+edge node[anchor = west] {$f_{1}$} (m-2-2)
+(m-2-1) 
+edge node[below] {$\varphi$} (m-2-2)
+;
+\path[right hook-latex, thick, font=\scriptsize]
+(m-1-1)
+edge
+(m-2-1);
+\path[dashed, ->,  thick, font=\scriptsize]
+(m-2-1) 
+edge node[anchor=south east] {$\xov{\varphi}$} (m-1-2);
+\end{tikzpicture}
+\end{equation*}
+where
+\[
+\psi(y, t) = 
+\begin{cases}
+y & \text{if } t< 1 \\
+hg(y) & \text{if } t=1 \\
+\end{cases}
+\]
+Using Corollary \ref{HELP COR} again, we obtain that there exists 
+$\xov{\varphi}\colon Y_{1}\times [0, 1] \to X$, which gives a homotopy 
+$\id_{Y_{1}}\simeq  hg \ (\rel A)$. Analogously, we obtain that 
+$\id_{Y_{2}} \simeq gh \ (\rel A)$.
+\end{proof}
+
+
+
+
+ 
+
+
+

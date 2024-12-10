@@ -1,0 +1,391 @@
+% !TEX root = mth727_lecture_notes.tex
+
+
+\chapter[Excision]{Excision}
+\chaptermark{Excision}
+\label{EXCISION}
+\thispagestyle{firststyle}
+
+One of the main properties of homology groups is excision. 
+It can stated as follows: 
+
+\begin{theorem}
+Let $X$ be a space and $X_{1}, X_{2}\subseteq X$ be open sets such that 
+$X= X_{1}\cup X_{2}$. Then the map of pairs 
+$i\colon (X_{1}, X_{1}\cap X_{2}) \to (X, X_{2})$ induces an 
+isomorphism
+\[
+i_{\ast}\colon H_{n}(X_{1}, X_{1}\cap X_{2}) 
+\overset{\cong}{\lra} 
+H_{n}(X, X_{2})
+\]
+for all $n\geq 0$.
+\end{theorem}
+
+
+The same property does not holds in general for homotopy groups. However, 
+it does hold under some extra assumptions. In order to make this precise we
+will need a definition.
+
+\begin{definition}
+\label{N CONNECTED PAIR DEF}
+Let $A\subseteq X$ and let $0 \leq n\leq \infty$. The pair $(X, A)$ is \emph{$n$-connected}
+if the map $\pi_{0}(A) \to \pi_{0}(X)$ is onto and $\pi_{k}(X, A, x_{0}) = \{1\}$ 
+for all $x_{0}\in A$ and all $1 \leq k\leq n$.
+\end{definition}
+
+
+\begin{proposition}
+\label{N CONNECTED PAIR PROP}
+Let $A\subseteq X$. The following conditions are equivalent.
+\benu
+\item[1)] $(X, A)$ is $n$-connected.
+\item[2)] The homomorphism $i_{\ast}\colon \pi_{k}(A, x_{0})  \to \pi_{k}(X, x_{0})$ 
+induced by the inclusion map $i\colon A\hra X$ is an isomorphism for all $x_{0}\in A$
+and all $k < n$ and it is an epimorphism for $k=n$.  
+\item[3)] For $k\leq n$, any map $(I^{k}, \pint^{k}) \to (X, A)$ is homotopic 
+relative to $\pint^{k}$ to a map $I^{k} \to A$. 
+\item[4)] For $k\leq n$, any map $h\colon I^{k}\cup (\partial I^{k} \times I)  \to X$ 
+such that $h(\partial I^{k} \times \{ 1 \}) \subseteq A$ can be extended to a map 
+$\xov{h}\colon I^{k}\times I \to X$ such that $h(I^{k}\times \{1\}) \subseteq A$. 
+\eenu
+\end{proposition}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+
+\begin{HOMOTEXCISIONTHM}
+\label{HOMOTOPY  EXCISION THM}
+Let $X$ be a space and
+$X_{1}, X_{2}\subseteq X$ be open such that 
+$X=  X_{1}\cup X_{2}$. Assume that 
+\begin{itemize}
+\item $(X_{1}, X_{1}\cap X_{2})$ is $m$-connected 
+\item $(X_{2}, X_{1}\cap X_{2})$ is $n$-connected 
+\end{itemize}
+for some $m, n \geq 0$. Then for any $x_{0}\in X_{1}\cap X_{2}$ the homomorphism 
+\[
+i_{\ast}\colon \pi_{k}(X_{1}, X_{1}\cap X_{2}, x_{0}) \to \pi_{k}(X, X_{2}, x_{0})
+\]
+induced by  the inclusion map, is an isomorphism for $1 \leq k < m+n$ and 
+it is onto for $k = m+n$.
+\end{HOMOTEXCISIONTHM}
+
+In this chapter we will explore some consequences Theorem \ref{HOMOTOPY  EXCISION THM}, 
+an we will return to its proof in Chapter \ref{PROOF EXCISION CHAPTER}.
+
+
+\begin{proposition}
+\label{PIK QUOTIENT PROP}
+Let $(X, A)$ be a pair with the homotopy extension property and let 
+$q\colon X \to X/A$ be the quotient map. Let $x_{0}\in A$ and 
+$\ast = q(A) \in X/A$. If $(X, A)$  is $m$-connected
+and the space $A$ is $n$-connected for some $m, n \geq 0$ then the homomorphism 
+\[
+q_{\ast}\colon \pi_{k}(X, A, x_{0}) \to \pi_{k}(X/A, \ast, \ast) = \pi_{k}(X/A, \ast)
+\]
+is an isomorphism for $k \leq m+n$ and it is an epimorphism for $k = m+n+1$. 
+\end{proposition}
+
+\begin{proof}
+Let $j\colon A \hra X$ be the inclusion map. Let $M$ denote the the mapping cylinder of $j$:
+\[
+M = (A \times [0, 1] \sqcup X) / {\sim}
+\]
+where $(x, 0) \sim x$ for all $x\in A$.
+Also, let $C = M/(A\times \{1\})$ be the mapping cone of $j$. In other words, 
+$C$ is obtained by attaching the cone $CA = A\times [0, 1]/ (A\times \{1\})$ to $X$. 
+
+Take the quotient map $\varphi \colon M \to C$. Denote by $M_{1}, M_{2}\subseteq M$
+the subspaces of $M$ given by $M_{1} = X \cup A\times [0, \frac{3}{4}]$ and 
+$M_{2} = A\times [\frac{1}{4}, 1]$, and let $C_{i} = \varphi(M_{i})$ for $i=1, 2$.  
+Also, let $\xov{x}_{0} = (x_{0}, \frac{1}{2})\in M_{1}\cap M_{2}$. 
+\begin{equation*}
+\begin{tikzpicture}[
+    xscale = 1.2,
+    yscale = 1.2,
+    d0/.style = {line width = 1.6}
+]
+
+\draw[d0]  (-0.4, 0) --(1.4, 0)  
+node[pos=0, anchor=south] {$X$}
+node[yshift = -2mm, anchor = north, pos=0.5] {\small $M$};
+\draw[d0, fill = mygray1] (0,0) -- (0.0, 2) -- (1.0, 2) -- (1, 0) -- cycle;
+\draw[d0, red] (0, 0) --(1.0, 0) node[pos= 0.5, anchor = south] {\small $A$};
+
+\draw[blue, line width = 1.4pt, dotted] (-0.8,2) -- (1.2, 2) (-0.8, 0.5) -- (1.2, 0.5);
+\draw[line width = 1.4pt,  color = blue, decorate, decoration={brace, amplitude = 5pt, mirror}] 
+(-0.8, 2) -- (-0.8, 0.5) node [midway,xshift=-18pt]  {\small $M_{2}$};
+
+\draw[blue, line width = 1.4pt, dotted] (1.8,1.5) -- (-0.2, 1.5) (1.8, 0.0) -- (1.4, 0.0);
+\draw[line width = 1.4pt,  color = blue, decorate, decoration={brace, amplitude = 5pt}] 
+(1.8, 1.5) -- (1.8, 0) node [midway,xshift=18pt]  {\small $M_{1}$};
+
+\fill (0.5, 0.9) circle (0.05) node[above] {\small $\xov{x}_{0}$};
+
+\draw[thick, ->, >=latex] (3.0, 1) -- (4.0, 1)
+node [above, pos=0.5] {\small $\varphi$};
+
+\begin{scope}[shift ={(6, 0)}]
+\draw[d0] (-0.4, 0) --(1.4, 0) 
+node[pos=0, anchor=south] {$X$}
+node[yshift = -2mm, anchor = north, pos=0.5] {\small $C$};
+\draw[d0, fill = mygray1] (0, 0.0) -- (0.5, 2) -- (1, 0) -- cycle;
+\draw[d0, red] (0, 0) --(1.0, 0) node[pos= 0.5, anchor = south] {\small $A$};
+
+\draw[blue, line width = 1.4pt, dotted] (-0.8,2) -- (1.2, 2) (-0.8, 0.5) -- (1.2, 0.5);
+\draw[line width = 1.4pt,  color = blue, decorate, decoration={brace, amplitude = 5pt, mirror}] 
+(-0.8, 2) -- (-0.8, 0.5) node [midway,xshift=-18pt]  {\small $C_{2}$};
+
+\draw[blue, line width = 1.4pt, dotted] (1.8,1.5) -- (-0.2, 1.5) (1.8, 0.0) -- (1.4, 0.0);
+\draw[line width = 1.4pt,  color = blue, decorate, decoration={brace, amplitude = 5pt}] 
+(1.8, 1.5) -- (1.8, 0) node [midway,xshift=18pt]  {\small $C_{1}$};
+
+\end{scope}
+\end{tikzpicture}
+\end{equation*}
+Let $r\colon M \to X$ be the retraction map, and let $s\colon C \to X/A$ be the map
+that sends the cone $CA\subseteq C$ to the point $\ast\in X/A$. Both $r$ and $s$ are 
+homotopy equivalences. For $s$ this follows from Proposition \ref{CONTR QUOTIENT WITH HEP PROP}  
+using the fact that since $(X, A)$ has the homotopy extension property, then $(C, CA)$ 
+also has this property.
+
+For any $k\geq 1$  the following diagram commutes: 
+
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=2em, text height=1.5ex, text depth=0.25ex]
+{
+\pi_{k}(X, A, x_{0})  & \pi_{k}(X/A, \ast, \ast) \\
+\pi_{k}(M, M_{2}, \xov{x}_{0}) & \pi_{k}(C, C_{2}, \varphi(\xov{x}_{0})) \\
+\pi_{k}(M_{1}, M_{1}\cap M_{2}, \xov{x}_{0}) & \pi_{k}(C_{1}, C_{1}\cap C_{2}, \varphi(\xov{x}_{0})) \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[auto] {$q_{\ast}$} (m-1-2)
+(m-2-1)
+edge 
+node[anchor = east] {$r_{\ast}$} 
+node[anchor = west] {$\cong$} (m-1-1)
+edge 
+node[anchor=  south] {$\varphi_{\ast}$} (m-2-2)
+(m-2-2)
+edge 
+node[anchor=  west] {$s_{\ast}$} 
+node[anchor=  east] {$\cong$} (m-1-2)
+(m-3-1)
+edge 
+node[anchor=  west] {$\cong$} 
+node[anchor=  east] {$i_{\ast}$} (m-2-1)
+edge 
+node[anchor=  south] {$\varphi|_{M_{1}\ast}$} 
+node[anchor=  north] {$\cong$} (m-3-2)
+(m-3-2)
+edge 
+node[anchor=  west] {$i’_{\ast}$} (m-2-2)
+; 
+\end{tikzpicture}
+\end{equation*}
+Here $\varphi|_{M_{1}}$ is the restriction of $\varphi$ and 
+the homomorphisms $i_{\ast}$, $i’_{\ast}$ are induced by inclusions.
+Since $i\colon (M_{1}, M_{1}\cap M_{2}) \to (M_{j}, M_{1}\cap M_{2})$ is a homotopy 
+equivalence and $\varphi|_{M_{1}}\colon (M_{1}, M_{1}\cap M_{2}) \to (C_{1}, C_{1}\cap C_{2})$
+is a homeomorphism, $i_{\ast}$ and $\varphi|_{M_{1}\ast}$ are isomorphisms. It follows that 
+$q_{\ast}$ is an isomorphism or epimorphism if and only if $i’_{\ast}$ has the same 
+property. 
+
+From the above diagram we also obtain that 
+$\pi_{k}(C_{1}, C_{1}\cap C_{2}, \varphi(\xov{x}_{0})) \cong \pi_{k}(X, A, x_{0})$ for all 
+$k$, so $(C_{1}, C_{1}\cap C_{2})$ is $m$-connected. Also, since $C_{2}$ is a contractible 
+space, from the long exact sequence of the pair $(C_{2}, C_{1}\cap C_{2})$ we get 
+\[
+\pi_{k}(C_{2}, C_{1}\cap C_{2}, \varphi(\xov{x}_{0})) \cong 
+\pi_{k-1}(C_{1}\cap C_{2}, \varphi(\xov{x}_{0})) \cong 
+\pi_{k-1}(A, x_{0})
+\]
+Since by assumption $A$ is $n$-connected, thus $(C_{2}, C_{1}\cap C_{2})$ is $(n+1)$-connected. 
+By the Excision Theorem \ref{HOMOTOPY  EXCISION THM} we obtain that 
+$i’_{\ast}$ (and thus also $q_{\ast}$) is an isomorphism for $k\leq m + n$ and 
+an epimorphism for $k = m+n+1$.
+\end{proof}
+
+
+
+Let $(X, x_{0})$ be a pointed space and let $\omega\colon (I^{n}, \pint^{n}) \to (X, x_{0})$
+represent an element $[\omega] \in \pi_{n}(X, x_{0})$. Let $\Sigma X$ be the reduced suspension 
+of $X$. Consider the map 
+$\Sigma’\omega\colon I^{n+1}\to \Sigma X$ obtained the composition 
+\[
+\Sigma’\omega\colon I^{n+1} = I^{n}\times [0, 1] \overset{q}{\lra} \Sigma I^{n}
+\overset{\Sigma \omega}{\lra} \Sigma X
+\]
+where $q$ is the quotient map. One can check that $\Sigma’\omega$ represents an element 
+of $\pi_{n+1}(\Sigma X, \xov{x}_{0})$. 
+
+\begin{definition/proposition}
+The assignment $[\omega] \mapsto [\Sigma’\omega]$
+defines a homomorphism of groups 
+\[
+\Sigma_{\ast}\colon \pi_{n}(X, x_{0}) \to \pi_{n+1}(\Sigma X, \xov{x}_{0})
+\]
+which is called the \emph{suspension homomorphism}.
+\end{definition/proposition}
+
+\begin{proof}
+The function $\Sigma_{\ast}$ is well defined since the suspension functor preserves 
+homotopy classes of maps. It remains to check that $\Sigma_{\ast}$ is a group homomorphism 
+(exercise).
+\end{proof}
+
+
+\begin{FREUDENTHALTHM}
+\label{FREUDENTHAL THM}
+Let $(X, x_{0})$ be a well-pointed, $n$-connected space. Let $\xov{x}_{0}$
+denote the basepoint in the reduced suspension $\Sigma X$. The suspension 
+homomorphism 
+\[
+\Sigma_{\ast}\colon \pi_{k}(X, x_{0}) \to \pi_{k+1}(\Sigma X, \xov{x}_{0})
+\]
+is an isomorphism for $k \leq 2n$ and it is an epimorphism for $k= 2n + 1$.
+\end{FREUDENTHALTHM}
+
+\begin{proof}
+First, let $CX = X\times [0, 1]/X\times \{1\}$ be the cone on $X$. Identifying 
+$X$ with $X\times \{0\}$ we can consider it as a subspace of $CX$. Since $CX$
+is a contractible space, in the long exact sequence of the pair $(CX, X)$ the 
+homomorphism 
+$\partial \colon \pi_{k+1}(CX, X, x_{0}) \to \pi_{k}(X, x_{0})$ 
+is an isomorphism for all $k\geq 0$.
+
+One can check (exercise) that if $(X, x_{0})$ is a well-pointed space, 
+then for any $k\geq 0$ the following diagram commutes:
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+\pi_{k}(X, x_{0})  & \pi_{k+1}(\Sigma X, \xov{x}_{0}) \\
+\pi_{k+1}(CX, X, x_{0}) & \pi_{k+1}(CX/X, \xov{x}_{0}) \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[auto] {$\Sigma_{\ast}$} (m-1-2)
+(m-2-2)
+edge 
+node[anchor=  west] {$q’_{\ast}$} 
+node[anchor=  east] {$\cong$} (m-1-2)
+(m-2-1)
+edge node[anchor=  north] {$q_{\ast}$} (m-2-2)
+edge 
+node[anchor = east] {$\partial$} 
+node[anchor = west] {$\cong$} (m-1-1)
+; 
+\end{tikzpicture}
+\end{equation*}
+Here $q_{\ast}$ and $q’_{\ast}$ are induced by the quotient maps $q\colon CX \to CX/X$
+and $q’\colon CX/X = SX \to \Sigma X$. 
+
+Since $(X, x_{0})$ is well-pointed, the  map $q’$ is a homotopy equivalence, and thus
+$q’_{\ast}$ is an isomorphism. 
+It follows that $\Sigma_{\ast}$ is an isomorphism or epimorphism if and only if this 
+holds for $q_{\ast}$. Since $X$ is $n$-connected and $CX$ is contractible, the pair
+$(CX, X)$ is $n+1$-connected. Therefore, by Proposition \ref{PIK QUOTIENT PROP},
+$q_{\ast}$ is an isomorphism for $k + 1 \leq 2n + 1$ (or $k \leq 2n$)
+and an epimorphism for $k + 1 = 2n + 2$ (i.e. $k=2n + 1$)
+
+\end{proof}
+
+
+Since the sphere $S^{n}$ is $(n-1)$-connected, by Theorem \ref{FREUDENTHAL THM} 
+we obtain: 
+
+\begin{corollary}
+\label{FREUDENTHAL SN THM}
+The suspension homomorphism 
+\[
+\Sigma_{\ast}\colon \pi_{k}(S^{n}) \to \pi_{k+1}(\Sigma S^{n}) \cong \pi_{k+1}(S^{n+1})
+\]
+is an isomorphism for $k \leq 2n-2$ and an epimorphism for $k = 2n -1$.  
+\end{corollary}
+
+
+
+\begin{corollary}
+\label{PIN SN COROLLARY}
+For any $n\geq 1$ we have $\pi_{n}(S^{n})\cong \Z$. 
+\end{corollary}
+
+\begin{proof}
+
+We argue by induction with respect to $n$. We already know that $\pi_{1}(S^{1})\cong \Z$. 
+Also, by Theorem \ref{PI2 S2 THM} we have $\pi_{2}(S^{2}) \cong \Z$. 
+
+Next, assume that $\pi_{n}(S^{n})\cong \Z$ for some $n\geq 2$. 
+In such case $2n - 2 \geq n$, so by Corollary \ref{FREUDENTHAL SN THM} we obtain 
+$\Z \cong \pi_{n}(S^{n})\cong \pi_{n+1}(S^{n+1})$. 
+\end{proof}
+
+\begin{note}
+\label{PIN SN NOTE}
+1) By Corollary \ref{FREUDENTHAL SN THM} the suspension homomorphism 
+$\Sigma_{\ast}\colon \pi_{n}(S^{n}) \to \pi_{n+1}(S^{n+1})$
+is an isomorphism for all $n\geq 2$. By the same corollary 
+$\Sigma_{\ast}\colon \pi_{1}(S^{1}) \to \pi_{2}(S^{2})$ is onto,  
+and since every epimorphism $\Z \to \Z$ is an isomorphism, it follows 
+that this is an isomorphism as well. 
+
+2) The generator of the group $\pi_{n}(S^{n})$ is represented by 
+the identity map $\id\colon S^{n}\to S^{n}$. For $n=1$ it follows 
+from the direct computation of $\pi_{1}(S^{1})$, and for $n> 1$
+it holds since the suspension isomorphism maps the homotopy class 
+of $\id_{S^{n-1}}$ to the homotopy class of $\id_{S^{n}}$
+\end{note}
+
+
+\begin{corollary}
+$\pi_{3}(S^{2}) \cong \Z$ and the generator of $\pi_{3}(S^{2})$ is given by the 
+homotopy class of the Hopf bundle map (\ref{HOPF BUNDLE EXAMPLE}). 
+\end{corollary}
+
+\begin{proof}
+The long exact sequence of the Hopf fibration $S^{1}\to S^{3} \overset{p}{\to} S^{2}$ gives
+an exact sequence:
+\[
+0 = \pi_{3}(S^{1}) {\lra}
+\pi_{3}(S^{3}) \overset{p_{\ast}}{\lra}
+\pi_{3}(S^{2}) \overset{\partial}{\lra} 
+\pi_{2}(S^{1}) = 0
+\]
+Therefore $p_{\ast}$ is an isomorphism and so 
+$\pi_{3}(S^{2}) \cong \pi_{3}(S^{3})\cong \Z$. Also, since 
+$[\id_{S^{3}}]$ is a generator of $\pi_{3}(S^{3})$, thus 
+$p_{\ast}([\id_{S^{3}}]) = [p]$ is a generator of $\pi_{3}(S^{2})$.
+\end{proof}
+
+\begin{note}
+Notice that since  $\pi_{2}(S^{1}) = 0$, the suspension homomorphism 
+$\Sigma_{\ast}\colon \pi_{2}(S^{1}) \to \pi_{3}(S^{2})$ is not an isomorphism.
+\end{note}
+
+
+\begin{corollary}
+For $n\geq 1$ the group $\pi_{n+1}(S^{n})$ is cyclic. 
+\end{corollary}
+
+\begin{proof}
+We have $\pi_{2}(S^{1}) = 0$ and $\pi_{3}(S^{2})\cong \Z$. 
+By Corollary \ref{FREUDENTHAL SN THM} the suspension homomorphism 
+$\Z\cong \pi_{3}(S^{2}) \to \pi_{4}(S^{3})$ is onto, so $\pi_{4}(S^{3})$ is a cyclic group. 
+By the same corollary we have $\pi_{n+1}(S^{n}) \cong \pi_{n+2}(S^{n+1})$ for all 
+$n\geq 3$.
+\end{proof}
+
+
+
+
+
+
+

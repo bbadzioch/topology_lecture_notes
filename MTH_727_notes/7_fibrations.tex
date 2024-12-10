@@ -1,0 +1,898 @@
+% !TEX root = mth727_lecture_notes.tex
+
+
+\chapter[Fibrations]{Fibrations}
+\chaptermark{Fibrations}
+\label{FIBRATIONS CHAPTER}
+\thispagestyle{firststyle}
+
+
+\begin{definition}
+\label{HOMOTOPY LIFTING PROPERTY DEF}
+A map $p\colon E \to B$ has the \emph{homotopy lifting property} for a space $X$
+if for any commutative diagram of the form 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+X \times \{0\} & E \\
+X \times [0, 1] &  B \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-2) 
+edge node[anchor = west] {$p$} (m-2-2)
+(m-1-1) 
+edge node[above] {$\xov{f}$} (m-1-2)
+(m-2-1) 
+edge node[below] {$h$} (m-2-2)
+;
+\path[right hook-latex, thick, font=\scriptsize]
+(m-1-1) 
+edge node[left] {$i$} (m-2-1);
+\path[dashed, ->,  thick, font=\scriptsize]
+(m-2-1) 
+edge node[anchor=south east] {$\xov{h}$} (m-1-2);
+\end{tikzpicture}
+\end{equation*}
+there exists a map $\xov{h}\colon X\times [0, 1] \to E$ such that 
+$\xov{h}i = \xov{f}$ and $p\xov{h} = h$.
+\end{definition}
+
+In the setting of Definition \ref{HOMOTOPY LIFTING PROPERTY DEF} we will say 
+that $\xov{h}$ is a lift of $h$ beginning at $\xov{f}$.
+
+
+\begin{definition}
+A map $p\colon E \to B$ is 
+\benu
+\item[\textbullet] a \emph{Hurewicz fibration} if it has the homotopy lifting 
+property for any space $X$. 
+\item[\textbullet] a \emph{Serre fibration} if it has the homotopy lifting 
+property for any CW complex $X$. 
+\eenu
+\end{definition}
+
+\begin{note}
+Every Hurewicz fibration is a Serre fibration.
+\end{note}
+
+\begin{example}
+\label{PRODUCT FIBRATION EXAMPLE}
+For any spaces $B, F$ the projection map $\pr_{B} \colon B\times F \to B$ is a Hurewicz 
+fibration. Indeed, assume that we have a commutative diagram
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+X \times \{0\} & B\times F \\
+X \times [0, 1] &  B \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-2) 
+edge node[anchor = west] {$\pr_{B}$} (m-2-2)
+(m-1-1) 
+edge node[above] {$\xov{f}$} (m-1-2)
+(m-2-1) 
+edge node[below] {$h$} (m-2-2)
+;
+\path[right hook-latex, thick, font=\scriptsize]
+(m-1-1) 
+edge node[left] {$i$} (m-2-1);
+\end{tikzpicture}
+\end{equation*}
+\ 
+\vskip -5mm
+\ 
+Let $\pr_{F}\colon B\times F \to F$ be the projection onto $F$.
+We can define $\xov{h}\colon X\times [0, 1] \to B\times F$ by 
+\[
+\xov{h}(x, t) = (h(x, t),\  \pr_{F}\xov{f}(x, 0))
+\]
+\end{example}
+
+
+\begin{example}
+Every covering map $p\colon E\to B$ is a Hurewicz fibration.
+\end{example}
+
+%
+%\begin{proposition}
+%\label{HOMOTOPY LIFTING INVARIANCE PROP}
+%Let $h, h’\colon X\times [0, 1] \to B$ be two homotopies between maps 
+%$f, g\colon X \to B$. Assume that these homotopies are themselves homotopic 
+%relative endpoints. That is, there exists 
+%a map 
+%\[
+%H\colon X\times [0,1] \times [0, 1] \to B
+%\] 
+%such that $H|_{X\times [0, 1]\times \{0\}} = h$,  $H|_{X\times [0, 1]\times \{1\}} = h’$,
+%and for each $t\in [0, 1]$ the map  $H|_{X\times [0, 1]\times \{t\}}$ is a homotopy 
+%between $f$ and $g$. Assume also that we have commutative diagrams
+%
+%\begin{equation*}
+%\begin{tikzpicture}
+%\begin{scope}
+%\matrix (m) 
+%[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+%{
+%X \times \{0\} & E \\
+%X \times [0, 1] &  B \\
+%};
+%\path[->, thick, font=\scriptsize]
+%(m-1-2) 
+%edge node[anchor = west] {$p$} (m-2-2)
+%(m-1-1) 
+%edge node[above] {$\xov{f}$} (m-1-2)
+%(m-2-1) 
+%edge node[below] {$h$} (m-2-2)
+%;
+%\path[right hook-latex, thick, font=\scriptsize]
+%(m-1-1) 
+%edge node[left] {$i$} (m-2-1);
+%\path[dashed, ->,  thick, font=\scriptsize]
+%(m-2-1) 
+%edge node[anchor=south east] {$\xov{h}$} (m-1-2);
+%\end{scope}
+%
+%\begin{scope}[xshift=45mm]
+%\matrix (m) 
+%[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+%{
+%X \times \{0\} & E \\
+%X \times [0, 1] &  B \\
+%};
+%\path[->, thick, font=\scriptsize]
+%(m-1-2) 
+%edge node[anchor = west] {$p$} (m-2-2)
+%(m-1-1) 
+%edge node[above] {$\xov{f}$} (m-1-2)
+%(m-2-1) 
+%edge node[below] {$h’$} (m-2-2)
+%;
+%\path[right hook-latex, thick, font=\scriptsize]
+%(m-1-1) 
+%edge node[left] {$i$} (m-2-1);
+%\path[dashed, ->,  thick, font=\scriptsize]
+%(m-2-1) 
+%edge node[anchor=south east] {$\xov{h’}$} (m-1-2);
+%\end{scope}
+%\end{tikzpicture}
+%\end{equation*}
+%If $p$ is a Hurewicz fibration then the maps $\xov{h}_{1}, \xov{h’}_{1}\colon X \to E$
+%are homotopic via homotopy $\varphi\colon X\times [0, 1] \to E$ such that 
+%$p\varphi_{t} = g$ for all $t\in [0, 1]$. 
+%The same holds if $p$ is a Serre fibration and $X$ is a CW complex. 
+%\end{proposition}
+%
+%\begin{proof}
+%Exercise.
+%\end{proof}
+%
+%
+%
+%\begin{definition}
+%$p\colon E \to B$ be a Hurewicz or Serre fibration. 
+%For $b\in B$ the space $p^{-1}(b)\subseteq E$ is called the \emph{fiber} of $p$ over $b$. 
+%\end{definition}
+%
+%
+%\begin{proposition}
+%Let $p\colon E \to B$ be a Hurewicz fibration. 
+%If $b_{0}, b_{1}$ are points in the same path connected component of 
+%$B$, then $p^{-1}(b_{0}) \simeq p^{-1}(b_{1})$. 
+%\end{proposition}
+%
+%\begin{proof}
+%Let $\tau\colon [0, 1]\to B$ be a path such that $\tau(0) = b_{0}$ and $\tau(1) = b_{1}$. 
+%We have commutative diagrams
+%\begin{equation*}
+%\begin{tikzpicture}
+%\begin{scope}
+%\matrix (m) 
+%[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+%{
+%p^{-1}(b_{0}) \times \{0\} & E \\
+%p^{-1}(b_{0}) \times [0, 1] &  B \\
+%};
+%\path[->, thick, font=\scriptsize]
+%(m-1-2) 
+%edge node[anchor = west] {$p$} (m-2-2)
+%(m-1-1) 
+%edge node[above] {$\xov{f}$} (m-1-2)
+%(m-2-1) 
+%edge node[below] {$h$} (m-2-2)
+%;
+%\path[right hook-latex, thick, font=\scriptsize]
+%(m-1-1) 
+%edge  (m-2-1);
+%\path[dashed, ->,  thick, font=\scriptsize]
+%(m-2-1) 
+%edge node[anchor=south east] {$\xov{h}$} (m-1-2);
+%\end{scope}
+%
+%\begin{scope}[xshift=55mm]
+%\matrix (m) 
+%[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+%{
+%p^{-1}(b_{1}) \times \{0\} & E \\
+%p^{-1}(b_{1}) \times [0, 1] &  B \\
+%};
+%\path[->, thick, font=\scriptsize]
+%(m-1-2) 
+%edge node[anchor = west] {$p$} (m-2-2)
+%(m-1-1) 
+%edge node[above] {$\xov{f’}$} (m-1-2)
+%(m-2-1) 
+%edge node[below] {$h’$} (m-2-2)
+%;
+%\path[right hook-latex, thick, font=\scriptsize]
+%(m-1-1) 
+%edge (m-2-1);
+%\path[dashed, ->,  thick, font=\scriptsize]
+%(m-2-1) 
+%edge node[anchor=south east] {$\xov{h’}$} (m-1-2);
+%\end{scope}
+%\end{tikzpicture}
+%\end{equation*}
+%where $\xov{f}(x, 0) = x$, and $h(x, t) = \tau(t)$, 
+%$\xov{f’}(x, 0) = x$, and $h’(x, t) = \tau(1-t)$. 
+%This gives maps $\xov{h}_{1}\colon p^{-1}(b_{0}) \to p^{-1}(b_{1})$ and
+%$\xov{h’}_{1}\colon p^{-1}(b_{1}) \to p^{-1}(b_{1})$. 
+%Using Proposition \ref{HOMOTOPY LIFTING INVARIANCE PROP} one can show that 
+%these maps are inverse homotopy equivalences.
+%\end{proof}
+
+
+
+\begin{definition}
+Let $A\subseteq X$. A map $p\colon E \to B$ has the 
+\emph{relative homotopy lifting property} for the pair  $(X, A)$
+if for any commutative diagram of the form 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+X \times \{0\} \cup A\times [0, 1] & E \\
+X \times [0, 1] &  B \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-2) 
+edge node[anchor = west] {$p$} (m-2-2)
+(m-1-1) 
+edge node[above] {$\xov{f}$} (m-1-2)
+(m-2-1) 
+edge node[below] {$h$} (m-2-2)
+;
+\path[right hook-latex, thick, font=\scriptsize]
+(m-1-1) 
+edge node[left] {$i$} (m-2-1);
+\path[dashed, ->,  thick, font=\scriptsize]
+(m-2-1) 
+edge node[anchor=south east, pos=0.45] {$\xov{h}$} (m-1-2);
+\end{tikzpicture}
+\end{equation*}
+
+there exists a map $\xov{h}\colon X\times [0, 1] \to E$ such that 
+$\xov{h}i = \xov{f}$ and $p\xov{h} = h$.
+\end{definition}
+
+\begin{theorem}
+\label{SERRE FIBR EQUIV COND THM}
+Let $p\colon E\to B$ be a map. The following conditions are equivalent:
+\benu
+\item[1)] $p$ is a Serre fibration;
+\item[2)] $p$ has the homotopy lifting property for $D^{n}$ for all $n\geq0$;
+\item[3)] $p$ has the relative homotopy lifting property for $(D^{n}, S^{n-1})$ 
+for all $n\geq0$;
+\item[4)] $p$ has the relative homotopy lifting property for all relative 
+CW-complexes $(X, A)$.  
+\eenu
+\end{theorem}
+
+\begin{proof}
+1) $\Ra$ 2) Obvious.
+
+2) $\Ra$ 3) Assume that we have a diagram 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+D^{n} \times \{0\} \cup S^{n-1}\times [0, 1] & E \\
+D^{n} \times [0, 1] &  B \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-2) 
+edge node[anchor = west] {$p$} (m-2-2)
+(m-1-1) 
+edge node[above] {$\xov{f}$} (m-1-2)
+(m-2-1) 
+edge node[below] {$h$} (m-2-2)
+;
+\path[right hook-latex, thick, font=\scriptsize]
+(m-1-1) 
+edge  (m-2-1);
+\path[dashed, ->,  thick, font=\scriptsize]
+(m-2-1) 
+edge node[anchor=south east, pos=0.45] {$\xov{h}$} (m-1-2);
+\end{tikzpicture}
+\end{equation*}
+We want to show that the map $\xov h$ exists.
+
+We can construct a homeomorphism 
+$\varphi\colon D^{n}\times [0, 1] \to D^{n}\times [0, 1]$ such that 
+$\varphi(D^{n}\times\{0\}) = D^{n}\times\{0\}\cup S^{n-1}\times [0, 1]$. 
+This gives a commutative diagram
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+D^{n} \times \{0\}  &   D^{n}\times\{0\}\cup S^{n-1}\times [0, 1] & E \\
+D^{n} \times [0, 1] &  D^{n} \times [0, 1] & B \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1)
+edge node[above] {$\varphi$} (m-1-2)
+(m-1-3) 
+edge node[anchor = west] {$p$} (m-2-3)
+(m-1-2) 
+edge node[above] {$\xov{f}$} (m-1-3)
+(m-2-1)
+edge node[below] {$\varphi$} (m-2-2)
+(m-2-2) 
+edge node[below] {$h$} (m-2-3)
+;
+\path[right hook-latex, thick, font=\scriptsize]
+(m-1-1)
+edge (m-2-1)
+(m-1-2) 
+edge (m-2-2);
+\path[dashed, ->,  thick, font=\scriptsize]
+(m-2-1) 
+edge node[anchor=south east, pos=0.3] {$h’$} (m-1-3);
+\end{tikzpicture}
+\end{equation*}
+The map $h’\colon D^{n}\times [0, 1] \to E$ exists by 2). Then we can take 
+$\xov{h} = h’\varphi^{-1}$.
+
+3) $\Ra$ 4) Let $(X, A)$ be a relative complex, and assume that we have a commutative 
+diagram
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+X \times \{0\} \cup A\times [0, 1] & E \\
+X \times [0, 1] &  B \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-2) 
+edge node[anchor = west] {$p$} (m-2-2)
+(m-1-1) 
+edge node[above] {$\xov{f}$} (m-1-2)
+(m-2-1) 
+edge node[below] {$h$} (m-2-2)
+;
+\path[right hook-latex, thick, font=\scriptsize]
+(m-1-1) 
+edge (m-2-1);
+\path[dashed, ->,  thick, font=\scriptsize]
+(m-2-1) 
+edge node[anchor=south east, pos=0.45] {$\xov{h}$} (m-1-2);
+\end{tikzpicture}
+\end{equation*}
+We want to show that the map $\xov h$ exists.
+
+Assume that $X$ is obtained by attaching a single $n$-dimensional 
+cell $e^{n}$ to $A$ using an attaching map $\varphi\colon S^{n-1}\to A$, i.e. 
+$X = A\cup_{\varphi} e^{n}$. Let $\xov{\varphi}\colon D^{n}\to X$ be the characteristic 
+map of $e^{n}$ (\ref{CW TERMINOLOGY NN}).
+Then the above diagram can be extended as follow: 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+D^{n}\times \{0\}\cup S^{n-1}\times[0, 1]  &[20mm]  X\times\{0\}\cup A\times [0, 1] & E \\
+D^{n} \times [0, 1] & X \times [0, 1] & B \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1)
+edge node[above] {$\xov{\varphi}\times \{0\}\cup \varphi\times [0, 1]$} (m-1-2)
+(m-1-3) 
+edge node[anchor = west] {$p$} (m-2-3)
+(m-1-2) 
+edge node[above] {$\xov{f}$} (m-1-3)
+(m-2-1)
+edge node[below] {$\xov{\varphi}\times [0, 1]$} (m-2-2)
+(m-2-2) 
+edge node[below] {$h$} (m-2-3)
+;
+\path[right hook-latex, thick, font=\scriptsize]
+(m-1-1)
+edge (m-2-1)
+(m-1-2) 
+edge (m-2-2);
+\path[dashed, ->,  thick, font=\scriptsize]
+(m-2-1) 
+edge node[anchor=south east, pos=0.3] {$h’$} (m-1-3);
+\end{tikzpicture}
+\end{equation*}
+The map $h’$ exists by 3). Since  $X\times [0, 1]$ is a quotient space of 
+$A\times [0, 1] \sqcup D^{n} \times [0, 1]$, 
+the map 
+\[
+\xov{f} \sqcup h’ \colon A\times [0, 1] \sqcup D^{n} \times [0, 1] \to E
+\] 
+defines the desired map $\xov{h}\colon X\times [0, 1] \to E$. 
+The general statement can be obtained from here by induction with respect to 
+cell attachments. 
+
+
+
+4) $\Ra$ 1) Let $X$ be a CW complex and $A=\varnothing$. Then the relative lifting 
+property for $(X, A)$ is the same as the lifting property for $X$. 
+\end{proof}
+
+\begin{note}
+\label{REL HOMOT LIFT FOR CUBES NOTE}
+Property 3) in Theorem \ref{SERRE FIBR EQUIV COND THM} can be equivalently 
+stated as follows. Given a cube $I^{n}$, let $K$ be a subset of $\pint^{n}$ 
+consisting of all but one face of $I^{n}$. Then for any commutative diagram 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+K & E \\
+I^{n} &  B \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-2) 
+edge node[anchor = west] {$p$} (m-2-2)
+(m-1-1) 
+edge node[above] {$\xov{f}$} (m-1-2)
+(m-2-1) 
+edge node[below] {$h$} (m-2-2)
+;
+\path[right hook-latex, thick, font=\scriptsize]
+(m-1-1) 
+edge (m-2-1);
+\path[dashed, ->,  thick, font=\scriptsize]
+(m-2-1) 
+edge node[anchor=south east] {$\xov{h}$} (m-1-2);
+\end{tikzpicture}
+\end{equation*}
+there exists a map $\xov{h}\colon I^{n} \to E$ such that 
+this diagram commutes.
+\end{note}
+
+
+\begin{lemma}
+\label{REL HOMOT ISO FIBER HOMOT LEMMA}
+Let $p\colon E\to B$ be a Serre fibration. Let $e_{0}\in E$ and $b_{0}\in B$
+be points such that $p(e_{0}) = b_{0}$, and let $F = p^{-1}(b_{0})$. For any $n\geq 1$
+the map $p\colon (E, F, e_{0}) \to (B, b_{0}, b_{0})$ induces an isomorphism 
+of homotopy groups 
+\[
+p_{\ast} \colon \pi_{n}(E, F, e_{0}) \lra \pi_{n}(B, b_{0}, b_{0}) = \pi_{n}(B, b_{0})
+\]
+\end{lemma}
+
+
+\begin{proof}
+To check that $p_{\ast}\colon \pi_{n}(E, F, e_{0}) \to \pi_{n}(B, b_{0})$ is 
+onto, take a map $\omega \colon (I^{n}, \pint^{n}) \to (B, b_{0})$. By the 
+relative homotopy lifting property for $(I^{n-1}, \pint^{n-1})$, we can find 
+a map $\xov{\omega}\colon  I^{n} \to E$
+such that $\xov{\omega}(J^{n-1}) = e_{0}$ and $p\xov{\omega} = \omega$.
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+J^{n-1} = I^{n-1} \times \{1\} \cup \pint^{n-1}\times [0, 1] & E \\
+I^{n} = I^{n-1} \times [0, 1] &  B \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-2) 
+edge node[anchor = west] {$p$} (m-2-2)
+(m-1-1) 
+edge node[above] {$c_{e_{0}}$} (m-1-2)
+(m-2-1) 
+edge node[below] {$\omega$} (m-2-2)
+;
+\path[right hook-latex, thick, font=\scriptsize]
+(m-1-1) 
+edge (m-2-1);
+\path[dashed, ->,  thick, font=\scriptsize]
+(m-2-1) 
+edge node[anchor=south east, pos=0.45] {$\xov{\omega}$} (m-1-2);
+\end{tikzpicture}
+\end{equation*}
+Then $\xov{\omega}$ represents and element of $\pi_{n}(E, F, e_{0})$, 
+and $p_{\ast}([\xov{\omega}]) = [\omega]$.
+
+It remains to verify that $p_{\ast}$ is 1-1. Assume that 
+$\omega_{0}, \omega_{1}\colon (I^{n}, \pint^{n}, J^{n-1})\to (E, F, e_{0})$
+be maps such that $p_{\ast}([\omega_{0}]) = p_{\ast}([\omega_{1}])$. 
+Then there exists a homotopy $h\colon I^{n}\times I \to B$ with
+$h_{0} = p\omega_{0}$ and $h_{1} = p\omega_{1}$, 
+and such that $h(\pint^{n}\times [0, 1]) = b_{0}$.
+Take the subset $K\subseteq I^{n}\times I$ given by 
+\[
+K = I^{n}\times \{0, 1\} \cup J^{n-1}\times [0, 1]
+\]
+Notice that $K$ consists of all faces of the cube $I^{n+1} = I^{n}\times [0, 1]$, 
+except for the face $I^{n-1}\times \{0\} \times [0, 1]$. 
+Define $\xov{f}\colon X \to E$ by 
+\[
+\xov{f}(x) = 
+\begin{cases}
+\omega_{0}(x) & \text{for $x\in I^{n}\times \{0\}$} \\
+\omega_{1}(x) & \text{for $x\in I^{n}\times \{1\}$} \\
+e_{0} & \text{for $x\in J^{n-1}\times [0, 1]$} \\
+\end{cases}
+\]
+By (\ref{REL HOMOT LIFT FOR CUBES NOTE}) we can find a map 
+$\xov{h}\colon I^{n+1} \to E$ such that $\xov{h}|_{K} = \xov{f}$
+and $p\xov{h} = h$. Such map $\xov{h}$ gives a homotopy between 
+$\omega_{0}$ and $\omega_{1}$. Therefore $[\omega_{0}] = [\omega_{1}]$
+in $\pi_{n}(E, F, e_{0})$. 
+\end{proof}
+
+
+
+\begin{theorem}
+\label{EXACT SEQ FIBRATION THM}
+Let $p\colon E\to B$ be a Serre fibration. Let $e_{0}\in E$ and $b_{0}\in B$
+be  such that $p(e_{0}) = b_{0}$, and let $F = p^{-1}(b_{0})$. Let 
+$i\colon F \to E$ be the inclusion map. For any $n\geq 1$ define a homomorphism 
+$\partial \colon \pi_{n}(B, b_{0})\to \pi_{n-1}(F, e_{0})$ given by 
+\[
+\partial \colon \pi_{n}(B, b_{0}) \overset{p_{\ast}^{-1}}{\lra} \pi_{n}(E, F, e_{0}) 
+\overset{\partial}{\lra} \pi_{n-1}(F, e_{0})
+\] 
+Then the following sequence is exact: 
+\begin{multline*}
+{\dots}\lra \pi_{n+1}(B, b_{0}) \overset{\partial}{\lra} 
+\pi_{n}(F, e_{0}) \overset{i_{\ast}}{\lra}
+\pi_{n}(E, e_{0}) \overset{p_{\ast}}{\lra}
+\pi_{n}(B, b_{0}) \overset{\partial}{\lra} {\dots} \\
+{\dots} \overset{p_{\ast}}{\lra} \pi_{1}(B, b_{0}) \overset{\partial}{\lra} 
+\pi_{0}(F, e_{0}) \overset{i_{\ast}}{\lra} 
+\pi_{0}(E, e_{0}) \overset{p_{\ast}}{\lra} 
+\pi_{0}(B, b_{0}) 
+\end{multline*}
+\end{theorem}
+
+
+\begin{proof}
+Exactness in almost all places follows from the exactness of the 
+long exact sequence of the triple $(E, F, e_{0})$, and the commutativity of the 
+following diagram:
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=2em, text height=1.5ex, text depth=0.25ex]
+{
+{\dots} & \pi_{n}(F, e_{0}) & \pi_{n}(E, e_{0}) & \pi_{n}(B, b_{0}) 
+& \pi_{n-1}(F, e_{0}) &  \pi_{n-1}(E, e_{0}) & {\dots} \\
+{\dots} & \pi_{n}(F, e_{0}) & \pi_{n}(E, e_{0}) & \pi_{n}(E, F, e_{0}) 
+& \pi_{n-1}(F, e_{0}) &  \pi_{n-1}(E, e_{0}) & {\dots} \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1)
+edge (m-1-2)
+(m-1-2) 
+edge node[above] {$i_{\ast}$} (m-1-3)
+(m-1-3) 
+edge node[above] {$p_{\ast}$} (m-1-4)
+(m-1-4) 
+edge node[above] {$\partial$} (m-1-5)
+(m-1-5) 
+edge node[above] {$i_{\ast}$} (m-1-6)
+(m-1-6) 
+edge (m-1-7)
+
+(m-2-1)
+edge (m-2-2)
+(m-2-2) 
+edge node[below] {$i_{\ast}$} (m-2-3)
+edge node[pos=0.45, anchor = south, rotate=90] {$=$} (m-1-2)
+(m-2-3) 
+edge node[below] {$j_{\ast}$} (m-2-4)
+edge node[pos=0.45, anchor = south, rotate=90] {$=$} (m-1-3)
+(m-2-4) 
+edge node[below] {$\partial$} (m-2-5)
+edge node[left] {$p_{\ast}$} node[right] {$\cong$}(m-1-4)
+(m-2-5) 
+edge node[below] {$i_{\ast}$} (m-2-6)
+edge node[pos=0.45, anchor = south, rotate=90] {$=$} (m-1-5)
+(m-2-6) 
+edge (m-2-7)
+edge node[pos=0.45, anchor = south, rotate=90] {$=$} (m-1-6)
+;
+\end{tikzpicture}
+\end{equation*}
+\ 
+\vskip -5mm
+\ 
+Since the long exact sequence of $(E, F, x_{0})$ ends at $\pi_{0}(E, e_{0})$, exactness
+of the sequence 
+\[
+\pi_{0}(F, e_{0}) \overset{i_{\ast}}{\lra} 
+\pi_{0}(E, e_{0}) \overset{p_{\ast}}{\lra} 
+\pi_{0}(B, b_{0}) 
+\]
+needs to be checked separately (exercise).
+\end{proof}
+
+
+\begin{note}
+The map $\partial\colon\pi_{n}(B, b_{0})\to \pi_{n-1}(F, e_{0})$ can be described 
+directly as follows. Take a map $\omega\colon (I^{n}, \pint^{n}) \to (B, x_{0})$.
+Since $p\colon E\to B$ is a Serre fibration, by (\ref{REL HOMOT LIFT FOR CUBES NOTE})
+we can find $\xov{\omega}\colon I^{n}\to E$ 
+such that $p\xov{\omega} = \omega$, and $\xov{\omega}(J^{n-1}) = e_{0}$. 
+Then $\partial([\omega]) = [\xov{\omega}|_{I^{n-1}\times \{0\}}]$.
+
+\begin{equation*}
+\begin{tikzpicture}[scale=1.3]
+\filldraw[line width=2pt, fill=mygray1] (0, 0) rectangle (1, 1) node[pos=0.5] {\small $I^{n}$};
+\path (0, 0) --  (1, 0) node[midway,below] {\small $I^{n-1}\times \{0\}$};
+
+\draw[red, line width=2pt, cap=rect] (0, 0) -- (0, 1) -- node[above] {\small $J^{n-1}$}
+(1, 1) -- (1, 0);
+
+
+\filldraw[line width=2pt, fill=mygray1] 
+(3, 1.2) rectangle (4, 2.2);
+\path (3, 1.2) --  (4, 1.2) node[midway,below] {\small $F$};
+\draw[red, line width=2pt, cap=rect] 
+(3, 1.2) -- node[left] {\small $e_{0}$} 
+(3, 2.2) -- node[above] {\small $e_{0}$} 
+(4, 2.2) -- node[right] {\small $e_{0}$} (4, 1.2);
+
+
+\filldraw[line width=2pt, fill=mygray1] 
+(3, -1.2) rectangle (4, -0.2);
+\path (3, -1.2) --  (4, -1.2) node[midway,below] {\small $b_{0}$};
+\draw[red, line width=2pt, cap=rect] 
+(3, -1.2) -- node[left] {\small $b_{0}$} 
+(3, -0.2) -- node[above] {\small $b_{0}$}
+(4, -0.2) -- node[right] {\small $b_{0}$} (4, -1.2);
+
+\draw[thick, ->, >=latex] 
+(1.4, 0.8) -- node[anchor=south east] {\small $\xov{\omega}$} (2.6, 1.4);
+\draw[thick, ->, >=latex] 
+(1.4, 0.2) -- node[anchor=north east] {\small $\omega$} (2.6, -0.4);
+\draw[thick, ->, >=latex] 
+(3.5, 0.7) -- node[anchor=west] {\small $p$} (3.5, 0.3);		
+
+\end{tikzpicture}
+\end{equation*}
+
+\end{note}
+
+
+
+
+
+
+\begin{example}
+Consider the product fibration $\pr_{B}\colon B\times F \to B$. For $b_{0}\in B$
+we have $\pr_{B}^{-1}(b_{0}) = \{b_{0}\}\times F\cong F$. This for $f_{0}\in F$
+the exact sequence looks as follows: 
+
+\begin{equation*}
+{\dots} \to \pi_{n+1}(B, b_{0}) \overset{\partial}{\lra} 
+\pi_{n}(F, f_{0}) \overset{i_{\ast}}{\lra}
+\pi_{n}(B\times F, (b_{0}, f_{0})) \overset{p_{\ast}}{\lra}
+\pi_{n}(B, b_{0}) \overset{\partial}{\lra}
+\pi_{n-1}(F,f_{0}) \overset{i_{\ast}}{\to} {\dots}
+\end{equation*}
+
+The projection map $\pr_{F}\colon B\times F \to F$ induces homomorphisms 
+$\pr_{F\ast}\colon \pi_{n}(B\times F, (b_{0}, f_{0})) \to \pi_{n}(F, f_{0})$
+such that $\pr_{F\ast}i_{\ast} = \id_{\pi_{n}(F, f_{0})}$. This means that 
+$\Im{\partial} = \Ker i_{\ast} = 0$. Therefore for each $n\geq 1$ we obtain 
+a split short exact sequence 
+\begin{equation*}
+0 \lra 
+\pi_{n}(F, f_{0}) \stackrel[\pr_{F\ast}]{i_{\ast}}{\overrightarrow{\underleftarrow{\hspace{0.7cm}}}}
+\pi_{n}(B\times F, (b_{0}, f_{0})) \overset{p_{\ast}}{\lra}
+\pi_{n}(B, b_{0}) \lra 0
+\end{equation*}
+This shows that 
+$\pi_{n}(B\times F, (b_{0}, f_{0})) \cong 
+\pi_{n}(B, b_{0}) \times \pi_{n}(F, f_{0})$,
+which is a special case of the product formula (\ref{PIN  PROD THM}).
+\end{example}
+
+
+\begin{example}
+Let $p\colon E \to B$ be a covering, let $b_{0}\in B$ and let $e_{0}\in p^{-1}(b_{0})$. 
+The space $F = p^{-1}(b_{0})$ is discrete, so $\pi_{n}(F) = 0$ for all 
+$n \geq 1$. Therefore the exact sequence of the fibration becomes 
+\begin{multline*}
+{\dots}\lra
+\ 0\  {\lra}
+\pi_{n}(E, e_{0}) \overset{p_{\ast}}{\lra}
+\pi_{n}(B, b_{0}) {\lra}
+\ 0\  \lra {\dots} \\
+{\dots}{\lra}\  0\  {\lra}
+\pi_{1}(E, e_{0}) \overset{p_{\ast}}{\lra}
+\pi_{1}(B, b_{0}) \overset{\partial}{\lra}
+\pi_{0}(F, e_{0}) \overset{i_{\ast}}{\lra}
+\pi_{0}(E, e_{0}) \overset{p_{\ast}}{\lra}
+\pi_{0}(B, b_{0})
+\end{multline*}
+This shows that $p_{\ast}\colon \pi_{n}(E, e_{0}) \to \pi_{n}(B, b_{0})$
+is an isomorphism for all $n\geq 2$, and it is a monomorphism for $n=1$. 
+This recovers the statement of Proposition \ref{COVERING PIN PROP}. 
+
+The image of $p_{\ast}\colon \pi_{1}(E, e_{0}) \to \pi_{1}(B, b_{0})$
+coincides with $\Ker(\partial\colon \pi_{1}(B, b_{0}) \to \pi_{0}(F, e_{0}))$. 
+By the definition of the map $\partial$, an element $[\omega]\in \pi_{1}(B, b_{0})$
+is in $\Ker \partial$ if $\omega\colon [0, 1]\to B$ has a lift 
+$\xov{\omega}\colon [0, 1]\to E$ such that $\xov{\omega}(1) = e_{0}$ and 
+$\omega(1)$ is in the same path connected component of $F$ as $e_{0}$. Since 
+$F$ is discrete, it means that $\xov{\omega}(1) = e_{0} = \xov{\omega}(0)$. 
+As a consequence, we obtain that $\Im(p_{\ast}\colon \pi_{1}(E, e_{0}) \to \pi_{1}(B, b_{0})$
+consists of elements $[\omega]\in \pi_{1}(B, b_{0})$ such that the lift of $\omega$
+ending at $e_{0}$ is a loop. 
+\end{example}
+
+
+\begin{theorem}
+\label{LOC TO GLOB SERRE FIB THM}
+Let $p\colon E\to B$ be map and let  $\{U_{i}\}_{i\in I}$ be an open cover of $B$. 
+Assume that for each $i\in I$ the map $p_{i}\colon p^{-1}(U_{i}) \to U_{i}$, which is
+the restriction of $p$ is a Serre fibration. Then $p$ is a Serre fibration. 
+\end{theorem}
+
+\begin{note}
+An analogous fact is true for Hurewicz fibrations, under the assumption that $B$ is 
+a paracompact space. 
+\end{note}
+
+\begin{proof}[Proof of Theorem \ref{LOC TO GLOB SERRE FIB THM}]
+See e.g. Hatcher \emph{Algebraic Topology}, Proposition 4.48 p. 379.
+\end{proof}
+
+
+\begin{definition} 
+\label{FIBRE BUNDLE DEF}
+A map $p\colon E\to B$ is a \emph{fiber bundle} with fiber $F$ if for every point 
+$b\in B$ there exists an open neighborhood $b\in U\subseteq B$ and a homeomorphism 
+$h_{U}\colon p^{-1}(U) \to U \times F$ such that the following 
+diagram commutes: 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep= 2em, column sep=1.5em, text height=1.5ex, text depth=0.25ex]
+{
+p^{-1}(U) & & U \times F \\
+& U & \\ 
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[auto] {$h_{U}$} (m-1-3)
+edge node[anchor=north east] {$p$} (m-2-2)
+(m-1-3)
+edge node[anchor= north west] {$\pr_{1}$} (m-2-2)
+; 
+\end{tikzpicture}
+\end{equation*}
+Here $\pr_{1} \colon U\times F \to U$ is the projection map $\pr_{1}(x, y) = x$. 
+\end{definition}
+
+
+\begin{proposition}
+Every fiber bundle is a Serre fibration. 
+\end{proposition}
+
+\begin{proof}
+This follows from Theorem \ref{LOC TO GLOB SERRE FIB THM} and Example \ref{PRODUCT FIBRATION EXAMPLE}.
+\end{proof}
+
+\begin{example}
+Every covering space $p\colon E\to B$ is a fiber bundle whose fiber is a discrete space.
+\end{example}
+
+
+\begin{example}
+{\color{red} Mobius band}
+\end{example}
+
+\begin{example}
+{\color{red} Klein bottle}
+\end{example}
+
+
+\begin{example}
+\label{CPN BUNDLE EXAMPLE}
+Consider $S^{2n+1}$ as a subspace of the complex space $\C^{n}$:
+\[
+S^{2n+1} = \{(z_{0}, \dots, z_{n})\in \C^{n+1}\ | 
+\ \textstyle{\sum_{i=0}^{n} \norm{z_{i}}^{2} = 1}\}
+\]
+In particular, $S^{1} = \{z \in \C \ | \ \norm{z} = 1\}$.
+The \emph{$n$-dimensional complex projective space} is the quotient space 
+\[
+\CP^{n} = S^{2n+1}/\sim
+\]
+where $(z_{1}, \dots, z_{n})\sim  \lambda(z_{0}, \dots , z_{n})$ for all 
+$\lambda \in S^{1}$. We will denote by $[z_{0}, \dots, z_{n}]\in \CP^{n}$
+the equivalence class of $(z_{0}, \dots, z_{n})$. 
+Let $p\colon S^{2n+1} \to \CP^{n}$ be the quotient map
+$p(z_{0}, \dots, z_{n}) = [z_{0}, \dots, z_{n}]$.
+
+We will show that $p\colon S^{2n+1} \to \CP^{n}$ is a fiber bundle with fiber 
+$S^{1}$. Let $b = [z_{0}, \dots, z_{n}]\in \CP^{n}$. Choose $0\leq i\leq n$ 
+such that $z_{i}\neq 0$, 
+and take $U_{i} = \{[w_{0}, \dots, w_{n}]\in \CP^{n} \ |\  w_{i}\neq 0\}$. This 
+set is an open neighborhood of $b$ in $\CP^{n}$. We have  
+\[
+p^{-1}(U_{i}) = \{(w_{0}, \dots, w_{n})\in S^{2n+1} \ | \ w_{i}\neq 0\}
+\]
+Define a map $h_{i}\colon p^{-1}(U_{i}) \to U_{i}\times S^{1}$ by
+$h_{i}(w_{0}, \dots, w_{n}) = ([w_{0}, \dots, w_{n}], w_{i}/\norm{w_{i}})$. 
+This is a homeomorphism, with the inverse given by 
+\[
+h_{i}^{-1}([v_{0}, \dots, v_{n}], \lambda) = 
+\frac{\norm{v_{i}}}{v_{i}}\cdot \lambda \cdot(v_{0}, \dots, v_{n})
+\]
+
+Let $n\geq 1$. The long exact sequence of the bundle $p\colon S^{2n+1} \to \CP^{n}$
+has the form 
+\begin{multline*}
+{\dots}\lra 
+\pi_{m}(S^{1}) \overset{i_{\ast}}{\lra}
+\pi_{m}(S^{2n+1}) \overset{p_{\ast}}{\lra}
+\pi_{m}(\CP^{n}) \overset{\partial}{\lra} 
+\pi_{m-1}(S^{1})\lra{\dots} \\
+{\dots}\lra 
+\pi_{2}(S^{2n+1}) \overset{p_{\ast}}{\lra}
+\pi_{2}(\CP^{n}) \overset{\partial}{\lra}
+\pi_{1}(S^{1}) \overset{i_{\ast}}{\lra}
+\pi_{1}(S^{2n+1})\overset{p_{\ast}}{\lra} 
+\pi_{1}(\CP^{n}, b_{0}) \overset{\partial}{\lra} 
+\pi_{0}(S^{1}) = 0
+\end{multline*}
+Since $\pi_{m}(S^{1}) = 0$ for $m >1$, 
+we obtain that  $\pi_{m}(\CP^{n})\cong \pi_{m}(S^{2n+1})$ for $m\geq 3$. 
+Also, since $\pi_{1}(S^{1})\cong \Z$ and 
+$\pi_{m}(S^{2n + 1}) = 0$ for $m<2n+1$, thus 
+$\pi_{2}(\CP^{n}) \cong \pi_{1}(S^{1})\cong \Z$ and $\pi_{1}(\CP^{n}) = 0$. 
+\end{example}
+
+\begin{example}
+\label{HOPF BUNDLE EXAMPLE}
+As a special case of Example \ref{CPN BUNDLE EXAMPLE}, take $n=1$. 
+In this case, we have a homeomorphism $\CP^{1} \cong S^{2}$. 
+To see this, define a map $h\colon \CP^{1}\setminus \{[1, 0]\}\to \C$ by 
+$h([z_{0}, z_{1}]) = \frac{z_{0}}{z_{1}}$. This is a homeomorphism 
+with the inverse given by $h^{-1}(z) = \frac{1}{1 + \norm{z}}\cdot [z, 1]$. 
+Since $S^{2}$ is homeomorphic to the one-point compactification of $\C$, i.e. 
+$S^{2}\cong \C \cup \{\infty\}$, the map $h$ can be extended to a homeomomrphism 
+$h\colon  \CP^{1}\to S^{2}$ by setting $h([1, 0]) = \infty$.  
+
+Under the identification $\CP^{1}\cong S^{2}$ the bundle 
+$S^{1}\to S^{3}\overset{p}{\to} \CP^{1}$ becomes $S^{1}\to S^{3}\overset{p}{\to} S^{2}$. 
+This bundle is called the \emph{Hopf bundle} (or the \emph{Hopf fibration}). 
+\end{example}
+
+Using the long exact sequence of the Hopf fibration we obtain:
+
+\begin{theorem}
+\label{PI2 S2 THM}
+$\pi_{2}(S^{2}) \cong \Z$.
+\end{theorem}
+
+

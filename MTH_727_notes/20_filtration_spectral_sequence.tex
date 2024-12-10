@@ -1,0 +1,263 @@
+% !TEX root = mth727_lecture_notes.tex
+
+
+\chapter[Spectral Sequence From a Filtration]{Spectral Sequence\\ From a Filtration}
+\chaptermark{Spectral Sequence From a Filtration}
+\label{SPECTRAL SEQUENCE FROM FILTRATION CHAPTER}
+\thispagestyle{firststyle}
+
+
+The goal of this chapter is to describe a construction of a spectral sequence 
+associated to a filtration of a chain complex. By a chain complex we will mean 
+here a non-negatively graded chain complex, 
+i.e. a chain complex of abelian group
+
+\[
+{\dots} \to 
+C_{n+1} \overset{\partial}{\to}  
+C_{n} \overset{\partial}{\to}
+C_{n-1} \overset{\partial}{\to}
+{\dots}
+\]
+such that $C_{n} = 0$ for $n< 0$.
+
+\begin{definition}
+Let $C_{\ast}$ be a chain complex. A \emph{filtration} of $C_{\ast}$
+is a sequence of subcomplexes 
+\[
+0 = F_{-1}C_{\ast} \subseteq F_{0}C_{\ast} \subseteq {\dots} \subseteq  C_{\ast}
+\] 
+such that $\bigcup_{p}F_{p}C_{\ast} = C_{\ast}$.
+The filtration is \emph{first quadrant} if $H_{k}(F_{p}C_{\ast}/F_{p-1}C_{\ast}) = 0$
+for $k < p$. 
+\end{definition}
+
+
+\begin{example}
+Let $X$ be a CW complex. The filtration of $X$ with respect to the skeleta 
+\[
+\varnothing = X^{(-1)} \subseteq X^{(1)} \subseteq X^{(2)} \subseteq {\dots} \subseteq X 
+\]
+defines a filtration of the singular chain complex of $X$:
+\[
+0  = C_{\ast}(X^{(-1)}) \subseteq C_{\ast}(X^{(1)}) \subseteq C_{\ast}(X^{(2)}) \subseteq {\dots} \subseteq C_{\ast}(X) 
+\]
+Since $H_{p}(C_{\ast}(X^{(q)}), C_{\ast}(X^{(q-1)})) \cong H_{p}(X^{(q)}, X^{(q-1)}) = 0$
+for $p < q$, so this is a first quadrant filtration.
+
+\end{example}
+
+
+\begin{note} A filtration $\{F_{p}C_{\ast}\}$ of a chain complex $C_{\ast}$ induces a 
+filtration of homology groups of $C_{\ast}$
+\[
+0 = F_{-1}H_{n}(C_{\ast}) \subseteq F_{1}H_{n}(C_{\ast})  \subseteq 
+{\dots} \subseteq H_{n}(C_{\ast})
+\] 
+where $F_{p}H_{n}(C_{\ast}) \coloneq \Im(H_{n}(F_{p}C_{\ast})) \to H_{n}(C_{\ast}))$.
+Since $\bigcup F_{p}C_{\ast} = C_{\ast}$ we have 
+$\bigcup_{p} F_{p}H_{n}(C_{\ast}) = H_{n}(C_{\ast})$.
+\end{note}
+
+
+
+
+
+Assume that we are given 
+a chain complex $C_{\ast}$ with differentials $\partial \colon C_{n} \to C_{n-1}$, 
+and that $\{F_{p}C_{\ast}\}$ is a filtration of $C_{\ast}$. 
+Denote $E^{0}_{p, q} \coloneq F_{p}C_{p+q}/F_{p-1}C_{p+q}$. We will consider 
+subgroups $B^{\infty}_{p, q}, Z^{\infty}_{p, q} \subseteq E^{0}_{p, q}$ defined 
+as follows:
+\begin{align*}
+Z^{\infty}_{p, q} & = \{[x]\in E^{0}_{p, q} \ 
+| \ \partial z = 0 \in C_{p+q-1} \text{ for some } z\in [x]\} \\
+B^{\infty}_{p, q} & = \{[x]\in E^{0}_{p, q} \ 
+| \ \partial b \in [x] \text{ for some } b\in C_{p+q+1} \}
+\end{align*}
+We have $B^{\infty}_{p, q}  \subseteq Z^{\infty}_{p, q}$. Define 
+$E^{\infty}_{p, q} \coloneq Z^{\infty}_{p, q}/B^{\infty}_{p, q}$.
+
+
+
+\begin{proposition}
+$E^{\infty}_{p, q} \cong F_{p}H_{p+q}(C_{\ast})/F_{p-1}H_{p+q}(C_{\ast})$.
+\end{proposition}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+The spectral sequence we are constructing will introduce intermediate stages 
+$E^{0}_{p, q}$ between $E^{0}_{p, q}$ and $E^{\infty}_{p, q}$ such that each stage 
+is closer approximation 
+of $E^{\infty}_{p, q}$. More precisely, for $r=1, 2, \dots$ define:
+\begin{align*}
+Z^{r}_{p, q} & = \{[x]\in E^{0}_{p, q} \ 
+| \ \partial z \in  F_{p-r}C_{p+q-1} \text{ for some } z\in [x]\} \\
+B^{r}_{p, q} & = \{[x]\in E^{0}_{p, q} \ 
+| \ \partial b \in [x] \text{ for some } b\in F_{p+r-1}C_{p+q+1} \}
+\end{align*}
+We have inclusions
+\[
+B^{1}_{p, q} \subseteq B^{2}_{p, 1} \subseteq {\dots} \subseteq B^{\infty}_{p, q}
+\subseteq Z^{\infty}_{p, q}\subseteq {\dots} \subseteq Z^{2}_{p, q} \subseteq Z^{1}_{p, q}
+\]
+Define: $E^{r}_{p, q} \coloneq Z^{r}_{p, q}/B^{r}_{p, q}$. 
+
+\begin{proposition} 
+\label{E1 FILTRATION SS PROP}
+In the setting described above we have
+\benu
+\item[1)] $B^{\infty}_{p, q} = \bigcup_{r} B^{r}_{p, q}$ and $
+Z^{\infty}_{p, q} = \bigcap_{r} Z^{r}_{p, q}$.
+\item[2)] $E^{1}_{p, q} \cong H_{p+q}(F_{p}C_{\ast}/F_{p-1}C_{\ast})$.
+\eenu
+\end{proposition}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{note}
+Since $F_{p}C_{\ast} = 0$ if $p< 0$, we get that $E^{1}_{p, q} = 0$ for $p< 0$. 
+If $F_{p}C_{\ast}$ is a first quadrant filtration, then we also get 
+$E^{1}_{p, q} = 0$ for $q<0$. 
+\end{note}
+
+
+The groups $E^{r}_{p, q}$ will form pages of our spectral sequence. In order to finish 
+the construction we still need to specify differentials 
+$d^{r}\colon E^{r}_{p, q} \to E^{r}_{p-r, q+r-1}$. This can be done as follow. 
+By definition, every element of $E^{r}_{p, q} = Z^{r}_{p, q}/B^{r}_{p, q}$ 
+is represented by $z \in F_{p}C_{p+q}$ such that $\partial z\in F_{p-r}C_{p+q-1}$. 
+We set $d^{r}([z]) = [\partial z]$. 
+
+\begin{proposition}
+The function $d^{r}\colon E^{r}_{p, q} \to E^{r}_{p-r, q+r-1}$ is a well-defined 
+homomorphism. Moreover, $d^{r}d^{r} = 0$ and 
+$H_{p, q}(E^{r}_{\ast\ast}, d^{r}) \cong E^{r+1}_{p, q}$.
+\end{proposition}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+Here is a result summarizing the above constructions:
+
+\begin{theorem}
+\label{CHAIN COMPLEX FILTRATION SS THM}
+Let $C_{\ast}$ be a chain complex with a first quadrant filtration 
+\[
+0 = F_{-1}C_{\ast} \subseteq F_{0}C_{\ast} \subseteq {\dots} \subseteq  C_{\ast}
+\] 
+such that $\bigcup_{p}F_{p}C_{\ast} = C_{\ast}$.
+Then there exists a first quadrant spectral sequence $E^{r}_{\ast\ast}$ such that 
+\bit 
+\item $E^{1}_{p, q} = H_{p+q}(F_{p}C_{\ast}/F_{p-1}(C_{\ast}))$;
+\item the sequence converges to $H_{\ast}(C_{\ast})$.
+\eit
+\end{theorem}
+
+Applying this to the singular chain 
+complex of a topological space we obtain: 
+
+\begin{theorem}
+\label{SPACE FILTRATION SS THM}
+Let $X$ be a space with a filtration 
+\[
+\varnothing = X_{-1} \subseteq X_{0} \subseteq X_{1} \subseteq {\dots} \subseteq X
+\] 
+such that for every compact subset $A\subseteq X$ we have $A\subseteq X_{p}$
+for some $p\geq 0$. Assume also that $H_{k}(X_{p}, X_{p-1}) = 0$ for $k<p$. 
+Then there exists a first quadrant spectral sequence $E^{r}_{\ast\ast}$ such that 
+\bit 
+\item $E^{1}_{p, q} = H_{p+q}(X_{p}, X_{p-1})$
+\item The sequence converges to $H_{\ast}(X)$. More precisely, 
+\[
+E^{\infty}_{p, q} = F_{p}H_{p+q}(X)/F_{p-1}H_{p+q}(X)
+\]
+where $F_{p}H_{n}(X) = \Im(H_{n}(X_{p}) \to H_{n}(X))$.
+\eit
+\end{theorem}
+
+\begin{proof}
+The filtration of the space $X$ induces a filtration of the singular chain complex of $X$:
+\[
+0  = C_{\ast}(X_{-1}) \subseteq  C_{\ast}(X_{0}) \subseteq C_{\ast}(X_{1}) \subseteq {\dots} \subseteq C_{\ast}(X)
+\]
+The condition on the compact sets in $X$ implies that 
+$\bigcup_{p}C_{\ast}(X_{p}) = C_{\ast}(X)$. Thus the statement follows from   
+Theorem \ref{CHAIN COMPLEX FILTRATION SS THM}.
+\end{proof}
+
+\begin{note}
+The differentials 
+$d^{1}\colon E^{1}_{p, q} = H_{p+q}(X_{p}, X_{p-1}) \to 
+H_{p+q-1}(X_{p-1}, X_{p-2}) = E^{1}_{p-1, q}$ can be more explicitly described 
+as compositions
+\[
+H_{p+q}(X_{p}, X_{p-1}) \overset{\delta}{\to} H_{p+q-1}(X_{p-1}) 
+\to H_{p+q-1}(X_{p-1}, X_{p-2})
+\]
+where $\delta$ is the boundary map from the homology long exact sequence 
+of the pair $(X_{p}, X_{p-1})$.
+\end{note}
+
+
+
+\begin{example}
+For a CW complex $X$ consider the filtration  of $X$ by its skeleta: 
+\[
+\varnothing = X^{(-1)} \subseteq X^{(0)} \subseteq X^{(1)} \subseteq {\dots} \subseteq X
+\]
+In the spectral sequence associated to this filtration we have 
+\[
+E^{1}_{p, q} = H_{p+q}(X^{(p)}, X^{(p-1)}) =
+\begin{cases}
+H_{p}(X^{(p)}, X^{(p-1)}) & \text{ if } q=0 \\
+0 & \text{otherwise} \\
+\end{cases}
+\]
+As a consequence the first page of the spectral sequence looks as follows:
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) [matrix of math nodes,
+    nodes in empty cells,
+    row sep=1em, 
+    column sep=1em,
+    nodes={minimum width=5ex, anchor=center, minimum height=5ex,outer sep=-1pt}
+    ]{
+          2     &[-2mm] \vdots     &  \vdots   &  \vdots   & \\
+          1     &  0   &  0  &  0  & \\
+          0     &  H_{0}(X^{(0)}, X^{(-1)}) &  H_{1}(X^{(1)}, X^{(0)}) &  H_{2}(X^{(2)}, X^{(1)})  &  \cdots \\[-5mm]
+                &   0  &  1  &  2  &  \\};
+\path[->, thick, font=\scriptsize]
+(m-3-3.west) edge  node[above, pos=0.3]{$d^{1}$} (m-3-2.east)
+(m-3-4.west) edge  node[above, pos=0.3]{$d^{1}$} (m-3-3.east)
+(m-3-5.west) edge  node[above, pos=0.3]{$d^{1}$} (m-3-4.east)
+;
+\draw[very thick] ([yshift=2mm]m-1-1.east) -- ([yshift=-1mm]m-4-1.east);
+\draw[very thick] ([yshift=-1mm]m-4-1.north) -- ([yshift=-1mm, xshift=3mm]m-4-5.north) ;
+\end{tikzpicture}
+\end{equation*}
+The spectral sequence collapses at the second page, 
+so $E^{2}_{p, q} \cong E^{\infty}_{p, q}$. We also have 
+\[
+E^{\infty}_{p, q} = 
+\frac{\Im(H_{p+q}(X^{(p)}) \to H_{p+q}(X))}
+{\Im(H_{p+q}(X^{(p-1)}) \to H_{p+q}(X))}
+\cong 
+\begin{cases}
+H_{p}(X) & \text{ if } q=0 \\
+0 & \text{otherwise} \\
+\end{cases}
+\]
+As a consequence, singular homology groups of $X$ are isomorphic to the 
+homology groups of the chain complex given by the first row of $E^{1}$. 
+This chain complex is the cellular chain complex of $X$. 
+\end{example}
+
+
+
+

@@ -1,0 +1,232 @@
+% !TEX root = mth727_lecture_notes.tex
+
+
+\chapter[Serre classes]{Serre classes}
+\chaptermark{Serre classes}
+\label{SERRE CLASSES CHAPTER}
+\thispagestyle{firststyle}
+
+
+The motivation for this chapter is to show that the following holds.
+
+\begin{theorem}
+\label{HOMOTOPY GPS SPHERES THM}
+The homotopy groups $\pi_{n}(S^{m})$ are finitely generated for all $n, m \geq 1$.
+\end{theorem}
+
+This will follow from a more general result that will be stated in terms 
+of Serre classes.
+
+\begin{definition}
+A \emph{Serre class} is a non-empty collection $\ccal$ of abelian groups satisfying 
+the property that if 
+\[
+0 \to A \to B \to C \to 0
+\]
+is a short exact sequence of abelian groups then $B\in \ccal$ if and only if 
+$A, C \in \ccal$
+
+We will say that a Serre class $\ccal$ is a \emph{Serre ring} if in addition 
+it satisfies that if $A, B \in \ccal$ then $A\otimes B \in \ccal$ and 
+$\Tor(A, B)\in \ccal$. 
+
+We will also say that a Serre class is \emph{acyclic} if for every group $A\in \ccal$
+we have $H_{q}(K(A, 1)) \in \ccal$ for all $q >0$. 
+\end{definition}
+
+\begin{proposition}
+Let $\ccal$ is a Serre class. The following hold:
+\benu
+\item $0 \in \ccal$.
+\item If $A \in \ccal$ and $A’\cong A$ then $A’ \in \ccal$.
+\item If $B\subseteq A$ then $A\in \ccal$ if and only if $B, A/B \in \ccal$.
+\item If $A \to B \to C$ is an exact sequence and $A, C \in \ccal$ then $B\in \ccal$.
+\item If $0 = A_{-1} \subseteq A_{1} \subseteq A_{2} \subseteq {\dots} \subseteq A_{n}$
+then $A_{n}\in \ccal$ if and only if $A_{i}/A_{i-1} \in \ccal$ for all $i$. 
+\eenu
+\end{proposition}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{proposition}
+\label{SERRE RING HOMOLOGY PROP}
+Let $\ccal$ is a Serre ring. If $X$ is a path connected space such that 
+$H_{q}(X) \in \ccal$ for all $0 < q < p$ then $H_{p}(X; G) \in \ccal$ for any group 
+$G\in \ccal$. 
+\end{proposition}
+
+\begin{proof}
+By the Universal Coefficient Theorem we have 
+\[ 
+H_{p}(X; G) \cong (H_{p}(X)\otimes G) \oplus \Tor(H_{p-1}(X), G)
+\]
+This immediately gives that $H_{p}(X; G)\in \ccal$ for $p\geq 2$
+For $p=0$ we gave $H_{0}(X; G) \cong G \in \ccal$ while for 
+$p=1$ we obtain $H_{1}(X; G) \cong H_{1}(X)\otimes G \in \ccal$.
+\end{proof}
+
+
+
+
+\begin{proposition} All of the following are acyclic Serre rings:
+\ 
+\begin{itemize}
+\item $\cfin = $ the class of all finite abelian groups.
+\item $\cfg = $ the class of all finitely generated abelian groups.
+\item $\ctor = $ the class of all torsion abelian groups.
+\item $\ccal_{p} = $ the class of all p-torsion abelian groups for 
+a given prime $p$.
+\end{itemize}
+\end{proposition}
+
+
+\begin{theorem}
+\label{2 OF 3 SERRE CLASS HOMOLOGY THM}
+Let $F \to E \overset{p}{\to} B$ be a Serre fibration with a simply connected space 
+$B$, and let $\ccal$ be a Serre ring. If for two of the spaces $F$, $E$, $B$
+the homology groups $H_{q}(-)$ are in $\ccal$ for all $q>0$ then the same holds 
+for the third space.
+\end{theorem}
+
+\begin{proof}\ 
+There are three cases to consider. 
+
+\emph{Case 1:} $H_{q}(F), H_{q}(B) \in \ccal$ for all $q > 0$.
+
+Consider the Serre spectral sequence of the fibration $p$. 
+We have $E^{2}_{p, q} = H_{p}(B, H_{q}(F))$ so by 
+Proposition \ref{SERRE RING HOMOLOGY PROP} we get that $E^{2}_{p, q} \in \ccal$
+for all $(p, q) \neq (0, 0)$. Next, since groups $E^{3}_{p, q}$ are obtained 
+by taking quotients of subgroups of the groups $E^{2}_{p, q}$, we get that 
+$E^{3}_{p, q}\in \ccal$ for all $(p, q) \neq (0, 0)$. Inductively, we obtain 
+that $E^{r}_{p, q}\in \ccal$ for all $r \geq 2$ and $(p, q)\neq (0, 0)$, 
+and so also $E^{\infty}_{p, q}\in \ccal$ for $(p, q)\neq (0, 0)$. 
+For $q > 0$ the groups $H_{q}(E)$ admit a finite filtration such filtration
+quotients are isomorphic to groups $E^{\infty}_{p, q}$ with $(p, q)\neq 0$. 
+This implies that $H_{q}(E)\in \ccal$.
+
+\emph{Case 2:} $H_{q}(F), H_{q}(E) \in \ccal$ for all $q > 0$.
+
+Since all groups $E^{\infty}_{p, q}$ are quotients of subgroups of $H_{p+q}(E)$, 
+we have $E^{\infty}_{p, q}\in \ccal$ for all $(p, q) \neq (0, 0)$. 
+We will show that $E^2_{p, q}\in \ccal$ for $(p, q)\neq (0, 0)$ by induction with 
+respect to $p$. For $p=0$ this holds since $E^{2}_{0, q}\cong H_{q}(F)$. 
+Assume that it also holds for $E^{2}_{i, q}$ for all $i < p$. It follows that 
+$E^{r}_{i, q}\in \ccal$ for all $i < p$ and all $r\geq 2$. 
+
+Since all differentials 
+terminating at $E^{r}_{p, 0}$ are trivial, for each $r$ we have an exact 
+sequence 
+\[
+E^{r+1}_{p, 0} \to E^{r}_{p, 0} \overset{d^{r}}{\to} E^{r}_{p-r, r-1}
+\]
+By assumption $E^{r}_{p-r, r-1}\in \ccal$, so if $E^{r+1}_{p, 0} \in \ccal$
+then the same is true for $E^{r}_{p, 0}$. Since 
+$E^{p+1}_{p, q} = E^{\infty}_{p, q} \in \ccal$, arguing inductively over 
+decreasing values of $r$ we obtain that $E^{r}_{p, 0} \in\ccal$ for all $r\geq 2$. 
+In particular, $H_{p}(B) = E^{2}_{p, 0}\in \ccal$. Using Proposition 
+\ref{SERRE RING HOMOLOGY PROP} we obtain that $E^2_{p, q} = H_{p}(B, H_{q}(F))\in \ccal$
+for all $q\geq 0$. 
+
+\emph{Case 3:} $H_{q}(B), H_{q}(E) \in \ccal$ for all $q > 0$.
+
+This is similar to case 2.
+\end{proof}
+
+
+\begin{proposition}
+\label{HOMOLOGY K(GN) ACYCLIC SERRE CLASS PROP}
+If $\ccal$ is an acyclic Serre ring then for every $A\in \ccal$ and $n\geq 1$
+we have $H_{q}(K(A, n)) \in \ccal$. 
+\end{proposition}
+
+\begin{proof}
+We argue by induction with respect to $n$. 
+The case $n=1$ holds by definition of acyclicity of a Serre class. Assume 
+that the statement is true for some $n\geq 1$. For $A\in \ccal$ consider 
+the homotopy fibration sequence $K(A, n) = \Omega K(A, n+1) \to \ast \to K(A, n+1)$. 
+Since $H_{q}(K(A, n)), H_{q}(\ast) \in \ccal$ for all $q>0$, by   
+Theorem \ref{2 OF 3 SERRE CLASS HOMOLOGY THM} we obtain that $H_{q}(K(A, n+1))\in \ccal$. 
+\end{proof}
+
+
+
+\begin{theorem}
+\label{HOMOTOPY VS HOMOLOGY SERRE CLASS THM}
+Let $\ccal$ be an acyclic Serre ring. If $X$ is a simply connected space then the following 
+conditions are equivalent:
+\benu
+\item $\pi_{n}(X)\in \ccal$ for all $n\geq 1$ 
+\item $H_{n}(X)\in \ccal$ for all $n\geq 1$
+\eenu  
+\end{theorem}
+
+
+The proof of Theorem \ref{HOMOTOPY VS HOMOLOGY SERRE CLASS THM} will make 
+use of the notion of Postnikov sections:
+
+\begin{definition}
+\label{POSTNIKOV SECTION DEF}
+Let $X$ be a path connected space. The $n$-th Postnikov section of $X$ 
+is a space $X_{n}$ together with a map $f\colon X \to X_{n}$ such that
+\benu
+\item[1)] $f_{\ast}\colon \pi_{q}(X) \to \pi_{q}(X_{n})$ is an isomorphism 
+for $q \leq n$
+\item[2)] $\pi_{q}(X) = 0$ for $q > n$. 
+\eenu
+\end{definition} 
+
+The $n$-th Postnikov section of a space $X$ can be constructed glueing to 
+$X$ cells in dimensions $n+1$ and higher to kill all homotopy groups above 
+$\pi_{n}(X)$. The map $f\colon X\to X_{n}$ is then given by the inclusion.
+
+
+\begin{proof}[Proof of Theorem \ref{HOMOTOPY VS HOMOLOGY SERRE CLASS THM}]\ 
+
+1) $\Ra$ 2) Let $X_{n}$ denote the $n$-th  Postnikov section of $X$. 
+By Theorem \ref{N-EQUIVALENCE HOMOLOGY THM} we have $H_{q}(X)\cong H_{q}(X_{n})$
+for all $q< n$, so it will be enough to show that $H_{q}(X_{n})\in \ccal$ for all
+$n, q > 0$. We will prove this by induction with respect to $n$.  For $n=2$ we have 
+$X_{2} = K(\pi_{2}(X), 2)$, so the statement holds by 
+Proposition \ref{HOMOLOGY K(GN) ACYCLIC SERRE CLASS PROP}. Assume that it also holds 
+for some $n\geq 2$. Notice that we have a fibration sequence 
+\[
+K(\pi_{n+1}(X), n+1) \to X_{n+1} \to X_{n}
+\]
+Using Proposition \ref{HOMOLOGY K(GN) ACYCLIC SERRE CLASS PROP} again we get 
+that $H_{q}(K(\pi_{n+1}(X), n+1) ) \in \ccal$ for $q>0$, so using 
+Theorem \ref{2 OF 3 SERRE CLASS HOMOLOGY THM} we obtain that $H_{q}(X_{n+1}) \in \ccal$
+for $q>0$. 
+
+2) $\Ra$ 1) We will show that $\pi_{n}(X)\in \ccal$ by induction with respect to $n$. 
+Since $X$ is simply connected, for $n=2$ by the Hurewicz Isomorphism Theorem we
+get  $\pi_{2}(X) \cong H_{2}(X) \in \ccal$. Next, assume that $\pi_{q}(X)\in \ccal$
+for all $q\leq n$ and consider the fibration sequence 
+\[
+\hofib f \to X \to X_{n}
+\]
+where $X_{n}$ is the $n$-th Postnikov section of $X$.  Notice that
+\[
+\pi_{q}(\hofib f) = 
+\begin{cases}
+0 & { if } q\leq n \\
+\pi_{q}(X) & { if } q > n \\
+\end{cases}
+\]
+Since $\pi_{q}(X_{n})\in \ccal$ for all $q$, thus by part 1) $\Ra$ 2) we get that 
+$H_{q}(X_{n})\in \ccal$ for all $q>0$. By assumption $H_{q}(X)\in \ccal$
+for $q>0$. Therefore, using Theorem \ref{2 OF 3 SERRE CLASS HOMOLOGY THM} we obtain 
+that $H_{q}(\hofib f)\in \ccal$ for $q>0$. Since  $\hofib f$ is $n$-connected, 
+by the Hurewicz Isomorphism Theorem we get 
+$H_{n+1}(\hofib f)\cong \pi_{n+1}(\hofib f) \cong \pi_{n+1}(X)$. This gives 
+$\pi_{n+1}(X)\in \ccal$.
+
+
+
+\end{proof}
+
+
+
+

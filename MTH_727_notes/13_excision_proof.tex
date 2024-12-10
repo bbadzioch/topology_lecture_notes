@@ -1,0 +1,278 @@
+% !TEX root = mth727_lecture_notes.tex
+
+
+\chapter[Proof of the Excision Theorem]{Proof of the Excision \\ Theorem}
+\chaptermark{Proof of the Excision Theorem}
+\label{PROOF EXCISION CHAPTER}
+\thispagestyle{firststyle}
+
+
+Based on Tammo tom Dieck, \emph{Algebraic Topology} sec. 6.9. 
+
+The goal of this section is to give a proof a the Excision Theorem. For reference, 
+we bring up again its statement:
+
+{
+\renewcommand{\thetheorem}{\ref{HOMOTOPY  EXCISION THM}}
+\begin{HOMOTEXCISIONTHM}
+Let $X$ be a space and
+$X_{1}, X_{2}\subseteq X$ be open such that 
+$X=  X_{1}\cup X_{2}$. Assume that 
+\begin{itemize}
+\item $(X_{1}, X_{1}\cap X_{2})$ is $m$-connected 
+\item $(X_{2}, X_{1}\cap X_{2})$ is $n$-connected 
+\end{itemize}
+for some $m, n \geq 0$. Then for any $x_{0}\in X_{1}\cap X_{2}$ the homomorphism 
+\[
+i_{\ast}\colon \pi_{k}(X_{1}, X_{1}\cap X_{2}, x_{0}) \to \pi_{k}(X, X_{2}, x_{0})
+\]
+induced by  the inclusion map, is an isomorphism for $1 \leq k < m+n$ and 
+it is onto for $k = m+n$.
+\end{HOMOTEXCISIONTHM}
+\addtocounter{theorem}{-1}
+}
+
+\begin{nn}{\bf Cubical subdivisions.}
+The proof of Theorem \ref{HOMOTOPY  EXCISION THM} will involve working with 
+certain subdivisions of cubes $I^{n}$. Here we set some terminology and notation 
+related to such subdivisions. 
+
+Let $N \geq 1$ be some fixed integer. For $j=0,\dots, N$
+denote $c_{j} = \frac{j}{N}$. Also, let $\delta = \frac{1}{N}$. The numbers 
+$c_{j}$ define a subdivision of the interval $I = [0, 1]$ into subintervals
+$[c_{j}, c_{j+1}] = [c_{j}, c_{j} + \delta]$ . 
+More generally, an $n$-dimensional cube $I^{n}$ has a subdivision 
+into subcubes of the form 
+\begin{align*}
+C_{j_{1}, \dots, j_{n}} & = 
+[c_{j_{1}}, c_{j_{1}+1}]\times [c_{j_{2}}, c_{j_{j}+1}] \\
+& = [c_{j_{1}}, c_{j_{1}} + \delta]\times [c_{j_{2}}, c_{j_{2}}+ \delta]
+\times {\dots}\times [c_{j_{n}}, c_{j_{n}}+ \delta]\\
+\end{align*}
+for some $0 \leq j_{1}, \dots, j_{n} \leq N-1$. We will call this
+the $N$-cubical subdivision of $I^{n}$. This subdivision defines a CW complex 
+structure on $I^{n}$. An $m$-dimensional cell in $I^{n}$ is an $m$-dimensional subcube 
+\[
+C = [c_{j_{1}}, c_{j_{1}} + \epsilon_{1}]\times [c_{j_{2}}, c_{j_{2}}  + \epsilon_{2}] 
+\times {\dots} \times [c_{j_{n}}, c_{j_{n}}  + \epsilon_{n}]
+\] 
+where $\epsilon_{i} = \delta$ for $m$ values of the index $i$ and $\epsilon_{i} = 0$ 
+otherwise. We will denote by $I^{n}(m)$ the $m$-skeleton of $I^{n}$ with this cell structure.
+
+Let $C_{j_{1}, \dots, j_{n}}$ be an $n$-dimensional subcube: 
+\[
+C_{j_{1}, \dots, j_{n}}
+= \{ (t_{1}, \dots, t_{n})\in I^{n} 
+\ | \  c_{j_{i}} \leq t_{i} \leq c_{j_{i}} + \delta  \}
+\]
+For $0\leq p \leq N$ we will denote by $S_{p}C_{j_{1}, \dots, j_{n}}$ 
+and $L_{p}C_{j_{1}, \dots, j_{n}}$
+the subspaces of $C_{j_{1}, \dots, j_{n}}$ given by 
+\begin{align*}
+S_{p}C_{j_{1}, \dots, j_{n}} & 
+= \{ (t_{1}, \dots, t_{n})\in C_{j_{1}, \dots, j_{n}} 
+\ | \  c_{j_{i}} < t_{i} < c_{j_{i}} + \textstyle{\frac{\delta}{2}}  
+\text{ for at  least $p$ coordinates $t_{i}$}\} \\
+L_{p}C_{j_{1}, \dots, j_{n}} & 
+= \{ (t_{1}, \dots, t_{n})\in C_{j_{1}, \dots, j_{n}}  
+\ | \  c_{j_{i}} + \textstyle{\frac{\delta}{2}} < t_{i} < c_{k} + \delta
+\text{ for at  least $p$ coordinates $t_{i}$}\} \\
+\end{align*}
+Also, denote
+\[
+S_{p}  = \bigcup_{j_{1}, \dots, j_{n}} S_{p}C_{j_{1}, \dots, j_{n}} \hskip 10mm
+L_{p}  = \bigcup_{j_{1}, \dots, j_{n}} L_{p}C_{j_{1}, \dots, j_{n}}
+\]
+\end{nn}
+
+
+\begin{lemma}
+\label{EXCISION PREPARATION LEMMA}
+Consider $I^{n}$ with the $N$-cubical subdivision for some $N> 0$.
+Assume that $A, B\subseteq I^{n}$ are closed, disjoint sets, such that
+$A \cap I^{n}(p) = \varnothing$ for some $p\leq n$.
+There exists a homotopy $\Phi\colon I^{n}\times [0, 1] \to I^{n}$ satisfying 
+the following conditions: 
+\benu
+\item [(i)] $\Phi(C\times[0, 1]) \subseteq C$ for each subcube (of any dimension) in $I^{n}$.
+\item [(ii)] $\Phi_{0} = \id_{I^{n}}$.
+\item [(iii)] $\Phi_{1}^{-1}(A)\subseteq S_{p+1}$ and $\Phi_{1}^{-1}(B) = B$.
+\eenu
+Also, there exists a homotopy $\Psi\colon I^{n}\times [0, 1] \to I^{n}$ 
+that satisfies (i) and $(ii)$ and 
+\benu
+\item [(iii’)] $\Psi_{1}^{-1}(A)\subseteq L_{p+1}$ and $\Psi_{1}^{-1}(B) = B$.
+\eenu
+\end{lemma}
+
+\begin{proof}
+Let $\varphi \colon [0, 1]\times [0, 1] \to [0, 1]$ be a homotopy defined as follows:
+\[
+\varphi(t, s) = (1-s)t + s\cdot \min(c_{j}+\delta, 2t - c_{j})
+\]
+for $t\in [c_{j}, c_{j} + \delta]$. This is a homotopy between the identity map 
+on $[0, 1]$ and a map that on each subinterval $[c_{j}, c_{j} + \delta]$ sends
+$[c_{j} + \frac{\delta}{2}, c_{j} + \delta ]$ to the point $c_{j} + \delta$ and stretches 
+$[c_{j}, c_{j} + \frac{\delta}{2}]$ linearly to $[c_{j}, c_{j} + \delta]$.
+Define $\widetilde{\Phi}\colon I^{n}\times [0, 1]\to I^{n}$ by 
+\[
+\widetilde{\Phi}((t_{1}, \dots, t_{n}), s) = 
+(\varphi(t_{1}, s), \dots, \varphi(t_{n}, s))
+\]
+The homotopy $\widetilde{\Phi}$ satisfies conditions (i) and (ii).
+Moreover, $\widetilde{\Phi}_{1}(t_{1}, \dots, t_{n}) \not\in I^{n}(p)$ if and only if 
+$(t_{1}, \dots, t_{n})\in S_{p+1}$. Since $A\cap I^{n}(p) = \varnothing$ this gives 
+$\widetilde{\Phi}_{1}^{-1}(A) \subseteq S_{p+1}$. 
+Let $\varrho\colon I^{n} \to [0, 1]$ be a function such that 
+$\varrho(A) = 1$ and $\varrho(B) = 0$. Define $\Phi\colon I^{n}\times [0, 1] \to I^{n}$  
+by 
+\[
+\Phi(x, s) = \widetilde{\Phi}(x, s\varrho(x)) 
+\]
+Then $\Phi_{1}^{-1}(A) = \widetilde{\Phi}_{1}^{-1}(A)\subseteq S_{p}$
+and $\Phi_{1}^{-1}(B) = \widetilde{\Phi}_{0}^{-1}(B) = B$
+
+The homotopy $\Psi$ can be obtained analogously.
+
+\end{proof}
+
+
+
+\begin{corollary}
+\label{EXCISION SEPARATION COR}
+Consider the cube $I^{n}$ with the N-cubical subdivision for some $N\geq 1$. 
+Assume that $A, B\subseteq I^{n}$ are closed, disjoint sets, such that
+$A \cap I^{n}(p) = \varnothing$ and $B \cap I^{n}(q) = \varnothing$ for some 
+$p, q \leq n$. There exists a homotopy $\Lambda\colon I^{n}\times [0, 1] \to I^{n}$ 
+satisfying the following conditions: 
+\benu
+\item [(i)] $\Lambda(C\times[0, 1]) \subseteq C$ for each subcube 
+(of any dimension) in $I^{n}$.
+\item [(ii)] $\Lambda_{0} = \id_{I^{n}}$.
+\item [(iii)] $\Lambda_{1}^{-1}(A)\subseteq S_{p+1}$ and 
+$\Lambda_{1}^{-1}(B) \subseteq L_{q+1}$.
+\eenu
+\end{corollary}
+
+
+\begin{proof}
+Take a homotopy $\Phi$ as in Lemma \ref{EXCISION PREPARATION LEMMA}.
+Using the same lemma with $A = \Phi_{1}^{-1}(A)$ and 
+$B  = \Phi_{1}^{-1}(B) = B$  
+we obtain a homotopy $\Psi$ that satisfies (i), (ii) and 
+$\Psi_{1}^{-1}(\Phi_{1}^{-1}(A)) = \Phi_{1}^{-1}(A) \subseteq S_{p+1}$ 
+and $\Psi_{1}^{-1}(\Phi_{1}^{-1}(B)) = \Psi_{1}^{-1}(B) \subseteq L_{q+1}$.
+The homotopy $\Lambda$ can be then defined by
+\[
+\Lambda(x, s) = 
+\begin{cases}
+\Phi(x, 2s) & \text{for $s \leq \frac{1}{2}$} \\
+\Psi(\Phi(x, 1), 2s) & \text{for $s \geq \frac{1}{2}$} \\
+\end{cases} 
+\]
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{HOMOTOPY  EXCISION THM}]
+Denote $X_{0} = X_{1}\cap X_{2}$. We will first show that the homomorphism 
+\[
+i_{\ast}\colon \pi_{k}(X_{1}, X_{0}, x_{0}) \to \pi_{k}(X, X_{2}, x_{0})
+\]
+is onto for $k\leq m+n$. 
+
+Assume then $k \leq m+n$ and let $\omega \colon I^{k}\to X$ be a map 
+representing an element of $\pi_{k}(X, X_{2}, x_{0})$. We have 
+$\omega(I^{k-1}\times \{0\})\subseteq X_{2}$ and 
+$\omega ((\partial I^{k} \times I) \cup (I^{k-1}\times \{1\})) = x_{0}$. 
+We need to show that $\omega$ is homotopic through such maps to 
+$\tau \colon I^{k}\to X$ such that $\tau(I^{k}) \subseteq X_{1}$ and 
+$\tau(I^{k-1}\times \{0\})\subseteq X_{0}$.
+
+Consider $I^{k}$ with a $N$-cubical subdivision such that for each subcube 
+$C\subseteq I^{k}$ we have either 
+$\omega(C) \subseteq X_{1}$ or $\omega(C) \subseteq X_{2}$.
+We claim that there exists a homotopy $h\colon \omega \simeq \omega_{1}$
+such that 
+\benu
+
+\item if $\omega(C) \subseteq X_{0}$ then $h(x, t) = \omega(x)$ 
+for  $(x, t)\in C \times [0, 1]$
+\item if $\omega(C) \subseteq X_{i}$ for $i=1, 2$ then 
+$h(C\times [0, 1]) \subseteq X_{i}$. 
+\item $\omega^{-1}_{1}(X_{1}\setminus X_{0}) \cap I^{k}(m) = \varnothing$
+\item $\omega^{-1}_{1}(X_{2}\setminus X_{0}) \cap I^{k}(n) = \varnothing$. 
+\eenu
+
+The homotopy $h$ can be constructed by induction with respect to skeleta 
+of $I^{k}$. Let $C^{0}$ be a $0$-dimensional subcube of $I^{k}$. If $\omega(C^{0})\in X_{0}$
+take $h|_{C^{0}\times [0, 1]}$ to be the constant map to the point $\omega(C^{0})$  
+if $C^{0}\in X_{i}\setminus X_{0}$ for $i=1, 2$ take $h|_{C^{0}\times [0, 1]}$
+to be a path in $X_{i}$ that joins $\omega(C^{0})$ with a point in $X_{0}$. 
+Such path exists by the connectivity assumption on the pair $(X_{i}, X_{0})$. 
+In effect we obtain a homotopy $h\colon I^{k}(0)\times [0, 1]\to X$ 
+satisfying 1)-4). For the inductive step, assume  that we already constructed 
+a homotopy $h\colon I^{k}(r)\times [0, 1]\to X$ for some $r\geq 0$, and let $C^{r+1}$
+be an $(r+1)$-dimensional cube. The homotopy $h$ is already defined on $\partial C^{r+1}$. 
+If $\omega(C^{r+1}) \subseteq X_{0}$, we extend $h$ to $C^{r+1}$ using 
+condition 1). If $\omega(C^{r+1})\subseteq X_{1}$ and $r+1 \leq m$ then 
+we can extend $h$ to a homotopy  $h\colon C^{r+1}\times [0, 1] \to X_{1}$ 
+such that $h_{1}(C^{r+1}) \subseteq X^{0}$ by Proposition \ref{N CONNECTED PAIR PROP}.  
+We proceed analogously if $\omega(C^{r+1})\subseteq X_{2}$ and $r+1 \leq k$. In all other 
+cases we extend $h$ to $C^{r+1}$ in an arbitary way that satisfies condition 2). 
+
+To check that the resulting map $\omega_{1} = h_{1}\colon I^{k}\to X$ satisfies 
+condition 3), let $C^{r}\subseteq I^{k}(m)$ be an $r$-dimensional subcube for some 
+$r \leq m$. If $\omega(C^{r})\subseteq X_{1}$ then $\omega_{1}(C^{r})\subseteq X_{0}$ and 
+if $\omega(C^{r})\subseteq X_{2}$ then $\omega_{1}(C^{r})\subseteq X_{2}$. 
+Thus $\omega_{1}(C^{r})\cap (X_{1}\setminus X_{0}) = \varnothing$. Condition 4)
+is satisfied by the same argument.  
+
+
+Next, consider the homotopy $\Lambda$ as in Corollary \ref{EXCISION SEPARATION COR}
+for the sets  $A = \omega_{1}^{-1}(X_{1} \setminus X_{0})$ and 
+$B = \omega_{1}^{-1}(X_{2} \setminus X_{0})$. The composition 
+$\omega_{1}\Lambda\colon I^{k}\times I \to X$ gives a homotopy between $\omega_{1}$
+and a map $\omega_{2}$ satisfying 
+$\omega_{2}^{-1}(X_{1}\setminus X_{0}) \subseteq S_{m+1}$ and 
+$\omega_{2}^{-1}(X_{2}\setminus X_{0}) \subseteq L_{n+1}$. 
+Take the projection map $\pr\colon I^{k} \to I^{k-1}$, 
+$\pr(t_{1}, \dots, t_{k-1}, t_{k}) = (t_{1}, \dots, t_{k-1})$. We claim 
+that the sets $\pr(S_{m+1})$ and $\pr(L_{n+1})$ are disjoint. Indeed, 
+if $(t_{1}, t_{2}, \dots, t_{k-1})\in \pr(S_{m+1})\cap \pr(L_{n+1})$ then 
+there are numbers $c_{j_{1}}, \dots, c_{j_{k-1}}\in \{0, \frac{1}{N}, \dots, \frac{N-1}{N} \}$
+such that $c_{j_{i}} < t_{i} < c_{j_{i}} + \frac{\delta}{2}$ 
+for at least $m$ coordinates $t_{i}$
+and $c_{j_{i}} + \frac{\delta}{2} < t_{i} < c_{j_{i}} + \delta$ for at least $n$ 
+coordinates $t_{i}$. However, by assumption $k-1 < m+n$, so this is impossible.
+As a consequence, the sets $\pr(\omega_{2}^{-1}(X_{1}\setminus X_{0}))$
+and $\pr(\omega_{2}^{-1}(X_{2}\setminus X_{0}))$ are disjoint. We also 
+have $\partial I^{k-1}\cap \pr(\omega_{2}^{-1}(X_{2}\setminus X_{0})) = \varnothing$ 
+so 
+$\pr(\omega_{2}^{-1}(X_{1}\setminus X_{0}))  \cup \partial I^{k-1}$ 
+and $ \pr(\omega_{2}^{-1}(X_{2}\setminus X_{0}))$ 
+are disjoint, closed subsets of $I^{k-1}$. Take a function 
+$\varrho\colon I^{k-1}\to [0, 1]$ such that 
+$\varrho(\pr(\omega_{2}^{-1}(X_{1}\setminus X_{0})) \cup \partial I^{k-1}) = 1$ and 
+$\varrho(\pr(\omega_{2}^{-1}(X_{2}\setminus X_{0}))) = 0$. 
+Define a homotopy $h\colon I^{k}\times [0, 1]\to X$ by
+\[
+h((t_{1}, \dots, t_{k-1}, t_{k}), s) = 
+\omega_{2}(t_{1}, \dots, t_{k-1}, (1-s)t_{k} + s\varrho(t_{1}, \dots, t_{k-1})t_{k})
+\]
+Then $h_{0} = \omega_{2} \simeq \omega$ while $h_{1}$ gives the desired map $\tau$.
+
+The argument that 
+$i_{\ast}\colon \pi_{k}(X_{1}, X_{0}, x_{0}) \to \pi_{k}(X, X_{2}, x_{0})$
+is 1-1 for $k < m+n$ is analogous. In such case we start with two maps
+$\omega_{0}, \omega_{1} \colon I^{k} \to X_{1}$ representing two elements of 
+$\pi_{k}(X_{1}, X_{0}, x_{0})$. If these maps represent the same element in 
+$\pi_{k}(X, X_{2}, x_{0})$ then there exists 
+$h\colon I^{k+1} = I^{k}\times I \to X$ such that 
+$h|_{I^{k}\times \{i\}} = \omega_{i}$ for $i=0, 1$ 
+and that satisfies the appropriate conditions on the other faces of $I^{k+1}$. 
+We want to show that $h$ is homotopic to a map $h’\colon I^{k+1} \to X_{1}$. 
+Since $k+1 \leq m+n$ this can be done in the same way as above.
+\end{proof}
+
+
+
+

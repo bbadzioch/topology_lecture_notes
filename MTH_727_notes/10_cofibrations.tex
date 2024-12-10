@@ -1,0 +1,410 @@
+% !TEX root = mth727_lecture_notes.tex
+
+
+\chapter[Cofibrations]{Cofibrations}
+\chaptermark{Cofibrations}
+\label{COFIBRATIONS CHAPTER}
+\thispagestyle{firststyle}
+
+
+\begin{definition}
+\label{HOMOTOPY EXTENSION PROPERTY DEF}
+A map $i\colon A \to X$ has the \emph{homotopy extension property} for a space $Y$
+if for any commutative diagram of the form 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=3em, text height=1.5ex, text depth=0.25ex]
+{
+Y & X \\
+PY &  A \\
+};
+\path[->, thick, font=\scriptsize]
+(m-2-2) 
+edge node[anchor = west] {$i$} (m-1-2)
+(m-1-2) 
+edge node[above] {$\xov{f}$} (m-1-1)
+(m-2-2) 
+edge node[below] {$h$} (m-2-1)
+(m-2-1) 
+edge node[left] {$\ev_{0}$} (m-1-1);
+\path[dashed, ->,  thick, font=\scriptsize]
+(m-1-2) 
+edge node[anchor=south east] {$\xov{h}$} (m-2-1);
+\end{tikzpicture}
+\end{equation*}
+there exists a map $\xov{h}\colon X\times [0, 1] \to E$ such that 
+$\xov{h}i = \xov{f}$ and $p\xov{h} = h$.
+Here $PY$ is the path space of $Y$ and $\ev_{0}\colon PY \to Y$ is the evaluation 
+at $0$ map: $\ev_{0}(\omega) = \omega(0)$.
+\end{definition}
+
+
+
+Equivalently, $i\colon A \to X$ has the homotopy extension property for $Y$  
+if given any map $\xov{f}\colon X \to Y$ and a homotopy 
+$h^{\sharp}\colon A\times [0, 1] \to Y$ such that $h^{\sharp}_{0} = \xov{f}i$
+we can find a homotopy $\xov{h}^{\sharp}\colon X\times [0, 1]$, such that 
+$\xov{h}^{\sharp}_{0} = \xov{f}$ and $\xov{h}^{\sharp}(i(a), t) = h^{\sharp}(a, t)$ 
+for all $(a, t) \in A\times [0, 1]$.
+
+
+In this setting we will say 
+that $\xov{h}^{\sharp}$ is an extension of $h^{\sharp}$ beginning at $\xov{f}$.
+
+
+\begin{definition}
+A map $i\colon A \to X$ is a \emph{cofibration} if it has the homotopy extension
+property for any space Y. In such case we also say that the space $X/i(A)$ is the 
+\emph{cofiber} of $i$.
+\end{definition}
+
+\begin{example}
+By Theorem \ref{HEP REL CW THM} if $(X, A)$ is a relative CW complex then the inclusion 
+$i\colon A \hra X$ is a cofibration.
+\end{example}
+
+Recall that the mapping cylinder of a map $f\colon X \to Y$ is the quotient space 
+\[
+M_{f} = (X \times [0, 1] \sqcup Y) / {\sim}
+\]
+where $(x, 0) \sim f(x)$ for all $x\in X$. We have a map $s_{f}\colon M_{f} \to Y\times [0, 1]$
+such that $s_{f}(x, t) = (f(x), t)$ for $(x, t)\in X\times [0, 1]$ and $f(y) = (y, 0)$ for 
+$y\in Y$. 
+
+\begin{proposition}
+\label{COFIBRATION EQUIV CONDITIONS PROP}
+For a map $i\colon A\to X$ the following conditions are equivalent:
+\benu
+\item[1)] The map $i$ is a cofibration.
+\item[2)] The map $i$ has the homotopy extension property for the space $M_{i}$
+\item[3)] There exists a map 
+$r_{f}\colon X\times [0, 1] \to M_{i}$ such that $r_{f}s_{f} = \id_{M_{i}}$
+\eenu
+\end{proposition}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{corollary}
+\label{COFIBRATIONS ARE EMBEDDINGS COR}
+If $i\colon A \to X$ is a cofibration then $i$ is an embedding.
+\end{corollary}
+
+\begin{proof}
+Exercise. Use condition 3) in Proposition \ref{COFIBRATION EQUIV CONDITIONS PROP}.
+\end{proof}
+
+\begin{proposition}
+\label{CYLINDER COFIBR PROP}
+Given any map $f\colon X \to Y$ the map $i_{f}\colon X \to M_{f}$ given by 
+$i_{f}(x) = (x, 1)$ is a cofibration. 
+\end{proposition}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{note}
+\label{COFIBR REPLACEMENT NN}
+Given a map $f\colon X \to Y$, let $d_{f}\colon M_{f} \to Y$ be the strong 
+deformation retraction. As a consequence of Proposition \ref{CYLINDER COFIBR PROP}, 
+we have a commutative diagram
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep= 2em, column sep=1.5em, text height=1.5ex, text depth=0.25ex]
+{
+Y & & M_{f} \\
+& X & \\ 
+};
+\path[->, thick, font=\scriptsize]
+(m-1-3) 
+edge node[above] {$d_{f}$} node[below] {$\simeq$}(m-1-1)
+(m-2-2)
+edge node[anchor=north east] {$f$} (m-1-1)
+edge node[anchor= north west] {$i_{f}$} (m-1-3)
+; 
+\end{tikzpicture}
+\end{equation*}
+where $i_{f}$ is a cofibration. A homotopy inverse of $d_{f}$ is given by the 
+inclusion map $j_{f}\colon Y \to M_{f}$.
+\end{note}
+
+\begin{note}
+Recall that the mapping cone of a map $f\colon X \to Y$ is the space 
+$C_{f} = M_{f}/X\times \{ 1 \}$. The space $C_{f}$ is the cofiber of the cofibration
+$i_{f}\colon X \to M_{f}$. 
+\end{note}
+
+
+\begin{nn}{\bf Coexact Puppe sequence.} The construction of the coexact Puppe sequence 
+of a map is dual to the construction of the exact Puppe sequence 
+given in Chapter \ref{EXACT PUPPE SEQUENCE CHAPTER}. 
+
+As in Chapter \ref{EXACT PUPPE SEQUENCE CHAPTER} we will be interested here in pointed 
+spaces and homotopy classes of maps that preserve basepoints. In this case we will use 
+a slightly weakened version of a cofibration: a map of pointed spaces 
+$i\colon (A, a_{0}) \to (X, x_{0})$ is a cofibration if has the homotopy extension property 
+for all pointed maps $(X, x_{0}) \to (Y, y_{0})$ and pointed homotopies 
+$A\times [0, 1] \to Y$. In this context we modify the constructions of the mapping 
+mapping cylinder and the mapping cone as follows:
+\end{nn}
+
+\begin{definition}
+For a map of pointed spaces $f\colon (X, x_{0}) \to (Y, y_{0})$ the 
+\emph{reduced mapping cylinder} of $f$ is the space 
+$\xov{M}_{f} = M_{f}/\{x_{0}\}\times [0, 1]$. 
+The \emph{reduced mapping cone} is the space $\xov{C}_{f} = \xov{M}_{f}/ X\times \{1\}$. 
+\end{definition}
+
+The reduced mapping cylinder and mapping cone come with a natural choice of basepoints.
+As in (\ref{COFIBR REPLACEMENT NN}) for any map $f\colon (X, x_{0}) \to (Y, y_{0})$
+we have a commutative diagram 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep= 2em, column sep=1.5em, text height=1.5ex, text depth=0.25ex]
+{
+Y & & \xov{M}_{f} \\
+& X & \\ 
+};
+\path[->, thick, font=\scriptsize]
+(m-1-3) 
+edge node[above] {$d_{f}$} node[below] {$\simeq$}(m-1-1)
+(m-2-2)
+edge node[anchor=north east] {$f$} (m-1-1)
+edge node[anchor= north west] {$i_{f}$} (m-1-3)
+; 
+\end{tikzpicture}
+\end{equation*}
+where $i_{f}$ is a pointed cofibration and $d_{f}$ is a pointed homotopy equivalence.
+ Also, $\xov{C}_{f}$ is the cofiber of $i_{f}$.
+
+
+\begin{definition}
+A sequence of maps of spaces 
+\[
+(X_{0}, x_{0}) \overset{f_{0}}{\lra} (X_{1}, x_{1}) \overset{f_{1}}{\lra} (X_{2}, x_{2})
+\]
+is \emph{coexact at $X_{1}$} is for any pointed space $(Y, y_{0})$ the sequence 
+pointed sets 
+\[
+[X_{2}, Y]_{\ast} \overset{f_{1}^{\ast}}{\lra}
+[X_{1}, Y]_{\ast} \overset{f_{0}^{\ast}}{\lra}
+[X_{0}, Y]_{\ast}
+\]
+is exact at $[X_{1}, Y]_{\ast}$.
+\end{definition}
+
+\begin{proposition}
+\label{HOMOTOPY CLASSES COEXACT SEQ PROP}
+If $i\colon A \to X$ is a cofibration,  $q\colon X \to X/i(A)$ is the quotient map, 
+$x_{0}\in A$ then the sequence 
+$(A, x_{0})\overset{i}{\lra} (X, i(x_{0})) \overset{q}{\lra} (X/A, qi(x_{0}))$ is 
+coexact at $X$. 
+\end{proposition}
+
+For any map $f\colon (X, x_{0}) \to (Y, y_{0})$ consider the sequence  
+\[
+X \overset{f}{\lra} Y \overset{q(f)}{\lra} \xov{C}_{f}
+\]
+where $q(f)(y) = (y, 0)$. Since this sequence is homotopy equivalent to 
+the cofibration sequence $X \overset{i_{f}}{\lra} \xov{M_{f}} \lra \xov{C_{f}}$, is is coexact 
+at $Y$. Continuing this construction inductively we obtain a coexact sequence
+\begin{equation*}
+\label{ITERATED HOCOFIB EQ}
+\tag{$\ast$}
+X \overset{f}{\lra} 
+Y \overset{q(f)}{\lra}
+\xov{C}_{f} \overset{q^{2}(f)}{\lra}
+\xov{C}_{q(f)} \overset{q^{3}(f)}{\lra}
+\xov{C}_{q(f)} \overset{q^{4}(f)}{\lra}
+\xov{C}_{q^{3}(f)} \lra
+{\dots}
+\end{equation*}
+
+As in Chapter \ref{EXACT PUPPE SEQUENCE CHAPTER} our goal will be to show that this 
+sequence admits a more convenient description. This will depend on two facts that 
+dualize Propositon \ref{HOFIB MAP IS FIBRATION PROP} and 
+Corollary \ref{FIBER VS HOFIBER COROLLARY}
+
+\begin{proposition}
+\label{HOCOFIB MAP IS COFIBRATION PROP}
+For any map $f\colon (X, x_{0}) \to (Y, y_{0})$ the map 
+$q(f)\colon X \to \xov{C}_{f}$ is a cofibration.
+\end{proposition}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{proposition}
+\label{COFIBER VS HOCOFIBER PROP}
+If $f\colon (X, x_{0}) \to (Y, y_{0})$ is a cofibration then the quotient map
+\[
+\xov{C}_{f} \to Y/f(X)
+\]
+is a homotopy equivalence.
+\end{proposition}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+Notice that $\xov{C}_{f}/q(f) \cong \Sigma X$, where $\Sigma X$ 
+is the reduced suspension of $X$. In this way we obtain:
+
+\begin{proposition}
+\label{HOCOFIB Q(F) IS SUSPENSION PROP}
+For any map of pointed spaces $f\colon (X, x_{0}) \to (Y, y_{0})$ we have 
+a commutative diagram 
+\begin{equation*}
+\begin{tikzpicture}
+\matrix (m) 
+[matrix of math nodes, row sep= 2em, column sep=2em, text height=1.5ex, text depth=0.25ex]
+{
+X & Y & \xov{C}_{f} & \xov{C}_{q(f)} \\
+  &   &             & \Sigma X \\ 
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1) 
+edge node[above] {$f$} (m-1-2)
+(m-1-2)
+edge node[above] {$q(f)$} (m-1-3)
+(m-1-3)
+edge node[above] {$q^{2}(f)$} (m-1-4)
+edge node[anchor= north east] {$g$} (m-2-4)
+(m-1-4)
+edge node[anchor= west] {$\simeq$} (m-2-4)
+; 
+\end{tikzpicture}
+\end{equation*}
+\end{proposition}
+
+Applying Proposition \ref{COFIBER VS HOCOFIBER PROP} iteratively to the sequence 
+(\ref{ITERATED HOCOFIB EQ}) we get homotopy equivalences
+\begin{align*}
+& \xov{C}_{q(f)}  \overset{\simeq}{\lra} \Sigma X \\
+& \xov{C}_{q^{2}(f)}  \overset{\simeq}{\lra} \Sigma Y \\
+& \xov{C}_{q^{3}(f)}  \overset{\simeq}{\lra} \Sigma \xov{C}_{f}\\
+& \xov{C}_{q^{4}(f)}  \overset{\simeq}{\lra} \Sigma \xov{C}_{q(f)} \simeq \Sigma^{2} X \\
+& \xov{C}_{q^{5}(f)}  \overset{\simeq}{\lra} \Sigma \xov{C}_{q^{2}(f)} \simeq \Sigma^{2} Y \\
+& \dots \ \ \ \dots \ \ \ \dots \ \ \ \ \dots \ \ \ \dots \\
+\end{align*}
+
+Moreover, one can check that the following diagram commutes up to homotopy: 
+
+\begin{equation*}
+\label{PUPPE COEXACT SEQ EQ}
+\tag{$\ast\ast$}
+\begin{tikzpicture}[baseline=(current  bounding  box.center)]
+\matrix (m) 
+[matrix of math nodes, row sep=3em, column sep=1.5em, text height=1.5ex, text depth=0.25ex]
+{
+X & Y & \xov{C}_{f} & \xov{C}_{q(f)} & \xov{C}_{q^{2}(f)} & \xov{C}_{q^{3}(f)}
+& \xov{C}_{q^{4}(f)} & \dots \\
+X & Y & \xov{C}_{f} & \Sigma X & \Sigma Y & \Sigma \xov{C}_{f} & \Sigma^{2} X & \dots \\
+};
+\path[->, thick, font=\scriptsize]
+(m-1-1)
+edge node[above] {$f$} (m-1-2)
+edge node[pos=0.45, anchor = south, rotate=90] {$=$} (m-2-1)
+(m-1-2)
+edge node[above] {$q(f)$} (m-1-3)
+edge node[pos=0.45, anchor = south, rotate=90] {$=$} (m-2-2)
+(m-1-3)
+edge node[above] {$q^{2}(f)$} (m-1-4)
+edge node[pos=0.45, anchor = south, rotate=90] {$=$} (m-2-3)
+(m-1-4)
+edge node[above] {$q^{3}(f)$} (m-1-5)
+edge node[pos=0.45, anchor = south, rotate=90] {$\simeq$} (m-2-4)
+(m-1-5)
+edge node[above] {$q^{4}(f)$} (m-1-6)
+edge node[pos=0.45, anchor = south, rotate=90] {$\simeq$} (m-2-5)
+(m-1-6)
+edge node[above] {$q^{5}(f)$} (m-1-7)
+edge node[pos=0.45, anchor = south, rotate=90] {$\simeq$} (m-2-6)
+(m-1-7)
+edge  (m-1-8)
+edge node[pos=0.45, anchor = south, rotate=90] {$\simeq$} (m-2-7)
+
+(m-2-1)
+edge node[below] {$f$} (m-2-2)
+(m-2-2)
+edge node[below] {$q(f)$} (m-2-3)
+(m-2-3)
+edge node[below] {$g$} (m-2-4)
+(m-2-4)
+edge node[below] {$\Sigma f$} (m-2-5)
+(m-2-5)
+edge node[below] {$\Sigma q(f)$} (m-2-6)
+(m-2-6)
+edge node[below] {$\Sigma g$} (m-2-7)
+(m-2-7)
+edge (m-2-8)
+;
+\end{tikzpicture}
+\end{equation*}
+
+
+\begin{definition}
+The sequence in the lower row of the diagram (\ref{PUPPE COEXACT SEQ EQ})
+is called the \emph{Puppe coexact sequence} associated to the map $f$.
+\end{definition}
+
+As a consequence, for any map of pointed spaces $f\colon (X, x_{0}) \to (Y, y_{0})$
+and any pointed space $(Z, z_{0})$ we obtain a long exact sequence of sets: 
+\begin{multline*}
+\label{PUPPE COEXACT HOMOTOPY CLASSES SEQ EQ}
+\tag{\maltese}
+[X, Z]_{\ast} \overset{f^{\ast}}{\longleftarrow} 
+[Y, Z]_{\ast} \overset{q(f)^{\ast}}{\longleftarrow} 
+[\xov{C}_{f}, Z]_{\ast} \overset{g^{\ast}}{\longleftarrow} 
+[\Sigma X, Z]_{\ast} \overset{\Sigma f^{\ast}}{\longleftarrow} 
+[\Sigma Y, Z]_{\ast} \overset{\Sigma q(f)^{\ast}}{\longleftarrow} 
+[\Sigma \xov{C}_{f}, Z]_{\ast} \overset{\Sigma g^{\ast}}{\longleftarrow} 
+[\Sigma^{2} X, Z]_{\ast} \longleftarrow {\dots}
+\end{multline*}
+
+Starting with $[\Sigma X, Z]_{\ast}$ the sets in this sequence have a group structure
+defined by the suspension, and all maps are homomorphisms of groups. Starting with 
+$[\Sigma^{2}, Z]_{\ast}$ all groups are abelian. 
+
+
+\begin{note}
+1) Using the adjunction $\adj\colon [\Sigma X, Y]_{\ast} \overset{\cong}{\lra} [X, \Omega Y]_{\ast}$ as in (\ref{SUSPENSION LOOP ADJUNCTION NOTE}) we can rewrite the sequence
+(\ref{PUPPE COEXACT HOMOTOPY CLASSES SEQ EQ}) in the form 
+\begin{multline*}
+[X, Z]_{\ast} \overset{f^{\ast}}{\longleftarrow} 
+[Y, Z]_{\ast} \overset{q(f)^{\ast}}{\longleftarrow} 
+[\xov{C}_{f}, Z]_{\ast} \overset{g^{\ast}}{\longleftarrow} 
+[X, \Omega Z]_{\ast} \overset{f^{\ast}}{\longleftarrow} 
+[Y, \Omega Z]_{\ast} \overset{q(f)^{\ast}}{\longleftarrow} 
+[\xov{C}_{f}, \Omega Z]_{\ast} \overset{g^{\ast}}{\longleftarrow} 
+[X, \Omega^{2} Z]_{\ast} \longleftarrow {\dots}
+\end{multline*}
+In this setting, groups structures are induced the multiplication in loop spaces.
+
+2) Assume that the map $f\colon (X, x_{0})\to (Y, y_{0})$ is a cofibration. Using 
+Corollary \ref{COFIBRATIONS ARE EMBEDDINGS COR} we can then assume that $X$ is 
+a subspace of $Y$ and that $f$ is the inclusion map. 
+By Proposition \ref{COFIBER VS HOCOFIBER PROP} we have $\xov{C}_{f}\simeq Y/X$, 
+so the above sequence can be written as 
+\begin{multline*}
+[X, Z]_{\ast} \overset{f^{\ast}}{\longleftarrow} 
+[Y, Z]_{\ast} \overset{q^{\ast}}{\longleftarrow} 
+[Y/X, Z]_{\ast} \overset{g^{\ast}}{\longleftarrow} 
+[X, \Omega Z]_{\ast} \overset{f^{\ast}}{\longleftarrow} 
+[Y, \Omega Z]_{\ast} \overset{q^{\ast}}{\longleftarrow} 
+[Y/X, \Omega Z]_{\ast} \overset{g^{\ast}}{\longleftarrow} 
+[X, \Omega^{2} Z]_{\ast} \longleftarrow {\dots}
+\end{multline*}
+where $q\colon Y \to Y/X$ is the quotient map.
+\end{note} 
+
+
+
+
+

@@ -1,0 +1,112 @@
+% !TEX root = mth727_lecture_notes.tex
+
+
+\chapter{Review: Homotopies}
+\chaptermark{Review: Homotopies}
+\thispagestyle{firststyle}
+
+
+\begin{definition}
+\label{HOMOTOPY DEF}
+Let $f, g\colon X \to Y$ be continuous functions. A \emph{homotopy} between $f$ and $g$ is a continuous 
+function $h\colon X\times [0, 1]\to Y$ such that $h(x, 0) = f(x)$ and $h(x, 1) = g(x)$: 
+
+\begin{equation*}
+\begin{tikzpicture}[
+    scale = 2.3,
+    d0/.style = {line width = 1.6pt},
+    d1/.style= {postaction={decorate}, line width = 1.6pt, decoration={markings, mark=at position 0.55 with {\arrow{stealth}}}},
+    d2/.style = {postaction={decorate}, line width = 1.6pt, decoration={markings, mark=at position 0.54 with {\arrow[rotate=9]{stealth}}}},
+]
+
+\draw[d0, fill = mygray1] (0,0) rectangle node{\small $X\times [0, 1]$} (1,1);
+\draw[d0, red]  (0,0) node[anchor = east] {\small $X\times \{0\}$}  --  (1, 0); 
+\draw[d0, red]  (0,1) node[anchor = east] {\small $X\times \{1\}$}  --  (1, 1); 
+\draw[d0, red]  (0,1) -- (1,1); 
+\node at (2, 0.5) {\small $Y$};
+\draw[thick, ->, >=latex] (1.2, 0.5) -- node[anchor=south] {\small $h$} (1.7, 0.5);
+
+\draw[red,thick, ->, >=latex] (0.5, 1.1) to[out=45, in=120] 
+node[pos= 0.5, anchor=south] {\small $g$}
+(2, 0.7) ;
+\draw[red,thick, ->, >=latex] (0.5, -0.1) to[out=-45, in=-120] 
+node[pos= 0.5, anchor=north] {\small $f$} 
+(2, 0.3);
+\end{tikzpicture}
+\end{equation*}
+
+
+If such homotopy exists then we say that the functions $f$ and $g$ are \emph{homotopic} 
+and we write $f\simeq g$.  We will also write $h\colon f\simeq g$ to indicate that $h$ is a homotopy 
+between $f$ and $g$.  
+\end{definition}
+
+
+\begin{note}
+Given a homotopy $h\colon X \times [0, 1] \to Y$ it will be convenient denote by $h_{t}\colon X \to Y$
+the function defined by $h_{t}(x) = h(x, t)$. If $h\colon f\simeq g$ then $h_{0} = f$ and $h_{1} = g$. 
+\end{note}
+
+
+\begin{definition}
+Let $X$ be a space and let $A\subseteq X$. If $f, g\colon X \to Y$ are functions such that $f|_{A} = g|_{A}$
+then we say that $f$ and $g$ are \emph{homotopic relative to $A$} if there exists a homotopy 
+$h\colon X \times [0, 1] \to Y$ such that $h_{0} = f$, $h_{1} = g$ and $h_{t}|_{A} = f|_{A} = g|_{A}$ for all 
+$t\in [0, 1]$. In  such case we write $f\simeq g \ (\rel A)$. 
+\end{definition}
+
+
+
+
+\begin{definition}
+\label{HOMOTEQ DEF}
+A map $f\colon X \to Y$ is a \emph{homotopy equivalence} if there exists a map $g\colon Y \to X$ 
+such that $gf \simeq \id_{X}$ and $fg\simeq \id_{Y}$. If such maps exist  we say that the spaces
+$X$ and $Y$ are \emph{homotopy equivalent} and we write $X \simeq Y$. 
+\end{definition}
+
+\begin{note}
+If $f$ and $g$ are maps as in Definition \ref{HOMOTEQ DEF} then we say that $g$ is 
+a \emph{homotopy inverse} of $f$.  
+\end{note}
+
+\begin{definition}
+If $X$ is a space such that $X \simeq \ast$ then we say that $X$ is a \emph{contractible space}. 
+\end{definition}
+
+
+\begin{definition}
+\label{DEFORM RETRACT DEF}
+A subspace $A \subseteq X$ is a \emph{deformation retract} of a space $X$ if there exists a homotopy 
+$h\colon X \times [0, 1] \to X$ such that 
+\benu
+\item[1)] $h_{0} = \id_{X}$
+\item[2)] $h_{t}|_{A} = \id_{A}$ for all  $t\in [0, 1]$ 
+\item[3)] $h_{1}(x)\in A$ for all $x\in X$
+\eenu
+In such case we say that $h$ is a \emph{deformation retraction}
+of $X$ onto $A$. 
+
+\end{definition}  
+
+\begin{proposition}
+\label{DEFORM RETRACT HOMOT EQ PROP}
+If $A\subseteq X$ is a deformation retract of $X$ then $A\simeq X$. 
+\end{proposition}
+
+
+
+\begin{note}
+Let $X, X’$  be spaces, $A\subseteq X$, $A’\subseteq X’$. By a map $f\colon (X, A) \to (X’, A’)$
+we will understand a function $f\colon X \to X’$ such that $f(A)\subseteq A’$. A homotopy 
+of such maps is a homotopy $h\colon X\times [0, 1] \to X’$ such that $h_{t}(A)\subseteq A’$
+for each $t\in [0, 1]$. 
+
+We will also use a variant of this for triples of spaces. If $B\subseteq A \subseteq X$
+and $B’\subseteq A’ \subseteq X’$ then a map $f\colon (X, A, B) \to (X’, A’, B’)$ is a 
+function $f\colon X\to X’$ such that $f(A)\subseteq A’$ and $f(B)\subseteq B’$. A homotopy 
+$h$ of such maps satisfies the same conditions on every level $h_{t}$. 
+\end{note}
+
+
+
