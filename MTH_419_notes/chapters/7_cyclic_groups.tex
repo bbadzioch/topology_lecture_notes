@@ -1,0 +1,195 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Cyclic groups}
+
+\vskip -5mm
+
+\begin{definition}{}{CYCLIC GROUP}
+A group $G$ is cyclic if there is an element $a\in G$ such that 
+\[
+G = \{a^{n} \ | \ n\in \Z \}
+\]
+or,  in other notation,  $G = \langle a \rangle$. In such case we say that 
+$a$ is a \emph{generator} of $G$. 
+\end{definition} 
+
+
+\begin{FL}
+{\bf Example.} The following groups are cyclic:
+
+
+\bitem 
+\item $\Z$ \\[-3mm] 
+\item $\Z_{n}$ for any $n\geq 1$ \\[-3mm] 
+\item If $G$ is any group and $a\in G$ then $\langle a \rangle$ is a cyclic 
+subgroup of $G$.
+\eitem
+\end{FL}
+
+\showto{SKELETON}{\vskip 40mm}
+
+\begin{thm}{}{CYCLIC GP ORDER}
+If $G$ is a finite group then $G$ is cyclic if and only if there is an element
+$a\in G$ such that $|a| = |G|$.
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+If $G$ is cyclic then $G = \lrang{a}$ for some $a\in G$ and then 
+$|G| = |\lrang{a}| = |a|$. Conversely, if there is $a\in G$ such that 
+$|a| = |G|$, then $\lrang{a}\subseteq G$ and $|\lrang{a}| = |G|$, which 
+gives $\lrang{a} = G$. 
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+
+
+\begin{thm}{}{SUBGPS OF CYCLIC GRP ARE CYCLIC}
+Every subgroup of a cyclic group is cyclic.
+\end{thm} 
+
+\begin{FL}
+\begin{proof}
+Let $G = \langle a \rangle$, and let $H$ be a subgroup of $G$. 
+If $H$ contains only the trivial element $e = a^{0}$ then $H$
+is cyclic since $H = \langle e \rangle$. Otherwise, there are some 
+elements $a^{n}\in H$ with $n>0$. Let $m > 0$ be the smallest 
+integer such that $a^{m}\in H$. We will show that 
+$H = \langle a^{m} \rangle$. 
+
+
+
+Since $a^{m}\in H$, thus $\left(a^{m}\right)^{k}\in H$ for all $k\in \Z$, 
+so $\langle a^{m} \rangle \subseteq H$. 
+ 
+
+Conversely, let $a^{n}\in H$ for some $n$. Then $n = qm + r$ for some 
+$0 \leq r < m$. This gives 
+\[
+a^{n} = a^{qm + r} = a^{qm}\cdot a^{r}
+\]
+We have seen already that $a^{-qm}\in H$, so $a^{-qm}\cdot a^{n} \in H$.
+However, we have 
+\[
+a^{-qm}\cdot a^{n} = a^{-qm}\cdot a^{qm}\cdot a^{r} = a^{r}
+\]
+which means that $a^{r}\in H$. Since $r < m$, we get that $r=0$. Therefore 
+$a^{n} = a^{qm} \in \langle a^{m} \rangle$. 
+This implies that $H \subseteq \langle a^{m} \rangle$.
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+\begin{thm}{}{ORDER SUBGP CYCLIC GP}
+If $G$ is a finite cyclic group and $H\subseteq G$ is a subgroup then $|H|$ divides 
+$|G|$. 
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+Let $G = \lrang{a}$ and let $|G| = |a| = n$. 
+By \Cref{thm:SUBGPS OF CYCLIC GRP ARE CYCLIC} we have $H = \lrang{a^{m}}$ for some $m$. 
+Then $|H| = |a^{m}|$ and by \Cref{thm:ORDER OF POWER} $|a^{m}| = \frac{n}{\gcd(n, m)}$. 
+Therefore $|H|$ divides $|G|$. 
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\vskip 50mm}
+
+
+\begin{thm}{}{SUBGPS OF CYCLIC GP}
+If $G$ is a finite cyclic group and $d>0$ is an integer that divides $|G|$ then 
+there exists exactly one subgroup $H\subseteq G$ such that $|H| = d$. 
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+Let $G = \lrang{a}$ and let $|G| = |a| = n$. Since $d$ divides $n$ we have 
+$n = dm$ for some $m >0$. We will first show that a subgroup $H$ of order $d$ exists. 
+Take $H = \lrang{a^{m}}$. Then 
+\[
+|H| = |a^{m}| = \frac{n}{\gcd(n, m)} = \frac{n}{m} = d
+\]
+Next, $H' \subseteq G$ be some other subgroup of $G$ such that 
+$|H'| = d$. We have $H' = \lrang{a^{k}}$ for some $0 < k \leq n$ such that 
+$\gcd(n, k) = m$. Then $m = pk + qn$ for some $p, q \in \Z$. This gives 
+\[
+a^{m} = a^{pk}\cdot a^{qn} = \left(a^{k}\right)^{p} \in H' 
+\]
+and so $H = \lrang{a^{m}} \subseteq H'$. Since both groups $H$ and $H'$ consist of $d$
+elements, it follows that $H = H'$. 
+
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{thm}{}{CYCLIC GP GENERATORS}
+Let $G = \lrang{a}$ be a cyclic group of order $n$. An element $a^{k}$ is a generator 
+of $G$ (i.e. $\lrang{a^{k}} = G$) if and only if $\gcd(n, k) = 1$. 
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+The group $\lrang{a^{k}}$ consists of $\frac{n}{\gcd(n, k)}$ elements. 
+We  have $\lrang{a^{k}} = G$ if and only if $\frac{n}{\gcd(n, k)} = n$
+i.e. $\gcd(k, n) = 1$.  
+\end{proof}
+\end{FL}
+
+\begin{exercise}
+In the group $\Z_{15}$ find all elements $a$ such that $a$ generates $\Z_{15}$
+\end{exercise}
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{thm}{}{CYCLIC DIR SUM}
+Let $G_{1} = \lrang{a_{1}}$ and $G_{2} = \lrang{a_{2}}$ be finite cyclic groups. 
+The group $G_{1}\times G_{2}$ is cyclic if and only if $\gcd(|G_{1}|, |G_{2}|) = 1$. 
+\end{thm}
+
+
+\begin{FL}
+\begin{proof}
+Assume that $\gcd(|G_{1}|, |G_{2}|) = 1$. Consider the element 
+$(a_{1}, a_{2})\in G_{1}\times G_{2}$. By \Cref{thm:GP DIR SUM ELT ORDER} 
+we have:
+\[
+|(a_{1}, a_{2})| = \lcm(|a_{1}|, |a_{2}|) 
+=  \lcm(|G_{1}|, |G_{2}|) = \frac{|G_{1}|\cdot |G_{2}|}{\gcd(|G_{1}|, |G_{2}|)}
+= |G_{1}|\cdot |G_{2}| = |G_{1}\times G_{2}|
+\]
+This shows that $G_{1}\times G_{2} = \lrang{(a_{1}, a_{2})}$.
+
+Conversely, assume that $|G_1| = n_{1}$, $|G_{2}| = n_{2}$ and that 
+$\gcd(n_{1}, n_{2}) = d > 1$. Let $(b_{1}, b_{2})\in G_{1}\times G_{2}$
+be an arbitrary element. Then 
+\[
+(b_{1}, b_{2})^{n_{1}n_{2}/d} = (b_{1}^{n_{1}\cdot (n_{2}/d)}, b_{2}^{n_{2}\cdot (n_{1}/d)})
+= (e, e)
+\]
+This means that $|(b_{1}, b_{2})|$ divides ${n_{1}n_{2}/d}$, and so 
+$|(b_{1}, b_{2})| < n_{1}n_{2} = |G_{1}\times G_{2}|$. 
+\end{proof}
+
+{\bf Example.} The group $\Z_{2}\times \Z_{3}$ is a cyclic group generated by the element 
+$(1, 1)$. On the other hand the group $\Z_{2}\times\Z_{2}$ is not cyclic. 
+
+Using induction, \Cref{thm:CYCLIC DIR SUM} can be generalized as follows:
+\end{FL}
+
+\showto{SKELETON}{\vfill}
+
+
+\begin{thm}{}{CYCLIC N DIR SUM}
+For $i=1, \dots, n$ let $G_{i} = \lrang{a_{i}}$ be a cyclic group. 
+The group $G_{1}\times G_{2}\times {\dots} \times G_{n}$ is cyclic if and only if 
+$\gcd(|G_{i}|, |G_{j}|) = 1$ for all $i\neq j$. 
+\end{thm}
+

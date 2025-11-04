@@ -1,0 +1,232 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Order of an element of a group}
+
+
+\underline{\bf Exponentiation}
+
+\begin{FL}
+\medskip 
+
+Let $G$ be a group and let $g\in G$. For an integer $n > 0$ we denote:
+
+
+\bitem
+\item $g^{n} = \underbrace{g\cdot g \cdot {\dots}\cdot g}_{\text{$n$ times}}$
+\hfill (additive notation: $ng = \underbrace{g + g + {\dots} + g}_{\text{$n$ times}}$)
+\\[0mm]
+\item $g^{-n} = \underbrace{g^{-1}\cdot g^{-1} \cdot {\dots}\cdot g^{-1}}_{\text{$n$ times}}$ 
+\hfill (additive notation: $(-n)g = \underbrace{-g - g - {\dots} - g}_{\text{$n$ times}}$)
+\\[0mm]
+\item $g^{0} = e$ 
+\hfill (additive notation: $0g = 0$) \\
+\eitem
+\vskip 15mm
+\end{FL}
+
+
+\showto{SKELETON}{\vskip 70mm}
+
+\underline{\bf Properties of exponentiation}
+
+\begin{FL}
+\bitem
+\item $g^{m + n} = g^{m}\cdot g^{n}$ 
+\hfill (additive notation: $(m+n)g = (mg) + (ng)$)
+\\[0mm]
+\item $g^{mn} = \left(g^{m}\right)^{n}$ 
+\hfill (additive notation: $(mn)g = m(ng)$)
+\\[0mm]
+
+\eitem 
+
+\vskip 10mm
+\end{FL}
+
+\showto{SKELETON}{\vskip 40mm}
+
+\begin{definition}{}{GROUP ELEMENT ORDER}
+Let $G$ be a group. An \emph{order} of an element $g\in G$ is the smallest 
+integer $n \geq 1$ such that $g^{n} = e$. We write: $|g| = n$. 
+
+\bigskip
+
+If $g^{n} \neq e$ for all $n\geq 1$ then we say that $g$ is an element of an 
+\emph{infinite order} and we write $|g| = \infty$. 
+ 
+\end{definition} 
+
+\begin{FL}
+{\bf Note.} If $g^{n} = e$ then  $g^{-1} = g^{n-1}$. In particular, if $g^{2} = e$ 
+then $g = g^{-1}$.
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{exercise}
+Recall that the multiplication table of the dihedral group $D_{4}$
+is as follows: 
+\begin{center}
+{\small
+\tagpdfsetup{table/header-rows={1}}
+\begin{tabular}{l !{\vrule width 2pt} llllllll}
+\circ     & \ $I$       & $R_{90}$  & $R_{180}$ & $R_{270}$ & $H$       & $V$       & $D$       & $D'$      \\[1mm]
+\noalign{\hrule height 2pt} \\[-3mm]
+$I$       & \ $I$       & $R_{90}$  & $R_{180}$ & $R_{270}$ & $H$       & $V$       & $D$       & $D'$      \\
+$R_{90}$  & \ $R_{90}$  & $R_{180}$ & $R_{270}$ & $I$       & $D'$      & $D$       & $H$       & $V$       \\
+$R_{180}$ & \ $R_{180}$ & $R_{270}$ & $I$       & $R_{90}$  & $V$       & $H$       & $D'$      & $D$       \\
+$R_{270}$ & \ $R_{270}$ & $I$       & $R_{90}$  & $R_{180}$ & $D$       & $D'$      & $V$       & $H$       \\
+$H$       & \ $H$       & $D$       & $V$       & $D'$      & $I$       & $R_{180}$ & $R_{90}$  & $R_{270}$ \\
+$V$       & \ $V$       & $D'$      & $H$       & $D$       & $R_{180}$ & $I$       & $R_{270}$ & $R_{90}$  \\[1mm]
+$D$       & \ $D$       & $H$       & $D'$      & $V$       & $R_{270}$ & $R_{90}$  & $I$       & $R_{180}$ \\
+$D'$      & \ $D'$      & $V$       & $D$       & $H$       & $R_{90}$  & $R_{270}$ & $R_{180}$ & $I$       \\
+\end{tabular}
+}
+\end{center}
+\bigskip
+
+Find the order of every element of $D_{4}$.
+\end{exercise}
+
+
+\showto{SKELETON}{\vskip 70mm}
+
+\begin{exercise}
+Find the order of every element in the  group $\Z_{6}$. 
+\end{exercise}
+
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{thm}{}{ORDER IN FINITE GP IS FINITE}
+If $G$ is a finite group and $g\in G$ then $|g| < \infty$. 
+\end{thm} 
+
+\begin{FL}
+\begin{proof}
+Consider the sequence 
+\[
+g^{1}, g^{2}, g^{3}, \dots \subseteq G
+\]
+Since $G$ consists of finitely many elements, we must have $g^{m} = g^{n}$ for some 
+$n > m$. This gives 
+\begin{align*}
+g^{-m}g^{m}  =\  & g^{-m}g^{n} \\
+e  =\  & g^{n-m} \\
+\end{align*}
+Thus $|g| \leq n-m < \infty$.
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\vskip 90mm}
+
+
+\begin{thm}{}{ORDER GP ELT DIVIDES}
+If $G$ is a group, $g\in G$ and $n\geq 1$ is an integer such that $g^{n} = e$, then 
+$|g|$ divides $n$.  
+\end{thm} 
+
+
+\begin{FL}
+\begin{proof}
+We have 
+\[
+n = |g|\cdot q + r
+\]
+for some integers $q\geq 0$ and $0\leq r < |g|$. We want to show that $r=0$. Assume 
+that it is not true. Then we have 
+\[
+e = g^{n} = g^{|g|\cdot q + r} = g^{|g|\cdot q}\cdot g^{r} 
+= \left(g^{|g|}\right)^{q} \cdot g^{r}
+= e \cdot g^{r}
+= g^{r}
+\]
+We obtain that $g^{r} = e$. This is however impossible, since $r < |g|$.
+\end{proof}
+
+\vskip 10mm
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+\begin{thm}{}{ORDER OF PRODUCT}
+If $G$ is a group, and $a, b\in G$ are elements such that $|a|, |b| < \infty$
+and $ab = ba$ then $|ab|$ divides $|a|\cdot |b|$.   
+\end{thm} 
+
+\begin{FL}
+\begin{proof}
+Let $|a| = m$ and $|b| = n$. We have 
+\[
+(ab)^{mn} = a^{mn}b^{mn} = \left( a^{m} \right)^{n}\cdot \left( b^{n} \right)^{m}
+= e^{n}\cdot e^{m} = e 
+\]
+By \Cref{thm:ORDER GP ELT DIVIDES} we get that $|ab|$ divides $mn = |a|\cdot |b|$.
+\end{proof}
+
+\vskip 10mm 
+
+{\bf Example.} In the dihedral group $D_{4}$ take $a = R_{90}$, $b=R_{180}$. 
+Then $a\cdot b = R_{90}\cdot R_{180} = R_{270}$
+We have $|R_{90}| = 4$, $|R_{180}| = 2$, so $|R_{90}|\cdot |R_{180}| = 8$ 
+which is divisible by $|R_{270}| = 4$. 
+
+\vskip 10mm
+
+{\bf Example.} \Cref{thm:ORDER OF PRODUCT} is not true in general if $ab\neq ba$. 
+Take for example $a, b$ to be two different reflections in the dihedral group $D_{3}$.
+Then $|a| = |b| = 2$, so $|a|\cdot |b| = 4$, but $|ab| = 3$.   
+
+As another example, in the group $GL(2, \R)$ take matrices
+\[
+A = 
+\bbm
+0 & 2 \\
+\frac{1}{2} & 0\\
+\ebm, 
+\ \ \ \ 
+B = 
+\bbm
+1 & 0 \\
+0 & 1 \\
+\ebm
+\] 
+Then $|A| = 2$ and $|B|=2$ but $|AB| = \infty$.
+
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+\begin{thm}{}{ORDER OF POWER}
+If $G$ is a group, and $a\in G$ is element such that $|a| = n < \infty$
+then 
+\[
+|a^{k}| = \frac{n}{\gcd(n, k)}
+\] 
+\end{thm} 
+
+
+\begin{exercise}
+Compute the order of the element $6 \in \Z_{10}$. 
+\end{exercise}
+
+\begin{FL}
+\vskip 10mm
+
+\begin{proof}[Proof of \Cref{thm:ORDER OF POWER}]
+Let $|a^{k}| = r$. Then $r$ is the smallest positive integer such that 
+$\left(a^{k}\right)^{r} = a^{kr} = e$. 
+Using \Cref{thm:ORDER GP ELT DIVIDES} we obtain that $r$ is the smallest
+positive integer such that $n|kr$. This means that $kr$ is the least 
+common multiple of $n$ and $k$: $kr = \lcm(n, k)$. This gives: 
+\[
+kr = \lcm(n,k) = \frac{nk}{\gcd(n, k)}
+\]
+and so $r=\dfrac{n}{\gcd(n, k)}$.
+\end{proof}
+\end{FL}
+
+

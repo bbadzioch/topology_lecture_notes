@@ -1,0 +1,310 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Group actions}
+
+\begin{definition}{}{GP ACTION}
+Let $G$ be a group and $X$ be a set. Given a function
+\[
+\mu\colon G\times X \to X
+\]
+denote $g\cdot x \coloneq \mu(g, x)$.
+We say that $\mu$ is a \emph{group action} of $G$ on the set $X$ if the following 
+conditions are satisfied: 
+\bigskip
+\benu
+\item $(gh)\cdot x = g\cdot(h\cdot x)$ for any $g, h\in G$ and $x\in X$. 
+\item $e\cdot x = x$ for any $x\in X$.
+\eenu
+  
+\end{definition}
+
+\begin{FL}
+\textbf{Note.} Let $\mu\colon G\times X \to X$ be a group action and let $g\in G$, 
+Define a function $\varphi_{g}\colon X \to X$ by $\varphi_{g}(x) = g\cdot x$. 
+This function is a bijection. Indeed, it is onto, since if $y\in X$, then 
+$y = \varphi_{g}(g^{-1}\cdot y)$. Also, it is 1-1, since if 
+$\varphi_{g}(x) = \varphi_{g}(x')$, then $g\cdot x = g\cdot x'$, which gives
+\[
+x = e\cdot x = g^{-1}g \cdot x = g^{-1}g\cdot x' = e\cdot x' = x'
+\]
+This shows that a group action $\mu$ associates to each element $g\in G$ 
+a permutation $\varphi_{g}$ of the set $X$. The property 1) in \Cref{def:GP ACTION}  
+implies that multiplication in $G$ corresponds to composition of permutations: 
+\[
+\varphi_{gh} = \varphi_{g}\circ\varphi_{h}
+\]
+As a consequence, we obtain a homomorphism of groups: 
+\[
+\Phi\colon G \to S(X)
+\]
+where $S(X)$ is the group of permutations of the set $X$ and $\Phi(g) = \varphi_{g}$.
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{definition}{}{GP AC ORBIT STAB}
+Let  $\mu\colon G\times X \to X$ be a group action. 
+
+\bigskip
+
+\bitem 
+\item The \emph{orbit} of an element $x\in X$ is the subset of $X$
+given by 
+\[
+\Orb(x) = \{ gx \ | \ g\in G \}
+\]
+\item The \emph{stabilizer} of an element $x\in X$ is the subset 
+of $G$ given by 
+\[
+\Stab(x) = \{ g \in G \ | \ gx = x \}
+\]
+\eitem 
+\end{definition}
+
+
+\begin{FL}
+\textbf{Example.} Take the dihedral group $D_{4}$: 
+\begin{center}
+{\small
+\tagpdfsetup{table/header-rows={1}}
+\begin{tabular}{l !{\vrule width 2pt} llllllll}
+\circ     & \ $I$       & $R_{90}$  & $R_{180}$ & $R_{270}$ & $H$       & $V$       & $D$       & $D'$      \\[1mm]
+\noalign{\hrule height 2pt} \\[-3mm]
+$I$       & \ $I$       & $R_{90}$  & $R_{180}$ & $R_{270}$ & $H$       & $V$       & $D$       & $D'$      \\
+$R_{90}$  & \ $R_{90}$  & $R_{180}$ & $R_{270}$ & $I$       & $D'$      & $D$       & $H$       & $V$       \\
+$R_{180}$ & \ $R_{180}$ & $R_{270}$ & $I$       & $R_{90}$  & $V$       & $H$       & $D'$      & $D$       \\
+$R_{270}$ & \ $R_{270}$ & $I$       & $R_{90}$  & $R_{180}$ & $D$       & $D'$      & $V$       & $H$       \\
+$H$       & \ $H$       & $D$       & $V$       & $D'$      & $I$       & $R_{180}$ & $R_{90}$  & $R_{270}$ \\
+$V$       & \ $V$       & $D'$      & $H$       & $D$       & $R_{180}$ & $I$       & $R_{270}$ & $R_{90}$  \\[1mm]
+$D$       & \ $D$       & $H$       & $D'$      & $V$       & $R_{270}$ & $R_{90}$  & $I$       & $R_{180}$ \\
+$D'$      & \ $D'$      & $V$       & $D$       & $H$       & $R_{90}$  & $R_{270}$ & $R_{180}$ & $I$       \\
+\end{tabular}
+}
+\end{center}
+
+\bigskip
+
+Elements of this group 
+are symmetries of a square.
+\begin{tikzpic}
+    \node[
+    name = s,
+    regular polygon, 
+    regular polygon sides=4, 
+    minimum size=2.5cm, 
+    color=red, 
+    fill=red!20,
+    line width=2pt,
+    draw] 
+    at (0,0) {};
+\node[anchor=south west] at (s.corner 1) {$a_{2}$};
+\node[anchor=north west] at (s.corner 4) {$a_{3}$};
+\node[anchor=north east] at (s.corner 3) {$a_{4}$};
+\node[anchor=south east] at (s.corner 2) {$a_{1}$};
+\end{tikzpic}
+Let $X = \{a_{1}, a_{2}, a_{3}, a_{4}\}$ be the set of vertices of the square. 
+For each $g\in D_{4}$ let $g\cdot a_{i}\coloneq g(a_{i})$. This defines an action 
+of $D_{4}$ on $X$. Since $a_{1} = Ia_{1}$, $a_{2} = R_{90}a_{1}$, $a_{3}= R_{180}a_{1}$ 
+and $a_{4} = R_{270}a_{1}$, this action has only one orbit:
+\[
+\Orb(a_{1}) = \{ a_{1}, a_{2}, a_{3}, a_{4}\}
+\]
+The stabilizer of the vertex $a_{1}$ consists of elements of $D_{4}$ that do not move $a_{1}$. 
+We get $\Stab(a_{1}) = \{I, D'\}$. On the other hand, $\Stab(a_{2}) = \{I, D\}$.
+
+
+
+\textbf{Example.} Let $G = \lrang{a}$ be a cyclic group of order 2, so that $a^{2}=e$.
+Define an action of $G$ on the set of integers by $e\cdot n = n$ and $a\cdot n = -n$
+for any $n\in \Z$. If $n\neq 0$ then $\Orb(n) = \{n, -n\}$ and $\Stab(n) = \{e\}$, 
+Also, $\Orb(0) = \{0\}$ and $\Stab(0) = \{e, a\}$. Notice that for each $n\in \Z$
+we have $\Orb(n) = \Orb(-n)$.
+
+
+
+\textbf{Example.} If $G$ is a group the we can define an action of $G$ on itself 
+by $g\cdot x \coloneq gxg^{-1}$. Take for example $G=D_{4}$.
+We have $\Orb(I) = \{gIg^{-1} \ | \ g\in D_{4}\} = \{ I\}$ and $\Stab(I) = D_{4}$. 
+On the other hand $\Orb(R_{90}) = \{ R_{90}, R_{270}\}$ and 
+$\Stab(R_{90}) = \{I, R_{90}, R_{180}, R_{270}\}$.
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+
+
+\begin{thm}{}{GP AC ORBIT PROPS}
+Let $\mu\colon G \times X \to X$ be a group action and let $x, y\in X$. Then:
+
+\bigskip
+
+\benu
+\item $x\in \Orb(x)$. \\[-5mm]
+\item Either $\Orb(x) = \Orb(y)$ or $\Orb(x)\cap \Orb(y) = \varnothing$. \\[-5mm]
+\item $\Orb(x) = \Orb(y)$ if and only if $y = gx$ for some $g\in G$. \\[-5mm]
+\eenu 
+\end{thm}
+
+
+\begin{FL}
+\begin{proof}\ 
+
+\textbf{1)} We have $x = e\cdot x \in \Orb(x)$.
+
+\textbf{2)} Assume that $\Orb(x)\cap \Orb(y) \neq \varnothing$ and 
+$z\in \Orb(x)\cap \Orb(y)$. Then $z = g_{1}\cdot x$ and $z = g_{2}\cdot y$
+for some $g_{1}, g_{2}\in G$. Then, for any $h\in G$ we obtain:
+\[
+h\cdot x = (hg_{1}^{-1})\cdot (g_{1} x) =  (hg_{1}^{-1})\cdot (g_{2}y)
+\in \Orb(y)
+\]
+and so $\Orb(x)\subseteq \Orb(y)$. By the same argument $\Orb(y)\subseteq \Orb(x)$, and so 
+$\Orb(x) = \Orb(y)$.
+
+\textbf{3)} If $y = g\cdot x$ then $y\in \Orb(y)\cap \Orb(x)$, and so $\Orb(x) = \Orb(y)$
+by 2). Conversely, if $\Orb(x) = \Orb(y)$ then $y \in \Orb(x)$, so $y = g\cdot x$ for some 
+$g\in G$.
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\vfill}
+
+
+\begin{cor}{}{ORBIT SUM}
+If $\mu\colon G\times X \to X$ is a group action and $X$ is a finite set, then 
+\[
+|X| = |\Orb(x_{1})| + |\Orb(x_{2})| + \dots + |\Orb(x_{m})|
+\]
+where $\Orb(x_{1}), \Orb(x_{2}), {\dots}, \Orb(x_{m})$ are all different orbits 
+of the action.
+\end{cor}
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{thm}{}{GP AC STAB PROPS}
+Let $\mu\colon G \times X \to X$ be a group action and let $x\in X$. 
+
+\bigskip
+
+\benu
+\item $\Stab(x)$ is a subgroup of $G$. \\[-3mm]
+\item If $y = gx$ then $\Stab(y) = g\Stab(x)g^{-1}$. \\[-3mm]
+\item If $G$ is a finite group then $|G| = |\Orb(x)|\cdot |\Stab(x)|$
+\eenu
+\end{thm}
+
+
+\begin{FL}
+\begin{proof}\ 
+
+\textbf{1)} Since $ex = x$, so $e\in \Stab(x)$. If $g, h\in\Stab(x)$ then $(gh)x = g(hx) = gx = x$, 
+so $gh\in\Stab(x)$. Finally, if $g\in \Stab(x)$ then $g^{-1}x = g^{-1}gx = ex = x$, 
+which gives $g^{-1}\in\Stab(x)$.
+
+\textbf{2)} Let $h\in \Stab(x)$. Then 
+\[
+(ghg^{-1})y = ghg^{-1}gx = ghx = gx = y
+\]
+so $g\Stab(x)g^{-1} \subseteq \Stab(y)$. Since $x = g^{-1}y$, this also gives 
+$g^{-1}\Stab(y)g \subseteq \Stab(y)$, or equivalently $\Stab(y)\subseteq g\Stab(x)g^{-1}$. 
+Therefore we obtain $\Stab(y) = g\Stab(x)g^{-1}$.
+
+\textbf{3)} Take the set of left cosets $G/\Stab(x)$. Let $f\colon G/\Stab(x) \to \Orb(x)$
+be a function given by $f(g\Stab(x)) = gx$. Notice that $f$ is well defined: 
+if $g\Stab(x) = h\Stab(x)$ then $h = ga$ for some $a\in \Stab(x)$, 
+so $hx = gax = gx$. Next, we show that the function $f$ is 1-1. 
+If $f(g\Stab(x)) = f(h\Stab(x))$ then $gx = hx$
+so $g^{-1}h\in \Stab(x)$, which means that $g\Stab(x) = h\Stab(x)$. Also, 
+$f$ is onto, since if $y\in\Orb(x)$ then $y = gx = f(g\Stab(x))$.  
+
+This shows that $f$ is a bijection and so $|G/\Stab(x)| = |\Orb(x)|$. 
+By Lagrange Theorem \ref{thm:LAGRANGE THM} we obtain 
+\[
+|G| = |G/\Stab(x)|\cdot |\Stab(x)| = |\Orb(x)|\cdot |\Stab(x)|.
+\]
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{thm}{(Cauchy Theorem)}{GP ORDER CAUCHY THM}
+If $G$ is a finite group and $p$ is a prime that divides $|G|$ then
+there exists an element of order $p$ in $G$. 
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+Take $X$ to be the set of all $p$-tuples of elements of $G$ such the product of 
+the $p$-tuple is the identity element:
+\[
+X = \{ (g_{0}, g_{1}, \dots, g_{p-1}) \ | \ g_{0}g_{1}\cdot{\dots}\cdot g_{p-1} = e\}
+\]
+Notice that $|X| = |G|^{p-1}$, since in a tuple $(g_{0}, g_{1}, \dots, g_{p-1})$ 
+the elements $g_{1}, g_{2}, \dots, g_{p-1}$ are arbitrary and 
+$g_{0} = (g_{1}g_{2}\cdot{\dots}\cdot g_{p-1})^{-1}$. Define an action 
+of $\Z_{p}$ on $X$ by 
+\[
+k\cdot (g_{0}, g_{1}, \dots, g_{p-1}) =  (g_{0+k}, g_{1+k}, \dots, g_{(p-1)+k})
+\]
+where addition of indices is taken mod $p$ (exercise: check that if 
+$(g_{0}, g_{1}, \dots, g_{p-1})\in X$ then $(g_{0+k}, g_{1+k}, \dots, g_{(p-1)+k})\in X$).  
+By \Cref{thm:GP AC STAB PROPS} every orbit of this action divides $|\Z_{p}| = p$, so it must contain either 
+1 or $p$ elements. Notice also that $|\Orb((g_{0}, g_{1}, \dots, g_{p-1}))| = 1$
+if and only if $g_{0}=g_{1}={\dots} = g_{p-1}$. One such orbit is the orbit of the tuple
+$(e, e, \dots, e)$. If all other orbits consisted of $p$ elements, then 
+the set $X$ would consists of $pq + 1$ elements for some $q$. This is however 
+impossible, since $|X| = |G|^{p-1}$ is divisible by $p$. This means that there 
+is some  element $g\neq e$ such that $(g, g, \dots, g)\in X$. Then $g^{p}=e$, and so 
+$|g| = p$. 
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+\begin{definition}{}{P GP}
+If $p$ is a prime number then a \emph{p}-group is a finite group of order $p^{r}$
+for some $r\geq 0$.
+\end{definition}
+
+
+\begin{cor}{}{AB P GPS ELT ORDER}
+A finite group $G$ is a $p$-group if and only if the order of every element of $G$
+is a power of $p$
+\end{cor}
+
+
+\begin{FL}
+\begin{proof}
+Let $G$ be a $p$-group, $|G| = p^{r}$. If $g\in G$ then $|g|$ divides $p^{r}$ 
+so $|g|=p^{i}$ for some $i$. 
+
+Conversely, if $G$ is not a $p$-group then there is some prime $q\neq p$ which 
+divides $|G|$. Then by \Cref{thm:GP ORDER CAUCHY THM} $G$ contains an element 
+of order $q$. 
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\vskip 70mm}
+
+
+\begin{thm}{}{P GP CENTER}
+If $G$ is a $p$-group then there exists an element $a\in G$ such that $a\neq e$
+and $ag = ga$ for all $g\in G$. 
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+Let $|G|=p^{r}$. Define an action of $G$ on itself by $g\cdot x = gxg^{-1}$. 
+By \Cref{thm:GP AC STAB PROPS} every orbit $\Orb(x)$ of this action divides $p^{r}$, 
+so $\Orb(x) = p^{i}$ for some $i\geq 0$. Also, $|\Orb(x)| = 1$ 
+(i.e. $\Orb(x) = \{x\}$) if and only if  $gx = xg$ for all $g\in G$.
+We have $\Orb(e) = \{e\}$. It all other orbits have more than one element, then we would 
+have $|G| = pq+1$ for some $q\geq 0$. This is impossible since $p$ divides 
+$|G|$. Thererefore there exists some element $a\neq e$ such that $\Orb(a) = \{a\}$. 
+\end{proof}
+\end{FL}
+

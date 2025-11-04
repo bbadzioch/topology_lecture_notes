@@ -1,0 +1,149 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Ring homomorphisms}
+
+
+\begin{definition}{}{RING HOMOM DEF}
+A \emph{homomorphism} from a ring $R$ to a ring $S$ is a function $f\colon R \to S$ such 
+that for any $a, b\in R$ we have
+\bitem
+\item $f(a + b) = f(a) + f(b)$
+\item $f(ab) = f(a)\cdot f(b)$
+\eitem
+\end{definition}
+
+
+\begin{FL}
+\textbf{Note.} Since a homomorphism of rings $f\colon R \to S$ 
+is a homomorphism of their additive groups, thus we have $f(0) = 0$ and 
+$f(-a) = -f(a)$ for any $a\in R$. 
+
+On the other hand if $R$ and $S$ are rings with unity, then it need not be true 
+in general that $f(1) = 1$. Take for example $R = \Z$, $S = \Z\times\Z$, and let 
+$f\colon \Z \to \Z\times\Z$ be given by $f(n) = (n, 0)$. Then $f$ is a ring 
+homomorphism, but $f(1) = (1, 0)$ which is not the unity in $\Z\times\Z$.
+
+To avoid such situations, usually, when working with rings with unity, it is 
+additionally assumed that homomorphisms preserve the unity, $f(1) = 1$. 
+
+\textbf{Example.} For $n > 1$ the function $f\colon \Z \to \Z_{n}$ given by 
+$f(k) = k \mod n$ is a ring homomorphism.
+
+\textbf{Example.} Let $R$ be a ring and let $a\in R$. The function 
+$f\colon R[x] \to R$ defined by $f(p(x)) = p(a)$ is a homomorphism of rings. 
+
+\textbf{Example.} If $R$ is a ring and $I \triangleright R$ then the function 
+$q\colon R \to R/I$ given by $q(a) = a + I$ is a homomorphism of rings.
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+\begin{definition}{}{RING ISO DEF}
+A \emph{isomorphism} of rings is a homomorphism $f\colon R \to S$ which is 
+a bijection. 
+
+\bigskip
+
+If there exists an isomorphism between rings $R$ and $S$ then we say that 
+these rings are \emph{isomorphic} and we write $R \cong S$.
+\end{definition}
+
+\begin{thm}{}{RING ISO INVERSE}
+If $f\colon R \to S$ is an isomorphism of rings then the inverse function 
+$f^{-1}\colon S \to R$ is also an isomorphism of rings. 
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+Exercise.
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\vskip 20mm}
+
+\begin{definition}{}{KER IM RING HOMOM}
+Let $f\colon R \to S$ be a homomorphism of rings. The \emph{image} of $f$
+is the set $\Img(f) \subseteq S$ defined by 
+\[
+\Img(f) = \{ f(r) \ | \ r \in R\}
+\]
+The \emph{kernel} of $f$ is the set $\Ker(f) \subseteq R$ given  by 
+\[
+\Ker(f) = \{ r\in R \ | \ f(r) = 0\}
+\]
+\end{definition}
+
+\begin{thm}{}{KER IS IDEAL}
+Let $f\colon R \to S$ be homomorphism of rings. Then 
+\benu
+\item $\Img(f)$ is a subring of $S$
+\item $\Ker(f)$ is an ideal of $R$.
+\eenu
+\end{thm}
+
+\begin{FL}
+\begin{proof}\ 
+
+\textbf{1)} Exercise. 
+
+\textbf{2)} One can check that $\Ker(f)$ is a subring of $R$ (exercise). Also, 
+if $a\in \Ker(f)$ and $r\in R$ then 
+\[
+f(ra) = f(r)\cdot f(a) = f(r)\cdot 0 = 0
+\]
+so $ra\in \Ker(f)$. Similarly, $ar\in\Ker(f)$. This show that $Ker(f)\triangleleft R$. 
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+\begin{thm}{(First Isomorphism Theorem for Rings)}{RING FIRST ISO THM}
+Let $f\colon R \to S$ be a ring which is onto. Then $S \cong R/\Ker(f)$.
+\end{thm}
+
+
+\begin{FL}
+\begin{proof}
+Define $g\colon R/\Ker(f) \to S$ by $g(a + \Ker(f)) = f(a)$. One can check that 
+this is a well defined function, which gives an isomorphism of rings.
+\end{proof}
+
+\textbf{Example.} Recall that for $n> 1$ we have an onto homomorphism 
+$f\colon \Z \to \Z_{n}$, $f(k) = k\mod n$. Notice that 
+\[
+\Ker(f) = \{nk \ | \ k\in \Z \} = n\Z
+\]
+This gives $\Z/n\Z \cong \Z_{n}$.
+
+
+\textbf{Example.} Take the homomorphism $f\colon R[x] \to R$ defined by $f(p(x)) = p(0)$.
+This homomorphism of onto, since if $a\in R$ then $r = f(p(x))$ for the polynomial 
+$p(x) = a$. We have 
+\begin{align*}
+\Ker(f) & = \{ p(x) \ | \ p(x) = 0 \} \\
+& = \{ a_{1}x + {\dots} + a_{n}x^{n} \ | \ a_{i}\in R, n \geq 0 \} \\
+& = xR[x]
+\end{align*}
+This shows that $R[x]/xR[x] \cong R$.
+\end{FL}
+
+\showto{SKELETON}{\vskip 100mm}
+
+
+
+\begin{thm}{}{EVERY IDEAL IS KER}
+If $R$ is a ring and $I\triangleleft R$ then there exists a ring homomorphism
+$f\colon R \to S$ such that $\Ker(f) = I$.  
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+Take $S = R/I$ and $f\colon R \to R/I$ defined by $f(a) = a + I$.
+\end{proof}
+\end{FL}
+
+
+
+
+

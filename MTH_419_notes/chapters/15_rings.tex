@@ -1,0 +1,183 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Rings}
+
+\begin{definition}{}{RINGS DEF}
+A \emph{ring} is set $R$ equipped with two binary operations:
+
+\medskip
+
+\bitem
+\item \emph{addition}, denoted $a+b$ \\[-3mm]
+\item \emph{multiplication}, denoted $a\cdot b$
+\eitem
+
+\medskip
+
+satisfying the following properties:
+\medskip
+
+\benu
+\item $R$ taken with addition is an abelian group (with the identity element $0\in R$).\\[-3mm]
+\item Multiplication is associative: $(a\cdot b)\cdot c = a\cdot (b\cdot c)$ for any $a, b, c\in R$.\\[-3mm]
+\item For any $a, b, c\in R$ we have $(a+b)c = ac + bc$ and $(b+c)a = ba + ca$. \\[-3mm]
+\eenu
+\end{definition}
+
+
+\begin{definition}{}{COMM RINGS DEF}
+We say that a ring $R$ is \emph{commutative} if $ab = ba$ for any $a, b\in R$. 
+
+\bigskip
+
+We  say that $R$ is a \emph{ring with unity} if there is an element $1\in R$ such that 
+$1\cdot a = a\cdot 1 = a$ for all $a\in R$.
+\end{definition}
+
+
+\begin{FL}
+\textbf{Example.}
+$\Z$, $\Q$, $\R$, $\C$ with the usual addition and multiplication are commutative 
+rings rings with unity. 
+
+\textbf{Example.} $\Z_{n}$ with the addition and multiplication modulo $n$ is 
+a commutative ring with unity.
+
+
+\textbf{Example.} Let $M_{n}(\R)$ denote the set of $n\times n$ matrices with coefficients 
+in $\R$. This is ring with addition and multiplication given by the usual addition 
+and multiplication of matrices. This is a ring with unity (given by the identity matrix), 
+but it is not commutative. In the same way with can define rings  $M_{n}(\Z)$,  
+$M_{n}(\Q)$ and $M_{n}(\C)$  of $n\times n$ matrices with integer, rational and complex
+coefficients. 
+
+
+\textbf{Example.} Let $R$ be a commutative ring. By $R[x]$ we
+denote the ring of polynomials with coefficients in $R$. Elements of $R[x]$ 
+are polynomials of the form
+\[
+p(x) = a_{0} + a_{1}x + {\dots} + a_{n}x_{n}
+\]
+where $a_{i}\in R$ and $n\geq 0$. Addition and multiplication are the usual addition 
+and multiplication of polynomials. The ring $R[x]$ is commutative if $R$ is commutative
+If $R$ is a ring with unit $1\in R$ then $R[x]$ is a ring with unity given by the polynomial
+$p(x) = 1$. 
+
+
+\textbf{Example.} In a similar way as in the last example, from any ring $R$ we 
+obtain a ring $R[x_{1}, \dots, x_{m}]$ of polynomials of $m$ variables.
+
+\textbf{Example} Let $S$ denote the set of all polynomials
+\[
+p(x) = 0 + a_{1}x + a_{2}x^{2} + {\dots} + a_{n}x^{n}
+\]
+such that $a_{i}\in \Z$, $n\geq 1$. The set $S$ is a commutative ring with the 
+usual addition and multiplication of polynomials, but it does not have a unity.
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+\ 
+\showto{SKELETON}{\vskip 120mm}
+
+\begin{thm}{}{RING UNITY UNIQUE}
+If a ring $R$ has a unity, the the unity is unique.
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+Assume that $1, 1'$ are two unities in $R$, so that 
+\[
+1\cdot a = a\cdot 1 = a \text{\ \ \ and \ \ \ } 1'\cdot a = a\cdot 1' = a 
+\]
+for all $a\in R$. Then $1 = 1\cdot 1' = 1'$.
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{thm}{}{RING ZERO MULTIPL}
+If a ring $R$. For any $a, b\in R$ we have:
+
+\benu
+\item $0\cdot a = a \cdot 0 = 0$. \\[-4mm]
+\item $a(-b) = (-a)b = -(ab)$. \\[-4mm]
+\item $(-a)(-b) = ab$ \\[-4mm]
+\item if $R$ has a unity $1\in R$ then $(-1)a = a(-1) = -a$.
+\eenu
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+\textbf{1)} We have
+\[
+0\cdot a = (0+0)a = 0\cdot a + 0\cdot a
+\]
+Subtracting $0\cdot a$ from both sides we obtain $0\cdot a = 0$. By the same argument, 
+$a\cdot 0 = 0$. 
+
+\textbf{2)} We have 
+\[
+a(-b) + ab = a(b - b) = a\cdot 0 = 0
+\]
+Thus $a(-b) = -ab$. In the same way, $a(-b) = -(ab)$
+
+\textbf{3)} Using part 2) we obtain
+(-a)(-b) = -(a(-b)) = -(-(ab)) = ab
+
+
+\textbf{4)} We have 
+\[
+0 = 0\cdot a = (1 + (-1))a = 1\cdot a + (-1)a = a + (-1)a
+\]
+Thus $(-1)a = -a$. Similarly, $a(-1) = -a$.
+\end{proof}
+\end{FL}
+\showto{SKELETON}{\newpage}
+
+\begin{definition}{}{SUBRING}
+Let $R$ be a ring. A \emph{subring} of $R$ is a subset $S\subseteq R$ such that 
+$S$ is a ring with respect to the addition and multiplication in $R$.  
+\end{definition}
+
+\showto{SKELETON}{\vskip 40mm}
+
+
+\begin{FL}
+\textbf{Example.} $\Z$ is a subring of $\Q$. 
+
+\textbf{Example.} Let $2\Z$ denote the set of even integers. Then $2\Z$ is a subring of 
+$\Z$. 
+\end{FL}
+
+\begin{thm}{}{SUBRING CRITERION}
+Let $R$ be a ring. A subset $S\subseteq R$ is a subring of $R$ if and only if the 
+following conditions are satisfied:
+\benu
+\item $0 \in S$ \\[-4mm]
+\item if $a, b\in S$ then $a+b\in S$ and $ab\in S$ \\[-4mm]
+\item if $a\in S$ then $(-a)\in S$ \\[-4mm]  
+\eenu 
+\end{thm}
+
+\begin{definition}{}{RING DIR PRODUCT}
+The \emph{direct product} of rings $R_{1}$, $R_{1}$ is a ring $R_{1}\times R_{2}$
+defined as follows:
+\bitem
+\item Elements of $R_{1}\times R_{1}$ are ordered tuples $(a_{1}, a_{2})$ 
+where $a_{i}\in R_{i}$ \\[-4mm]
+\item Addition and multiplication are given by
+\begin{align*}
+(a_{1}, a_{2}) + (b_{1}, b_{2}) = & \  (a_{1}+b_{1},\  a_{2}+b_{2})\\
+(a_{1}, a_{2}) \cdot (b_{1}, b_{2}) = & \  (a_{1}b_{1},\  a_{2}b_{2}) \\
+\end{align*}
+\eitem
+\end{definition}
+
+\begin{FL}
+\textbf{Note.} If $R_{1}, R_{2}, \dots, R_{n}$ are rings that the direct product
+$R_{1}\times R_{2}\times {\dots} R_{n}$ is defined analogously as as 
+in \Cref{def:RING DIR PRODUCT}. 
+\end{FL}
+

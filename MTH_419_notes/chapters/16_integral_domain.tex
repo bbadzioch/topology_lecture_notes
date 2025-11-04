@@ -1,0 +1,225 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Integral domains and fields}
+
+
+\begin{definition}{}{ZERO DIV}
+Let $R$ be a commutative ring. An element $a\neq 0$ of $R$ is a \emph{zero divisor} if 
+there exists $b\neq 0$ such that $ab = 0$.
+\end{definition}
+
+\begin{FL}
+\textbf{Example.} In the ring $\Z_{6}$ the elements $2$ and $3$ are zero divisors since  
+$2\cdot 3 = 0$. 
+\end{FL}
+
+\showto{SKELETON}{\vskip 30mm}
+
+\begin{definition}{}{ZERO DIV}
+An \emph{integral domain} is a commutative ring with unity which has no zero divisors. 
+\end{definition}
+
+
+\begin{FL}
+\textbf{Example.} $\Z$, $\Q$, $\R$, $\C$ are integral domain. 
+
+\textbf{Example.} $\Z \times \Z$ is not an integral domain since $(1, 0)\cdot (0, 1) = (0, 0)$.
+\end{FL}
+
+\showto{SKELETON}{\vskip 30mm}
+
+\begin{thm}{}{INT DOM CANCELLATION}
+Let $R$ be an integral domain and $a, b, c \in R$. If $a\neq 0$ and 
+$ab = ac$ then $b=c$. 
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+If $ab = ac$ then $a(b-c) = 0$. Since $R$ is an integral domain and $a\neq 0$, 
+this means that $b-c = 0$, and so $b=c$.
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+\begin{definition}{}{RING UNIT}
+Let $R$ be a commutative ring with unity. An element $a\in R$ is a \emph{unit} 
+if there exists $b\in R$ such that $ab = 1$. In such case, we denote $a^{-1}\coloneq b$.
+\end{definition}
+
+\begin{FL}
+\textbf{Example} The only units in $\Z$ are 1 and $-1$.
+
+\textbf{Example} Every non-zero element of $\Q$ is a unit. 
+\end{FL}
+
+\showto{SKELETON}{\vskip 30mm}
+
+\begin{definition}{}{FIELD}
+A \emph{field} is a commutative ring with unity in which every non-zero element is a unit.
+\end{definition}
+
+\begin{FL}
+\textbf{Example.} $\Q$, $\R$, $\C$ are fields.  
+\end{FL}
+
+\showto{SKELETON}{\vskip 40mm}
+
+\begin{thm}{}{FIELDS ARE INT DOM}
+Every field is an integral domain.
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+Let $F$ be a field and $a, b \in F$ be non-zero elements. If 
+$a\cdot b = 0$ then $b = a^{-1}(ab) = a^{-1}\cdot 0 = 0$, which is a contradiction. 
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{thm}{}{FIELDS ZP}
+A ring $\Z_{n}$ is a field if and only if $n$ is a prime number.  
+\end{thm}
+
+
+\begin{FL}
+\begin{proof}
+If $n$ is not a prime number, then $n = km$ for some $1 <k, m < n$. 
+Consider $k, m$ as elements of $\Z_{n}$. Then $k\neq 0$, $m\neq 0$ 
+but $k\cdot m = 0$. This shows that $\Z_{n}$ is not an integral domain 
+and so it is not a field.
+
+Conversely, assume that $n$ is a prime number and that $k\in \Z_{n}$, $k\neq 0$. 
+Then $\gcd(k, n) = 1$, so there exists $a, b\in \Z$ such that 
+$ak + bn = 1$. This gives $a\cdot k = 1$ in $\Z_{n}$, so $k$ is a unit 
+in $\Z_{n}$ and $k^{-1} = a$.
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\vskip 70mm}
+
+\begin{definition}{}{FIELD CHAR}
+Let $F$ be a field with unity $1\in F$. The \emph{characteristic} of $F$ is 
+the  smallest positive integer $n$ such that 
+\[
+\underbrace{1+1+{\dots}+1}_{n \text{ times}} = 0
+\] 
+denote such $n$ by $\chi(F)$. 
+
+\bigskip
+
+If such $n$ does not exist, then $\chi(F) = 0$
+\end{definition}
+
+
+
+\begin{FL}
+\textbf{Example}
+\bitem
+\item $\chi(\Q) = \chi(\R) = \chi(\C) = 0$ \\[-4mm]
+\item If $p$ is a prime number then $\chi(\Z_{p}) = p$.
+\eitem
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+\begin{thm}{}{FIELD CHAR PROPS}
+\textbf{1)} If $F$ is a field then $\chi(F)$ is either 0 or a prime number. 
+
+\bigskip
+
+\textbf{2)} If $F$ is a finite field and $\chi(F) = p$ for some prime $p$, then
+$F$ consists of $p^{n}$ elements for some $n\geq 1$. 
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+\textbf{1)} Assume that $\chi(F) > 0$ and $\chi(F) = km$ for some $k, m > 1$. 
+denote
+\begin{align*}
+\mathbf{k} = & \  \underbrace{1+1+{\dots}+1}_{k \text{ times}} \\
+\mathbf{m} = & \  \underbrace{1+1+{\dots}+1}_{m \text{ times}} \\
+\end{align*}
+Then $\mathbf{k}, \mathbf{m}$ are non-zero elements in $F$, since $k, m < \chi(F)$.
+Also: 
+\[
+\mathbf{km} =  \underbrace{1+1+{\dots}+1}_{km \text{ times}} = 0
+\]
+since $km = \chi(F)$. This means that $\bf k$ and $\bf m$ are zero divisors, 
+which is impossible.
+
+\bigskip
+
+\textbf{2)} Let $|F|$ denote the number of elements in $F$. Let $q$ be a prime 
+which divides $|F|$. Consider $F$ as an abelian group with addition. 
+By \Cref{thm:GP ORDER CAUCHY THM} there exists an element $a\in F$ of order $q$. 
+Notice that we have 
+\[
+pa = (\underbrace{1 + 1 + \cdot + 1}_{p \text{ times}})\cdot a = 0\cdot a = 0
+\]
+By \Cref{thm:ORDER GP ELT DIVIDES} this means that $q$ divides $p$. Since 
+$p$ and $q$ are primes, this gives $p=q$. As a consequence $|F| = p^{n}$ for some $n \geq 1$.
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+\showto{SKELETON}{\textbf{Example:} Field with 9 elements.}
+\begin{FL}
+\textbf{Example.} Here is an example of a field $\Z_{3}[i]$ of characteristic $3$ 
+with 9 elements. It is obtained by starting with the field $\Z_{3}$ and adding 
+to it a new element $i$ such that $i^{2} = -1$. More explicitly:
+\[
+\Z_{3}[i] = \{ a + bi \ | \ a, b\in \Z_{3}\}
+\]
+Addition and multiplication in $\Z_{3}[i]$ are given by
+\begin{align*}
+(a + bi) + (c + di) = &\  (a+c) + (b+d)i \\
+(a + bi) \cdot (c + di) = &\  (ac - bd) + (ac + bd)i \\
+\end{align*}
+We will show that all non-zero elements of $\Z_{3}[i]$ are units. Notice that 
+the polynomial $p(x) = x^{2} + 1$ has no roots in $\Z_{3}$. This implies that 
+if $a, b\in \Z_{3}$ and $b\neq 0$ then $a^{2} + b^{2} = b^{2}((ab^{-1})^{2} + 1) \neq 0$. 
+By the same argument, if $a\neq 0$ then $a^{2} + b^{2} \neq 0$.
+
+Take a non-zero element $a+bi \in \Z_{3}[i]$. We have 
+\[
+(a + bi)(a - bi) = a^{2} + b^{2}
+\]
+Since, by the observation above, $a^{2} + b^{2} \neq 0$, thus the element $
+(a^{2} + b^{2})^{-1}$ exists in $\Z_{3}$ and we have
+\[
+(a + bi)(a-bi)(a^{2} + b^{2})^{-1} = 1
+\]
+This shows that $(a + bi)^{-1} =  (a-bi)(a^{2} + b^{2})^{-1}$. 
+ 
+\textbf{Example.} The same procedure does not work for constructing a field with 
+$25$ elements. Take $\Z_{5}[i] = \{a + bi \ | \ a, b\in \Z_{5}\}$ with $i^{2} = -1$. 
+Then 
+\[
+(i - 2)(i - 3) = 0
+\]
+so $\Z_{5}[i]$ is not an integral domain, and thus not a field.
+
+The difference between $\Z_{3}[i]$ and $\Z_{5}[i]$ is that the polynomial 
+$p(x) = x^{2} + 1$ does not have any roots in $\Z_{3}$. By adding 
+the element $i$ to this field with $i^{2} = -1$ we create roots of this polynomial, 
+$x=i$ and $x= -i$. 
+
+On the other hand, in $\Z_{5}$ the polynomial $p(x) = x^{2} + 1$ already has
+two roots: $x= 2$ and $x = 3$. It means that $p(x) = (x-2)(x-3)$. 
+By adding $i$ to $\Z_{5}$ we create an additional root $x=i$. 
+This gives:
+\[
+0 = p(i) = (i - 2)(i - 3)
+\]
+\end{FL}
+
+
+
+
+
+

@@ -1,0 +1,987 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Permutation groups}
+
+
+\begin{definition}{}{PERMUTATION DEF}
+A \emph{permutation} of a set $A$ is a function $f\colon A \to A$
+which is a bijection. 
+\end{definition}
+
+\vskip 10mm
+
+\begin{tikzpic}
+\draw[rounded corners=10pt] (-0.25,0) rectangle (1.25,3);
+\draw[rounded corners=10pt] (2.75,0) rectangle (4.25,3);
+\foreach \x/\y in {0/d, 1/c, 2/b, 3/a}{
+\fill (0.5, {0.5 + (2/3)*\x}) circle (0.1) node[left] {\small $\y$};
+\fill (3.5, {0.5 + (2/3)*\x}) circle (0.1) node[right] {\small $\y$};
+}
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*0}) -- (3.5, {0.5 + (2/3)*3});
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*1}) -- (3.5, {0.5 + (2/3)*0});
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*2}) -- (3.5, {0.5 + (2/3)*2});
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*3}) -- (3.5, {0.5 + (2/3)*1});
+\node[anchor= east] at (-0.25, 2.65) {\small $A$};
+\node[anchor= west] at (4.25, 2.65) {\small $A$};
+\node[anchor = south] at (2, 2.5) {\small $f$};
+\end{tikzpic}
+
+
+\begin{FL}
+{\bf Note.} For every permutation $f$ we have the inverse function $f^{-1}$
+such that $f\circ f^{-1} (x) = x$ and  $f^{-1}\circ f (x) = x$ for all $x\in A$.
+
+\begin{tikzpic}
+\draw[rounded corners=10pt] (-0.25,0) rectangle (1.25,3);
+\draw[rounded corners=10pt] (2.75,0) rectangle (4.25,3);
+\foreach \x/\y in {0/d, 1/c, 2/b, 3/a}{
+\fill (0.5, {0.5 + (2/3)*\x}) circle (0.1) node[left] {\small $\y$};
+\fill (3.5, {0.5 + (2/3)*\x}) circle (0.1) node[right] {\small $\y$};
+}
+\draw[line width = 1, <-, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*0}) -- (3.5, {0.5 + (2/3)*3});
+\draw[line width = 1, <-, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*1}) -- (3.5, {0.5 + (2/3)*0});
+\draw[line width = 1, <-, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*2}) -- (3.5, {0.5 + (2/3)*2});
+\draw[line width = 1, <-, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*3}) -- (3.5, {0.5 + (2/3)*1});
+\node[anchor= east] at (-0.25, 2.65) {\small $A$};
+\node[anchor= west] at (4.25, 2.65) {\small $A$};
+\node[anchor = south] at (2, 2.5) {\small $f^{-1}$};
+\end{tikzpic}
+\end{FL}
+
+
+\showto{SKELETON}{\vfill}
+
+
+\begin{definition}{}{PERMUTATION GP DEF}
+Let $A$ be a set. The \emph{permutation group} of $A$ is a group $S(A)$
+defined as follows:
+\bitem
+\item {\bf Elements of $S(A)$:} permutations $f\colon A \to A$.
+\item {\bf Group operation:} composition of functions $g\circ f$. 
+\item {\bf The identity element:} the function $\varepsilon\colon A \to A$, 
+$\varepsilon(x) = x$ for all $x\in A$.  
+\item {\bf The inverse of $f$:} the inverse permutation $f^{-1}$.   
+\eitem
+\end{definition}
+
+\newpage
+
+
+\begin{definition}{}{SN GP DEF}
+For $n \geq 1$ the group $S_{n}$ is the group of permutations of the set 
+$A = \{1, 2, \dots, n\}$. This group is called the \emph{symmetric group 
+on $n$ letters}.
+\end{definition}
+
+
+\vskip 5mm
+
+{\bf Matrix notation of permutations:}
+\begin{tikzpic}[alt={Permutation 1 to 3, 2 to 2, 3 to 4, 4 to 1}]
+\draw[rounded corners=10pt] (-0.25,0) rectangle (1.25,3);
+\draw[rounded corners=10pt] (2.75,0) rectangle (4.25,3);
+\foreach \x/\y in {0/4, 1/3, 2/2, 3/1}{
+\fill (0.5, {0.5 + (2/3)*\x}) circle (0.1) node[left] {\small $\y$};
+\fill (3.5, {0.5 + (2/3)*\x}) circle (0.1) node[right] {\small $\y$};
+}
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*0}) -- (3.5, {0.5 + (2/3)*3});
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*1}) -- (3.5, {0.5 + (2/3)*0});
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*2}) -- (3.5, {0.5 + (2/3)*2});
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*3}) -- (3.5, {0.5 + (2/3)*1});
+\node[anchor = south] at (2, 2.5) {\small $\alpha$};
+\end{tikzpic}
+
+\begin{FL}
+\[
+\alpha = 
+\bbm
+1 & 2 & 3 & 4 \\
+3 & 2 & 4 & 1 \\
+\ebm
+\phantom{\alpha =}
+\]
+\end{FL}
+
+\showto{SKELETON}{\vskip 20mm}
+
+
+{\bf Composition:}
+
+\begin{tikzpic}
+\draw[rounded corners=10pt] (-0.25,0) rectangle (1.25,3);
+\draw[rounded corners=10pt] (2.75,0) rectangle (4.25,3);
+\draw[rounded corners=10pt] (5.75,0) rectangle (7.25,3);
+%
+\foreach \x/\y in {0/4, 1/3, 2/2, 3/1}{
+\fill (0.5, {0.5 + (2/3)*\x}) circle (0.1) node[left] {\small $\y$};
+\fill (3.5, {0.5 + (2/3)*\x}) circle (0.1) node[right] {\small $\y$};
+\fill (6.5, {0.5 + (2/3)*\x}) circle (0.1) node[right] {\small $\y$};
+}
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*0}) -- (3.5, {0.5 + (2/3)*3});
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*1}) -- (3.5, {0.5 + (2/3)*0});
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*2}) -- (3.5, {0.5 + (2/3)*2});
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*3}) -- (3.5, {0.5 + (2/3)*1});
+\node[anchor = south] at (2, 2.5) {\small $\alpha$};
+%
+\draw[line width = 1, ->, >=latex, shorten <= 5mm, shorten >= 2mm] 
+(3.5, {0.5 + (2/3)*0}) -- (6.5, {0.5 + (2/3)*3});
+\draw[line width = 1, ->, >=latex, shorten <= 5mm, shorten >= 2mm] 
+(3.5, {0.5 + (2/3)*1}) -- (6.5, {0.5 + (2/3)*1});
+\draw[line width = 1, ->, >=latex, shorten <= 5mm, shorten >= 2mm] 
+(3.5, {0.5 + (2/3)*2}) -- (6.5, {0.5 + (2/3)*0});
+\draw[line width = 1, ->, >=latex, shorten <= 5mm, shorten >= 2mm] 
+(3.5, {0.5 + (2/3)*3}) -- (6.5, {0.5 + (2/3)*2});
+\node[anchor = south] at (5, 2.5) {\small $\beta$};
+\end{tikzpic}
+
+\begin{FL}
+\[
+\beta \circ \alpha = 
+\bbm
+1 & 2 & 3 & 4 \\
+2 & 4 & 3 & 1 \\
+\ebm
+\circ
+\bbm
+1 & 2 & 3 & 4 \\
+3 & 2 & 4 & 1 \\
+\ebm
+\phantom{\alpha \circ \beta =}
+\]
+\[
+= 
+\bbm
+1 & 2 & 3 & 4 \\
+3 & 4 & 1 & 2 \\
+\ebm
+\]
+\end{FL}
+
+\vfill 
+
+\begin{thm}{}{SN GP ORDER}
+For any $n \geq 1$ we have $|S_{n}| = n!$
+\end{thm}
+
+\newpage
+
+\underline{\bf Dihedral groups and permutation groups}
+
+\begin{FL}
+Let $P_{n}$ be a regular polygon with $n$ vertices. Label the vertices with 
+numbers $1, 2, \dots, n$. Since every symmetry of $P_{n}$ sends vertices to 
+vertices, it defines a certain permutation of vertices:
+
+
+
+
+\begin{tikzpic}[alt={Diagonal reflection of a square.}]
+ \node[name=s1, 
+  regular polygon, 
+  regular polygon sides=4, 
+  minimum size=2cm, 
+  draw, 
+  color=red, 
+  fill=red!20,
+  line width=2pt, 
+  ] 
+  at (0,0) {};
+  \draw[line width=1, black!60] (-0.9, -0.9) -- (0.9, 0.9);
+  \node[anchor = south west] at (s1.corner 1) {\small\bf $1$};
+  \node[anchor = north west] at (s1.corner 4) {\small\bf $2$};
+  \node[anchor = north east] at (s1.corner 3) {\small\bf $3$};
+  \node[anchor = south east] at (s1.corner 2) {\small\bf $4$};
+ %
+  \node[red, anchor = north east] at (s1.corner 1) {\small $\bf 1$};
+  \node[red, anchor = south east] at (s1.corner 4) {\small $\bf 2$};
+  \node[red, anchor = south west] at (s1.corner 3) {\small $\bf 3$};
+  \node[red, anchor = north west] at (s1.corner 2) {\small $\bf 4$};
+%
+  \begin{scope}
+  \draw[->, line width=1, >=latex] (1.5, 0) -- node[above] {$D$} (3.5, 0);
+  \end{scope}
+ % 
+  \begin{scope}[xshift = 5cm]
+  \begin{scope}[
+  yscale=-1, 
+  rotate=-90, 
+  transform shape,
+  ]
+  \node[name=s2, 
+  regular polygon, 
+  regular polygon sides=4, 
+  minimum size=2cm, 
+  draw, 
+  color=red, 
+  fill=red!20,
+  line width=2pt, 
+  ] 
+  at (0,0) {};
+ \end{scope}
+  \node[anchor = south west] at (s2.corner 1) {\small\bf $1$};
+  \node[anchor = south east] at (s2.corner 4) {\small\bf $4$};
+  \node[anchor = north east] at (s2.corner 3) {\small\bf $3$};
+  \node[anchor = north west] at (s2.corner 2) {\small\bf $2$};
+% 
+  \node[red, anchor = north east] at (s2.corner 1) {\small $\bf 1$};
+  \node[red, anchor = north west] at (s2.corner 4) {\small $\bf 2$};
+  \node[red, anchor = south west] at (s2.corner 3) {\small $\bf 3$};
+  \node[red, anchor = south east] at (s2.corner 2) {\small $\bf 4$};
+ \end{scope}
+\end{tikzpic}
+
+\[
+D = 
+\bbm
+1 & 2 & 3 & 4 \\
+1 & 4 & 3 & 2 \\
+\ebm
+\phantom{D =}
+\]
+
+\ 
+
+Since composition of symmetries corresponds to composition of permutations of vertices, 
+we can identify the dihedral group $D_{n}$ with a subgroup of the group of permutations 
+$S_{n}$. Note that not every permutation in $S_{n}$ comes from a symmetry of $P_{n}$. E.g.:
+
+
+\[
+\alpha = 
+\bbm
+1 & 2 & 3 & 4 \\
+1 & 2 & 4 & 3 \\
+\ebm
+\phantom{\alpha =}
+\]
+
+
+\begin{tikzpic}[][scale=1.5]
+  \draw[red, 
+  fill=red!20,
+  line width=2pt
+  ] (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- cycle;
+%
+  \node[anchor = south west] at (1, 1) {\small\bf $1$};
+  \node[anchor = south east] at (0, 1) {\small\bf $2$};
+  \node[anchor = north east] at (0, 0) {\small\bf $3$};
+  \node[anchor = north west] at (1, 0) {\small\bf $4$};
+%
+  \begin{scope}
+  \draw[->, line width=1, >=latex] (1.7, 0.5) -- node[above] {???} (3.3, 0.5);
+  \end{scope}
+%
+  \begin{scope}[xshift = 4cm]
+  \draw[red, 
+  fill=red!20,
+  line width=2pt
+  ] (0, 0) -- (1, 0) -- (0, 1) -- (1, 1) -- cycle;
+%
+  \node[anchor = south west] at (1, 1) {\small\bf $1$};
+  \node[anchor = south east] at (0, 1) {\small\bf $2$};
+  \node[anchor = north east] at (0, 0) {\small\bf $4$};
+  \node[anchor = north west] at (1, 0) {\small\bf $3$};
+ \end{scope}
+\end{tikzpic}
+
+\end{FL}
+\showto{SKELETON}{\newpage}
+
+
+{\bf Note.} The groups $S_{n}$ are non-abelian for $n > 2$\showto{FULL}{, e.g:}
+
+\begin{FL}
+\[
+\overset{
+{\color{red}\alpha}}
+{\bbm
+1 & 2 & 3 \\
+2 & 1 & 3 \\
+\ebm
+}
+\circ
+\overset{
+{\color{red}\beta}}
+{\bbm
+1 & 2 & 3 \\
+1 & 3 & 2 \\
+\ebm
+}
+= 
+\overset{
+{\color{red}\alpha\circ \beta}}
+{
+\bbm
+1 & 2 & 3 \\
+2 & 3 & 1 \\
+\ebm
+}
+\]
+\[
+\overset{
+{\color{red}\beta}}
+{
+\bbm
+1 & 2 & 3 \\
+1 & 3 & 2 \\
+\ebm
+}
+\circ
+\overset{
+{\color{red}\alpha}}
+{
+\bbm
+1 & 2 & 3 \\
+2 & 1 & 3 \\
+\ebm
+}
+= 
+\overset{
+{\color{red}\beta\circ \alpha}}
+{
+\bbm
+1 & 2 & 3 \\
+3 & 1 & 2 \\
+\ebm
+}
+\]
+\end{FL}
+
+\showto{SKELETON}{\vskip 50mm}
+\showto{FULL}{\newpage}
+
+
+\begin{definition}{}{SN MOVING ELT}
+Let $\alpha \in S_{n}$ and let $i \in \{1, \dots, n\}$. We will say that 
+$\alpha$ \emph{moves} $i$ if $\alpha(i) \neq i$. If $\alpha(i) = i$
+we will say that $\alpha$ \emph{fixes} $i$. 
+\end{definition}
+
+\begin{FL}
+{\bf Example.} The permutation
+\[
+\bbm
+1 & 2 & 3 & 4 \\
+2 & 4 & 3 & 1 \\
+\ebm
+\]
+moves 1, 2 and 4, and fixes 3. 
+\end{FL}
+\showto{SKELETON}{\vskip 30mm}
+
+
+\begin{definition}{}{SN DISJOINT PERM}
+We will say that permutations $\alpha, \beta \in S_{n}$ are \emph{disjoint}
+if there is no $i\in \{1, \dots, n\}$. which is moved by both $\alpha$ and $\beta$. 
+\end{definition}
+
+{\bf Example.}
+\begin{tikzpic}[alt={Disjoint permutations.}]
+\draw[rounded corners=10pt] (-0.25,0) rectangle (1.25,4);
+\draw[rounded corners=10pt] (2.75,0) rectangle (4.25,4);
+\foreach \x/\y in {0/5, 1/4, 2/3, 3/2, 4/1}{
+\fill (0.5, {0.5 + (2/3)*\x}) circle (0.1) node[left] {\small $\y$};
+\fill (3.5, {0.5 + (2/3)*\x}) circle (0.1) node[right] {\small $\y$};
+}
+\draw[red, line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*0}) -- (3.5, {0.5 + (2/3)*3});
+\draw[red, line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*1}) -- (3.5, {0.5 + (2/3)*0});
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*2}) -- (3.5, {0.5 + (2/3)*2});
+\draw[red, line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*3}) -- (3.5, {0.5 + (2/3)*1});
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*4}) -- (3.5, {0.5 + (2/3)*4});
+\node[anchor = south] at (2, 3.5) {\small $\alpha$};
+\node at (2, -1)
+{
+$
+\bbm
+1 & {\color{red} 2} & 3 & {\color{red} 4} & {\color{red} 5}\\
+1 & {\color{red} 4} & 3 & {\color{red} 5} & {\color{red} 2}\\
+\ebm
+$
+};
+%
+\begin{scope}[xshift=6cm]
+\draw[rounded corners=10pt] (-0.25,0) rectangle (1.25,4);
+\draw[rounded corners=10pt] (2.75,0) rectangle (4.25,4);
+\foreach \x/\y in {0/5, 1/4, 2/3, 3/2, 4/1}{
+\fill (0.5, {0.5 + (2/3)*\x}) circle (0.1) node[left] {\small $\y$};
+\fill (3.5, {0.5 + (2/3)*\x}) circle (0.1) node[right] {\small $\y$};
+}
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*0}) -- (3.5, {0.5 + (2/3)*0});
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*1}) -- (3.5, {0.5 + (2/3)*1});
+\draw[red, line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*2}) -- (3.5, {0.5 + (2/3)*4});
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*3}) -- (3.5, {0.5 + (2/3)*3});
+\draw[red, line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*4}) -- (3.5, {0.5 + (2/3)*2});
+\node[anchor = south] at (2, 3.5) {\small $\beta$};
+\node at (2, -1)
+{
+$
+\bbm
+{\color{red} 1} & 2 & {\color{red} 3} & 4 & 5\\
+{\color{red} 3} & 2 & {\color{red} 1} & 4 & 5\\
+\ebm
+$
+};
+\end{scope}
+\end{tikzpic}
+
+
+
+\begin{thm}{}{DISJOINT PERM COMMUTE}
+If $\alpha, \beta \in S_{n}$ are disjoint permutations then 
+\[
+\alpha\circ\beta = \beta\circ\alpha
+\]
+Moreover, 
+\[
+\alpha\circ\beta(i) = 
+\begin{cases}
+\alpha(i) & \text{if $i$ is moved by $\alpha$} \\
+\beta(i) & \text{if $i$ is moved by $\beta$} \\
+i & \text{otherwise} \\
+\end{cases}
+\]
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+Assume that $i\in \{1, \dots, n\}$ is an element moved by $\alpha$. Then 
+$\alpha$ also moves $\alpha(i)$. It follows that both $i$ and $\alpha(i)$
+are fixed by $\beta$, so we have 
+\[
+\beta\circ\alpha(i) = \alpha(i) = \alpha\circ\beta(i)
+\]
+By the same argument, if $i$ is moved by $\beta$ then 
+\[
+\alpha\circ\beta(i) = \beta(i) =  \beta\circ\alpha(i)
+\]
+Finally, it both $\alpha$ and $\beta$ fix $i$ then 
+\[
+\alpha\circ\beta(i) = i =  \beta\circ\alpha(i)
+\]
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{definition}{}{SN CYCLE}
+A permutation $\alpha\in S_{n}$ is a \emph{cycle of length $r$} (or \emph{$r$-cycle}) 
+if there are distinct elements $i_{1}, i_{2},\dots i_{r}\in \{1, 2, \dots, n\}$ such that
+\[
+\alpha(i_{1}) = i_{2}, \ \ 
+\alpha(i_{2}) = i_{3}, \ \ 
+\dots \ \ 
+\alpha(i_{r-1}) = i_{r}, \ \ 
+\alpha(i_{r}) = i_{1} \\ 
+\]
+and $\alpha$ fixes all other elements of $\{1, \dots, n\}$.
+\end{definition}
+
+
+\begin{FL}
+{\bf Example.}
+
+\[
+\alpha=
+\bbm
+1 & 2 & 3 & 4 & 5 & 6 \\
+3 & 2 & 6 & 4 & 1 & 5\\
+\ebm
+\phantom{\alpha=}
+\]
+\begin{tikzpic}
+  \path (90 :1cm) node {1}
+        (0:1cm) node {3}
+        (270:1cm) node {6}
+        (180:1cm) node {5}
+        ;
+  \draw [red, line width=1pt, ->, >=latex] (0, 0) +(-15:1) arc(-15:-75:1);
+  \draw [red, line width=1pt, ->, >=latex] (0, 0) +(-105:1) arc(255:195:1);
+  \draw [red, line width=1pt, ->, >=latex] (0, 0) +(165:1) arc(165:105:1);
+  \draw [red, line width=1pt, ->, >=latex] (0, 0) +(75:1) arc(75:15:1);
+\end{tikzpic}
+
+\vskip 10mm
+
+{\bf Cycle notation.} A permutation $\alpha$ such that 
+\[
+\alpha(i_{1}) = i_{2}, \ \ 
+\alpha(i_{2}) = i_{3}, \ \ 
+\dots \ \ 
+\alpha(i_{r-1}) = i_{r}, \ \ 
+\alpha(i_{r}) = i_{1} \\ 
+\]
+and which fixes all other elements is denoted by $(i_{1}, i_{2}, \dots, i_{r})$.
+
+
+\vskip 10mm
+
+{\bf Example.}
+
+\[
+\bbm
+1 & 2 & 3 & 4 & 5 & 6 \\
+3 & 2 & 6 & 4 & 1 & 5\\
+\ebm
+= (1, 3, 5, 6) = (3, 5, 6, 1) = (5, 6, 1, 3) = (6, 1, 3, 5)
+\]
+\end{FL}
+\showto{SKELETON}{\vfill}
+
+
+
+\begin{thm}{}{SN CYCLE DECOMP}
+Every permutation in $S_{n}$ is either a cycle or a product of disjoint cycles.
+\end{thm}
+
+
+\begin{FL}
+{\bf Example.}
+
+\[
+\bbm
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+3 & 8 & 6 & 2 & 1 & 5 & 7 & 4 \\
+\ebm
+= (1, 3, 6, 5)\circ(2, 8, 4)\circ (7) = (1, 3, 6, 5)\circ(2, 8, 4)
+\]
+\begin{tikzpic}
+  \path (90 :1cm) node {1}
+        (0:1cm) node {3}
+        (270:1cm) node {6}
+        (180:1cm) node {5}
+        ;
+  \draw [red, line width=1.5pt, ->, >=latex] (0, 0) +(-15:1) arc(-15:-75:1);
+  \draw [red, line width=1.5pt, ->, >=latex] (0, 0) +(-105:1) arc(255:195:1);
+  \draw [red, line width=1.5pt, ->, >=latex] (0, 0) +(165:1) arc(165:105:1);
+  \draw [red, line width=1.5pt, ->, >=latex] (0, 0) +(75:1) arc(75:15:1);
+%  
+   \path (3, 0) +(90 :1cm) node {2}
+         (3, 0) +(-30:1cm) node {4}
+         (3, 0) +(210:1cm) node {8}
+        ;
+  \draw [red, line width=1.5pt, ->, >=latex] (3, 0) +(75:1) arc(75:-15:1);
+  \draw [red, line width=1.5pt, ->, >=latex] (3, 0) +(-45:1) arc(-45:-135:1);
+  \draw [red, line width=1.5pt, ->, >=latex] (3, 0) +(-165:1) arc(-165:-255:1);
+%
+  \path (6,0) +(90:1cm) node {7};
+  \draw [red, line width=1.5pt, ->, >=latex] (6, 0) +(75:1) arc(75:-255:1);
+\end{tikzpic}
+\end{FL}
+\showto{SKELETON}{\vskip 40mm\newpage}
+
+
+
+\begin{lemma}{}{SN ISOLATED CYCLE}
+Let $\alpha \in S_{n}$, and let $i_{0} \in \{1, \dots, n\}$ be an element moved 
+by $\alpha$. Then:
+\benu
+\item There exists $r>1$ such that $\alpha^{r}(i_{0}) = i_{0}$
+\item If $r>1$ is the smallest integer satisfying $\alpha^{r}(i_{0}) = i_{0}$ then 
+all elements 
+\[
+i_{0}, \alpha(i_{0}), \alpha^{2}(i_{0}), \dots, \alpha^{r-1}(i_{0})
+\]
+are distinct. 
+\eenu
+\end{lemma}
+
+
+\begin{FL}
+\begin{proof}
+Consider the sequence  
+\[
+i_{0} = \alpha^{0}(i_{0}),\  \alpha^{1}(i_{0}),\ \alpha^{2}(i_{0}),\  \dots
+\]
+Since all elements of this sequence come from the finite set $\{1, \dots, n\}$, 
+there must an integer $r\geq 1$ such that the elements 
+$i_{0}, \alpha(i_{0}), \alpha^{2}(i_{0}), \dots, \alpha^{r-1}(i_{0})$ are distinct
+and $\alpha^{r}(i_{0})$ is equal to one of the previous elements. We will show 
+that $\alpha^{r}(i_{0}) = i_{0}$. Indeed, otherwise 
+$\alpha^{r}(i_{0}) = \alpha^{k}(i_{0})$ for some $1 \leq k < r$. This gives 
+\[
+\alpha(\alpha^{r-1}(i_{0})) = \alpha(\alpha^{k-1}(i_{0}))
+\] 
+and since $\alpha$ is a 1-1 function, we obtain
+\[
+\alpha^{r-1}(i_{0}) = \alpha^{k-1}(i_{0})
+\]
+This contradicts the assumption that the elements 
+$i_{0}, \alpha(i_{0}), \dots, \alpha^{r-1}(i_{0})$ are distinct.
+\end{proof}
+\end{FL}
+\showto{SKELETON}{\newpage}
+
+
+\showto{SKELETON}{\emph{Poof of \Cref{thm:SN CYCLE DECOMP}}.\newpage}
+\begin{FL}
+\begin{proof}[Proof of \Cref{thm:SN CYCLE DECOMP}]
+Let $\alpha\in S_{n}$. We will argue that $\alpha$ can be written as a product of 
+cycles by induction with respect to the number $k$ of elements of $\{1, \dots, n\}$
+moved by $k$. If $k=0$ then $\alpha$ fixes all elements, so it is the identity 
+permutation, which is a $1$-cycle. 
+
+Assume then that all permutations moving $k$ or fewer elements can be written as a product 
+of disjoint cycles and that $\alpha$ moves $k+1$ elements. Let $i_{0}\in \{1, \dots, n\}$ 
+be an element moved by $\alpha$. By \Cref{lemma:SN ISOLATED CYCLE} there is $r>1$ such 
+that the elements
+\[
+i_{0}, \ \alpha(i_{0}), \ \alpha^{2}(i_{0}), \dots, \alpha^{r-1}(i_{0})
+\]
+are all distinct and $\alpha^{r}(i_{0}) = i_{0}$. Denote for $k=1, \dots, r-1$
+denote $i_{k} = \alpha^{k}(i_{0})$. Notice that $\alpha(i_{k}) = i_{k+1}$ for $k<r-1$ and 
+$\alpha(i_{r-1}) = i_{0}$. Let $\beta\in S_{n}$ be a permutation defined as follows:
+
+\[
+\beta(i) = 
+\begin{cases}
+i & \text{if $i \in \{i_{0}, \dots, i_{r-1}\}$} \\
+\alpha(i) & \text{otherwise}
+\end{cases}
+\]
+Notice that the cycle $(i_{0}, i_{1}, \dots, i_{r-1})$ and $\beta$ are disjoint
+permutations. Thus, we can use \Cref{thm:DISJOINT PERM COMMUTE} to show that 
+$\alpha = (i_{0}, i_{1}, \dots, i_{r-1})\circ \beta$. Then, since $\beta$ moves
+fewer elements than $\alpha$, by the inductive assumption we can write 
+$\beta$ as a product of disjoint cycles:
+\[
+\beta = \gamma_{1}\circ \dots \circ \gamma_{m}
+\]
+Therefore we obtain a decomposition of $\alpha$ into a product of disjoint cycles:
+\[
+\alpha =  (i_{0}, i_{1}, \dots, i_{r-1})\circ \gamma_{1}\circ \dots \circ \gamma_{m}
+\]
+\end{proof}
+
+\vskip 5mm
+\end{FL}
+
+Recall that the least common multiple of integers 
+$n_{1}, n_{2}, \dots, n_{k} \geq 1$  is the smallest positive integer
+$\lcm(n_{1}, \dots, n_{k})$ which is divisible by each of these numbers.
+
+
+\begin{thm}{}{SN ELEMENT ORDER}
+Assume that a permutation $\alpha\in S_{n}$ has a decomposition into disjoint cycles
+\[
+\alpha = \gamma_{1}\circ \dots \circ \gamma_{m}
+\]
+where $\gamma_{i}$ is a cycle of length $r_{i}>1$. 
+Then the order of $\alpha$ is given by 
+\[
+|\alpha| = \lcm(r_{1}, r_{2}, \dots, r_{m}) 
+\]
+\end{thm}
+
+
+\begin{FL}
+\begin{proof}
+First, notice that if $\gamma$ is an $r$-cycle then $|\gamma| = r$. Let
+\[
+\alpha = \gamma_{1}\circ \dots \circ \gamma_{m}
+\]
+where $\gamma_{i}$ is an $r_{i}$-cycle, and let $p = \lcm(r_{1}, \dots, r_{m})$.
+By \Cref{thm:DISJOINT PERM COMMUTE} disjoint cycles commute, so 
+\[
+\alpha^{p} = (\gamma_{1}\circ \dots \circ \gamma_{m})^{p} 
+=  \gamma_{1}^{p}\circ \dots \circ \gamma_{m}^{p} = \varepsilon
+\]
+where $\varepsilon$ is the identity permutation.
+By \Cref{thm:ORDER GP ELT DIVIDES} we obtain that $|\alpha|$ divides $p$. 
+
+Next, we claim that $\gamma_{i}^{|\alpha|} = \varepsilon$ for each $i$. 
+Indeed, since the cycles are disjoint, elements moved by $\gamma_{i}^{|\alpha|}$ 
+are fixed by $\gamma_{j}^{|\alpha|}$ for all $j\neq i$, so if $\gamma_{i}^{|\alpha|}$ 
+moves some element, then the same element is moved by 
+$\gamma_{1}^{|\alpha|}\circ \dots \circ \gamma_{m}^{|\alpha|}$. This however 
+cannot happen because 
+\[
+\gamma_{1}^{|\alpha|}\circ \dots \circ \gamma_{m}^{|\alpha|}
+= (\gamma_{1}\circ \dots \circ \gamma_{m})^{|\alpha|} = \alpha^{|\alpha|} = \varepsilon 
+\]
+In this way we obtained that $r_{i}$ divides $|\alpha|$ for $i=1, \dots, m$, 
+and so $p$ divides $|\alpha|$. Therefore $|\alpha| = p$.
+
+\end{proof}
+\end{FL}
+\showto{SKELETON}{\newpage}
+
+
+\begin{exercise}
+Compute the order of the following permutation in $S_{8}$:
+\[
+\bbm
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+3 & 8 & 6 & 2 & 1 & 5 & 7 & 4 \\
+\ebm
+\]
+\end{exercise}
+
+\showto{SKELETON}{\vskip 50mm}
+
+\begin{exercise}
+Find all possible orders of elements of $S_{5}$.
+\end{exercise}
+\showto{SKELETON}{\vskip 60mm}
+
+\begin{exercise}
+Compute the number of permutations of order 10 in $S_{8}$.
+\end{exercise}
+
+\begin{exercise}
+Compute the number of permutations of order 3 in $S_{7}$.
+\end{exercise}
+\showto{SKELETON}{\newpage}
+
+
+\begin{definition}{}{SN TRANSPOSITION}
+A \emph{transposition} in $S_{n}$ is a cycle  $(i_{1}, i_{2})$ of length 2. 
+\end{definition}
+
+
+\begin{thm}{}{CYCLE IS PROD OF TRANSP}
+Every permutation in $S_{n}$ can be written as a product of transpositions.
+\end{thm}
+
+
+\begin{FL}
+\begin{proof}
+By \Cref{thm:SN CYCLE DECOMP} every permutation is product of cycles, so 
+it is enough to show that every cycle can be written as a product of 
+transpositions. This is true, since if $(i_{1}, i_{2}, \dots, i_{r})$ is a cycle 
+in $S_{n}$ then 
+\[
+(i_{1}, i_{2}, \dots, i_{r}) = (i_{1}, i_{r})\circ (i_{1}, i_{r-1})
+\circ \dots \circ (i_{1}, i_{2})
+\]
+\end{proof}
+
+
+{\bf Note.} A permutation can be written as a product of cycles in many different ways:
+\medskip
+\begin{align*}
+\bbm
+1 & 2 & 3 & 4 \\
+2 & 3 & 1 & 4 \\
+\ebm 
+&\  = \ \\
+          &\  =\ (1, 3)\circ (1, 2) \\  
+          &\  =\  (2, 3)\circ (1, 3) \\
+          &\  =\  (1, 3)\circ (4, 2)\circ (1, 2)\circ(1, 4) \\
+          &\  =\  (2, 4)\circ (1, 2)\circ (2, 3)\circ(1, 4) \\
+          &\ = \ \dots \\
+\end{align*}
+
+\vskip -15mm
+\ 
+\end{FL}
+\showto{SKELETON}{\newpage}
+
+\begin{thm}{}{PARITY OF PERMUTATION}
+Let $\alpha\in S_{n}$ and let 
+\[
+\alpha = \beta_{1}\circ\beta_{2}\circ \dots \circ \beta_{r}
+\]
+be a decomposition of $\alpha$ into a product of transpositions. 
+
+\ 
+
+\textbullet\  If the number $r$
+is even, then every other decomposition of $\alpha$ into transpositions consists of 
+an even number of transpositions. 
+
+\medskip
+
+\textbullet\  If $r$ is odd, then every other decomposition 
+of $\alpha$ into transpositions consists of an odd number of transpositions. 
+\end{thm}
+\showto{SKELETON}{\newpage}
+
+\begin{lemma}{}{TRIVIAL PERM EVEN}
+Let $\beta_{1}, \dots, \beta_{r}$ be transpositions in $S_{n}$ such that 
+\[
+\beta_{1}\circ\beta_{2}\circ \dots \circ \beta_{r} = \varepsilon
+\]
+where $\varepsilon$ is the identity permutation. Then $r$ is an  even number. 
+\end{lemma}
+
+\begin{FL}
+\begin{proof}
+We will prove by induction with respect to $k$ the following statement:
+
+\begin{center}
+\emph{For any $k\geq 2$, if
+$\beta_{1}\circ\beta_{2}\circ \dots \circ \beta_{r} = \varepsilon$
+and $r \leq k$ then $r$ is an even number.} 
+\end{center}
+
+If $k=2$ this holds, since
+the only way to write $\varepsilon$ as a product of 1 or 2 transpositions 
+is $\beta\circ\beta^{-1}$, which uses 2 transpositions.  
+
+For the inductive step, assume then that the statement holds for some $k$. 
+We need to show that it also holds for $k+1$. 
+Let then $\beta_{1}, \dots, \beta_{r}$ be transpositions such that $r\leq k+1$ and
+\begin{equation}
+\tag{$\ast$}
+\beta_{1}\circ\beta_{2}\circ \dots \circ \beta_{r} = \varepsilon
+\end{equation} 
+Assume that one of the transpositions $\beta_{i}$ is of the form $(a, b)$ for some 
+$a, b\in \{1, \dots, n\}$.
+One can check that the following identities hold:
+\bitem
+\item $(a, b)\circ (c, d) = (c, d)\circ (a, b)$
+\item $(a, b)\circ (b, c) = (b, c)\circ (a, c)$
+\eitem
+Here $a, b, c, d$ are distinct elements of the set $\{1, \dots, n \}$. These 
+identities say that when multiplying transpositions, we can move the transposition
+involving $a$ toward the right side without changing the number of transpositions. 
+Using this observation, we can rewrite the equation ($\ast$) as follows:
+\[
+\tag{$\ast \ast$}
+\gamma_{1}\circ \dots \circ \gamma_{r-k}\circ (a, b_{1}) \circ (a, b_{2})
+\circ {\dots} \circ (a, b_{k}) = \varepsilon
+\]
+where $\gamma_{1}, \dots, \gamma_{r-k}$ are transpositions that do not involve $a$.  
+If $b_{1}\neq b_{i}$ for $i=2, \dots k$, then the permutation on the left hand 
+side of the equation ($\ast\ast$) would send $b_{1}$ to $a$, which is impossible.
+This means that there is $i > 1$ such that $b_{1}\neq b_{2}, \dots, b_{i-1}$ and 
+$b_{1} = b_{i}$. We will need one more identity:
+\bitem
+\item $(a, b)\circ (a, c) = (b, c)\circ (a, b)$ for distinct elements $a, b, c$.
+\eitem
+Using this identity, we can bring the equation ($\ast \ast$) to the following form:
+\[
+\gamma_{1}\circ {\dots} \circ \gamma_{r-k}\circ 
+(b_{1}, b_{2}) \circ {\dots} \circ 
+(b_{1}, b_{i-1})\circ (a, b_{1})\circ(a, b_{i})\circ(a, b_{i+1})\circ {\dots} \circ (a, b_{n})
+= \varepsilon
+\]
+Since $b_{1} = b_{i}$ we have $(a, b_{1})\circ(a, b_{i}) = \varepsilon$, and the above 
+equation becomes
+\[
+\gamma_{1}\circ {\dots} \circ \gamma_{r-k}\circ 
+(b_{1}, b_{2}) \circ {\dots} \circ 
+(b_{1}, b_{i-1})\circ (a, b_{i+1})\circ {\dots} \circ (a, b_{n})
+= \varepsilon
+\]
+This expresses $\varepsilon$ as a product of $r-2$ transpositions. Since $r \leq k+1$, 
+thus $r-2 \leq k$, and so, by the inductive assumption, $r-2$ must be an even number. 
+Therefore $r$ is an even as well.
+\end{proof}
+
+
+\begin{proof}[Proof of \Cref{thm:PARITY OF PERMUTATION}]
+Assume that a permutation $\alpha$ can be written as a product of transpositions
+in two different ways:
+\begin{align*}
+\alpha = & \beta_{1}\circ\beta_{2}\circ \dots \circ \beta_{r} \\
+\alpha = & \gamma_{1}\circ\gamma_{2}\circ \dots \circ \gamma_{s} \\
+\end{align*}
+Then we have 
+\begin{align*}
+\varepsilon & = \alpha \circ \alpha^{-1}  \\
+            & = (\beta_{1}\circ\beta_{2}\circ \dots \circ \beta_{r})
+            \circ (\gamma_{1}\circ\gamma_{2}\circ \dots \circ \gamma_{s})^{-1} \\
+            & = (\beta_{1}\circ\beta_{2}\circ \dots \circ \beta_{r}) \circ 
+             (\gamma_{s}^{-1}\circ\gamma_{s-1}^{-1}\circ \dots \circ \gamma_{1}^{-1}) \\ 
+            & = (\beta_{1}\circ\beta_{2}\circ \dots \circ \beta_{r}) \circ
+             (\gamma_{s}\circ\gamma_{s-1}\circ \dots \circ \gamma_{1})          
+\end{align*}
+This means that $\varepsilon$ is a product of $r+s$ transpositions. 
+Since by \Cref{lemma:TRIVIAL PERM EVEN}, $r+s$ is an even number, thus
+either both $r$ and $s$ are even numbers or they are both odd.  
+\end{proof}
+\end{FL}
+\showto{SKELETON}{\newpage}
+
+
+\begin{definition}{}{PERM SIGN}
+A permutation $\alpha\in S_{n}$ is \emph{even} if it can be written as a product of 
+even number of transpositions and it is \emph{odd} if it can be written as a product
+of an odd number of tranpositions.
+\end{definition}
+
+
+\begin{thm}{}{EVEN PERM ARE SUBGP}
+The subset of $S_{n}$ consisting of all even permutations is a subgroup of $S_{n}$.
+\end{thm}
+
+\showto{SKELETON}{\vskip 50mm}
+
+
+\begin{definition}{}{ALT GP}
+The subgroup of $S_{n}$ consisting of even permutations is called an 
+\emph{alternating group on $n$ letters} and it is denoted by $A_{n}$
+\end{definition}
+
+\begin{thm}{}{ALT GP ORDER}
+For $n\geq 2$ the alternating group $A_{n}$ has order $\frac{n!}{2}$.
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+Let $B_{n}$ be the set of all odd permutations in $S_{n}$. Since $|S_{n}| = n!$, 
+it is enough to show that $|A_{n}| = |B_{n}|$, i.e. that there exists a bijection 
+$f\colon A_{n} \to B_{n}$. Such bijection can be defined by $f(\alpha) = (1, 2)\circ \alpha$.
+\end{proof}
+\end{FL}
+\showto{SKELETON}{\newpage}
+
+\begin{definition}{}{SN PERM SIGN}
+The \emph{sign} of a permutation $\alpha\in S_{n}$ is defined as follows:
+\[
+\sign(\alpha) = 
+\begin{cases}
++1 & \text{if $\alpha$ is even} \\
+-1 & \text{if $\alpha$ is odd}
+\end{cases}
+\]
+\end{definition}
+
+\begin{FL}
+{\bf Note.} Recall that for a square matrix $A$ we can compute its determinant
+$\det A$. The determinant can be defined using permutations and their signs as follows. 
+For a matrix
+\[
+A = 
+\bbm
+a_{1,1} & {\dots} & a_{1,n} \\
+\vdots  &            &  \vdots \\
+a_{n,1} & {\dots} & a_{n,n} \\
+\ebm
+\] 
+we set
+\[
+\det A = \sum_{\alpha\in S_{n}} \sign(\alpha)\cdot
+a_{1,\alpha(1)}\cdot a_{2,\alpha(2)}\cdot{\dots}\cdot a_{n,\alpha(n)}
+\]
+\end{FL}
+

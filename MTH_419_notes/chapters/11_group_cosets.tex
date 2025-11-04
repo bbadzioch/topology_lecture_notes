@@ -1,0 +1,263 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Cosets and Lagrange theorem}
+
+\begin{definition}{}{GP COSET}
+Let $G$ be a group and $H\subseteq G$ a subgroup. For $a\in G$ the 
+\emph{left coset of $H$ in $G$ containing $a$} is the subset of 
+$G$ given by 
+\[
+aH = \{ ah \ | \ h\in H\}
+\]
+Similarly, the \emph{right coset of $H$ in $G$ containing $a$} is the subset
+\[
+Ha = \{ ha \ | \ h\in H\}
+\]
+\end{definition}
+
+{\bf Example.} Consider the group $D_{4}$:
+
+\begin{center}
+{\small
+\tagpdfsetup{table/header-rows={1}}
+\begin{tabular}{l !{\vrule width 2pt} llllllll}
+\circ     & \ $I$       & $R_{90}$  & $R_{180}$ & $R_{270}$ & $H$       & $V$       & $D$       & $D'$      \\[1mm]
+\noalign{\hrule height 2pt} \\[-3mm]
+$I$       & \ $I$       & $R_{90}$  & $R_{180}$ & $R_{270}$ & $H$       & $V$       & $D$       & $D'$      \\
+$R_{90}$  & \ $R_{90}$  & $R_{180}$ & $R_{270}$ & $I$       & $D'$      & $D$       & $H$       & $V$       \\
+$R_{180}$ & \ $R_{180}$ & $R_{270}$ & $I$       & $R_{90}$  & $V$       & $H$       & $D'$      & $D$       \\
+$R_{270}$ & \ $R_{270}$ & $I$       & $R_{90}$  & $R_{180}$ & $D$       & $D'$      & $V$       & $H$       \\
+$H$       & \ $H$       & $D$       & $V$       & $D'$      & $I$       & $R_{180}$ & $R_{90}$  & $R_{270}$ \\
+$V$       & \ $V$       & $D'$      & $H$       & $D$       & $R_{180}$ & $I$       & $R_{270}$ & $R_{90}$  \\[1mm]
+$D$       & \ $D$       & $H$       & $D'$      & $V$       & $R_{270}$ & $R_{90}$  & $I$       & $R_{180}$ \\
+$D'$      & \ $D'$      & $V$       & $D$       & $H$       & $R_{90}$  & $R_{270}$ & $R_{180}$ & $I$       \\
+\end{tabular}
+}
+\end{center}
+
+\begin{FL}
+Take the subgroup $K = \{I, H\}$ of $D_{4}$. Here are some left and right cosets of 
+$K$ in $D_{4}$:
+\begin{center}
+\tagpdfsetup{table/tagging=presentation}
+\begin{tabular}{lll}
+$R_{90} K =  \{R_{90}, D'\}$ &\ \ \ & $K  R_{90} =  \{R_{90}, D \}$ \\
+$D'K = \{D', R_{90}\}$       &\ \ \ & $K  D' =  \{D',  R_{270} \}$ \\
+$DK =  \{ D, R_{270} \}$     &\ \ \ & $KD = \{D, R_{90} \}$ \\
+\end{tabular}
+\end{center}
+Notice that: 
+\vskip -12mm
+\ 
+\bitem
+\item Cosets defined by different elements may be the same. E.g. $R_{90}K = D'K$. 
+\item Left coset of a given element may be different that the right coset. 
+For example, $R_{90}K\neq KR_{90}$.
+\eitem
+\end{FL}
+\showto{SKELETON}{\newpage}
+
+\begin{thm}{}{GP COSET PROPS}
+Let $G$ be a group, $H\subseteq G$ a subgroup, and let $a, b\in G$. Then:
+\benu
+\item $a\in aH$. \\[-5mm]
+\item either $aH = bH$ or $aH\cap bH = \varnothing$. \\[-5mm]
+\item $aH = bH$ if and only if $a^{-1}b \in H$. \\[-5mm]
+\item $|aH| = |H|$, where $|aH|$ denotes the number of elements in $aH$. 
+\eenu 
+Analogous properties hold for right cosets.
+\end{thm}
+
+
+
+\begin{FL}
+\begin{proof}\ 
+
+
+\textbf{1)} Since $e\in H$ thus $a = ae \in aH$.
+ 
+\textbf{2)} Assume that $aH \cap bH \neq \varnothing$ and let $g\in aH \cap bH$. Then 
+$ah_{1} = g = bh_{2}$
+Then for $h \in H$ we have 
+\[
+ah = ah_{1}(h_{1}^{-1}h) = bh_{2}(h_{1}^{-1}h) \in bH
+\]
+This shows that $aH \subseteq bH$. By a similar argument $bH \subseteq aH$, so 
+$aH = bH$. 
+
+\textbf{3)} If $aH = bH$ then $b = ah$ for some $h\in H$, so $a^{-1}b = h \in H$. 
+Conversely, if $a^{-1}b = h \in H$ then $b \in aH \cap bH$. By part 2) this gives 
+$aH = bH$. 
+
+\textbf{4)} It is enough to notice that the function $f\colon H \to aH$, 
+$f(h) = ah$ is a bijection. 
+\end{proof}
+\end{FL}
+
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{definition}{}{GP COSETS SET}
+For a group $G$ and a subgroup $H\subseteq G$
+by $G/H$ we denote the set of left cosets of $H$ in $G$ and by 
+$H{\,}\reflectbox{/} G$ we denote the set of right cosets. 
+\end{definition}
+
+
+
+\begin{FL}
+{\bf Example.} Cosets of $K = \{I, H\}$ in $D_{4}$:
+
+
+
+
+
+\bigskip
+
+\begin{center}
+\begin{minipage}[t]{0.15\textwidth}
+\begin{center}
+\tagpdfsetup{table/tagging=presentation}
+\begin{tabular}{!{\vrule width 1pt} ll !{\vrule width 1pt}}
+\noalign{\hrule height 1pt}
+$I$ & $H$ \\
+\noalign{\hrule height 1pt}
+$R_{90}$ & $D'$ \\
+\noalign{\hrule height 1pt}
+$R_{180}$ & $V$ \\
+\noalign{\hrule height 1pt}
+$R_{270}$ & $D$ \\
+\noalign{\hrule height 1pt}
+\end{tabular}
+\bigskip
+
+\emph{$G/H$ \\ left cosets}
+\end{center}
+\end{minipage}
+\hskip 20mm
+\begin{minipage}[t]{0.15\textwidth}
+\begin{center}
+\tagpdfsetup{table/tagging=presentation}
+\begin{tabular}{!{\vrule width 1pt} ll !{\vrule width 1pt}}
+\noalign{\hrule height 1pt}
+$I$ & $H$ \\
+\noalign{\hrule height 1pt}
+$R_{90}$ & $D$ \\
+\noalign{\hrule height 1pt}
+$R_{180}$ & $V$ \\
+\noalign{\hrule height 1pt}
+$R_{270}$ & $D'$ \\
+\noalign{\hrule height 1pt}
+\end{tabular}
+\bigskip
+
+\emph{$H{\,}\reflectbox{/} G$ \\ right cosets}
+\end{center}
+\end{minipage}
+\end{center}
+\end{FL}
+
+
+
+\showto{SKELETON}{\vskip 90mm}
+
+
+\begin{thm}{}{NUM COSETS LEFT EQ RIGHT}
+If $G$ is a group and $H\subseteq G$ is a subgroup, then $|G/H| =|H{\,}\reflectbox{/} G|$. 
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+The function $f\colon G/H \to H {\,}\reflectbox{/} G$ given by $f(aH) = Ha^{-1}$ is a bijection.
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\vskip 50mm\newpage}
+
+
+\begin{definition}{}{SUBGP INDEX}
+If $G$ is a group and $H\subseteq G$ is a subgroup then the \emph{index}
+of $H$, denoted $[G:H]$, is the number of left cosets of $H$ in $G$ 
+(or, equivalently, the number of right cosets):
+\[
+[G:H] = |G/H| =  | H {\,}\reflectbox{/} G|
+\]
+\end{definition}
+
+
+\begin{FL}
+{\bf Example.} If $K = \{I, H\}\subseteq D_{4}$ then $[D_{4}: K] = 4$.
+\end{FL}
+\showto{SKELETON}{\vskip 40mm}
+ 
+\begin{thm}{(Lagrange Theorem)}{LAGRANGE THM}
+If $G$ is a finite group and $H\subseteq G$ is a subgroup then 
+\[
+|G| = [G:H]\cdot |H|
+\]
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+By \Cref{thm:GP COSET PROPS} each element of $G$ belongs to exactly one left coset 
+of $H$. Thus, if $a_{1}H,\ a_{2}H, \dots, a_{n}H$ are all distinct cosets, then 
+\[
+|G| = |a_{1}H| + |a_{2}H| + {\dots} + |a_{n}H|
+\] 
+Moreover, since each coset consists of $|H|$ elements and there are $[G\colon H]$
+cosets, we obtain that $|G| = [G:H]\cdot |H|$. 
+\end{proof}
+\end{FL}
+\showto{SKELETON}{\vfill}
+
+\begin{cor}{}{SUBGP ORD DIV GP}
+If $G$ is a finite group and $H\subseteq G$ is a subgroup then the order of 
+$H$ divides the order of $G$.  
+\end{cor}
+
+\showto{SKELETON}{\newpage}
+
+\begin{cor}{}{ELT ORD DIV GP}
+If $G$ is a finite group and $a\in G$ then the order $|a|$ of $a$ divides the order of $G$.
+\end{cor}
+
+\begin{FL}
+\begin{proof}
+Recall that by \Cref{thm:ORDER ELT VS GROUP} we have $|a| = |\langle a \rangle|$
+where $\langle a \rangle$ is the subgroup of $G$ generated by $a$. Also, by 
+\Cref{cor:SUBGP ORD DIV GP}, $|\langle a \rangle|$ divides $|G|$.
+
+\end{proof}
+\end{FL}
+
+\begin{FL}
+{\bf Note.} It is not true that if $G$ is a group and $k$ divides $|G|$ then 
+$G$ contains an element of order $k$. Take for example the symmetric group $S_{4}$. 
+By looking at possible disjoint cycle decompositions of elements of $S_{4}$, we 
+can see that every element of $S_{4}$ has order 1,2,3 or 4. This means that $S_{4}$
+does not contain any element of order 6, even though 6 divides the order of $S_{4}$.
+
+
+{\bf Note.} It is also not true that if $k$ divides the order of a group $G$, then 
+$G$ contains a subgroup $H$ of order $k$. We will see an example of that later.   
+
+
+{\bf Example.} Let $G$ be a group of order $p$ where $p$ is a prime number. 
+Then every element of $G$ is of order either 1 (i.e. it is the identity element)
+or $p$. Thus if $a\in G$  and $a\neq e$ then $|a| = |G|$. This means 
+that $G$ is a cyclic group generated by $a$, and so $G\cong \Z_{p}$. 
+
+
+{\bf Example.} We will show if $G$ is a group of order $4$, then $G$ is isomorphic 
+either to $\Z_{4}$ or to $\Z_{2}\oplus\Z_{2}$. By \Cref{cor:ELT ORD DIV GP}, if 
+$a\in G$ then $|a|=1$ (which means that $a=e$), $|a|=2$, or $|a|=4$. If 
+$G$ contrains an element of order $4$, then it is cyclic, and so $G\cong\Z_{4}$. 
+Otherwise, $G$ contains the trivial element $e$ and three elements, (which we will 
+denote $a, b, c$) of order 2. Notice that $ab = ba = c$ (since $ab = b$ would give  
+$a=e$,  $ab = a$ would give $b=e$, and $ab = e = aa$ would imply that $b=a$). 
+Similarly, we obtain that $ac = ca = b$ and $bc = bc = a$. This shows that the function 
+$f\colon G \to \Z_{2}\oplus\Z_{2}$, given by $f(a) = (1, 0)$, $f(b) = (0, 1)$ and 
+$f(c) = (1, 1)$ is an isomorphism of groups.
+\end{FL}

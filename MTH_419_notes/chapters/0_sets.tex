@@ -1,0 +1,308 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Review: set theory}
+
+\underline{\bf Sets}
+
+In general sets will be denoted by capital letters:  $A, B, C, \dots$ 
+
+Frequently  used sets:
+\begin{itemize}
+\item[] $\varnothing = $ the empty set (i.e. the set that contains no elements) 
+\item[] $\N = \{0, 1, 2, \dots\}$ the set of natural numbers 
+\item[] $\Z = \{\dots, -2, -1, 0, 1, 2, \dots \}$ the set of integers 
+\item[] $\Z^{+} = \{1, 2, 3, \dots \}$ the set of positive integers 
+\item[] $\Q = $ the set of rational numbers 
+\item[] $\R = $ the set of real numbers
+\end{itemize}
+
+We will write  $x\in A$ to denote that  $x$ is an element of the set $A$ and
+$y\not\in A$ to indicate that  $y$ is not an element of $A$. 
+For example, $5\in \Z$,  $\tfrac{1}{3} \not\in \Z$.
+
+
+\vskip 5mm
+
+\underline{\bf Subsets}
+
+A set $B$ is a \emph{subset} of a set $A$ if every element of $B$ is in $A$.
+In such case we write $B\subseteq A$. 
+
+
+\begin{tikzpic}[][scale =0.8]
+\draw[fill = black!10] (0,0) circle (1.5);
+\draw[fill = black!20] (0.5,0) circle (0.8);
+\begin{scope}[rotate= 45]
+%\fill (-0.75, 0.75) circle (0.1);
+\fill (0, 0.75) circle (0.1);
+\fill (0.75, 0.75) circle (0.1);
+\fill (-0.75, 0) circle (0.1);
+\fill (0, 0) circle (0.1);
+\fill (0.75, 0) circle (0.1);
+\fill (-0.75, -0.75) circle (0.1);
+\fill (0, -0.75) circle (0.1);
+%\fill (0.75, -0.75) circle (0.1);
+\end{scope}
+\node at (-1, 0) {\small $A$}; 
+\node at (1, 0) {\small $B$}; 
+\end{tikzpic}
+
+A set $B$ is a \emph{proper subset} of $A$ if $B\subseteq A$ and $B\neq A$. 
+
+
+\bigskip 
+
+{\bf Example.} Some subsets of $\Z$:
+
+\bitem
+\item $A = \{ n\in \Z \ | \ n > 10 \}$ - the set of integers greater than $10$. \\[-5mm]
+\item $B = \{ n \in \Z \ | \ n = 2k \text{ for some $k\in \Z$}\}$ - the set of even integers.
+\eitem
+
+\underline{\bf Operations on sets}
+
+\textbullet\  The \emph{union} of sets $A$ and $B$ is the set $A\cup B$ that consists of all
+elements that belong to either $A$ or $B$ (or both):
+\[
+A \cup B = \{x \ | \ x\in A \text{ or } x\in B\}
+\]
+
+\textbullet\  The \emph{intersection} of sets $A$ and $B$ is the set $A\cap B$ 
+that consists of all elements that belong to both $A$ and $B$:
+\[
+A \cap B = \{x \ | \ x\in A \text{ and } x\in B\}
+\]
+
+\textbullet\  The \emph{difference} of sets $A$ and $B$ is the set $A\setminus B$ 
+that consists of all elements that belong to  $A$ but not to $B$:
+\[
+A \setminus B = \{x \ | \ x\in A \text{ and } x\not\in B\}
+\]
+
+{\bf Example.} If $A = \{a, b, c, d\}$, $B= \{c, d, e, f\}$ then:
+\begin{align*}
+A\cup B = \{a, b, c, d, e, f\} \\
+A\cap B = \{c, d\} \\
+A \setminus B = \{a, b\} \\
+\end{align*}
+
+
+\vskip -15mm
+
+
+\begin{tikzpic}[]
+\fill[black, opacity = 0.1] (-0.75, 0) circle (1.5);
+\fill[black, opacity = 0.1]  (0.75, 0) circle (1.5);
+\draw (0.75, 0) circle (1.5);
+\draw (-0.75, 0) circle (1.5);
+\fill (-1.75, 0) circle (0.07) node[below = 10pt, yshift=-1mm, anchor=base] {\small $a$};
+\fill (-1.05, 0) circle (0.07) node[below = 10pt, yshift=-1mm, anchor=base] {\small $b$};
+\fill (-0.35, 0) circle (0.07) node[below = 10pt, yshift=-1mm, anchor=base] {\small $c$};
+\fill (0.35, 0) circle (0.07) node[below = 10pt, yshift=-1mm, anchor=base] {\small $d$};
+\fill (1.05, 0) circle (0.07) node[below = 10pt, yshift=-1mm, anchor=base] {\small $e$};
+\fill (1.75, 0) circle (0.07) node[below = 10pt, yshift=-1mm, anchor=base] {\small $f$};
+\node at (-1.4, 1) {\small $A$};
+\node at (1.4, 1) {\small $B$};
+\end{tikzpic}
+
+
+
+{\bf Note.} We say that sets $A$ and $B$ are \emph{disjoint sets} if $A\cap B = \varnothing$. 
+
+
+\textbullet\ The \emph{Cartesian product} of sets $A$, $B$ is the set consisting of 
+all ordered pairs of elements of $A$ and $B$:
+$$A\times B = \{(a, b) \ | \ a\in A, \ \ b\in B\}$$
+
+
+
+{\bf Example.} If $A = \{1, 2, 3\}$, $B= \{2, 3, 4 \}$ then
+\[
+A\times  B = \{(1, 2), (1, 3), (1, 4), (2, 2), (2, 3), (2, 4), (3, 2), (3, 3), (3, 4)\}
+\]
+
+\newpage
+
+
+
+\underline{\bf Functions}
+
+\begin{tikzpic}[alt=A function between two sets.][scale =0.9]
+\draw[rounded corners=10pt] (-0.25,0) rectangle (1.25,3);
+\draw[rounded corners=10pt] (2.75,0) rectangle (4.75,3);
+\foreach \x in {0, 1, 2}{
+\fill (0.5, {0.5 + \x}) circle (0.1);
+}
+\foreach \x in {0, 1, 2, 3}{
+\fill (3.5, {0.5 + (2/3)*\x}) circle (0.1);
+}
+\node[left] at (0.5, 2.5) {$a$};
+\node[right] at (3.5, {0.5+(2/3)*3}) {$f(a)$};
+\draw[line width = 1, ->, >=latex] (0.7, 2.5) -- (3.3, 2.5) node[above, midway] {\small $f$}; 
+\draw[line width = 1, ->, >=latex] (0.7, 1.54) -- (3.32, 2.35); 
+\draw[line width = 1, ->, >=latex] (0.7, 0.5) -- (3.3, 0.5); 
+\node[anchor= east] at (-0.25, 2.65) {\small $A$};
+\node[anchor= west] at (4.75, 2.65) {\small $B$};
+\node at (2, -0.75) {$f\colon A \to B$};
+\end{tikzpic}
+
+
+Composition of functions:
+
+
+
+
+\begin{tikzpic}[alt=A function between two sets.]
+\draw[rounded corners=10pt] (-0.25,0) rectangle (1.25,3);
+\draw[rounded corners=10pt] (2.75,0) rectangle (4.75,3);
+\draw[rounded corners=10pt] (6.25,0) rectangle (8.75,3);
+%
+\foreach \x in {0, 1, 2}{
+\fill (0.5, {0.5 + \x}) circle (0.1);
+}
+\foreach \x/\y in {0/4, 1/3, 2/2, 3/1}{
+\fill (3.5, {0.5 + (2/3)*\x}) circle (0.1);
+\fill (7.0, {0.5 + (2/3)*\x}) circle (0.1);
+}
+%
+\draw[line width = 1, ->, >=latex] (0.7, 2.5) -- (3.3, 2.5) node[above, midway] {\small $f$}; 
+\draw[line width = 1, ->, >=latex] (0.7, 1.54) -- (3.32, 2.35); 
+\draw[line width = 1, ->, >=latex] (0.7, 0.5) -- (3.3, 0.5); 
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(3.5, {0.5 + (2/3)*0}) -- (7.0, {0.5 + (2/3)*0});
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(3.5, {0.5 + (2/3)*1}) -- (7.0, {0.5 + (2/3)*0});
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(3.5, {0.5 + (2/3)*2}) -- (7.0, {0.5 + (2/3)*1});
+\draw[line width = 1, ->, >=latex, shorten <= 10mm, shorten >= 2mm] 
+(3.5, {0.5 + (2/3)*3}) -- (7.0, {0.5 + (2/3)*2});
+%
+\node[anchor = south] at (5.5, 2.5) {\small $g$};
+\node[anchor= east] at (-0.25, 2.65) {\small $A$};
+\node[anchor= west] at (8.75, 2.65) {\small $C$};
+\node[left] at (0.5, 2.5) {$a$};
+\node[right] at (3.5, 2.5) {$f(a)$};
+\node[right] at (7.0, {0.5 + (2/3)*2}) {$g(f(a))$};
+\node at (3.75, -0.75) {$g\circ f\colon A \to C$};
+\end{tikzpic}
+
+
+
+
+\textbullet\ A function $f\colon A\to B$ is \emph{1-1} if $f(a) = f(a')$ only if $a= a'$. 
+
+\begin{tikzpic}[][scale =0.9]
+\begin{scope}
+\draw[rounded corners=10pt] (-0.25,0) rectangle (1.25,3);
+\draw[rounded corners=10pt] (2.75,0) rectangle (4.25,3);
+\foreach \x in {0, 1, 2}{
+\fill (0.5, {0.5 + \x}) circle (0.1);
+}
+\foreach \x in {0, 1, 2, 3}{
+\fill (3.5, {0.5 + (2/3)*\x}) circle (0.1);
+}
+\draw[line width = 1, ->, >=latex] (0.7, 2.5) -- (3.3, 2.5) node[above, midway] {\small $f$}; 
+\draw[line width = 1, ->, >=latex] (0.7, 1.54) -- (3.32, 2.35); 
+\draw[line width = 1, ->, >=latex] (0.7, 0.5) -- (3.3, 0.5); 
+\node[anchor= east] at (-0.25, 2.65) {\small $A$};
+\node[anchor= west] at (4.25, 2.65) {\small $B$};
+\node at (2, -0.5) {\small not  1-1};
+\end{scope}
+%
+\begin{scope}[xshift = 70mm]
+\draw[rounded corners=10pt] (-0.25,0) rectangle (1.25,3);
+\draw[rounded corners=10pt] (2.75,0) rectangle (4.25,3);
+\foreach \x in {0, 1, 2}{
+\fill (0.5, {0.5 + \x}) circle (0.1);
+}
+\foreach \x in {0, 1, 2, 3}{
+\fill (3.5, {0.5 + (2/3)*\x}) circle (0.1);
+}
+\draw[line width = 1, ->, >=latex] (0.7, 2.5) -- (3.3, 2.5) node[above, midway] {\small $f$}; 
+\draw[line width = 1, ->, >=latex] (0.7, 1.53) -- (3.3, 0.5 + 4/3); 
+\draw[line width = 1, ->, >=latex] (0.7, 0.5) -- (3.3, 0.5); 
+\node[anchor= east] at (-0.25, 2.65) {\small $A$};
+\node[anchor= west] at (4.25, 2.65) {\small $B$};
+\node at (2, -0.5) {\small 1-1};
+\end{scope}
+\end{tikzpic}
+
+
+
+
+\textbullet\ A function $f\colon A\to B$ is \emph{onto} if for every $b\in B$ there is $a\in A$ such that 
+$f(a) = b$
+
+\begin{tikzpic}[][scale=0.9]
+\begin{scope}
+\draw[rounded corners=10pt] (-0.25,0) rectangle (1.25,3);
+\draw[rounded corners=10pt] (2.75,0) rectangle (4.25,3);
+\foreach \x in {0, 1, 2}{
+\fill (3.5, {0.5 + \x}) circle (0.1);
+}
+\foreach \x in {0, 1, 2, 3}{
+\fill (0.5, {0.5 + (2/3)*\x}) circle (0.1);
+}
+\draw[line width = 1, ->, >=latex] (0.7, 2.5) -- (3.3, 2.5) node[above, midway] {\small $f$}; 
+\draw[line width = 1, ->, >=latex] (0.7, 4/3 + 0.53) -- (3.32, 2.35); 
+\draw[line width = 1, ->, >=latex] (0.7, 2/3 + 0.47) -- (3.32, 0.65); 
+\draw[line width = 1, ->, >=latex] (0.7, 0.5) -- (3.3, 0.5); 
+\node[anchor= east] at (-0.25, 2.65) {\small $A$};
+\node[anchor= west] at (4.25, 2.65) {\small $B$};
+\node at (2, -0.5) {\small not onto};
+\end{scope}
+%
+%
+\begin{scope}[xshift = 70mm]
+\draw[rounded corners=10pt] (-0.25,0) rectangle (1.25,3);
+\draw[rounded corners=10pt] (2.75,0) rectangle (4.25,3);
+\foreach \x in {0, 1, 2}{
+\fill (3.5, {0.5 + \x}) circle (0.1);
+}
+\foreach \x in {0, 1, 2, 3}{
+\fill (0.5, {0.5 + (2/3)*\x}) circle (0.1);
+}
+\draw[line width = 1, ->, >=latex] (0.7, 2.5) -- (3.3, 2.5) node[above, midway] {\small $f$}; 
+\draw[line width = 1, ->, >=latex] (0.7, 4/3 + 0.53) -- (3.32, 2.35); 
+\draw[line width = 1, ->, >=latex] (0.7, 2/3 + 0.51) -- (3.3, 1.5); 
+\draw[line width = 1, ->, >=latex] (0.7, 0.5) -- (3.3, 0.5); 
+\node[anchor= east] at (-0.25, 2.65) {\small $A$};
+\node[anchor= west] at (4.25, 2.65) {\small $B$};
+\node at (2, -0.5) {\small onto};
+\end{scope}
+\end{tikzpic}
+
+\textbullet\ A function $f\colon A\to B$ is a \emph{bijection} if $f$ is both 1-1 and onto. 
+
+\begin{tikzpic}[][scale=0.9]
+\begin{scope}
+\draw[rounded corners=10pt] (-0.25,0) rectangle (1.25,3);
+\draw[rounded corners=10pt] (2.75,0) rectangle (4.25,3);
+\foreach \x in {0, 1, 2, 3}{
+\fill (0.5, {0.5 + (2/3)*\x}) circle (0.1);
+\fill (3.5, {0.5 + (2/3)*\x}) circle (0.1);
+\draw[line width = 1, ->, >=latex] (0.7, {0.5 + (2/3)*\x}) -- (3.3, {0.5 + (2/3)*\x});
+}
+\node[anchor= east] at (-0.25, 2.65) {\small $A$};
+\node[anchor= west] at (4.25, 2.65) {\small $B$};
+\node at (2, -0.5) {\small bijection};
+\node[anchor = south] at (2, 2.5) {\small $f$};
+\end{scope}
+\end{tikzpic}
+
+{\bf Note.} If $f\colon A\to B$ is a bijection then the inverse function 
+$f^{-1}\colon B\to A$ exists  and it is also a bijection. Then for every 
+$a\in A$ and $b\in B$ we have:
+\[
+f^{-1}(f(a)) = a \text{\ \ \ \ and\ \ \ \ } f(f^{-1}(b)) = b
+\]
+
+
+\underline{\bf Cardinality}
+
+We will denote by $|A|$ the cardinality of the set $A$. For a finite set, 
+this is the number of elements of $A$. 
+
+{\bf Note.} If $A$, $B$ are sets, then $|A| = |B|$ if and only if there exists 
+a bijection $f\colon A \to B$.

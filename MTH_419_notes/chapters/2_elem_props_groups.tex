@@ -1,0 +1,109 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+
+\lecture{Elementary properties of groups}
+
+\vskip -5mm
+
+\begin{thm}{}{IDENTITY UNIQUE}
+In a group $G$ there is only one identity element. 
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+If  $e, e'\in G$ are two identity elements, then for every $a\in G$ we have 
+\[
+a = ea \text{\ \ and \ \ }  ae'=a
+\]
+This gives: 
+\[
+e' = ee' = e
+\]
+
+\end{proof}
+
+\vskip 10mm
+\end{FL}
+
+
+\showto{SKELETON}{\vskip 30mm}
+
+
+\begin{thm}{(Cancellation Property)}{THM:GROUP CANCELLATION PROP}
+If $G$ is a group,  $a,b,c \in G$ and either $ac = bc$ or $ca = cb$
+then $a=b$.
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+Assume that  $ac = bc$. Then we have
+\[
+a = (ac)c^{-1} = (bc)c^{-1} = b
+\]
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\vskip 30mm}
+
+\begin{thm}{}{GROUP UNIQUE INVERSES}
+If $G$ is a group then every element of $G$ has only one 
+inverse element. 
+\end{thm}
+
+
+\begin{FL}
+\begin{proof}
+Let $a\in G$ and let $b, b' \in G$ be two inverses of $a$:
+\[
+ab = e = ab'
+\]
+Then, by the cancellation property, $b = b'$.
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\vskip 30mm}
+
+
+
+\begin{thm}{}{GROUP PRODUCT INVERSE}
+
+If $G$ is a group and $a, b \in G$ then $(ab)^{-1} = b^{-1}a^{-1}$.
+\end{thm}
+
+\showto{SKELETON}{\newpage}
+
+
+
+\begin{FL}
+\begin{proof}
+We have:
+\[
+(ab)(b^{-1}a^{-1}) = abb^{-1}a^{-1} = e 
+\]
+Similarly, $(b^{-1}a^{-1})(ab) = e$.
+\end{proof}
+
+\vskip 10mm
+\end{FL}
+
+
+
+\showto{SKELETON}{\vskip 50mm}
+
+\begin{exercise}
+Write multiplication tables of all possible groups with 1, 2 and 3 elements. 
+\end{exercise}
+
+\showto{SKELETON}{\newpage}
+
+\begin{exercise}
+Write multiplication tables of all possible groups with 4 elements. 
+\end{exercise}
+
+
+
+
+
+
+

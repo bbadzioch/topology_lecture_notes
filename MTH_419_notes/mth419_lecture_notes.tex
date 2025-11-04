@@ -1,0 +1,66 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = mth419_lecture_notes.tex
+
+\DocumentMetadata{
+   lang=en,
+   pdfversion=2.0,
+   pdfstandard=ua-2,
+   pdfstandard=a-4f,
+   tagging=on,
+   tagging-setup={math/setup=mathml-SE,
+                  debug/parent-child-check=off, %attend, 
+                  tabsorder=structure,
+                  },
+   %tagging-setup={math/mathml/luamml/load=false}
+   }
+
+
+
+\input{mth419_header.tex}
+
+\hypersetup{
+    pdflang={en-US},
+    pdftitle={MTH 419 Lecture Notes},
+    pdfauthor={Bernard Badzioch},
+}
+
+%---------------------------------------------------
+%  Multiaudience
+%---------------------------------------------------
+%\DefCurrentAudience{SKELETON}
+\DefCurrentAudience{FULL}
+
+%\includeonly{chapters/7_cyclic_groups.tex}
+
+\begin{document}
+
+\tableofcontents
+\newpage
+\setcounter{page}{1}
+
+\include{chapters/0_sets.tex}
+\include{chapters/0_number_theory.tex}
+\include{chapters/1_groups.tex}
+\include{chapters/2_elem_props_groups.tex}
+\include{chapters/3_dihedral_groups.tex}
+\include{chapters/4_order_group_element.tex}
+\include{chapters/5_subgroups.tex}
+\include{chapters/6_direct_products.tex}
+\include{chapters/7_cyclic_groups.tex}
+\include{chapters/8_permutation_groups.tex}
+\include{chapters/9_group_homomorphisms.tex}
+\include{chapters/10_group_isomorphisms.tex}
+\include{chapters/11_group_cosets.tex}
+\include{chapters/12_quotient_groups.tex}
+\include{chapters/13_group_actions.tex}
+\include{chapters/14_fin_ab_gps.tex}
+\include{chapters/15_rings.tex}
+\include{chapters/16_integral_domain.tex}
+\include{chapters/17_ideals.tex}
+\include{chapters/18_rings_homomorphisms.tex}
+\include{chapters/19_polynomial_rings.tex}
+\include{chapters/20_unique_factorization_domains.tex}
+\include{chapters/21_prime_elts_and_ufds.tex}
+\include{chapters/22_pid_is_ufd.tex}
+
+\end{document}

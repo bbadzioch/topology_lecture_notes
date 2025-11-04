@@ -1,0 +1,166 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Prime elements and UFDs}
+
+
+\begin{definition}{}{RING PRIME ELT}
+Let $R$ be an integral domain, and let $a, b\in R$. We say that $a$ \emph{divides} $b$
+if $b = ac$ for some $c\in R$. We then write: $a\mid b$.
+\end{definition}
+
+
+
+\begin{thm}{}{ASSOCIATE DIVISION}
+If $R$ is an integral domain and $a, b\in R$ are non-zero elements then $a\sim b$ 
+and only if $a\mid b$ and $b\mid a$.
+\end{thm}
+
+\begin{proof}
+If $a\mid b$ and $b\mid a$ then $b = ca$ and $a = db$. This gives $b = cdb$. 
+Since $R$ is an integral domain, we obtain that $cd = 1$, so $c, d$ are units and 
+$d = c^{-1}$. Therefore $a\sim b$. 
+
+Conversely, if $a\sim b$ then $b = ua$ for some unit $u$. Then $a \mid b$. 
+Also, $a = u^{-1}b$, so $b\mid a$.
+\end{proof}
+
+
+\bigskip
+
+
+\textbf{Example}
+
+\bitem
+\item In $\Z$ we have: 
+\[
+\{\text{prime elements}\} = \{\pm \text{ prime numbers}\} = \{\text{irreducible elements}\}
+\]
+
+\item By the proof of \Cref{thm:Z MINUS SQRT FIVE NOT UFD}, in $\Z[\sqrt{-5}]$ the element 
+$\alpha = 2+\sqrt{5}i$ is irreducible. On the other hand $\alpha$ is not a prime element since 
+$\alpha\mid (3\cdot 3)$ but $\alpha \nmid 3$.
+\eitem
+
+
+
+\begin{thm}{}{PRIME IS IRRED}
+If $R$ is an integral domain and $a\in R$ is a prime element then $a$ is irreducible. 
+\end{thm}
+
+
+\begin{proof}
+Let $a\in R$ be a prime element and let $a= bc$. We want to show that either $b$ or $c$
+must be a unit in $R$.
+
+We have $a\mid (bc)$. Since $a$ is a prime element it implies
+that $a\mid b$ or $a\mid c$. 
+
+We can assume  that $a\mid b$.  Since also $b\mid a$, thus by \Cref{thm:ASSOCIATE DIVISION} 
+we obtain that $a\sim b$, i.e. $a = bu$ for some unit $u\in R$. Therefore we have
+\[
+bc = a = bu
+\]
+Since $R$ is an integral domain, this gives $u=c$, and so $c$ is s unit.
+\end{proof}
+
+
+\begin{thm}{}{IRRED IS PRIME IN UFD}
+If $R$ is a UFD and  $a\in R$  then $a$ is an irreducible element if and only if  
+$a$ is a prime element. 
+\end{thm}
+
+
+
+\begin{proof}
+
+($\Leftarrow$) This follows from \Cref{thm:PRIME IS IRRED}.
+
+($\Rightarrow$) Assume that $a\in R$ is irreducible and that $a\mid (bc)$. We want 
+to show that either $a\mid b$ or $a\mid c$.
+
+If $b=0$, then $b= a\cdot 0$ so $a\mid b$. If $b$ is a unit, then $c = b^{-1}bc$ so $a\mid c$. 
+
+As a consequence we can assume that $b, c$ are non-zero, non-units. 
+
+Since $a\mid (bc)$ there is $d\in R$ such that $bc =ad$. Assume that $d$ is not a unit. 
+Since $R$ is a UFD we have decompositions:
+\[
+b = b_{1}\cdot {\dots} \cdot b_{m}, \ \ \ \  
+c = c_{1}\cdot {\dots} \cdot c_{n}, \ \ \ \ 
+d =  d_{1}\cdot {\dots} \cdot d_{p}
+\]
+where $b_{i}, c_{j}, d_{k}$ are irreducible.
+This gives
+\[
+b_{1}\cdot \dots {\cdot} b_{m}\cdot  c_{1}\cdot \dots {\cdot} c_{n} = a\cdot  d_{1}\cdot \dots {\cdot} d_{p}
+\]
+By the uniqueness of decomposition in UFDs this implies that  either $a\sim b_{i}$ for some $i$
+or $a\sim c_{j}$ for some $j$. In the first case we get $a\mid b$, and in the second case $a\mid c$.
+
+If $d$ is a unit the argument is similar. 
+\end{proof}
+
+
+
+\begin{thm}{}{UFD VIA PRIMES}
+An integral domain $R$ is a UFD if and only if the following conditions are satisfied:
+
+\bigskip
+ 
+\benu
+\item every non-zero, non-unit element of $R$ is a product 
+of irreducible elements.\\[-3mm]
+\item every irreducible element in $R$ is a prime element. 
+\eenu
+\end{thm}
+
+
+
+
+\begin{proof}
+
+
+($\Rightarrow$) This follows from the definition of UFD and 
+\Cref{thm:IRRED IS PRIME IN UFD}.
+
+
+($\Leftarrow$) Assume that $R$ satisfies conditions 1) - 2) of the theorem. We only need 
+to show that  if $b_{1}, \dots, b_{k}$, $c_{1}, \dots, c_{l}$ are irreducible elements in $R$
+such that 
+\[
+b_{1}\cdot {\dots} \cdot b_{k} = c_{1}\cdot {\dots} \cdot c_{l}
+\]
+then $k=l$, and after reordering of the factors we have 
+$b_{1}\sim c_{1}$, $\dots$, $b_{k}\sim c_{k}$.
+
+We argue by induction with respect to $k$. 
+ 
+If $k=1$ then we have  $b_{1}= c_{1}\cdot {\dots} \cdot c_{l}$. Since $b_{1}$ is irreducible, 
+this implies that $l=1$, and so $b_{1}=c_{1}$.
+
+
+Next, assume that the uniqueness property holds for some $k$ and that we have 
+\[
+b_{1}\cdot {\dots} \cdot b_{k}\cdot b_{k+1} = c_{1}\cdot {\dots} \cdot c_{l}
+\]
+where $b_{i}$, $c_{j}$ are irreducible elements. This implies that 
+$b_{k+1} \mid (c_{1}\cdot {\dots} \cdot c_{l})$. By condition 2) we get that $b_{k+1}$ 
+is a prime element. It follows that $b_{k}\mid c_{j}$ for some $1\leq j\leq l$. We can assume that 
+$b_{k+1}\mid c_{l}$. Then $c_{l} = ab_{k+1}$ for some $a\in R$. Since $c_{l}$, $b_{k+1}$
+are irreducible,  $a$ must be a unit. This shows that $b_{k+1}\sim c_{l}$. Furthermore, we obtain from here that 
+\[
+b_{1}\cdot {\dots} \cdot b_{k}\cdot b_{k+1} = c_{1}\cdot {\dots} \cdot c_{l-1}\cdot a b_{k+1}
+\]
+Since $R$ is an integral domain this gives
+\[
+b_{1}\cdot {\dots} \cdot b_{k} = c_{1}\cdot {\dots} \cdot c_{l-1}a
+\]
+Since $b_{k}$ is irreducible and $a$ is a unit, the product $c_{l-1}a$ is an irreducible element. Therefore, by the inductive assumption we get that $k=l-1$, and that 
+after reordering of factors we have
+\[
+b_{1}\sim c_{1}, \dots, \ \   b_{k-1}\sim c_{k-1}, \ \ b_{k}\sim c_{l-1}a \sim c_{l-1}
+\]
+\end{proof}
+
+

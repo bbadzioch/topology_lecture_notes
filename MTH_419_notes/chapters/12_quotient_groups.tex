@@ -1,0 +1,235 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Quotient groups}
+
+\vskip -5mm
+
+{\bf Recall:} 
+\bitem 
+\item A normal subgroup of a group $G$ is a subgroup $H\subseteq G$ such that 
+for every $a\in G$ and $h\in H$ we have $aha^{-1}\in H$. \\[-4mm]
+\item We write $H \triangleleft G$  to denote that $H$ is a normal subgroup of 
+$G$.  \\[-4mm]
+\item If $f\colon G \to K$ is a group homomorphism, then $\Ker(f)\triangleleft G$. 
+\eitem
+
+\begin{thm}{}{NORMAL GP EQUIV COND}
+Let $G$ be a group and let $H\subseteq G$ be a subgroup. Then the following conditions
+are equivalent:
+\bigskip
+\bitem 
+\item[\textbf{1)}] $H\triangleleft G$ \\[-4mm]
+\item[\textbf{2)}] For any $a\in G$ we have $aHa^{-1} = H$ where $aHa^{-1} = \{aha^{-1} \ | \ h\in H\}$.\\[-4mm]
+\item[\textbf{3)}] For any $a\in G$ we have $aH = Ha$. 
+\eitem  
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+1) $\Ra$ 2) Choose $a\in G$. By the definition of a normal subgroup, for every $b\in G$ we have 
+$bHb^{-1} \subseteq H$, so in particular $aHa^{-1}\subseteq H$. 
+
+Moreover, taking $b=a^{-1}$ we get $a^{-1}Ha \subseteq H$. This gives:
+\[
+H = eHe^{-1} = (aa^{-1})H(aa^{-1})^{-1} = a(a^{-1}Ha)a^{-1} \subseteq aHa^{-1}
+\] 
+Thus we obtain $aHa^{-1} = H$. 
+
+2) $\Ra$ 3) Let $a\in G$ and $h\in H$. Since $aHa^{-1} = H$, thus $aha^{-1} = h'$
+for some $h'\in H$ and so $ah = h'a \in Ha$. This gives $aH \subseteq Ha$. Similarly, 
+since $a^{-1}Ha = H$, we get $a^{-1}ha = h'$ for some $h'\in H$ and so 
+$ha = ah'$. This implies that $Ha \subseteq aH$. 
+
+
+3) $\Ra$ 1) Let $a\in G$ and $h\in H$. Since $aH = Ha$, there is $h'\in H$ such that 
+$ah = h'a$, or equivalently $aha^{-1} = h'$. Thus $aha^{-1}\in H$ for any $a\in G$
+and $h\in H$, which shows that $H \triangleleft G$. 
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{thm}{}{NORMAL COSET MULTIPL}
+Let $G$ be a group and $H\triangleleft G$. Let $a_{1}, a_{2}, b_{1}, b_{2} \in G$ be elements 
+such that $a_{1}H = a_{2}H$ and $b_{1}H = b_{2}H$. Then $(a_{1}b_{1})H = (a_{2}b_{2})H$. 
+\end{thm}
+
+\begin{FL}
+{\bf Note.} \Cref{thm:NORMAL COSET MULTIPL} is not true if $H\subseteq G$ is a
+subgroup of $G$ which is not normal. Take, for example, the dihedral group $D_{4}$ and let 
+$K = \{I, H\} \subseteq D_{4}$. We have 
+\[ R_{90}K = D'K \ \ \ \text{and} \ \ \ R_{270}K = DK \] 
+On the other hand
+\begin{align*}
+& (R_{90}\cdot R_{270})K = IK = \{ I, H\} \\
+& (D'\cdot D)K = R_{180}K = \{ R_{180}, V \}
+\end{align*}
+Thus $(R_{90}\cdot R_{270})K \neq (D'\cdot D)K$.
+
+
+
+\begin{proof}[Proof of \Cref{thm:NORMAL COSET MULTIPL}]
+Since $a_{1}H = a_{2}H$, we have $a_{1} = a_{2}h$ for some $h\in H$. 
+Similarly, since $b_{1}H = b_{2}H$, thus $b_{1} = b_{2}h'$ for some $h'\in H$. 
+This gives $a_{1}b_{1} = a_{2}hb_{2}h'$. 
+
+Since $H$ is a normal subgroup, we have $Hb_{2} = b_{2}H$, so $hb_{2} = b_{2}h''$
+for some $h''\in H$. Using this we obtain
+\[
+a_{1}b_{1} = a_{2}hb_{2}h' = a_{2}b_{2}h''h' \in a_{2}b_{2}H
+\]
+This gives $a_{1}b_{1}H \subseteq a_{2}b_{2}H$. Analogously we can show that 
+$a_{2}b_{2}H \subseteq a_{1}b_{1}H$, and so $a_{2}b_{2}H = a_{1}b_{1}H$.
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+\begin{definition}{}{QUOTIENT GP}
+Let $G$ be a group and let $H \triangleleft G$. The \emph{quotient group} $G/H$ 
+is defined as follows:
+\bigskip
+\bitem
+\item Elements of $G/H$ are left cosets $aH$ of $H$ in $G$. \\[-4mm]
+\item Group operation: $aH\cdot bH = (ab)H$. \\[-4mm]
+\item The identity element: the coset $eH = H$. \\[-4mm]
+\item The inverse of $aH$: $a^{-1}H$. 
+\eitem
+\end{definition}
+
+\begin{FL}
+{\bf Note.} By Lagrange Theorem \labelcref{thm:LAGRANGE THM} we have 
+\[
+|G/H| = [G:H] = \frac{|G|}{|H|}
+\]
+\end{FL}
+
+{\bf Example.} Take the dihedral group $D_{4}$: 
+\begin{center}
+{\small
+\tagpdfsetup{table/header-rows={1}}
+\begin{tabular}{l !{\vrule width 2pt} llllllll}
+\circ     & \ $I$       & $R_{90}$  & $R_{180}$ & $R_{270}$ & $H$       & $V$       & $D$       & $D'$      \\[1mm]
+\noalign{\hrule height 2pt} \\[-3mm]
+$I$       & \ $I$       & $R_{90}$  & $R_{180}$ & $R_{270}$ & $H$       & $V$       & $D$       & $D'$      \\
+$R_{90}$  & \ $R_{90}$  & $R_{180}$ & $R_{270}$ & $I$       & $D'$      & $D$       & $H$       & $V$       \\
+$R_{180}$ & \ $R_{180}$ & $R_{270}$ & $I$       & $R_{90}$  & $V$       & $H$       & $D'$      & $D$       \\
+$R_{270}$ & \ $R_{270}$ & $I$       & $R_{90}$  & $R_{180}$ & $D$       & $D'$      & $V$       & $H$       \\
+$H$       & \ $H$       & $D$       & $V$       & $D'$      & $I$       & $R_{180}$ & $R_{90}$  & $R_{270}$ \\
+$V$       & \ $V$       & $D'$      & $H$       & $D$       & $R_{180}$ & $I$       & $R_{270}$ & $R_{90}$  \\[1mm]
+$D$       & \ $D$       & $H$       & $D'$      & $V$       & $R_{270}$ & $R_{90}$  & $I$       & $R_{180}$ \\
+$D'$      & \ $D'$      & $V$       & $D$       & $H$       & $R_{90}$  & $R_{270}$ & $R_{180}$ & $I$       \\
+\end{tabular}
+}
+\end{center}
+
+\begin{FL}
+One can check that the subgroup 
+$K = \{I, R_{180}\}$ is a normal subgroup of $D_{4}$. The quotient group 
+$D_{4}/K$ has 4 elements:
+\begin{align*} 
+& IK = R_{180}K = \{I, R_{180}\} \\
+& R_{90}K = R_{270}K = \{R_{90}, R_{270}\} \\
+& HK =  VK = \{H, K\} \\
+& DK = D'K = \{D, D'\}
+\end{align*}
+The multiplication table of $D_{4}/K$ is as follows:
+\begin{center}
+{\small
+\tagpdfsetup{table/header-rows={1}}
+\begin{tabular}{l !{\vrule width 2pt} l l l l}
+\circ     & $IK$        & $R_{90}K$  & $HK$      & $DK$       \\[1mm]
+\noalign{\hrule height 2pt} \\[-3mm]
+$IK$       & $IK$       & $R_{90}K$  & $HK$      & $DK$       \\[1mm]
+$R_{90}K$  & $R_{90}K$  & $IK$       & $DK$      & $HK$       \\[1mm]
+$HK$       & $HK$       & $DK$       & $IK$      & $R_{90}K$  \\[1mm]
+$DK$       & $DK$       & $HK$       & $R_{90}K$ & $IK$        \\[1mm]
+\end{tabular}
+}
+\end{center}
+Recall that every group of order 4 is isomorphic either to $\Z_{4}$ or 
+$\Z_{2}\times \Z_{2}$. Since all elements of $D_{4}/K$ are of order 2, 
+we obtain that $D_{4}/K \cong \Z_{2}\times \Z_{2}$
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+\begin{FL}
+{\bf Example.} If $G$ is a cyclic group every subgroup $H\subseteq G$ is normal, 
+since $G$ is abelian. Moreover, if $G = \lrang{a}$ then every element of 
+$G/H$ is of the form $a^{k}H = (aH)^{k}$ for some $k\in \Z$. This means 
+that $G/H$ is a cyclic group, $G/H = \lrang{aH}$. If $[G:H] = n$ then $G/H \cong \Z_{n}$
+
+
+Recall that if $f\colon G \to H$ is a homomorphism, then by 
+\Cref{cor:KERNEL IS NORMAL} $\Ker(f)$ is a normal subgroup of $G$, so the 
+quotient group $G/\Ker(f)$ exists.
+\end{FL}
+
+\begin{thm}{(First Isomorphism Theorem)}{GP FIRST ISO THM}
+Let $f\colon G \to H$ be a homomorphisms of groups which is onto. Then 
+\[
+H \cong G/\Ker(f)
+\] 
+\end{thm}
+
+\begin{FL}
+{\bf Example.} Take the homomorphism $f\colon \Z\to \Z_{n}$ given by 
+$f(k) = k \mod n$. This homomorphism is onto and
+\[
+\Ker(f) = \{ k \ | \ k \mod n = 0\} = \{ nl \ |\ l\in \Z  \}
+\] 
+Denote this subgroup of $\Z$ by $n\Z$. By \Cref{thm:GP FIRST ISO THM}
+we obtain $\Z/n\Z \cong \Z_{n}$.  
+
+{\bf Example.} Recall that $\R^{\ast}$ denote the group of non-zero real numbers 
+with multiplication. Take the determinant homomorphism 
+\[
+\det\colon GL(n, \R) \to \R^{\ast}
+\]
+This homomorphism is onto and
+\[
+\Ker(\det) = \{A\in GL(n, \R) \ | \ \det A = 1\} = SL(n, \Z)
+\]
+Thus we obtain $GL_{n}(n, \R)/SL(n, \R) \cong \R^{\ast}$.
+
+
+\begin{proof}[Proof of \Cref{thm:GP FIRST ISO THM}]
+Let $b\in H$. Since $f$ is onto, there is $a\in G$ such that $f(a) = b$.  
+Recall that by \Cref{cor:GP HOMOM INV IMAGE} we have 
+\[
+f^{-1}(b) = \{ ak \ | \ k\in \Ker(f) \} = a\Ker(f)
+\]
+It follows that we have a well-defined function 
+$\bar{f} \colon G/\Ker(f) \to H$ given by $\bar{f}(g\Ker(f)) = f(g)$. 
+We will show that this function is an isomorphism of groups.
+  
+First, notice that the function $\bar{f}$ is a homomorphism:
+\begin{align*}
+\bar{f}(a_{1}\Ker(f) \cdot a_{2}\Ker(f)) & =  \bar{f}(a_{1}a_{2}\Ker(f)) \\
+& = f(a_{1}a_{2})\\ 
+& = f(a_{1})\cdot f(a_{2}) \\
+& = \bar{f}(a_{1}\Ker(f))\cdot \bar{f}(a_{2}\Ker(f))
+\end{align*}
+Next, the function $\bar{f}$ is onto, since $f$ is onto. It remains to show 
+that $\bar{f}$ is 1-1, i.e. that $\Ker(\bar{f}) = \{e\Ker(f)\}$. 
+Assume then that $\bar{f}(g\Ker(f)) = e$. This means that $f(g) = e$, so 
+$g\in Ker(f)$. But in such case $g\Ker(f) = e\Ker(f)$. 
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+\begin{cor}{}{NORMAL GPR ARE KERS}
+For any normal subgroup $K$ of a group $G$ there exists a homomorphism 
+$f\colon G \to H$ such that $\Ker(f) = K$. 
+\end{cor}
+
+\begin{FL}
+\begin{proof}
+Take $H = G/K$ and define $f$ by $f(a) = aK$. 
+\end{proof}
+\end{FL}
+

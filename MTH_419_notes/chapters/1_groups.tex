@@ -1,0 +1,213 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Groups}
+
+\vskip -7mm
+
+\begin{definition}{}{DEF:GROUP}
+A \emph{group} is set $G$ equipped with an operation that assigns to 
+each pair of elements $a, b \in G$ an element $a\cdot b \in G$ in such 
+way, that the following conditions are satisfied:
+\benu
+\item[{\bf 1)}] For any $a, b, c\in G$ we have 
+\[
+(a\cdot b)\cdot c = a\cdot (b \cdot c)
+\]
+(associativity).
+\\[-1mm]
+\item[{\bf 2)}] There exists an element $e\in G$ such that 
+\[
+e\cdot a = a \cdot e = a
+\]
+for all $a\in G$. The element $e$ is called the \emph{identity element} or the 
+\emph{trivial element}.
+\\[-1mm]
+\item[{\bf 3)}] For each element $a\in G$ there exists an element $b\in G$ such that 
+\[
+a\cdot b = b \cdot a = e
+\]
+Such element $b$ is called the \emph{inverse} of $a$ and it is denoted by $a^{-1}$. 
+\eenu 
+\end{definition}
+
+\begin{FL}
+{\bf Note.} The first condition in the definition of a group implies that if we want 
+to multiply several elements, then it does not matter how we place parentheses. E.g.:
+\[
+((ab)c)d = (ab)(cd) = a(b(cd)) = a((bc)d) = (a(bc))d
+\]
+\end{FL}
+
+
+\showto{SKELETON}{\newpage}
+
+\begin{definition}{}{DEF:ABGROUP}
+A \emph{abelian group} is a group $G$ where the multiplication is commutative: 
+\[
+a \cdot b = b \cdot a
+\] 
+for all $a, b\in G$. 
+\end{definition}
+
+
+
+\showto{FULL}{\newpage}
+\showto{SKELETON}{\vskip 30mm}
+
+{\bf \underline{Notation}}
+
+
+{\bf Multiplicative:} 
+
+\benu
+\item[\textbullet] $a\cdot b$, \ $a \times b$, \ $a \ast b$, \ 
+$a \circ b$,\  $a \odot b$, \dots \\[-5mm]
+\item[\textbullet] {\bf Inverse element:} $a^{-1}$.  \\[-5mm]
+\item[\textbullet] {\bf The identity element:} $e$,  $1$, \dots
+\eenu
+
+
+
+{\bf  Additive:} 
+
+\benu
+\item[\textbullet] $a + b$ \\[-5mm]
+\item[\textbullet] {\bf Inverse element:} $-a$.  \\[-5mm]
+\item[\textbullet] {\bf The identity element:} $0$.
+\eenu
+
+{\bf Note:} The additive notation is only used for abelian groups.
+
+
+\showto{SKELETON}{\newpage}
+\showto{FULL}{\vskip 10mm}
+
+{\bf \underline{Some examples of groups}}
+
+\begin{shownto}{FULL}
+\bitem
+\item $\Z$ - the group of integers (with addition) \\[-5mm]
+\item $\Q$ - the group of rational numbers (with addition)  \\[-5mm]
+\item $\R$ - the group of real numbers (with addition)  \\[-5mm]
+\item $\C$ - the group of complex numbers (with addition)  \\[-5mm]
+\eitem
+
+
+
+\bitem
+\item $\Q^{\ast}$ - the group of non-zero rational numbers (with multiplication)  \\[-5mm]
+\item $\R^{\ast}$ - the group of non-zero real numbers (with multiplication)  \\[-5mm]
+\item $\C^{\ast}$ - the group of non-zero complex numbers (with multiplication)  \\[-5mm]
+\eitem
+
+
+
+\bitem
+\item $\Q^{+}$ - the group of positive rational numbers (with multiplication)  \\[-5mm]
+\item $\R^{+}$ - the group of positive real numbers (with multiplication)  \\[-5mm]
+\eitem
+
+
+\bitem
+\item The trivial group $\{e\}$.
+\eitem
+
+\end{shownto}
+
+
+\showto{FULL}{\vskip 5mm}
+\showto{SKELETON}{\newpage}
+
+{\bf \underline{Example:} General linear groups $GL(n, \R)$.}
+
+\begin{FL}
+\bitem
+\item {\bf Elements of  $GL(n, \R)$:} invertible $n\times n$ matrices with real entries.
+\item {\bf Group operation:} matrix multiplication.
+\item {\bf The identity element:} the identity matrix $I_{n}$. 
+\eitem
+\vskip 10mm
+\end{FL}
+
+
+\showto{SKELETON}{\vskip 80mm}
+
+{\bf \underline{Example:} Groups $\Z_{n}$}
+
+\begin{FL}
+{\bf Notation:} Let $n > 0$ be an integer. For any integer $m$ we have 
+\[
+m = qn + r
+\]
+where $q, r\in \Z$ and $0 \leq r < n$. Then we write 
+\[
+m \bmod n = r
+\]
+
+\vskip 10mm
+
+For an integer $n\geq 2$ the group $\Z_{n}$ is defined as follows:
+
+\bitem
+\item {\bf Elements of  $\Z_{n}$:} numbers $0, 1, \dots, n-1$
+\item {\bf Group operation $\oplus$:} For $k, l\in \Z_{n}$ we set
+\[
+k \oplus l \coloneq (k+l) \bmod n
+\]
+\item {\bf The identity element:} $0$. 
+\item {\bf Inverses:} The inverse of an element $k\in \Z_{n}$ is the element $n-k$. 
+
+\eitem
+
+
+\vskip 10mm
+
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+
+{\bf \underline{Example:} Groups $U(n)$}
+
+\bigskip
+
+{\bf Recall:} 
+\bitem
+\item If $m, n$ are integers then  $\gcd(m, n)$, is the greatest integer that divides 
+both $m$ and $n$. \\[0mm]
+
+
+\item For any $m, n\neq 0$ there exists $a, b\in \Z$ such that 
+\[
+am + bn = \gcd(m, n)
+\] 
+Moreover, $\gcd(m, n)$ is the smallest positive integer that can be obtained for 
+any choice of $a$ and $b$. 
+\eitem
+
+
+\begin{FL}
+\vskip 10mm 
+
+For an integer $n\geq 2$ the group $U(n)$ is defined as follows:
+
+\bitem
+\item {\bf Elements of  $U(n)$:} integers $1 \leq k < n$ such that $\gcd(k, n) = 1$ 
+\item {\bf Group operation $\odot$:} For $k, l\in U(n)$ we set
+\[
+k \odot l \coloneq (k\cdot l) \bmod n
+\]
+\item {\bf The identity element:} $1$. 
+\item {\bf Inverses:} If $k$ is en element of $U(n)$, then we can find $p, q \in \Z$
+such that  $pk + qn = \gcd(k, n) = 1$. Let $\overline{p} = p \mod n$.  
+Notice that we have $\gcd(p, n) = 1$, so also $\gcd(\overline{p}, n) = 1$. Also, 
+\[
+(\overline{p}\cdot k) \mod n =  (pk) \mod n = (pk + qn) \mod n = 1
+\]
+This means that $\overline{p} = k^{-1}$ in the group $U(n)$.
+
+\eitem
+
+\end{FL}
+

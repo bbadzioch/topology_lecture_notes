@@ -1,0 +1,148 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Unique factorization domains}
+
+\begin{definition}{}{RING IRRED ELT}
+Let $R$ be an integral domain. An element $a\in R$ is \emph{irreducible} if
+$a\neq 0$, $a$ is not a unit and if $a = bc$ for some $b, c \in R$ then either 
+$b$ or $c$ is a unit. 
+\end{definition}
+
+
+\textbf{Example.}
+\bitem
+\item $n\in \Z$ is irreducible and only if $n = \pm p$ where $p$ is a prime number. 
+\item A field has no irreducible elements. 
+\item Take $p(x)\in \R[x]$, $p(x) = x^{2}+1$. Then $p(x)$ is irreducible  in $\R[x]$. 
+\item Take $p(x) \in \C[x]$, $p(x) = x^{2}+1$. Then $p(x)$ is not irreducible in $\C[x]$:
+since $p(x) = (x-i)(x+i)$.
+\eitem
+
+
+\begin{thm}{}{IRRED TIMES UNIT IRRED}
+If $R$ is an integral domain, $a\in R$ is irreducible and $u\in R$ is a unit 
+then $ua$ is irreducible.  
+\end{thm}
+
+\begin{proof}
+Let $ua = bc$. We need to show that either $b$ or $c$ is a unit. 
+Since $a = (u^{-1}b)c$ and $a$ is irreducible, thus either $c$
+is a unit or $u^{-1}b$ is a unit. In the second case, since a product 
+of units is a unit, we obtain that $b = u(u^{-1}b)$ is a unit.
+\end{proof}
+
+
+\begin{definition}{}{RING ASSOCIATES}
+Let  $R$ be an integral domain. Elements $a, b\in R$ are \emph{associates} if $a = ub$
+for some unit $u\in R$. We write: $a\sim b$.
+\end{definition}
+
+\textbf{Example.}
+\bitem
+\item If $m, n\in \Z$ then $m\sim n$ iff $m = \pm n$.
+\item Check: units in $\R[x]$ are non-zero polynomials of degree 0. It follows that if 
+$p(x), q(x)\in \R[x]$ then $p(x)\sim q(x)$ iff $p(x) = aq(x)$ for some $a\in \R-\{0\}$.
+\eitem
+
+
+\begin{definition}{}{UFD DEF}
+\label{DEF_UFD}
+A  \emph{unique factorization domain} (\emph{UFD}) is an integral domain $R$ 
+that satisfies the following conditions:
+
+\bigskip
+
+\benu
+\item  if $a\in R$ is a non-zero, non-unit element then 
+\[
+a= b_{1}\cdot {\dots} \cdot b_{k}
+\]
+for some irreducible elements $b_{1}, \dots, b_{k}\in R$\\[-3mm]
+
+\item if $b_{1}, \dots, b_{k}$, $c_{1}, \dots, c_{l}$ are irreducible elements such that 
+\[
+b_{1}\cdot {\dots} \cdot b_{k} = c_{1}\cdot {\dots} \cdot c_{l}
+\]
+then $k=l$ and for some permutation $\sigma\colon \{1, \dots, k\} \to \{1, \dots, k\}$ we have 
+$b_{1}\sim c_{\sigma(1)}$, $\dots$, $b_{k}\sim c_{\sigma(k)}$.
+\eenu
+\end{definition}
+
+\textbf{Example.} 
+\bitem
+\item $\Z$ is a UFD by the Fundamental Theorem of Arithmetic.
+\item If $F$ is a field then $F$ is a UFD since all non-zero elements of $F$ are units.
+\eitem
+
+
+\bigskip
+
+\textbf{Note.}
+For an positive integer $K$ let $\Z[\sqrt{-K}]$ denote the ring defined as follow:
+\bitem
+\item Elements of $\Z[\sqrt{-d}]$ are expressions $a + b\sqrt{K}i$ for $a, b\in \Z$. 
+\item Addition: 
+\[
+(a + b\sqrt{n}i) + (c + d\sqrt{K}i) = (a+c) + (b+d)\sqrt{K}i
+\]
+\item Multiplication: 
+\[
+(a + b\sqrt{n}i) \cdot (c + d\sqrt{K}i)  = (ac - nbd) + (ad + bc)\sqrt{K}i
+\]
+\eitem
+The ring $\Z[\sqrt{-K}]$ is a subring of the field of complex numbers $\C$, 
+so it is an integral domain. 
+
+\begin{thm}{}{Z MINUS SQRT FIVE NOT UFD}
+The ring $\Z[\sqrt{-5}]$ is not a UFD.
+\end{thm}
+
+\begin{proof}
+For $a+ b\sqrt{5}i \in \Z[\sqrt{-5}]$ define 
+$$N(a+ b\sqrt{5}i) = (a+ b\sqrt{5}i)(a - b\sqrt{5}i) = a^{2}+5b^{2}\in \N$$
+Notice that for any $\alpha, \beta\in \Z[\sqrt{-5}]$ we have:
+
+
+\benu
+\item $N(\alpha) = 1$ iff $\alpha = \pm 1$
+\item $N(\alpha) = 0$ iff $\alpha = 0$
+\item $N(\alpha\beta) = N(\alpha)N(\beta)$
+\item $N(\alpha) \neq 3$ for all $\alpha\in \Z[\sqrt{-5}]$
+\eenu
+
+\bigskip
+
+\textbf{Observation 1.} The only units in $\Z[\sqrt{-5}]$ are $1$ and $-1$. \newline
+
+
+Indeed, if $\alpha \in \Z[\sqrt{-5}]$ is a unit then
+$$N(\alpha)N(\alpha^{-1}) = N(\alpha\alpha^{-1}) = N(1) = 1$$
+Therefore $N(\alpha) =1$, and so $\alpha = \pm 1$. 
+
+As a consequence we obtain that in $\Z[\sqrt{-5}]$ we have $\alpha \sim \beta$ 
+if and only of $\alpha = \pm\beta$.
+
+
+\textbf{Observation 2.} If $\alpha\in \Z[\sqrt{-5}]$ is an element such that $N(\alpha) =9$
+then $\alpha$ is irreducible. 
+
+
+Indeed, if $\alpha = \beta\beta'$ then 
+$$N(\beta)N(\beta') = N(\alpha) = 9$$
+Therefore $N(\beta)$ must be either  $1$ (and so $\beta$ is a unit), $3$ (impossible), or $9$
+(and then $N(\beta')=1$, i.e. $\beta'$ is a unit) .
+
+
+\bigskip
+
+Take $9\in \Z[\sqrt{-5}]$. We have
+$$3\cdot 3 =9 = (2+\sqrt{5}i)(2-\sqrt{5}i)$$
+By Observation 2 the elements $3$, $2+\sqrt{5}i$ , $2-\sqrt{5}i$ are irreducible in $\Z[\sqrt{-5}]$.
+On the other hand, by Observation 1 we obtain 
+$$3\not\sim (2+\sqrt{5}i), \ \ \ 3 \not\sim (2-\sqrt{5}i)$$
+As a consequence $9$ does not have a unique factorization in $\Z[\sqrt{-5}]$.
+\end{proof}
+
+
+

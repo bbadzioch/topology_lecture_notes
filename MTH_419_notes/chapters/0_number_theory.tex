@@ -1,0 +1,83 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Some number theory}
+
+\underline{\bf Divisibility of integers.}
+
+If $m, n$ are integers then we say that $m$ \emph{divides} $n$ if 
+$n = km$ for some integer $k$. We write: $m|n$.
+
+\bigskip
+
+{\bf Some properties of divisibility:}
+\bitem
+\item For every $n$ we have $1|n$. \\[-3mm]
+\item For every $m\neq 0$ we have $m|0$ \\[-3mm]
+\item If $k|m$ and $m|n$ then $k|n$ \\[-3mm]
+\item If $m|n$ and $n|m$ then either $m=n$ or $m=-n$
+\eitem
+
+\vskip 20mm 
+
+\underline{\bf The Greatest Common Divisor}
+
+The \emph{greatest common divisor} of integers $n_{1}, \dots, n_{k}$ is the 
+greatest integer $m$ such that $m|n_{i}$ for $i=1,\dots, k$. We denote this 
+integer by $\gcd(n_{1}, \dots, n_{k})$.
+
+{\bf Some properties of gcd:}
+\bitem
+\item If $m|n_{i}$ for $i=1, \dots, k$ then $m|gcd(n_{1}, \dots, n_{k})$.
+\item If $n > 0$ then $\gcd(0, n) = n$  
+\item $\gcd(m, n) = \gcd(m, n-m)$ \\[-3mm]
+\item If $m, n$ are non-zero integers that there exists integers $a, b$
+such that 
+\[
+\gcd(m, n) = am + bn
+\]
+Moreover, $\gcd(m, n)$ is the smallest positive integer of such form.
+\eitem
+
+If $\gcd(m, n) = 1$ then we say that $m$ and $n$ are \emph{relatively prime}.
+
+\newpage
+
+
+\underline{\bf The Least Common Multiple}
+
+The \emph{least common multiple} of integers $n_{1}, \dots, n_{k}$ is the 
+smallest positive integer $m$ such that $n_{i}|m$ for $i=1,\dots, k$. We denote this 
+integer by $\lcm(n_{1}, \dots, n_{k})$.
+
+{\bf Some properties of lcm:}
+\bitem
+\item If $m$ is an integer such that $n_{i}|m$ for $i=1, \dots, k$ then 
+$\lcm(n_{1}, \dots, n_{k})| m$. \\[-2mm] 
+\item $\lcm(n_{1}, \dots, n_{k}) 
+= \dfrac{n_{1}\cdot{\dots}\cdot n_{k}}{\gcd(n_{1}, \dots, n_{k})}$
+\eitem
+
+\vskip 20mm 
+
+
+
+\underline{\bf Prime numbers.}
+
+An integer $p>1$ is prime if the only positive integers dividing $p$ are 
+$p$ and $1$. 
+
+\bigskip
+
+{\bf Some properties of primes:}
+\bitem
+\item If $p$ is a prime and $p|mn$ then  either $p|m$ or $p|n$. \\[-1mm]
+\item If $n>1$ is any integer then there is a unique way of writing 
+$n$ as a product of primes:
+\[
+n = p_{1}p_{2}\cdot{\dots}\cdot p_{k}
+\]
+such that $p_{1}\geq p_{2}\geq {\dots} \geq p_{k}$.
+ \\[-3mm]
+
+\eitem

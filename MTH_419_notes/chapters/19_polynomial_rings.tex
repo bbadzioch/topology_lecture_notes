@@ -1,0 +1,338 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Rings of polynomials}
+
+
+\begin{definition}{}{POLY RING}
+Let $R$ be a commutative ring. The \emph{ring of polynomials} $R[x]$ 
+of variable $x$ with coefficient in $R$, defined as follows.
+\bitem 
+\item Elements of $R[x]$ are expressions of the form 
+\[
+p(x) = a_{n}x^{n} + a_{n-1}x_{n-1} + {\dots} + a_{1}x + a_{0} = \sum_{i=0}^{n}a_{i}x^{i}
+\]
+\vskip -5mm
+where $n\geq 0$.\\[-3mm]
+\item Addition in $R[x]$: if $p(x) = \sum_{i=0}^{n}a_{i}x^{i}$, 
+$q(x) = \sum_{i=0}^{m}b_{i}x^{i}$ then 
+\[
+p(x) + q(x) = 
+\sum_{i=0}^{s} (a_{i} + b_{i})x^{i}
+\]
+\vskip -5mm
+where $s=\max(m, n)$. In this formula, if $i > n$ then we take $a_{i}=0$ and 
+if $i>m$ then we take $b_{i}=0$.\\[-3mm]
+\item Multiplication in $R[x]$: if $p(x) = \sum_{i=0}^{n}a_{i}x^{i}$, 
+$q(x) = \sum_{i=0}^{m}b_{i}x^{i}$ then
+\[
+p(x) \cdot q(x) = 
+\sum_{i=0}^{s} c_{i}x^{i}
+\]
+where $s=m+n$ and $c_{i} = a_{0}b_{i} + a_{1}b_{i-1} + {\dots} + a_{i}b_{0}$
+\eitem
+\end{definition}
+
+\textbf{Note.} Let $R$ be a commutative ring. Any polynomial 
+$p(x) =  a_{n}x^{n} + a_{n-1}x_{n-1} + {\dots} + a_{0}$ defines 
+a function $\overline{p}\colon R\to R$ given by 
+$\overline{p}(r) = a_{n}r^{n} + a_{n-1}r^{n-1} + {\dots} + a_{0}$. 
+In general it may happen that $p(x)$, $q(x)$ are different polynomials, but the 
+functions $\overline{p}$, $\overline{q}$ they define are the same. 
+
+For example, take $p(x) = 0\ , q(x) = x^{2} + x\in \Z_{2}[x]$. Then $p(x)\neq q(x)$. 
+On the other hand, consider the functions 
+$\overline{p}, \overline{q}\colon \Z_{2}\to \Z_{2}$. We have 
+$\overline{p}(0) = 0 = \overline{q}(0)$ and $\overline{p}(1) = 0 = \overline{q}(1)$, 
+so $\overline{p} = \overline{q}$.  
+
+\begin{definition}{}{POLY DEGREE}
+For a polynomial  $p(x) = \sum_{i} a_{i}x^{i}\in R[x]$ such that $p(x)\neq 0$, 
+the \emph{degree} $p(x)$ is the integer $n\geq 0$ such $a_{n}\neq 0$ and 
+$a_{i} = 0$ for all $i>n$. We denote $\deg p(x) = n$.  
+
+For the zero polynomial $p(x)=0$ degree is not defined. 
+\end{definition}
+
+
+\begin{thm}{}{DEG POLY PRODUCT}
+Let $R$ be an integral domain and let $p(x), q(x) \in R[x]$ be non-zero polynomials. 
+Then
+\[
+\deg (p(x) \cdot q(x)) = \deg p(x) + \deg q(x)
+\] 
+\end{thm}
+
+\begin{proof}
+If $\deg p(x) = n$ and $\deg q(x) = m$ then $p(x) = a_{n}x^{n} + {\dots} + a_{0}$
+$p(x) = b_{m}x^{m} + {\dots} + b_{0}$ for some $a_{i}, b_{i}\in R$ such that 
+$a_{n}\neq 0$, $b_{m}\neq 0$. Then 
+\[
+p(x) \cdot q(x) = a_{n}b_{m}x^{m+n} + {\dots} + a_{0}b_{0}
+\]
+Since $R$ is an integral domain, thus $a_{n}b_{m} \neq 0$, so 
+$\deg (p(x)\cdot q(x)) = m+n$. 
+\end{proof}
+
+\textbf{Example.} \Cref{thm:DEG POLY PRODUCT} is not true when $R$ is not an integral 
+domain. Take e.g. $p(x) = 2x + 1,\ q(x) = 3x + 1 \in \Z_{6}[x]$. Then 
+$\deg p(x) = p(x) = 1$ and $\deg (p(x)\cdot q(x)) = \deg(5x + 1) = 1$. 
+
+
+\begin{cor}{}{INT DOM POLY}
+If $R$ is an integral domain then $R[x]$ is also an integral domain. 
+\end{cor}
+
+\begin{proof}
+If $p(x), q(x)\in R[x]$ are non-zero polynomials, then by \Cref{thm:DEG POLY PRODUCT}
+$\deg (p(x)\cdot q(x))$ is defined, so $p(x)\cdot q(x)\neq 0$. 
+\end{proof}
+
+\begin{thm}{}{POLY DIV ALGORITHM}
+Let $R$ be an integral domain. Let $p(x) = a_nx^{n} + {\dots} + a_{0}$ and
+be a polynomial in $R[x]$ such that $p(x)\neq 0$.
+and $a_{n}$ is a unit. Then for any 
+$g(x)\in R[x]$ there exist unique polynomials $q(x), r(x)\in R[x]$ such that 
+\[
+g(x) = q(x)p(x) + r(x)
+\] 
+where either $r(x) = 0$ or $\deg r(x) < \deg p(x)$.
+\end{thm}
+
+\textbf{Note.} We say that $q(x)$ is the \emph{quotient} and $r(x)$ is the 
+\emph{reminder} of the division of $g(x)$ by $p(x)$.
+
+
+\begin{proof}[Proof of \Cref{thm:POLY DIV ALGORITHM}]
+To show existence of $q(x)$ and $r(x)$, 
+we argue by induction with respect to $\deg g(x)$. If $g(x) = 0$ or 
+$\deg g(x) < \deg p(x)$ then we take $q(x) = 0$ and $r(x) = g(x)$. 
+Next, assume that for any polynomial $g'(x)$ of degree smaller than 
+$m$ we can find $q(x)$ and $r(x)$ as in the theorem, and let 
+$g(x) = b_{m}x^{m} + {\dots} + b_{0}$ be a polynomial such 
+that $\deg g(x) = m \geq n = \deg p(x)$. Let 
+\[
+g(x) = b_{m}x^{m} + {\dots} + b_{0}
+\] 
+Using the assumption that $a_{n}$ is a unit in $R$, take the polynomial 
+\[
+s(x) = g(x) - (b_{m}a_{n}^{-1})p(x)\cdot x^{m-n}
+\] 
+We have:
+\begin{align*}
+s(x) = & g(x) - (b_{m}a_{n}^{-1})p(x)\cdot x^{m-n} \\
+& = (b_{m}x^{m} + b_{m-1}x^{m-1} + \dots) 
+- (b_{m}a_{n}^{-1})(a_{n}x^{n} + a_{n-1}x^{n-1} + \dots)\cdot x^{m-n}\\
+& = (b_{m}x^{m} + b_{m-1}x^{m-1} + \dots)  
+- ((b_{m}a_{n}^{-1}a_{n})x^{m} + (b_{m}a_{n}^{-1}a_{n-1})x^{m-1} + \dots) \\
+& = (b_{m}x^{m} + b_{m-1}x^{m-1} + \dots) 
+- (b_{m}x^{m} + (b_{m}a_{n}^{-1}a_{n-1})x^{m-1} + \dots) \\
+& = ((b_{m-1} - b_{m}a_{n}^{-1}a_{n-1}) x^{m-1} + \dots )
+\end{align*} 
+This shows that $\deg s(x) \leq m$ and so, by the inductive assumption, 
+we have $s(x) = q'(x)p(x) + r'(x)$ for some $q'(x), r'(x)\in R[x]$ such that 
+either $r'(x) = 0$ or $\deg r'(x) < \deg p(x)$. 
+This gives: 
+\begin{align*}
+g(x) & = s(x) + (b_{m}a_{n}^{-1})p(x)\cdot x^{m-n} \\
+& =  (q'(x)p(x) + r'(x)) + (b_{m}a_{n}^{-1})p(x)\cdot x^{m-n} \\
+& = (q'(x) + (b_{m}a_{n}^{-1})x^{m-n})p(x) + r'(x)
+\end{align*}
+Thus we can take $q(x) = q'(x) + (b_{m}a_{n}^{-1})x^{m-n}$ and $r(x) = r'(x)$.
+
+For uniqueness, assume that $g(x) = q_{1}(x)p(x) + r_{1}(x)$
+and $g(x) = q_{2}(x)p(x) + r_{2}(x)$ for some $p_{1}(x), p_{2}(x), r_{1}(x), r_{2}(x)\in R[x]$.
+Then 
+\[
+0 = (q_{1}(x) - q_{2}(x))p(x) + (r_{1}(x) - r_{2}(x))
+\]
+or equivalently 
+\[
+(q_{1}(x) - q_{2}(x))p(x)  = - (r_{1}(x) - r_{2}(x))
+\]
+If $q_{1}(x) \neq q_{2}(x)$ then degree of the left hand side is greater or equal
+to $\deg p(x)$, which is greater than the degree of the right hand side. Since this 
+is impossible, we get $q_{1}(x) = q_{2}(x)$. This implies that $r_{1}(x) = r_{2}(x)$. 
+\end{proof}
+
+
+\textbf{Exercise.} Let $p(x) = x^{2} + 3x + 2$ and $g(x) = 3x^{4} + 2x^{2} - x + 7$
+be polynomials in $\Z[x]$. Find the quotient and the reminder of the division 
+of $g(x)$ by $p(x)$.
+
+
+\textbf{Exercise.} Let $p(x) = 4x^{2} + 3x + 2$ and $g(x) = 3x^{4} + 2x^{2} + 4x + 1$
+be polynomials in $\Z_{5}[x]$. Find the quotient and the reminder of the division 
+of $g(x)$ by $p(x)$.
+
+
+\begin{definition}{}{POLY DIVISION DEF}
+Let $R$ be an integral domain and let $p(x), g(x)\in R[x]$. We say that 
+$p(x)$ \emph{divides} $g(x)$ if there is $q(x)\in R[x]$ such that 
+$g(x) = q(x)p(x)$.
+\end{definition}
+
+
+\begin{definition}{}{POLY ROOT}
+Let $R$ be an integral domain and let $p(x)\in R[x]$. We say that an element 
+$a\in R$ is a \emph{root} of $p(x)$ if $p(a) = 0$. 
+\end{definition}
+
+\begin{thm}{}{POLY ROOT DIVISION}
+Let $R$ be an integral domain and let $p(x)\in R[x]$. An element 
+$a\in R$ is a root of $p(x)$ if and only if $(x-a)$ divides $p(x)$. 
+\end{thm}
+
+\begin{proof}
+By \Cref{thm:POLY DIV ALGORITHM} we have
+\[
+p(x) = q(x)(x-a) + r(x)
+\]
+for some $q(x), r(x)\in R[x]$ where either $r(x) = b$ for some $b\in R$. 
+This gives:
+\[
+p(a) = q(a)(a-a) + b = b
+\]  
+Thus $p(a) = 0$ if and only if $b=0$. In such case $p(x) = q(x)(x-a)$.
+\end{proof}
+
+
+\begin{cor}{}{MULTI ROOT DIVISION}
+Let $R$ be an integral domain, let $p(x)\in R[x]$ and let $a_{1}, \dots, a_{m}\in R$
+be distinct elements of $R$. Then $a_{1}, \dots, a_{m}$ are roots of $p(x)$ if and only
+if $(x-a_{1})\cdot {\dots} \cdot (x-a_{m})$ divides $p(x)$. 
+\end{cor}
+
+\begin{proof}
+If $(x-a_{1})\cdot {\dots} \cdot (x-a_{m})$ divides $p(x)$ then 
+\[
+p(x) = q(x)\cdot (x-a_{1})\cdot {\dots} \cdot (x-a_{m})
+\]
+for some $q(x)\in R[x]$. Then $p(a_{i}) = 0$ for $i=1, \dots, m$, so 
+$a_{1}, \dots, a_{m}$ are roots of $p(x)$. 
+ 
+Conversely, assume that  $a_{1}, \dots, a_{m}$ are roots of $p(x)$. 
+By \Cref{thm:POLY ROOT DIVISION} we have 
+\[
+p(x) = q_{1}(x)\cdot(x-a_{1})
+\]  
+for some $q_{1}\in R[x]$. This gives: 
+\[
+0 = p(a_{2}) = q_{1}(a_{2})\cdot(a_{2}-a_{1})
+\]
+Since $a_{1}\neq a_{2}$, we have $a_{2}-a_{1} \neq 0$. Thus, since $R$ is an integral 
+domain, we obtain that $q_{1}(a_{2}) = 0$. Applying \Cref{thm:POLY ROOT DIVISION} to 
+the polynomial $q_{1}(x)$ we obtain that 
+\[
+q_{1}(x) = q_{2}(x)\cdot(x-a_{2})
+\]
+for some $q_{2}(x)\in R[x]$, and so 
+\[
+p(x) = q_{2}(x)\cdot (x-a_{2})\cdot (x-a_{1})
+\]
+Continuing this argument inductively, we obtain that 
+\[
+p(x) = q(x)\cdot (x-a_{1})\cdot {\dots} \cdot (x-a_{m})
+\]
+for some $q(x)\in R[x]$.
+\end{proof}
+
+\begin{cor}{}{POLY AT MOST N ROOTS}
+If $R$ is an integral domain and $p(x) \in R[x]$ is a non-zero polynomial, then $p(x)$
+has at most $\deg p(x)$ distinct roots. 
+\end{cor}
+
+\begin{proof}
+If $a_{1}, \cdot a_{m}$ are distinct roots of $p(x)$ then by \Cref{cor:MULTI ROOT DIVISION}
+we have 
+\[
+p(x) = q(x)\cdot (x-a_{1})\cdot {\dots} \cdot (x-a_{m})
+\]
+Then $\deg p(x) = \deg q(x) + m$, so $m \leq \deg p(x)$.
+\end{proof}
+
+\begin{cor}{}{POLY FUNC DISTINCT}
+Let $R$ be an integral domain consisting of infinitely many elements. 
+If $p(x), g(x)\in R[x]$ are polynomials such that $p(a) = g(a)$ for all 
+$a\in R$ then $p(x) = g(x)$.
+\end{cor}
+
+\begin{proof}
+Assume that $p(a) = g(a)$ for all $a\in R$. Take $f(x) = p(x) - g(x)$. 
+Then $f(a) = 0$ for all $a\in R$. Since consists of infinitely many elements, 
+thus $f(a)$ has infinitely many roots. By \ref{cor:POLY AT MOST N ROOTS}
+this is possible only if $f(x) = 0$, i.e. $p(x) = g(x)$.
+\end{proof}
+
+Recall that if $R$ a commutative ring, then an ideal $J\triangleleft R$ is principal
+if $J$ is generated by a single element. Thank is, there is $a\in R$ such that 
+\[
+J = \lrang{a} = \{ ar \ | \ r \in R \}
+\] 
+
+\begin{definition}{}{PID}
+A ring $R$ is a \emph{principal ideal domain (PID)} if $R$ is an integral domain and 
+every ideal of $R$ is principal.
+\end{definition}
+
+\textbf{Example.} Every field is a PID. Indeed, if $F$ is a field then the only 
+ideals of $F$ are $\{0\} = \lrang{0}$ and $F = \lrang{1}$.
+
+\textbf{Example.} The ring of integers $\Z$ is a PID. Indeed, let $J \triangleleft \Z$. 
+If $J = \{0\}$ then $J = \lrang{0}$. If $J \neq \{0\}$, let $a$ be the smallest 
+positive integer such that $a\in J$. We will show that $J = \lrang{a}$. Indeed, 
+assume that $b\in J$. We have $b = qa + r$ for some $q, r\in\Z$ such that $0\geq r < a$. 
+Since $r = b - qa$, thus $r\in J$. Since $a$ is the smallest positive element of $J$, 
+we must have $r=0$. Thus $b = qa$, and so $b\in \lrang{a}$. This shows that 
+$J \subseteq \lrang{a}$. Also, since $a\in J$, thus $\lrang{a}\subseteq J$. This 
+gives $J = \lrang{a}$.
+
+
+\textbf{Example.} The ring $\Z[x]$ is not a PID. Take for example the ideal 
+$\lrang{2, x} \triangleleft \Z[x]$ generated by the constant polynomial 
+$p(x) = 2$ and the polynomial $q(x) = x$. Elements of $\lrang{2, x}$
+are polynomials $g(x) = a_{n}x^{n} + {\dots} + a_{0}$ such that $a_{0}$ is an 
+even number. The ideal  $\lrang{2, x}$ is not principal. Indeed, assume that
+$\lrang{2, x} = \lrang{f(x)}$ for some $f(x)\in \Z[x]$. Since $2\in\lrang{2, x}$, 
+thus $f(x)$ must divide $2$. This means that $f(x)$ is a constant polynomial, and
+$f(x) = 1, -1, 2 \text{ or  } 2$. If $f(x) = \pm 1$ then  
+$\lrang{f(x)} = \Z[x] \neq \lrang{2, x}$. Also, if $f(x) = \pm 2$, then 
+$\lrang{f(x)}$ consists of polynomials whose all coefficients are even. Thus 
+$\lrang{f(x)}\neq \lrang{2, x}$.
+
+
+
+\begin{thm}{}{FIELD POLY RING PID}
+If $F$ is a field then $F[x]$ is a PID. 
+\end{thm}
+
+\textbf{Note.} \Cref{thm:FIELD POLY RING PID} can be considered as a generalization 
+of \Cref{thm:POLY ROOT DIVISION} as follows. For $a\in F$ consider the homomorphism 
+$\varphi\colon F[x] \to F$ given by $\varphi(p(x)) = p(a)$. Then 
+$\Ker(\varphi)$ is an ideal of $F[x]$ consisting of polynomials $g(x)$ such that 
+$g(a) = 0$. \Cref{thm:POLY ROOT DIVISION} says that every such polynomial is 
+a multiple of $(x-a)$, so $\Ker(\varphi)$ is a principal ideal, 
+$\Ker(\varphi) = \lrang{(x-a)}$. Now, if $J\triangleleft F[x]$ is an arbitrary ideal, 
+then there is a homomorphism $\varphi\colon F[x]\to S$ for some ring $S$ such that 
+$J = \Ker(\varphi)$. \Cref{thm:FIELD POLY RING PID} says that 
+$\Ker(\varphi) = \lrang{p(x)}$ for some $p(x)\in F[x]$.
+ 
+\begin{proof}[Proof of \Cref{thm:FIELD POLY RING PID}]
+Let $J \triangleleft F[x]$. If $J = \{0\}$ then $J = \lrang{0}$. Assume then 
+that $J \neq \{0\}$. Let $p(x)$ be a non-zero polynomial of the smallest degree, 
+such that $p(x)\in J$. We will show that $J = \lrang{p(x)}$. 
+
+Let $f(x)\in J$. We need to show that $f(x) = q(x)p(x)$ for some $q(x)\in F[x]$. 
+Since $F$ is a field, the coefficient of the highest degree term of $p(x)$ is a unit, 
+so by \Cref{thm:POLY DIV ALGORITHM} we have $f(x) = q(x)p(x) + r(x)$ 
+where either $r(x) = 0$ or $\deg r(x) < \deg p(x)$. Assume that $r(x)\neq 0$. Then
+$r(x) = f(x) - q(x)p(x) \in J$, which is impossible, since by assumption $p(x)$ 
+is a polynomial of the smallest degree in $J$. Thus $r(x) = 0$ and so 
+$f(x) = q(x)p(x)$.
+\end{proof}
+
+
+
+
+
+

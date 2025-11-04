@@ -1,0 +1,125 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Direct products}
+
+\begin{definition}{}{GP DIR PROD}
+The \emph{direct product} of groups $G_{1}, \dots, G_{n}$ is a group
+$G_{1}\times G_{2} \times {\dots} \times G_{n}$ defined as follows:
+\bitem
+\item Elements: $n$-tuples $(g_{1}, g_{2}, \dots, g_{n})$ where $g_{i}\in G_{i}$.
+\item Group operation:
+\[
+(g_{1}, g_{2}, \dots, g_{n}) \cdot (h_{1}, h_{2}, \dots, h_{n}) 
+= (g_{1}h_{1}, g_{2}h_{2}, \dots, g_{n}h_{n})
+\]
+\item The identity element: $(e_{1}, e_{2}, \dots, e_{n})$ where $e_{i}$ is the identity
+element in $G_{i}$.
+\item Inverses: $(g_{1}, g_{2}, \dots, g_{n})^{-1} = (g^{-1}_{1}, g^{-1}_{2}, \dots, g^{-1}_{n})$.
+\eitem
+\end{definition}
+
+{\bf Note.} We have:
+\[
+|G_{1}\times G_{2} \times {\dots} \times G_{n}| 
+= |G_{1}|\cdot |G_{2}|\cdot{\dots}\cdot |G_{n}|
+\]
+
+\begin{FL}
+{\bf Example.} The groups $\Z_{2}\oplus\Z_{3}$ has 6 elements:
+\[ 
+(0, 0),\ (0, 1), \ (0, 2), \ (1, 0), \ (1, 1), \ (1, 2)
+\]
+The multiplication table in $\Z_{2}\oplus\Z_{3}$ is as follows:
+
+
+
+
+\begin{center}
+{\small
+\tagpdfsetup{table/header-rows={1}}
+\begin{tabular}{l !{\vrule width 2pt} l l l l l l}
+\circ     & $(0, 0)$  & $(0, 1)$  & $(0, 2)$  & $(1, 0)$  & $(1, 1)$  & $(1, 2)$  \\[1mm]
+\noalign{\hrule height 2pt} \\[-3mm]
+$(0, 0)$  & $(0, 0)$  & $(0, 1)$  & $(0, 1)$  & $(1, 0)$  & $(1, 1)$  & $(1, 2)$  \\[1mm]
+$(0, 1)$  & $(0, 1)$  & $(0, 2)$  & $(0, 0)$  & $(1, 1)$  & $(1, 2)$  & $(1, 0)$  \\[1mm]
+$(0, 2)$  & $(0, 2)$  & $(0, 0)$  & $(0, 1)$  & $(1, 2)$  & $(1, 0)$  & $(1, 1)$  \\[1mm]
+$(1, 0)$  & $(1, 0)$  & $(1, 1)$  & $(1, 2)$  & $(0, 0)$  & $(0, 1)$  & $(0, 2)$  \\[1mm]
+$(1, 1)$  & $(1, 1)$  & $(1, 2)$  & $(1, 0)$  & $(0, 1)$  & $(0, 2)$  & $(0, 0)$  \\[1mm]
+$(1, 2)$  & $(1, 2)$  & $(1, 0)$  & $(1, 1)$  & $(0, 2)$  & $(0, 0)$  & $(0, 1)$  \\[1mm]
+\end{tabular}
+}
+\end{center}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+\begin{thm}{}{DIR SUM ABELIAN}
+The group $G_{1}\times {\dots} \times G_{n}$ is abelian of and only if 
+each of the groups $G_{i}$ is abelian.
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+If $G_{1}, \dots, G_{n}$ are abelian groups, then 
+\begin{align*}
+(g_{1}, \dots, g_{n})\cdot (h_{1}, \dots, h_{n}) 
+& = (g_{1}h_{1}, \dots, g_{n}h_{n}) \\
+& = (h_{1}g_{1}, \dots, h_{n}g_{n}) =  (h_{1}, \dots, h_{n}) \cdot (g_{1}, \dots, g_{n})
+\end{align*}
+Conversely, if $G_{1}\times  {\dots} \times G_{n}$ is abelian then for any 
+$g_{i}, h_{i}\in G_{i}$ we have 
+\begin{align*}
+(g_{1}h_{1}, \dots, g_{n}h_{n})
+& = (g_{1}, \dots, g_{n})\cdot (h_{1}, \dots, h_{n})  \\
+&  =  (h_{1}, \dots, h_{n}) \cdot (g_{1}, \dots, g_{n}) = (h_{1}g_{1}, \dots, h_{n}g_{n})
+\end{align*}
+which gives $g_{i}h_{i} = h_{i}g_{i}$ for $i=1,\dots,n$.
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\vskip 30mm}
+
+
+
+{\bf Recall:} 
+
+\bitem
+\item The \emph{least common multiple} of integers 
+$n_{1}, n_{2}, \dots, n_{k} \geq 1$  is the smallest positive integer, 
+denoted by $\lcm(n_{1}, \dots, n_{k})$, which is divisible 
+by each of these numbers.\\[-4mm]
+
+\item If $m > 0$ is an integer divisible by $n_{1}, \dots, n_{k}$
+then $m$ is divisible by $\lcm(n_{1}, \dots, n_{k})$.  
+\eitem
+
+\begin{thm}{}{GP DIR SUM ELT ORDER}
+For $i=1, \dots, n$ let $a_{i}\in G_{i}$, and let 
+$(a_{1}, \dots, a_{n})\in G_{1}\times{\dots}\times G_{n}$. Then 
+\[
+|(a_{1}, \dots, a_{n})| = \lcm(|a_{1}|, \dots, |a_{n}|)
+\]
+\end{thm}
+
+\begin{FL}
+{\bf Example.} Consider the element $(1, 1)\in \Z_{2}\times \Z_{3}$ since 
+$1\in Z_{2}$ is an element of order 2, and $1\in \Z_{3}$ is an element of order 3, 
+we obtain that $|(1, 1)| = \lcm(2, 3) = 6$.
+
+\begin{proof}[Proof of \Cref{thm:GP DIR SUM ELT ORDER}]
+Let $|(a_{1}, \dots, a_{n})|= p$ and $\lcm(|a_{1}|, \dots, |a_{n}|) = q$. We have 
+\[
+(a_{1}, \dots, a_{n})^{q} = (a_{1}^{q}, \dots, a_{n}^{q}) = (e_{1}, \dots, e_{n})
+\]
+The last equality comes from \Cref{thm:ORDER GP ELT DIVIDES}, since $|a_{i}|$
+divides $q$ for each $i$. Using \Cref{thm:ORDER GP ELT DIVIDES} again we obtain that $p$ 
+divides $q$. On the other hand, 
+\[
+ (e_{1}, \dots, e_{n}) =  (a_{1}, \dots, a_{n})^{p} = (a_{1}^{p}, \dots, a_{n}^{p})
+\]
+which gives $e_{i} = a_{i}^{p}$ for each $i$. Using \Cref{thm:ORDER GP ELT DIVIDES}
+one more time, we get that $|a_{i}|$ divides $p$, and so 
+$q = \lcm(|a_{1}|, \dots, |a_{n}|)$ divides $p$. As a consequence $p=q$.
+\end{proof}
+\end{FL}

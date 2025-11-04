@@ -1,0 +1,317 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Finite abelian groups}
+
+\begin{FL}
+The main goal of this section is to prove the following fact:
+\end{FL}
+
+\begin{thm}{}{FIN AB GRP DECOMP}
+If $G$ is a finite abelian group then $G$ is isomorphic 
+to a direct product of cyclic groups whose orders are powers of primes: 
+\[
+G \cong \Z_{p_{1}^{r_{1}}} \times \Z_{p_{2}^{r_{2}}} \times {\dots} \times \Z_{p_{k}^{r_{k}}}
+\]
+for primes $p_{1}, \dots, p_{k}$ and integers 
+$r_{1}, \dots, r_{k} \geq 1$ such that 
+$p_{1}^{r_{1}}\cdot p_{2}^{r_{2}}\cdot {\dots} \cdot p_{k}^{r_{k}} = |G|$.
+\end{thm}
+
+\begin{FL}
+{\bf Example.} Take $72 = 2^{3} \cdot 3^{2}$. \Cref{thm:FIN AB GRP DECOMP} says 
+that every abelian group of order 72 is isomorphic to one of the following groups:
+\begin{center}
+\tagpdfsetup{table/tagging=presentation}
+\begin{tabular}{ll}
+$\Z_{8} \times \Z_{9}$ & $\Z_{8} \times \Z_{3} \times \Z_{3}$ \\
+$\Z_{4}\times \Z_{2} \times \Z_{9}$ & $\Z_{4}\times \Z_{2}  \times \Z_{3} \times \Z_{3}$ \\
+$\Z_{2} \times \Z_{2} \times \Z_{2} \times \Z_{9}$ \ \ \ \ & $\Z_{2} \times \Z_{2} \times \Z_{2} \times \Z_{3} \times \Z_{3}$\\
+\end{tabular}
+\end{center}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{definition}{}{SHORT EX SEQ}
+A \emph{short exact sequence} of groups is a sequence group homorphisms
+\[
+K \overset{i}{\lra} G \overset{q}{\lra} H
+\]
+\vskip -5mm
+such that: 
+\bitem
+\item $i$ is 1-1
+\item $q$ is onto
+\item $\Img(i) = \Ker(q)$
+\eitem
+\end{definition}
+
+
+
+
+\begin{FL}
+{\bf Example.} Let $K$ be a normal subgroup of $G$ and let $i\colon K \to G$ be 
+the inclusion homomorphism: $i(a) = a$. Also, let $q\colon G \to G/K$ be the quotient
+homomorphism $q(a) = aK$. This defines a short exact sequence 
+\[
+K \overset{i}{\lra} G \overset{q}{\lra} G/K
+\]
+
+
+{\bf Example.} If $f\colon G \to H$ is homomorphism which is onto, then we have
+a short exact sequence
+\[
+\Ker(f) \overset{i}{\lra} G \overset{f}{\lra} H
+\]
+where $i\colon \Ker(f)\to G$ is the inclusion homomorphism.
+
+
+
+{\bf Example.} Let $G, H$ be groups. Define $i\colon G \to G\times H$ by $i(g) = (g, e)$,
+and $q\colon G\times H \to H$ by $q(g, h) = h$. This defines a short exact sequence 
+\[
+G \overset{i}{\lra} G \times H \overset{q}{\lra} H
+\]
+Notice that in this case we also have a homomorphism $s\colon H \to H\times G$, 
+$s(h) = (e, h)$ and $q\circ s = \id_{H}$.
+\end{FL}
+
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{thm}{}{GP SES SPLIT}
+Consider a short exact sequence
+\[
+K \overset{i}{\lra} G \overset{q}{\lra} H
+\]
+where $K, G, H$ are abelian groups. Assume that there exists a homomorphism 
+$s\colon H \to G$ such that $q\circ s (h) = h$ for all $h\in H$. 
+Then $G \cong K \times H$.
+\end{thm}
+
+\begin{FL}
+{\bf Note.} \Cref{thm:GP SES SPLIT} is not true in general for non-abelian groups. 
+For example, in the dihedral group $D_{4}$ take the subgroup of rotations
+$K = \{ I, R_{90}, R_{180}, R_{270}\}$. Since $K$ is a normal subgroup of $D_{4}$, 
+this gives a short exact sequence 
+\[
+K \overset{i}{\lra} D_{4} \overset{q}{\lra} D_{4}/K
+\]
+The group $D_{4}/K$ consists of two cosets: $IK$ and $VK$. Define 
+$s\colon D_{4}/K \to D_{4}$ by $s(IK) = I$ and $s(VK) = V$. One can check 
+that this is a group homomorphism. Moreover, $q(s(IK)) = IK$ and $q(s(VK)) = VK$. 
+However, $D_{4}$ is not isomorphic to $K \times D_{4}/K$. Indeed, since 
+$K \cong \Z_{4}$ and $D_{4}/K \cong \Z_{2}$, thus 
+$K\times D_{4}/K \cong \Z_{4}\times \Z_{2}$ is an abelian group, while $D_{4}$
+is non-abelian.
+
+
+
+\begin{proof}[Proof of \Cref{thm:GP SES SPLIT}]
+Define a function $f\colon K\times H \to G$ by $f(k, h) = i(k)\cdot s(h)$. 
+We will show that this function is an isomorphism of groups. 
+
+First, we check that $f$ is a homomorphism:
+\begin{align*}
+f((k, h)\cdot (k', h')) & = f(kk', hh') \\
+& = i(kk')\cdot s(hh') \\
+& = i(k)\cdot i(k')\cdot s(h)\cdot s(h') \\
+& = (i(k) \cdot s(h)) \cdot (i(k') \cdot s(h')) \\
+& = f(k, h) \cdot f(k', h')
+\end{align*}
+Next, assume that $(k, h)\in \Ker(f)$. Then $f(k, h) = i(k)\cdot s(h) = e$. 
+This gives: 
+\[
+e = q(i(k)\cdot s(h)) = q(i(k))\cdot q(s(h)) = e\cdot h = h
+\]
+so $e=h$. Thus, $e = f(k, h) = f(k, e) = i(k)\cdot e = i(k)$. Since $i$ is 1-1, 
+we get that $k=e$. Therefore the only element in $\Ker(f)$ is 
+the identity element $(e, e)$, which means that $f$ is 1-1. 
+
+It remains to show that $f$ is onto. Take an element $g\in G$, and let $h=q(g)$. 
+We have
+\[
+q(gs(h)^{-1}) = q(g) \cdot q(s(q(g^{-1}))) =  q(g)\cdot q(g^{-1}) = e
+\]
+which shows that $gs(h^{-1})\in \Ker(q)$. By exactness, we have 
+$\Ker(q) = \Img(i)$, so there is an element $k\in K$ such that 
+$i(k) = g\cdot s(h^{-1})$. Consider the element $(k, h)\in K\times H$. 
+We have:
+\[
+f(k, h) = i(k)\cdot s(h) =  g \cdot s(h^{-1})\cdot s(h) = g
+\]
+
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+
+
+\begin{cor}{}{GP SES ISO SPLIT}
+Consider a short exact sequence
+\[
+K \overset{i}{\lra} G \overset{q}{\lra} H
+\]
+where $K, G, H$ are abelian groups. Assume that there exists a homomorphism 
+$s\colon H \to G$ such that $q\circ s$ is an isomorphism. Then 
+$G \cong K \times H$.
+\end{cor}
+
+
+\begin{FL}
+\begin{proof}
+Define $f = (q\circ s)^{-1}\circ q \colon G \to H$. The sequence
+\[
+K \overset{i}{\lra} G \overset{f}{\lra} H
+\]
+is a short exact sequence. Moreover, we have 
+$f\circ s = (q\circ s)^{-1}\circ q \circ s = \id_{H}$. Thus by 
+\Cref{thm:GP SES SPLIT} we get $G \cong K\times H$. 
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{thm}{}{AB GR SPLIT PRIME}
+Let $G$ be a finite abelian group. Assume that $|G| = p^{r}m$ where 
+$p$ is a prime, $r\geq 1$ and $m$ is a number which is not divisible by $p$. 
+Then $G = K\times H$ where $|K| = p^{r}$ and $|H| = m$. 
+\end{thm}
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{lemma}{}{M POWER P AB GP}
+Let $G$ be a finite abelian group. Assume that there exists a prime $p$ such that 
+the order of each element $g\in G$ is a power of $p$. For $m\in \Z$ consider 
+the function 
+\[
+f\colon G \to G
+\]
+given by $f(g) = g^{m}$. If $m$ is not divisible by $p$ then $f$ is a 
+group isomorphism.
+\end{lemma}
+
+\showto{SKELETON}{\newpage}
+
+\begin{FL}
+\begin{proof}
+By \Cref{cor:AB P GPS ELT ORDER} we have $|G|=p^{r}$ for some $r\geq 0$.
+Therefore $g^{p^{r}} = e$ for all $g\in G$. 
+
+Since $\gcd(m, p^{r}) =1$, there exist $k, l\in \Z$ such that $km + lp^{r} = 1$. 
+Define $s\colon G \to G$ by $s(g) = g^{k}$. We have 
+\[
+s\circ f(g) = \left(g^{m}\right)^{k} = g^{km} = g^{1-lp^{r}} = g\cdot g^{-lp^{r}} = ge = g 
+\]
+so $s\circ f = \id_{G}$. Similarly, $f\circ s = \id_{G}$. Thus $f$ is an isomorphism 
+and $f^{-1} = s$. 
+\end{proof}
+
+
+
+\begin{proof}[Proof of \Cref{thm:AB GR SPLIT PRIME}]
+Define 
+\[
+H \coloneq \{ g \in G \ | \ \ |g| = p^{i} \text{ for some $i\geq 1$} \}
+\]
+One can check that this is a subgroup of $G$. Notice that if $g\in G$ then 
+$g^{m}\in H$. Indeed, we have
+\[
+\left(g^{m}\right)^{p^{r}} = g^{mp^{r}} = g^{|G|} = e
+\]
+so $|g^{m}|$ divides $p^{r}$. As a consequence we obtain a homomorphim 
+$q\colon G \to H$, $q(g) = g^{m}$. This homomorphism is onto since,
+by \Cref{lemma:M POWER P AB GP}, $q|_{H}\colon H \to H$ is an isomorphism.
+Take the short exact sequence 
+\[
+\Ker(q) \lra G \overset{q}{\lra} H
+\]
+Define $s\colon H\to G$ by $s(h) = h$. The composition $q\circ s\colon H \to H$
+is given by $q\circ s(h) = h^{m}$ which is an isomorphism by \Cref{lemma:M POWER P AB GP}. 
+Using \Cref{cor:GP SES ISO SPLIT} we obtain that $G\cong \Ker(q) \times H$.
+
+We have $|H|\cdot |\Ker(q)| = |G| = p^{r}m$. By \Cref{cor:AB P GPS ELT ORDER}, $|H|$ is 
+a power of $p$. Also, since $\Ker(q) = \{g\in G \ | \ g^{m}\}$, thus the order of 
+every element of $\Ker(q)$ divides $m$. This implies that $\Ker(q)$ does not contain 
+any elements of order $p$. By Cauchy Theorem \ref{thm:GP ORDER CAUCHY THM}, 
+we obtain that $|\Ker(q)|$ is not divisible by $p$. 
+Therefore $|H| = p^{r}$ and $|\Ker(q)| = m$. 
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{cor}{}{AB GP PRIME P GP SPLIT}
+If $G$ is a finite abelian group and 
+$|G| = p_{1}^{r_{1}}p_{2}^{r_{2}}\cdot {\dots}\cdot p_{k}^{r_{k}}$
+where $p_{1}, p_{2}, \dots, p_{k}$ are distinct primes then 
+\[
+G = G_{1}\times G_{2} \times {\dots} \times G_{k}
+\]
+where $|G_{i}| = p_{i}^{r_{i}}$.
+\end{cor}
+
+
+\begin{FL}
+\begin{proof} We use induction with respect to the number of distinct primes $k$. 
+If $k =1$ then $|G| = p_{1}^{r_{1}}$, so we take $G_{1} = G$. 
+
+Assume that the statement is true for all abelian groups whose order 
+is a product of powers of $k$ distinct primes, and let $G$ be a group such that 
+\[
+|G| = p_{1}^{r_{1}}p_{2}^{r_{2}}\cdot {\dots}\cdot p_{k}^{r_{k}}p_{k+1}^{r_{k+1}}
+\] 
+where $p_{1}, \dots, p_{k+1}$ are distinct primes.
+By \Cref{thm:AB GR SPLIT PRIME} we get $G = G_{1}\times H$ 
+where $|G_{1}| = p_{1}^{r_{1}}$ and 
+$|H| = p_{2}^{r_{2}}\cdot {\dots}\cdot p_{k}^{r_{k}}p_{k+1}^{r_{k+1}}$
+By the inductive assumption, $H \cong G_{2}\times {\dots}\times G_{k+1}$
+where $|G_{i}| = p_{i}^{r_{i}}$. This gives
+\[
+G \cong G_{1}\times H \cong G_{1}\times G_{2}\times {\dots} \times G_{k+1}
+\]
+\end{proof}
+\end{FL}
+\showto{SKELETON}{\newpage}
+
+
+\begin{thm}{}{AB P GP SPLIT}
+If $G$ is an abelian group such that $|G| = p^{n}$ for some prime $p$ 
+then $G$ is a direct product of cyclic groups:
+\[
+G \cong \Z_{p^{k_{1}}}\times \Z_{p^{k_{2}}}\times {\dots} \times \Z_{p^{k_{m}}}
+\]
+for some $k_{1}, k_{2}, \dots, k_{m}$.
+\end{thm}
+
+\begin{FL}
+\begin{proof}[Idea of Proof.]
+Use induction with respect to the order of the group $G$. Let $p^{r}$ be 
+the largest order of an element in $G$, and let $a\in G$ be an element 
+such that $|a| = p^{r}$. One can show that there exists a short exact 
+sequence 
+\[
+K \overset{i}{\lra} G \overset{q}{\lra} \Z_{p^{r}}
+\]
+such that $q(a) = 1 \in \Z_{p^{r}}$. Take the homomorphism 
+$s\colon \Z_{p^{r}}\to G$ given by $s(k) = a^{k}$. Since $q\circ s(k) = k$
+for all $k\in \Z^{p^{r}}$, by  \Cref{thm:GP SES SPLIT} we obtain that 
+$G \cong \Z_{p^{r}} \times K$. By the inductive assumption we 
+get that $K$ is a direct product of cyclic groups, 
+$K \cong \Z_{p^{k_{1}}} \times {\dots} \times \Z_{p^{k_{m}}}$,
+which gives $G  \cong \Z_{p^{r}}\times (\Z_{p^{k_{1}}} \times {\dots} \times \Z_{p^{k_{m}}})$.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{thm:FIN AB GRP DECOMP}]
+It follows from \Cref{cor:AB GP PRIME P GP SPLIT} and 
+\Cref{thm:AB P GP SPLIT}.
+\end{proof}
+\end{FL}
+

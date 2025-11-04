@@ -1,0 +1,325 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Homomorphisms}
+
+
+\begin{definition}{}{GP HOMOMORPHISM}
+Let $G$, $H$ be groups. A group homomorphism is a function 
+\[
+f\colon G \to H
+\]
+which for any $a, b \in G$ satisfies $f(a\cdot b) = f(a)\cdot f(b)$
+\end{definition}
+
+
+\begin{thm}{}{GP HOMOM PROPS}
+Let $f\colon G \to H$ be a groups homomorphism. Then:
+\bitem
+\item $f(e_{G}) = e_{H}$ where $e_{G}$ and $e_{H}$ are the identity elements 
+in $G$ and $H$, respectively. 
+\item $f(a^{-1}) = f(a)^{-1}$ for any $a\in G$. 
+\eitem 
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+1) We have
+\[
+f(e_{G}) = f(e_{G}\cdot e_{G}) = f(e_{G})\cdot f(e_{G})
+\]
+This gives:
+\[
+e_{H} = f(e_{G})\cdot f(e_{G})^{-1} = (f(e_{G})\cdot f(e_{G}))\cdot f(e_{G})^{-1}
+= f(e_{G}) 
+\]
+2) We have 
+\[
+e_{H} = f(e_{G}) = f(a\cdot a^{-1}) = f(a)\cdot f(a^{-1})
+\]
+which gives:
+\[
+f(a)^{-1} =  f(a)^{-1} \cdot e_{H} = f(a)^{-1}\cdot (f(a)\cdot f(a^{-1})) = f(a^{-1})
+\]
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+\showto{SKELETON}{{\bf Examples.}}
+
+\begin{FL}
+{\bf Example.} For $n\geq 2$ take the function $f\colon \Z \to \Z_{n}$ given by 
+$f(k) = k \mod n$. Then $f$ is a group homomorphism. 
+
+
+{\bf Example.} Recall that for $n\geq 1$, the general linear group $GL(n, \R)$ 
+is a group that consists of $n\times n$ invertible matrices with matrix multiplication
+as the group operation. Recall also that $\R^{\ast}$ is the group of non-zero
+real numbers with multiplication. For an invertible matrix $A$ its determinant 
+is a non-zero number $\det A$. Moreover, $\det AB = (\det A) \cdot (\det B)$. 
+This means that the determinant defines a homomorphism of groups
+\[
+\det\colon GL(n, \R) \to \R^{\ast}
+\]
+
+
+{\bf Example.} Let $S_{n}$ be the symmetric group on $n$ letters and let 
+$\sign \colon S_{n} \to \Z_{2}$ be defined by 
+\[
+\sign(\alpha) = 
+\begin{cases}
+0 & \text{is $\alpha$ is an even permutation} \\
+1 & \text{is $\alpha$ is an odd permutation} \\
+\end{cases} 
+\]
+This gives a homomorphism of groups.
+
+{\bf Example.} For a group $G$, consider the function $f\colon G\to G$ given by 
+$f(a) = a^{-1}$. In general this function is not a homomorphism. For example, 
+take $G = S_{3}$, the symmetric group on 3 letters, let $\alpha, \beta \in S_{3}$
+be given by  $\alpha = (1, 2)$,  $\beta = (2, 3)$. Then we have:
+\begin{align*}
+& f(\alpha\circ \beta) = ((1, 2)\circ (2, 3))^{-1} = (2, 3)^{-1}\circ(1, 2)^{-1} 
+= (2, 3)\circ(1, 2) = (1, 3, 2) \\
+& f(\alpha)\circ f(\beta) =  (1, 2)^{-1}\circ (2, 3)^{-1} = (1, 2)\circ (2, 3) = (1, 2, 3)
+\end{align*}
+and so $f(\alpha\circ\beta) \neq f(\alpha)\circ f(\beta)$
+
+On the other hand, if $G$ is an abelian group then for any $a, b\in G$ we get
+\[
+f(ab) = (ab)^{-1} = b^{-1}a^{-1} = a^{-1}b^{-1} = f(a)f(b)
+\]
+Thus for an abelian group $f(a) = a^{-1}$ defines a homomorphism.
+
+{\bf Example.} Recall that by $\R$ we denote the group of all real numbers with 
+addition and by $\R^{\ast}$ the group of non-zero real numbers with multiplication. 
+Define  $g \colon \R \to \R^{\ast}$ by $g(a) = 2^{a}$. For  $a, b\in \R$ we have 
+\[
+g(a+b) = 2^{a+b} = 2^{a}\cdot 2^{b} = g(a)\cdot g(b)
+\]
+This means that $g$ is a homomorphism of groups.
+
+{\bf Example.} For any group $G$ and an element $a\in G$ there is exactly one
+homomorphism $f\colon \Z \to G$ such that $f(1) = a$. This homomorphism if given 
+by $f(m) = a^{m}$. 
+
+{\bf Example.} For any group $G$ the identity function $\id_{G}\colon G\to G$, 
+given by $\id_{G}(a) = a$ for all $a\in G$ is a homomorphism. 
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+\begin{thm}{}{GP HOMOM ORDER}
+Let $f\colon G \to H$ be a homomorphism of groups and let $a\in G$. If $|a| < \infty$
+then $|f(a)|$ divides $|a|$.  
+\end{thm}
+
+
+\begin{FL}
+\begin{proof}
+If $|a| = n$ then
+\[
+f(a)^{n} = f(a^{n}) = f(e_{G}) = e_{H}
+\]
+This means that $|f(a)|$ divides $n$ (see \Cref{thm:ORDER GP ELT DIVIDES}).
+\end{proof}
+
+
+{\bf Example.} Let $G$ be a group and let $a\in G$ be an element such that $|a| = n$. 
+Then for each $k=1,2, \dots$ there is exactly one homomorphism $f\colon\Z_{kn} \to G$
+such that $f(1) = a$. This homomorphism is given by $f(m) = a^{m}$.
+\end{FL}
+
+\showto{SKELETON}{\vskip 100mm}
+
+\begin{definition}{}{GP HOMOM KER IM}
+Let $f\colon G \to H$ be a group homomorphism. The \emph{kernel of $f$} is the subset
+of $G$ defined by 
+\[
+\Ker(f) = \{ g\in G \ | \ f(g) = e\}
+\]
+The \emph{image of $f$} is the subset of $H$ given by
+\[
+\Img(f) = \{ f(g) \ | \ g \in G  \}
+\]
+\end{definition}
+
+\begin{thm}{}{KER IM ARE SUBGPS}
+If $f\colon G \to H$ is a homomorphism of groups then $\Ker(f)$ is a subgroup of 
+$G$ and $\Img(f)$ is a subgroup of $H$. 
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+Exercise. 
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+\showto{SKELETON}{{\bf Examples.}}
+\showto{SKELETON}{\newpage}
+
+
+\begin{FL}
+{\bf Example.} Let $f\colon \Z \to \Z_{n}$, $f(k) = (k \mod n)$. Then 
+$\Img(f) = \Z_{n}$ and $\Ker(f) = \{ nq \ |\ q \in \Z \}$. This 
+subgroup of $\Z$ is often denoted by $n\Z$. 
+
+{\bf Example.} Take the determinant homomorphism $\det\colon GL(n, R) \to \R^{\ast}$. 
+Then $\Img(\det) = \R^{\ast}$. Also, $\Ker(\det) = \{ A \in GL(n, \R) \ | \ \det A = 1 \}$
+This group is called the \emph{special linear group} and it is denoted by 
+$SL(n, \R)$.
+
+{\bf Example.} For the homomorphism $\sign\colon S_{n} \to \Z_{2}$ we have 
+$\Img(\sign) = \Z_{2}$ and $\Ker(\sign) = A_{n}$, where $A_{n}$ is the alternating 
+group.
+
+
+{\bf Example.} Let $G$ be an abelian group and let $f\colon G \to G$ be given by
+$f(a) = a^{-1}$. Then $\Img(f) = G$ and $\Ker(f) = \{e\}$.
+
+{\bf Example.} Let $g\colon \R \to \R^{\ast}$, $g(a) = 2^{a}$. Then $\Img(g) = \R^{+}$
+and $\Ker(g) = \{ 0 \}$.
+\end{FL}
+
+\begin{thm}{}{KER AND 1TO1}
+If $f\colon G\to H$ is a homomorphism then $f(a) = f(b)$ if and only if 
+$b = ak$ for some $k\in \Ker(f)$.
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+If $f(a) = f(b)$ then
+\[
+e = f(a)^{-1}f(b) = f(a^{-1})f(b) = f(a^{-1}b)
+\]
+so $a^{-1}b\in Ker(f)$. Taking $k = a^{-1}b$ we then get $ak = a(a^{-1}b) = b$.
+Conversely, if $k\in\Ker(f)$ then $f(ak) = f(a)f(k) = f(a)e = f(a)$.
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\vskip 70mm}
+
+
+\begin{cor}{}{TRIVIAL KER 1TO1}
+A homomorphism of groups $f\colon G\to H$ is 1-1 if and only if $\Ker(f) = \{e\}$.
+\end{cor}
+
+\showto{SKELETON}{\vskip 40mm}
+
+\begin{cor}{}{GP HOMOM INV IMAGE}
+If $f\colon G\to H$ is a homomorphism of groups, and $f(a) = b$ for some 
+$a\in G$, $b\in H$ then
+\[
+f^{-1}(b) = \{ ak \ | \ k\in Ker(f) \ \}
+\]
+\end{cor}
+
+\begin{FL}
+{\bf Note.} If $G$ is a group and $H\subseteq G$ is a subgroup, then there exists a homomorphism 
+\[
+f\colon K \to G
+\]
+such that $\Img(f) = H$ Indeed, we can take $f\colon H \to G$, $f(a) = a$. 
+
+We will show, however that, in general, not for every subgroup $H\subseteq G$ there 
+is a homomorphism $f\colon G \to K$ such that $H = \Ker(f)$. 
+\end{FL}
+\showto{SKELETON}{\newpage}
+
+
+\begin{thm}{}{KER NORMALITY}
+Let $f\colon G \to H$ is a homomorphism of groups then $g\in \Ker(f)$ if and only if 
+for each $a\in G$ we have $aga^{-1}\in \Ker(f)$.
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+Since $f(g) = e$ we obtain: 
+\[
+f(aga^{-1}) = f(a)f(g)f(a^{-1}) = f(a)ef(a)^{-1} = f(a)f(a)^{-1} = e
+\]
+and so $gag^{-1}\in \Ker(f)$.  
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\vskip 60mm}
+
+\begin{definition}{}{NORMAL SUBGP}
+Let $G$ be a group. We say that a subgroup $H\subseteq G$ is a \emph{normal subgroup}
+of $G$ if for any $h\in H$ and $g\in G$ we have $ghg^{-1} \in H$. 
+
+\medskip
+
+We write $H \triangleleft G$ to denote that $H$ is a normal subgroup of $G$. 
+\end{definition}
+
+
+\begin{cor}{}{KERNEL IS NORMAL}
+If $f\colon G\to H$ is a homomorphism of groups then $\Ker(f)$ is a normal subgroup
+of $G$.
+\end{cor}
+
+
+\begin{FL}
+\begin{proof}
+This follows from \Cref{thm:KER NORMALITY}.
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+\begin{FL}
+{\bf Example.} $G$ is an abelian group then any subgroup $H\subseteq G$ is normal since for 
+$h\in H$ and $g\in G$ we have 
+\[
+ghg^{-1} = gg^{-1}h = h \in H
+\]
+
+{\bf Example.} Recall that the alternating group $A_{n}$ is a subgroup of 
+the symmetric group $S_{n}$ consisting of all even permutations. This subgroup is normal, 
+since if $\alpha$ is an even permutation and $\beta$ is any permutation then
+$\beta\circ\alpha\circ\beta^{-1}$ is an even permutation.
+\end{FL}
+ 
+{\bf Example.} Consider the dihedral group $D_{4}$:
+
+\bigskip
+
+\begin{center}
+{\small
+\tagpdfsetup{table/header-rows={1}}
+\begin{tabular}{l !{\vrule width 2pt} llllllll}
+\circ     & \ $I$       & $R_{90}$  & $R_{180}$ & $R_{270}$ & $H$       & $V$       & $D$       & $D'$      \\[1mm]
+\noalign{\hrule height 2pt} \\[-3mm]
+$I$       & \ $I$       & $R_{90}$  & $R_{180}$ & $R_{270}$ & $H$       & $V$       & $D$       & $D'$      \\
+$R_{90}$  & \ $R_{90}$  & $R_{180}$ & $R_{270}$ & $I$       & $D'$      & $D$       & $H$       & $V$       \\
+$R_{180}$ & \ $R_{180}$ & $R_{270}$ & $I$       & $R_{90}$  & $V$       & $H$       & $D'$      & $D$       \\
+$R_{270}$ & \ $R_{270}$ & $I$       & $R_{90}$  & $R_{180}$ & $D$       & $D'$      & $V$       & $H$       \\
+$H$       & \ $H$       & $D$       & $V$       & $D'$      & $I$       & $R_{180}$ & $R_{90}$  & $R_{270}$ \\
+$V$       & \ $V$       & $D'$      & $H$       & $D$       & $R_{180}$ & $I$       & $R_{270}$ & $R_{90}$  \\[1mm]
+$D$       & \ $D$       & $H$       & $D'$      & $V$       & $R_{270}$ & $R_{90}$  & $I$       & $R_{180}$ \\
+$D'$      & \ $D'$      & $V$       & $D$       & $H$       & $R_{90}$  & $R_{270}$ & $R_{180}$ & $I$       \\
+\end{tabular}
+}
+\end{center}
+
+\begin{FL}
+The set $\{I, V\}$ is a subgroup of $D_{4}$. However, this is not a normal subgroup 
+since, for example, we have 
+\[
+DVD^{-1} = DVD = R_{90}D = H 
+\]
+and $H\not\in \{I, V\}$. 
+
+
+\begin{exercise} Check that the subgroup of rotations  
+$G = \{I, R_{90}, R_{180}, R_{270}\}$ is a normal subgroup of $D_{4}$. 
+\end{exercise}
+
+{\bf Note.} We will see later that for any normal subgroup $H\triangleleft G$ there
+is a homomorphism $f\colon G \to K$ such that $\Ker(f) = H$. 
+\end{FL}
+
+

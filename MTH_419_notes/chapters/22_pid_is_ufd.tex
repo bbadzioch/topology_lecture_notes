@@ -1,0 +1,102 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{PIDs and UFDs}
+
+\textbf{Recall:} A principal ideal domain (PID is a ring $R$ which is
+an integral domain, such that every ideal $I\triangleleft R$ is principal, 
+i.e. $I = \lrang{a}$ for some $a\in R$. 
+
+
+\begin{thm}{}{PID IS UFD}
+If $R$ is a PID then it is a UFD.  
+\end{thm}
+
+
+\begin{lemma}{}{PID IS NOETH}
+If $R$ is a PID and $I_{1}, I_{2}, \dots$ are ideals of $R$ such that 
+\[
+I_{1}\subseteq I_{2} \subseteq \dots
+\]
+then there exists $n\geq 1$ such that $I_{n}=I_{n+1}= \dots$.
+\end{lemma}
+
+
+\begin{proof}
+Take $J = \bigcup_{i=1}^{\infty} I_{i}$. One can check that $J$ is an ideal of $R$. 
+Since $R$ is a PID we have 
+$J = \lrang{a}$ for some $a\in I$. Take $n\geq 1$ such that $a\in I_{n}$. Then we get 
+\[
+J  \subseteq I_{n}\subseteq I_{n+1}\subseteq \ {\dots}\  \subseteq J
+\] 
+It follows that $I_{n} = I_{n+1} = \ {\dots}\  =  J$.
+\end{proof}
+
+
+\begin{lemma}{}{IRRED MAX IDEAL}
+Let $R$ be a PID. An element $a\in R$ is irreducible if and only if 
+$\lrang{a}$ is a maximal ideal of $R$.
+\end{lemma}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+
+
+\begin{proof}[Proof of \Cref{thm:PID IS UFD}]
+Let $R$ be a PID. By \Cref{thm:UFD VIA PRIMES} it suffices to show that 
+
+\benu
+
+\item Every non-zero, non-unit element of $R$ is a product of irreducible elements\\[-4mm]
+\item Every irreducible element in $R$ is a prime element. 
+\eenu
+
+
+\textbf{1)} We argue by contradiction. Assume that $a_{0}\in R$ is a non-zero, non-unit element that is 
+not a product of irreducibles. This implies that $a_{0} = a_{1}b_{1}$
+for some non-zero, non-unit elements  $a_{1}, b_{1}\in R$.
+
+If both $a_{1}$ and $b_{1}$ were products of irreducibles, then $a_{0}$ would be also 
+a product of irreducibles, contradicting our assumption.  We can then assume that $a_{1}$ is not
+a product of irreducibles, and so in particular we have $a_{1} = a_{2}b_{2}$
+for some non-zero, non-unit elements $a_{2}, b_{2}\in R$.
+
+By induction we obtain that for $i=1, 2, \dots $ there exists non-zero, non-unit elements 
+$a_{i}, b_{i} \in R$  such that $a_{i} = a_{i+1}b_{i+1}$ for all $i\geq 0$. 
+
+Consider the chain of ideals
+\[
+\lrang{a_{0}}\subseteq \lrang{a_{1}} \subseteq \dots
+\]
+By Lemma \Cref{lemma:IRRED MAX IDEAL} we obtain that $\lrang{a_{n}}=\lrang{a_{n+1}}$
+for some $n\geq 0$. This means that $a_{n} = a_{n+1}u$ for some unit $u\in R$ (check!). 
+As a consequence $a_{n+1}b_{n+1} = a_{n} = a_{n+1}u$
+and so $b_{n+1}=u$. This is a contradiction, since  $b_{n+1}$ is not a unit.
+
+\bigskip
+
+
+2) Let $a\in R$ be an irreducible element and let $a\mid (bc)$. We need to show that 
+either $a\mid b$ or $a\mid c$.
+
+Assume that $a\nmid b$. This implies that $b\not\in \lrang{a}$ and so 
+$\lrang{a} \neq \lrang{a} + \lrang{b}$
+
+Since by \Cref{lemma:IRRED MAX IDEAL} the ideal $\lrang{a}$ is a maximal ideal, we obtain 
+then that $ \lrang{a} + \lrang{b} = R$, and so in particular $1\in  \lrang{a} + \lrang{b}$. 
+Therefore $1 = ar+bs$ for some $r, s\in R$, and so  $c = a(rc) + (bc)s $
+Since $a \mid a(rc)$ and $a\mid (bc)s$ we obtain from here that $a\mid c$.
+\end{proof}
+
+
+
+\begin{cor}{}{FIELD POLY UFD}
+If $F$ is a field then the ring of polynomials $F[x]$ is a UFD. 
+\end{cor}
+
+\begin{proof}
+Follows from \Cref{thm:PID IS UFD} and \Cref{thm:FIELD POLY RING PID}
+\end{proof}
+

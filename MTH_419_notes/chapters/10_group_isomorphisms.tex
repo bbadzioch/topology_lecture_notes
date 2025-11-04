@@ -1,0 +1,195 @@
+% !TEX TS-program = lualatex-dev
+% !TEX root = ../mth419_lecture_notes.tex
+
+\lecture{Isomorphisms of groups}
+
+
+\begin{definition}{}{GROUP ISO}
+An \emph{isomorphism of groups} is a group homomorphism which is both onto and 1-1. 
+\end{definition}
+
+\begin{tikzpic}
+\draw[rounded corners=10pt] (-0.35,0) rectangle (1.25,3);
+\draw[rounded corners=10pt] (2.75,0) rectangle (4.35,3);
+\foreach \x/\y/\z in {1/b/{b'}, 2/a/{a'}, 3/{e_{G}}/{e_{H}}}{
+\fill (0.5, {0.5 + (2/3)*\x}) circle (0.1) node[left] {\small $\y$};
+\fill (3.5, {0.5 + (2/3)*\x}) circle (0.1) node[right] {\small $\z$};
+\draw[line width = 1, ->, >=latex, shorten <= 2mm, shorten >= 2mm] 
+(0.5, {0.5 + (2/3)*\x}) -- (3.5, {0.5 + (2/3)*\x});
+}
+\node at (0.5, 0.7) {$\vdots$};
+\node at (3.5, 0.7) {$\vdots$};
+%
+\node[anchor= east] at (-0.35, 2.65) {\small $G$};
+\node[anchor= west] at (4.35, 2.65) {\small $H$};
+\node[anchor = south] at (2, 2.5) {\small $f$};
+\end{tikzpic}
+
+
+\begin{thm}{}{INVERSE GP ISO}
+If $g\colon G \to H$ is an isomorphism then the inverse function $f^{-1}\colon H \to G$
+is also an isomorphism. 
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+The inverse function is 1-1 and onto, so it remains to prove that it is a homomorphism 
+of groups. 
+
+Let $a', b' \in H$. We need to show that $f^{-1}(a'b') = f^{-1}(a')f^{-1}(b')$. 
+Since $f$ is a 1-1 function it will suffice to show that 
+$f(f^{-1}(a'b')) = f(f^{-1}(a')\cdot f^{-1}(b'))$.
+
+We have $f(f^{-1}(a'b')) = a'b'$. Also, since $f$ is a homomorphism, we have 
+\[
+f(f^{-1}(a')f^{-1}(b')) = f(f^{-1}(a'))\cdot f(f^{-1}(b')) = a'b'
+\] 
+\end{proof}
+\end{FL}
+
+\showto{SKELETON}{\vfill}
+
+\begin{thm}{}{ISO KER IMG}
+A homorphism of groups $f\colon G\to H$ is an isomorphism if and only if 
+$\Img(f) = H$ and $\Ker(f) = \{e\}$.
+\end{thm}
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{definition}{}{ISOMORPHIC GPS}
+We say the group $G$ is \emph{isomorphic} to a group $H$ if there exists an isomorphism 
+$f\colon G \to H$. Then we write $G \cong H$.
+\end{definition}
+
+\begin{thm}{}{GP ISO IS EQUIV}
+Isomorphism of groups is an equivalence relation:
+\benu
+\item For any group $G$ we have $G\cong G$.
+\item If $G, H$ are groups such that $G\cong H$ then $H\cong G$. 
+\item If $G, H, K$ are groups such that $G\cong H$ and $H\cong K$, then $G\cong K$.
+\eenu
+\end{thm}
+
+
+\begin{FL}
+\begin{proof}
+1) The identity function $\id\colon G \to G$, $\id(a) = a$ is an isomorphism, 
+so $G\cong G$.
+
+2) If $G\cong H$ then there is an isomorphism $f\colon G\to H$. In such case the 
+function $f^{-1}\colon H \to G$ is also an isomorphism, so $H\cong G$.
+
+3) If $G\cong H$ and $H\cong K$ then we have isomorphisms $f\colon G \to H$ and 
+$g\colon H \to K$. Then the composition $g\circ f \colon G \to K$ is also an 
+isomorphism and so $G \cong K$.
+\end{proof}
+\end{FL}
+
+\begin{FL}
+{\bf Example.} Recall that for a set $A$ the group $S(A)$ of permutations of $A$
+consists of all permutations $f\colon A\to A$ with their composition as the 
+group operation. We will show that if $B$ is another set with the same number 
+of elements as $A$ then $S(A) \cong S(B)$. Indeed, let $\varphi\colon A\to B$
+be a function which is onto and 1-1. We define 
+\[
+\Phi \colon S(A) \to S(B)
+\]
+by $\Phi(\alpha) = \varphi \circ \alpha \circ \varphi^{-1}$. One can check that 
+this is an isomorphism of groups. 
+
+In particular, recall that the symmetric group on $n$ letters $S_{n}$ is defined 
+as the group of permutations of the set $\{1, 2, \dots, n\}$.  We obtain 
+that if $A$ is a set consists of $n$ elements, then $S(A) \cong S_{n}$.
+
+{\bf Example.} If $G$, $H$ are cyclic groups and $|G| = |H|$ then $G \cong H$. 
+Indeed, let $G = \lrang{a}$ and $H = \lrang{b}$ then the function $f\colon G \to H$, 
+$f(a^{k}) = b^{k}$ is an isomorphism. 
+
+As a consequence, we obtain that every cyclic group is isomorphic either to 
+$\Z$ or to $\Z_{n}$ for some $n\geq 1$. 
+
+{\bf Example.} Let $m, n>0$ be integers such that $\gcd(m, n) =1$. Recall that by \Cref{thm:CYCLIC DIR SUM} the group $\Z_{m}\oplus\Z_{n}$ is cyclic of order $mn$. 
+This gives: $\Z_{m}\oplus\Z_{n} \cong \Z_{mn}$.
+
+
+{\bf Note.} Let $f\colon G \to H$ be a homomorphism which is 1-1 
+(i.e. $\Ker(f) = \{ e\}$). Then we can obtain an isomorophism from $f$ by 
+replacing $H$ with $\Img(f)$:
+\[
+f\colon G \to \Img(f)
+\]
+Thus any 1-1 homomorphism $f\colon G \to H$ defines an isomorphism between 
+$G$ and the subgroup $\Img(f)$ of $H$.   
+\end{FL}
+
+\showto{SKELETON}{\newpage}
+
+
+\begin{thm}{(Cayley's Theorem)}{CAYLEYS THM}
+Let $G$ be a finite group of order $n$. Then $G$ is isomorphic to 
+a subgroup of the symmetric group $S_{n}$. 
+\end{thm}
+
+\begin{FL}
+\begin{proof}
+Let $\overline{G}$ denote the set of elements of $G$. Since $\overline{G}$
+consists of $n$ elements, the symmetric group $S_{n}$ is isomorphic
+to the group $S(\overline{G})$ of permutations of $\overline{G}$. Thus it will 
+suffice to prove that $G$ is isomorphic to a subgroup of $S(\overline{G})$. 
+
+To show this, it is enough to construct a 1-1 homomorphism 
+$\Phi\colon G \to S(\overline{G})$.  We will do it as follows.
+For an element $a\in G$ define a function $t_{a}\colon \overline{G} \to \overline{G}$
+by $t_{a}(x) = ax$. This function is a permutation of the set $\overline{G}$, 
+so it is an element of the group $S(\overline{G})$. We define: 
+$\Phi(a) = t_{a}$. 
+
+
+We will show that the function $\Phi$ is a group homomorphism, 
+i.e. that for any $a, b\in G$ we have $\Phi(ab) = \Phi(a)\circ \Phi(b)$. 
+Indeed, $\Phi(ab) = t_{ab}$ and $t_{ab}\colon \overline{G} \to \overline{G}$ 
+is the permutation given by $t_{ab}(x) = abx$. On the other hand, 
+\[
+\Phi(a)\circ \Phi(b) =t_{a}\circ t_{b}
+\] 
+where $t_{a}(x) = ax$ and $t_{b}(x) = bx$ 
+We have 
+\[
+t_{a}\circ t_{b}(x) = t_{a}(bx) = abx = t_{ab}(x)
+\]
+Therefore $\Phi(ab) = \Phi(a)\circ \Phi(b)$. 
+
+It remains to show that $\Phi$ is 1-1, i.e. that $\Ker(\Phi) = \{e\}$. 
+Assume then that $a\in \Ker(\Phi)$. This means that $\Phi(a) = t_{a}$
+is the identity permutation, $t_{a}(g) = g$ for $g\in G$. 
+But then $ag = g$ for all $g\in G$, which means that $a = e$. 
+
+\end{proof}
+\end{FL}
+
+
+\showto{SKELETON}{\newpage}
+
+\begin{definition}{}{GP AUTOM}
+An \emph{automophism} of a group $G$ is an isomorphism $f\colon G \to G$. 
+\end{definition}
+
+\begin{FL}
+{\bf Example.} Given a group $G$ and $a\in G$, define $f_{a}\colon G\to G$ by 
+$f_{a}(g) = aga^{-1}$. This function is an automorphism of $G$. Automorphisms 
+of this form are called \emph{inner automorphisms}.
+
+Note that if $G$ is an abelian group then $G$ for any $a\in G$ we have 
+$f_{a}(g) = g$. Thus the only inner automorphism of $G$ is the identity function. 
+\end{FL}
+
+\showto{SKELETON}{\vskip 70mm}
+
+\begin{definition}{}{GP AUTOM GP}
+Let $G$ be a group. The \emph{group of automorphisms} of $G$ is the group
+$\Aut(G)$ whose elements are automorphisms of $G$ and the group operation is
+given by composition of automorphisms.  
+\end{definition}
+
+
